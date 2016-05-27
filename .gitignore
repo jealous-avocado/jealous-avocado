@@ -6,3 +6,16 @@ node_modules/
 
 ## Compiled files ##
 public/compiled/
+public/lib
+
+#external disk files
+.Trashes
+
+#Thumbnails
+._*
+
+# Floobits
+.floo
+.floobit
+.floo
+.flooignore
