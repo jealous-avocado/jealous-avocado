@@ -14,9 +14,7 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
-app.use(express.static(__dirname));
-console.log(__dirname, '**************');
-
+app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (req, res) {
  res.render('index.html');
