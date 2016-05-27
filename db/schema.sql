@@ -1,0 +1,74 @@
+DROP DATABASE IF EXISTS rep;
+CREATE DATABASE rep;
+
+USE rep;
+
+DROP TABLE IF EXISTS users;
+    
+CREATE TABLE users (
+  id INTEGER AUTO_INCREMENT NOT NULL,
+  name VARCHAR(50) NOT NULL,
+  password VARCHAR(50) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY (name)
+);
+
+DROP TABLE IF EXISTS topics;
+    
+CREATE TABLE topics (
+  id INTEGER AUTO_INCREMENT NOT NULL,
+  name VARCHAR(50) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY (name)
+);
+
+DROP TABLE IF EXISTS videos;
+    
+CREATE TABLE videos (
+  id INTEGER AUTO_INCREMENT NOT NULL,
+  title VARCHAR(100) NOT NULL,
+  url VARCHAR(100) NOT NULL,
+  user_id INTEGER NOT NULL,
+  topic_id INTEGER NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY (title),
+  FOREIGN KEY (user_id) REFERENCES users (id),
+  FOREIGN KEY (topic_id) REFERENCES topics (id)
+);
+
+DROP TABLE IF EXISTS streams;
+    
+CREATE TABLE streams (
+  id INTEGER AUTO_INCREMENT NOT NULL,
+  title VARCHAR(100) NOT NULL,
+  url VARCHAR(100) NOT NULL,  
+  user_id INTEGER NOT NULL,
+  topic_id INTEGER NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY (title),
+  FOREIGN KEY (user_id) REFERENCES users (id),
+  FOREIGN KEY (topic_id) REFERENCES topics (id)
+);
+
+DROP TABLE IF EXISTS user_favs;
+    
+CREATE TABLE user_favs (
+  id INTEGER AUTO_INCREMENT NOT NULL,
+  user_id INTEGER NOT NULL,
+  fav_id INTEGER NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (user_id) REFERENCES users (id),
+  FOREIGN KEY (fav_id) REFERENCES users (id)
+);
+
+DROP TABLE IF EXISTS user_topics;
+    
+CREATE TABLE user_topics (
+  id INTEGER AUTO_INCREMENT NOT NULL,
+  user_id INTEGER NOT NULL,
+  topic_id INTEGER NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (user_id) REFERENCES users (id),
+  FOREIGN KEY (topic_id) REFERENCES topics (id)  
+);
+
