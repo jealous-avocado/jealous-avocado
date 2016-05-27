@@ -10,8 +10,8 @@ class Signin extends React.Component {
 
     $.post('/signin', {username : username, password: password})
     .then( () => {
-      // this.setState({ currentUser: username });
-      window.location.assign('#/'+ username);
+      this.props.formViewHandler();
+      // window.location.assign('#/'+ username);
     });
   }
 
