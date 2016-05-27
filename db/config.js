@@ -8,7 +8,7 @@ var knex = require('knex') ({
   }
 });
 
-var bookshelf = require('bookshelf')(knex);
+var db = require('bookshelf')(knex);
 
 // Could use knex.schema.createTable to create schema
 // instead of using schema.sql

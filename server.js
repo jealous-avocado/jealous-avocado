@@ -6,6 +6,8 @@ var bodyParser = require('body-parser')
 var session = require('express-session');
 var app = express();
 var PORT = process.env.PORT || 3000;
+var User = require('./db/models/user.js');
+
 
 app.use(bodyParser.urlencoded({     
  extended: true
@@ -22,16 +24,18 @@ app.get('/', function (req, res) {
 app.post('/signin', function (req, res) {
  var username = req.body.username;
  var password = req.body.password;
+
  new User({ username: username })
   .fetch()
   .then(function(user) {
     if (!user) {
-      res.redirect('/signin');
+      // res.redirect('/signin');
+      res.end();
     } else {
       res.end();
     }
   });
-};
+});
 
 app.get('/signout', function (req, res) {
  //destory session 

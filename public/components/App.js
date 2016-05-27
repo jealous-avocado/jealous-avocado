@@ -18,10 +18,17 @@ class App extends React.Component {
     this.setState({ formOpen : true });
   }
 
-  formViewHandler() {
+  toggleForm() {
     this.setState({ formOpen : false });
   }
 
+  setCurrentUser(currentuser) {
+    this.setState({
+      user: {
+        currentuser: currentuser
+      }
+    });
+  }
 
   render() {
     return (
@@ -30,8 +37,9 @@ class App extends React.Component {
         <br></br>
         <button onClick={this.loadSignInPage.bind(this)}> Sign in! </button>
         <ToggleDisplay show={this.state.formOpen}> 
-          <Signin formViewHandler = {this.formViewHandler.bind(this)} />
+          <Signin toggleForm = {this.toggleForm.bind(this)} setCurrentUser = {this.setCurrentUser.bind(this)} />
         </ToggleDisplay>
+        <div> current user : {this.state.user.currentuser} </div>
       </div>
     );
   }
