@@ -4,7 +4,6 @@ var _ = require('underscore');
 var request = require('request');
 var bodyParser = require('body-parser')
 var session = require('express-session');
-
 var app = express();
 var PORT = process.env.PORT || 3000;
 
@@ -23,8 +22,10 @@ app.get('/', function (req, res) {
 app.post('/signin', function (req, res) {
  var username = req.body.username;
  var password = req.body.password;
+ res.end();
  // auth logic check if user is in database
- res.redirect('/' + username);
+ // console.log(username, 'username');
+ // res.redirect('/#/teek');// + username);
 });
 
 app.get('/signout', function (req, res) {
