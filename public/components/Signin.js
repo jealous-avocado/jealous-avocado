@@ -1,3 +1,4 @@
+
 class Signin extends React.Component {
   constructor(props) {
     super(props);
@@ -25,6 +26,9 @@ class Signin extends React.Component {
     .then( () => {
       this.props.toggleForm();
       this.props.setCurrentUser(username);
+    })
+    .catch( e => {
+
     });
   }
 
@@ -36,6 +40,8 @@ class Signin extends React.Component {
         <input id='password' placeholder='password' type='password' />
         <input type='submit'></input>
       </form>
+      <ToggleDisplay show='true'>
+      </ToggleDisplay>
     );
   }
 }
