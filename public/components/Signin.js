@@ -3,15 +3,28 @@ class Signin extends React.Component {
     super(props);
   }
 
+  escape(userInfo) {
+    var escaped = {};
+
+    for (var key in userInfo) {
+      var value = userInfo[key];
+      escaped[key] = typeof value === 'string' ? _.escape(value) : value;
+    }
+
+    return escaped;
+  }
+
   postUser(e) {
     e.preventDefault();
     let username = $('#username').val(); // --> grabs username input
     let password = $('#password').val();
 
-    $.post('/signin', {username : username, password: password})
+    var userObj = this.escape.apply(this, {username: username, password: password});
+
+    $.post('/signin', userObj)
     .then( () => {
-      this.props.formViewHandler();
-      // window.location.assign('#/'+ username);
+      this.props.toggleForm();
+      this.props.setCurrentUser(username);
     });
   }
 

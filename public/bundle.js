@@ -25248,9 +25248,18 @@
 	      this.setState({ formOpen: true });
 	    }
 	  }, {
-	    key: 'formViewHandler',
-	    value: function formViewHandler() {
+	    key: 'toggleForm',
+	    value: function toggleForm() {
 	      this.setState({ formOpen: false });
+	    }
+	  }, {
+	    key: 'setCurrentUser',
+	    value: function setCurrentUser(currentuser) {
+	      this.setState({
+	        user: {
+	          currentuser: currentuser
+	        }
+	      });
 	    }
 	  }, {
 	    key: 'render',
@@ -25272,7 +25281,14 @@
 	        React.createElement(
 	          _reactToggleDisplay2.default,
 	          { show: this.state.formOpen },
-	          React.createElement(_Signin2.default, { formViewHandler: this.formViewHandler.bind(this) })
+	          React.createElement(_Signin2.default, { toggleForm: this.toggleForm.bind(this), setCurrentUser: this.setCurrentUser.bind(this) })
+	        ),
+	        React.createElement(
+	          'div',
+	          null,
+	          ' current user : ',
+	          this.state.user.currentuser,
+	          ' '
 	        )
 	      );
 	    }
@@ -25358,6 +25374,18 @@
 	  }
 
 	  _createClass(Signin, [{
+	    key: 'escape',
+	    value: function escape(userInfo) {
+	      var escaped = {};
+
+	      for (var key in userInfo) {
+	        var value = userInfo[key];
+	        escaped[key] = typeof value === 'string' ? _.escape(value) : value;
+	      }
+
+	      return escaped;
+	    }
+	  }, {
 	    key: 'postUser',
 	    value: function postUser(e) {
 	      var _this2 = this;
@@ -25366,9 +25394,11 @@
 	      var username = $('#username').val(); // --> grabs username input
 	      var password = $('#password').val();
 
-	      $.post('/signin', { username: username, password: password }).then(function () {
-	        _this2.props.formViewHandler();
-	        // window.location.assign('#/'+ username);
+	      var userObj = this.escape.apply(this, { username: username, password: password });
+
+	      $.post('/signin', userObj).then(function () {
+	        _this2.props.toggleForm();
+	        _this2.props.setCurrentUser(username);
 	      });
 	    }
 	  }, {

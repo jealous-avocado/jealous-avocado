@@ -22,10 +22,6 @@ app.get('/', function (req, res) {
 app.post('/signin', function (req, res) {
  var username = req.body.username;
  var password = req.body.password;
- res.end();
- // auth logic check if user is in database
- // console.log(username, 'username');
- // res.redirect('/#/teek');// + username);
 });
 
 app.get('/signout', function (req, res) {
