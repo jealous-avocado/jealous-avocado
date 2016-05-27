@@ -3,5 +3,5 @@
 var Route = window.ReactRouter.Route;
 
 ReactDOM.render(
-    <App />
+   <Route path='/' component={App} />
   , document.getElementById('app'));
