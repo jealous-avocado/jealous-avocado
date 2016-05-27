@@ -22,6 +22,7 @@ app.get('/', function (req, res) {
 app.post('/signin', function (req, res) {
  var username = req.body.username;
  var password = req.body.password;
+
  new User({ username: username })
   .fetch()
   .then(function(user) {
@@ -31,7 +32,7 @@ app.post('/signin', function (req, res) {
       res.end();
     }
   });
-};
+});
 
 app.get('/signout', function (req, res) {
  //destory session 

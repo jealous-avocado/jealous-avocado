@@ -1,5 +1,5 @@
 {
-  "name": "GoRep",
+  "name": "gorep",
   "version": "1.0.0",
   "license": "UNLICENSED",
   "private": true,
@@ -10,6 +10,7 @@
   ],
   "dependencies": {
     "jquery": "^2.2.4",
-    "react": "^15.1.0"
+    "react": "^15.1.0",
+    "underscore": "^1.8.3"
   }
 }
