@@ -6,6 +6,8 @@ var bodyParser = require('body-parser')
 var session = require('express-session');
 var app = express();
 var PORT = process.env.PORT || 3000;
+var User = require('./db/models/user.js');
+
 
 app.use(bodyParser.urlencoded({     
  extended: true
@@ -27,7 +29,8 @@ app.post('/signin', function (req, res) {
   .fetch()
   .then(function(user) {
     if (!user) {
-      res.redirect('/signin');
+      // res.redirect('/signin');
+      res.end();
     } else {
       res.end();
     }
