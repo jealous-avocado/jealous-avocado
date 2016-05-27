@@ -6,8 +6,8 @@ var bodyParser = require('body-parser')
 var session = require('express-session');
 var app = express();
 var PORT = process.env.PORT || 3000;
+var db = require('./db/config');
 var User = require('./db/models/user.js');
-
 
 app.use(bodyParser.urlencoded({     
  extended: true

@@ -1,7 +1,7 @@
 var db = require('../config');
 
 var FavTopic = bookshelf.Model.extend({
-  tableName: 'user_favs',
+  tableName: 'userTopics',
   user() {
     return this.belongsTo(User);
   },
