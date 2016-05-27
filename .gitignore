@@ -2,7 +2,7 @@
 .DS_Store
 
 ## NPM ##
-public/node_modules/
+node_modules/
 
 ## Compiled files ##
 public/compiled/
