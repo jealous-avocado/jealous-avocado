@@ -26,22 +26,22 @@ class Signin extends React.Component {
     .then( () => {
       this.props.toggleForm();
       this.props.setCurrentUser(username);
-    })
-    .catch( e => {
-
     });
+    // .catch( e => {
+
+    // });
   }
 
   render() {
     return (
-      <form onSubmit={this.postUser.bind(this)}>
-        <label> Sign Up : </label>
-        <input id='username' placeholder='username'/>
-        <input id='password' placeholder='password' type='password' />
-        <input type='submit'></input>
-      </form>
-      <ToggleDisplay show='true'>
-      </ToggleDisplay>
+      <div>
+        <form onSubmit={this.postUser.bind(this)}>
+          <label> Sign Up : </label>
+          <input id='username' placeholder='username'/>
+          <input id='password' placeholder='password' type='password' />
+          <input type='submit'></input>
+        </form> 
+      </div>
     );
   }
 }

@@ -35,11 +35,21 @@ class App extends React.Component {
       <div>
         <div> HELLO THIS IS THE MAIN APP PAGE </div>
         <br></br>
-        <button onClick={this.loadSignInPage.bind(this)}> Sign in! </button>
+
+        <ToggleDisplay show={!this.state.user.currentuser}>
+          <button onClick={this.loadSignInPage.bind(this)}> Sign in! </button>
+        </ToggleDisplay>
+
         <ToggleDisplay show={this.state.formOpen}> 
           <Signin toggleForm = {this.toggleForm.bind(this)} setCurrentUser = {this.setCurrentUser.bind(this)} />
         </ToggleDisplay>
-        <div> current user : {this.state.user.currentuser} </div>
+
+        <ToggleDisplay show={!!this.state.user.currentuser}>
+          <button id='startStream'> Start Stream </button>
+        </ToggleDisplay>
+
+
+        <pre> current user : {this.state.user.currentuser} </pre>
       </div>
     );
   }
