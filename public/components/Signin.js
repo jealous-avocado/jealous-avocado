@@ -26,10 +26,9 @@ class Signin extends React.Component {
     .then( () => {
       this.props.toggleForm();
       this.props.setCurrentUser(username);
+      window.history.replaceState(null, null, '/'+username);
     });
-    // .catch( e => {
 
-    // });
   }
 
   render() {

@@ -1,6 +1,6 @@
 var db = require('../config');
 
-module.exports.User = db.Model.extend({
+var User = db.Model.extend({
   tableName: 'users',
   streams: function() {
     return this.hasMany(Stream);
@@ -9,6 +9,8 @@ module.exports.User = db.Model.extend({
     return this.hasMany(Video);
   }
 });
+
+module.exports = User;
 
 
 //Add password hashing with bcrypt, etc

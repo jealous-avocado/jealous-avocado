@@ -25215,6 +25215,10 @@
 
 	var _reactToggleDisplay2 = _interopRequireDefault(_reactToggleDisplay);
 
+	var _UserPage = __webpack_require__(223);
+
+	var _UserPage2 = _interopRequireDefault(_UserPage);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25264,6 +25268,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+
 	      return React.createElement(
 	        'div',
 	        null,
@@ -25290,11 +25295,7 @@
 	        React.createElement(
 	          _reactToggleDisplay2.default,
 	          { show: !!this.state.user.currentuser },
-	          React.createElement(
-	            'button',
-	            { id: 'startStream' },
-	            ' Start Stream '
-	          )
+	          React.createElement(_UserPage2.default, null)
 	        ),
 	        React.createElement(
 	          'pre',
@@ -25365,10 +25366,8 @@
 	      $.post('/signin', userObj).then(function () {
 	        _this2.props.toggleForm();
 	        _this2.props.setCurrentUser(username);
+	        window.history.replaceState(null, null, '/' + username);
 	      });
-	      // .catch( e => {
-
-	      // });
 	    }
 	  }, {
 	    key: 'render',
@@ -25485,13 +25484,18 @@
 	var UserPage = function (_React$Component) {
 	  _inherits(UserPage, _React$Component);
 
-	  function UserPage() {
+	  function UserPage(props) {
 	    _classCallCheck(this, UserPage);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(UserPage).call(this));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(UserPage).call(this, props));
 	  }
 
 	  _createClass(UserPage, [{
+	    key: "componentDidMount",
+	    value: function componentDidMount() {
+	      // sockets();
+	    }
+	  }, {
 	    key: "render",
 	    value: function render() {
 	      return React.createElement(
@@ -25500,8 +25504,15 @@
 	        React.createElement(
 	          "div",
 	          null,
-	          "Signed in, "
-	        )
+	          "Signed in, ",
+	          this.props.currentuser
+	        ),
+	        React.createElement(
+	          "button",
+	          { id: "startStream" },
+	          " Start Stream "
+	        ),
+	        React.createElement("div", { id: "videos-container" })
 	      );
 	    }
 	  }]);
