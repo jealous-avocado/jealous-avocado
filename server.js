@@ -45,6 +45,10 @@ app.get('/signout', function (req, res) {
  res.redirect('/');
 });
 
+app.get('/*', (req, res) => {
+  res.redirect('streamPage.html');
+});
+
 require('./WebRTC_Scalable_Broadcast.js')(server);
 
 server.listen(PORT, function () {

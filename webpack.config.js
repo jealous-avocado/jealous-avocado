@@ -1,9 +1,11 @@
 module.exports = {
-  entry: './public/index.js',
+  entry: {
+    main: './public/index.js',
+    stream: './public/streamPage.js'
+  },
 
   output: {
-    filename: './public/bundle.js',
-    publicPath: ''
+    filename: './public/[name].js'
   },
 
   module: {

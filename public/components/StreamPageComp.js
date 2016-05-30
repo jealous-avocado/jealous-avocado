@@ -1,4 +1,4 @@
-class UserPage extends React.Component {
+class StreamPageComp extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -10,7 +10,7 @@ class UserPage extends React.Component {
   render() {
     return (
       <div>
-        <div>Signed in, {this.props.currentuser}</div>
+        <div>Signed innnn!!!, {this.props.currentuser}</div>
         <button id='startStream'> Start Stream </button>
         <div id="videos-container"></div>
       </div>
@@ -18,4 +18,4 @@ class UserPage extends React.Component {
   }
 }
 
-export default UserPage;
+export default StreamPageComp;

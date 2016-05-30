@@ -1,6 +1,5 @@
 import Signin from './Signin';
 import ToggleDisplay from 'react-toggle-display';
-import UserPage from './UserPage';
 
 
 class App extends React.Component {
@@ -45,10 +44,6 @@ class App extends React.Component {
 
         <ToggleDisplay show={this.state.formOpen}> 
           <Signin toggleForm = {this.toggleForm.bind(this)} setCurrentUser = {this.setCurrentUser.bind(this)} />
-        </ToggleDisplay>
-
-        <ToggleDisplay show={!!this.state.user.currentuser}>
-          <UserPage />
         </ToggleDisplay>
 
 
