@@ -47,9 +47,6 @@ app.get('/signout', function (req, res) {
 
 require('./WebRTC_Scalable_Broadcast.js')(server);
 
-// var io = require('socket.io')(server);
-// io.on('connection', () => { console.log('connnected!@#!@#!@!##!');});
-
 server.listen(PORT, function () {
  console.log('Express listening on port ' + PORT + '!');
 });
