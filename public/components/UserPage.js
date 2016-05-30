@@ -1,12 +1,18 @@
 class UserPage extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    // sockets();
   }
 
   render() {
     return (
       <div>
-        <div>Signed in, {}</div>
+        <div>Signed in, {this.props.currentuser}</div>
+        <button id='startStream'> Start Stream </button>
+        <div id="videos-container"></div>
       </div>
     )
   }

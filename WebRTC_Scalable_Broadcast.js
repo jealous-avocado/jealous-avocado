@@ -19,15 +19,19 @@ function WebRTC_Scalable_Broadcast(app) {
         origins: '*:*'
     });
 
+    // io.on('connection', () => console.log('CONNECTED!!!!!'));
+
     io.set('transports', [
         'websocket', // 'disconnect' EVENT will work only with 'websocket'
         'xhr-polling',
-        'jsonp-polling'
+        'jsonp-polling',
+        'polling'
     ]);
 
     var listOfBroadcasts = {};
 
     io.on('connection', function(socket) {
+        console.log('CONNECTED to socket!!!!!!');
         var currentUser;
         socket.on('join-broadcast', function(user) {
             currentUser = user;
@@ -85,4 +89,4 @@ function WebRTC_Scalable_Broadcast(app) {
         }
         return firstResult;
     }
-}
+};

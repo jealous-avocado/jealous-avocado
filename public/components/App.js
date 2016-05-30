@@ -1,5 +1,7 @@
 import Signin from './Signin';
 import ToggleDisplay from 'react-toggle-display';
+import UserPage from './UserPage';
+
 
 class App extends React.Component {
   constructor() {
@@ -31,6 +33,7 @@ class App extends React.Component {
   }
 
   render() {
+
     return (
       <div>
         <div> HELLO THIS IS THE MAIN APP PAGE </div>
@@ -45,7 +48,7 @@ class App extends React.Component {
         </ToggleDisplay>
 
         <ToggleDisplay show={!!this.state.user.currentuser}>
-          <button id='startStream'> Start Stream </button>
+          <UserPage />
         </ToggleDisplay>
 
 

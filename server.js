@@ -5,7 +5,10 @@ var request = require('request');
 var bodyParser = require('body-parser')
 var session = require('express-session');
 var app = express();
+
 var server = require('http').Server(app);
+
+
 var PORT = process.env.PORT || 3000;
 var db = require('./db/config');
 var User = require('./db/models/user.js');
@@ -25,7 +28,7 @@ app.get('/', function (req, res) {
 app.post('/signin', function (req, res) {
  var username = req.body.username;
  var password = req.body.password;
- new User({ username: username })
+ new User({ name: username })
   .fetch()
   .then(function(user) {
     if (!user) {
@@ -42,9 +45,8 @@ app.get('/signout', function (req, res) {
  res.redirect('/');
 });
 
+require('./WebRTC_Scalable_Broadcast.js')(server);
 
-app.listen(PORT, function () {
+server.listen(PORT, function () {
  console.log('Express listening on port ' + PORT + '!');
 });
-
-require('./WebRTC_Scalable_Broadcast.js')(server);
