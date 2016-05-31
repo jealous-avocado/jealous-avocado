@@ -14,6 +14,9 @@ class App extends React.Component {
 
   render() {
 
+
+
+
     return (
       <div>
         <Link to="/signin"> Sign in </Link>
@@ -22,6 +25,8 @@ class App extends React.Component {
         <PublicPage />
 
         {this.props.children}
+
+        
         <pre> current user : {this.state.user.currentuser} </pre>
       </div>
     );

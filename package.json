@@ -3,8 +3,9 @@
   "version": "1.1.0",
   "private": true,
   "scripts": {
-    "start": "nodemon server.js",
-    "build": "webpack --watch",
+    "start": "nodemon server.bundle.js",
+    "build:client": "webpack --watch",
+    "build:server": "webpack --config webpack.server.config.js",
     "db": "mysql.server start"
   },
   "dependencies": {
