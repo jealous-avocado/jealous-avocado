@@ -25380,7 +25380,14 @@
 	  _createClass(StreamPageComp, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      (0, _socketioRTC.socketsTest)();
+	      // socketsTest();
+	
+	      var connection = new RTCMultiConnection().connect();
+	
+	      document.querySelector('#startStream').onclick = function () {
+	        connection.open();
+	        connection.direction = 'one-way';
+	      };
 	    }
 	  }, {
 	    key: 'render',
