@@ -6,7 +6,16 @@ class StreamPageComp extends React.Component {
   }
 
   componentDidMount() {
-    socketsTest();
+    // socketsTest();
+
+    var connection = new RTCMultiConnection().connect();
+    
+    document.querySelector('#startStream').onclick = function() {
+        connection.open();
+        connection.direction = 'one-way';
+    };
+
+
   }
 
   render() {

@@ -21,7 +21,6 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/public')); //express static will serve up index.html by default upon requesting root url
 
-
 app.post('/signin', function (req, res) {
  var username = req.body.username;
  var password = req.body.password;
