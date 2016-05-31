@@ -1,22 +1,22 @@
-module.exports = {
-  entry: {
-    main: './public/index.js',
-    stream: './public/streamPage.js'
-  },
+module.exports =
+  { name: 'client',
 
-  output: {
-    filename: './public/[name].js'
-  },
+    entry: {
+      main: './public/index.js',
+      stream: './public/streamPage.js'
+    },
 
-  module: {
-    loaders: [
-      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' }
-    ]
-  }, 
+    // target: 'node',
 
-  devtool: 'source-map'
+    output: {
+      filename: './public/[name].js'
+    },
 
-  // historyApiFallback: {
-  //   index: './public/index.html'
-  // }
-}
+    module: {
+      loaders: [
+        { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' }
+      ]
+    }, 
+
+    devtool: 'source-map'
+  };
