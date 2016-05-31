@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon server.js",
-    "build": "webpack-dev-server --inline --content-base . --watch --history-api-fallback",
+    "build": "webpack --watch",
     "db": "mysql.server start"
   },
   "dependencies": {
