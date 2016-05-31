@@ -19,25 +19,26 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public')); //express static will serve up index.html by default upon requesting root url
 
-app.get('/', function (req, res) {
- res.render('index.html');
-});
 
 app.post('/signin', function (req, res) {
  var username = req.body.username;
  var password = req.body.password;
- new User({ name: username })
-  .fetch()
-  .then(function(user) {
-    if (!user) {
-      // res.redirect('/signin');
-      res.end();
-    } else {
-      res.end();
-    }
-  });
+ // new User({ name: username })
+ //  .fetch()
+ //  .then(function(user) {
+ //    if (!user) {
+ //      res.status(404);
+ //      res.end();
+ //    } else {
+ //      res.status(201);
+ //      res.end();
+ //    }
+ //  });
+res.status(201);
+res.end();
+
 });
 
 app.get('/signout', function (req, res) {
@@ -45,8 +46,10 @@ app.get('/signout', function (req, res) {
  res.redirect('/');
 });
 
-app.get('/*', (req, res) => {
-  res.redirect('streamPage.html');
+
+
+app.get('*', (req, res) => {
+  res.sendFile(__dirname + '/public/index.html');
 });
 
 require('./WebRTC_Scalable_Broadcast.js')(server);

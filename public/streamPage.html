@@ -15,16 +15,18 @@
   </head>
 
   <body>
-    <h1> GoRep </h1>
+    <h1> apples </h1>
     <div id='streamPage'></div>
     <script src='stream.js'></script>
-    <!-- <script src='socketioRTC.js'></script> -->
+    <!-- // <script src='socketioRTC.js'></script> -->
      
      <script>
     var connection = new RTCMultiConnection().connect();
     document.querySelector('#startStream').onclick = function() {
         connection.open();
+        console.log(connection.channel, 'CONN');
     };
+
     </script>
 
   </body>

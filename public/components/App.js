@@ -1,6 +1,4 @@
-import Signin from './Signin';
-import ToggleDisplay from 'react-toggle-display';
-
+import {Link} from 'react-router';
 
 class App extends React.Component {
   constructor() {
@@ -8,27 +6,9 @@ class App extends React.Component {
     this.state = {
       user: {
         currentUser: null
-      },
-      formOpen: false
+      }
 
     };
-  }
-
-  loadSignInPage() {
-    // window.location.assign('#/signin');
-    this.setState({ formOpen : true });
-  }
-
-  toggleForm() {
-    this.setState({ formOpen : false });
-  }
-
-  setCurrentUser(currentuser) {
-    this.setState({
-      user: {
-        currentuser: currentuser
-      }
-    });
   }
 
   render() {
@@ -38,15 +18,8 @@ class App extends React.Component {
         <div> HELLO THIS IS THE MAIN APP PAGE </div>
         <br></br>
 
-        <ToggleDisplay show={!this.state.user.currentuser}>
-          <button onClick={this.loadSignInPage.bind(this)}> Sign in! </button>
-        </ToggleDisplay>
-
-        <ToggleDisplay show={this.state.formOpen}> 
-          <Signin toggleForm = {this.toggleForm.bind(this)} setCurrentUser = {this.setCurrentUser.bind(this)} />
-        </ToggleDisplay>
-
-
+        <Link to="/signin"> Sign in </Link>
+        {this.props.children}
         <pre> current user : {this.state.user.currentuser} </pre>
       </div>
     );
