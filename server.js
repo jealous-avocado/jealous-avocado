@@ -51,8 +51,6 @@ app.get('*', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
 });
 
-require('./WebRTC_Scalable_Broadcast.js')(server);
-
-server.listen(PORT, function () {
+app.listen(PORT, function () {
  console.log('Express listening on port ' + PORT + '!');
 });

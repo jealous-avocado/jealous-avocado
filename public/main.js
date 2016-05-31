@@ -58,11 +58,11 @@
 	
 	var _App2 = _interopRequireDefault(_App);
 	
-	var _Signin = __webpack_require__(221);
+	var _Signin = __webpack_require__(222);
 	
 	var _Signin2 = _interopRequireDefault(_Signin);
 	
-	var _StreamPageComp = __webpack_require__(222);
+	var _StreamPageComp = __webpack_require__(223);
 	
 	var _StreamPageComp2 = _interopRequireDefault(_StreamPageComp);
 	
@@ -25202,7 +25202,7 @@
 /* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -25211,6 +25211,12 @@
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _reactRouter = __webpack_require__(158);
+	
+	var _PublicPage = __webpack_require__(221);
+	
+	var _PublicPage2 = _interopRequireDefault(_PublicPage);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -25236,30 +25242,26 @@
 	  }
 	
 	  _createClass(App, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	
 	      return React.createElement(
-	        "div",
+	        'div',
 	        null,
 	        React.createElement(
-	          "div",
-	          null,
-	          " HELLO THIS IS THE MAIN APP PAGE "
-	        ),
-	        React.createElement("br", null),
-	        React.createElement(
 	          _reactRouter.Link,
-	          { to: "/signin" },
-	          " Sign in "
+	          { to: '/signin' },
+	          ' Sign in '
 	        ),
+	        React.createElement('br', null),
+	        React.createElement(_PublicPage2.default, null),
 	        this.props.children,
 	        React.createElement(
-	          "pre",
+	          'pre',
 	          null,
-	          " current user : ",
+	          ' current user : ',
 	          this.state.user.currentuser,
-	          " "
+	          ' '
 	        )
 	      );
 	    }
@@ -25272,6 +25274,62 @@
 
 /***/ },
 /* 221 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var PublicPage = function (_React$Component) {
+	  _inherits(PublicPage, _React$Component);
+	
+	  function PublicPage() {
+	    _classCallCheck(this, PublicPage);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(PublicPage).call(this));
+	  }
+	
+	  _createClass(PublicPage, [{
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        'div',
+	        { className: 'container-fluid' },
+	        React.createElement(
+	          'div',
+	          { className: 'row' },
+	          React.createElement(
+	            'div',
+	            { className: 'col-md-5' },
+	            ' Public Page '
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'col-md-7' },
+	            ' Current Videos '
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return PublicPage;
+	}(React.Component);
+	
+	exports.default = PublicPage;
+
+/***/ },
+/* 222 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -25349,8 +25407,8 @@
 	exports.default = Signin;
 
 /***/ },
-/* 222 */
-/***/ function(module, exports, __webpack_require__) {
+/* 223 */
+/***/ function(module, exports) {
 
 	'use strict';
 	
@@ -25359,8 +25417,6 @@
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _socketioRTC = __webpack_require__(223);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -25380,11 +25436,11 @@
 	  _createClass(StreamPageComp, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      // socketsTest();
 	
 	      var connection = new RTCMultiConnection().connect();
 	
 	      document.querySelector('#startStream').onclick = function () {
+	
 	        connection.open();
 	        connection.direction = 'one-way';
 	      };
@@ -25414,175 +25470,6 @@
 	}(React.Component);
 	
 	exports.default = StreamPageComp;
-
-/***/ },
-/* 223 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	module.exports.socketsTest = function () {
-	    var socket = io();
-	    console.log('MOUNTED');
-	};
-	
-	module.exports.sockets = function () {
-	    var socket = io();
-	
-	    // using single socket for RTCMultiConnection signaling
-	    var onMessageCallbacks = {};
-	    socket.on('message', function (data) {
-	
-	        if (data.sender == connection.userid) return;
-	        if (onMessageCallbacks[data.channel]) {
-	            onMessageCallbacks[data.channel](data.message);
-	        };
-	    });
-	
-	    // initializing RTCMultiConnection constructor.
-	    function initRTCMultiConnection(userid) {
-	        var connection = new RTCMultiConnection();
-	        connection.body = document.getElementById('videos-container');
-	        connection.channel = connection.sessionid = connection.userid = userid || connection.userid;
-	        connection.sdpConstraints.mandatory = {
-	            OfferToReceiveAudio: false,
-	            OfferToReceiveVideo: true
-	        };
-	        // using socket.io for signaling
-	        connection.openSignalingChannel = function (config) {
-	            var channel = config.channel || this.channel;
-	            onMessageCallbacks[channel] = config.onmessage;
-	            if (config.onopen) setTimeout(config.onopen, 1000);
-	            return {
-	                send: function send(message) {
-	                    socket.emit('message', {
-	                        sender: connection.userid,
-	                        channel: channel,
-	                        message: message
-	                    });
-	                },
-	                channel: channel
-	            };
-	        };
-	        connection.onMediaError = function (error) {
-	            alert(JSON.stringify(error));
-	        };
-	        return connection;
-	    }
-	
-	    // this RTCMultiConnection object is used to connect with existing users
-	    var connection = initRTCMultiConnection();
-	
-	    connection.getExternalIceServers = false;
-	
-	    connection.onstream = function (event) {
-	        connection.body.appendChild(event.mediaElement);
-	
-	        if (connection.isInitiator == false && !connection.broadcastingConnection) {
-	            // "connection.broadcastingConnection" global-level object is used
-	            // instead of using a closure object, i.e. "privateConnection"
-	            // because sometimes out of browser-specific bugs, browser
-	            // can emit "onaddstream" event even if remote user didn't attach any stream.
-	            // such bugs happen often in chrome.
-	            // "connection.broadcastingConnection" prevents multiple initializations.
-	
-	            // if current user is broadcast viewer
-	            // he should create a separate RTCMultiConnection object as well.
-	            // because node.js server can allot him other viewers for
-	            // remote-stream-broadcasting.
-	            connection.broadcastingConnection = initRTCMultiConnection(connection.userid);
-	
-	            // to fix unexpected chrome/firefox bugs out of sendrecv/sendonly/etc. issues.
-	            connection.broadcastingConnection.onstream = function () {};
-	
-	            connection.broadcastingConnection.session = connection.session;
-	            connection.broadcastingConnection.attachStreams.push(event.stream); // broadcast remote stream
-	            connection.broadcastingConnection.dontCaptureUserMedia = true;
-	
-	            // forwarder should always use this!
-	            connection.broadcastingConnection.sdpConstraints.mandatory = {
-	                OfferToReceiveVideo: false,
-	                OfferToReceiveAudio: false
-	            };
-	
-	            connection.broadcastingConnection.open({
-	                dontTransmit: true
-	            });
-	        }
-	    };
-	
-	    // ask node.js server to look for a broadcast
-	    // if broadcast is available, simply join it. i.e. "join-broadcaster" event should be emitted.
-	    // if broadcast is absent, simply create it. i.e. "start-broadcasting" event should be fired.
-	
-	    document.getElementById('startStream').onclick = function () {
-	
-	        var broadcastid = window.location.pathname;
-	
-	        if (broadcastid.replace(/^\s+|\s+$/g, '').length <= 0) {
-	            alert('Please enter broadcast-id');
-	            document.getElementById('broadcast-id').focus();
-	            return;
-	        }
-	
-	        this.disabled = true;
-	
-	        connection.session = {
-	            video: true,
-	            screen: true,
-	            audio: true,
-	            oneway: true
-	        };
-	
-	        socket.emit('join-broadcast', {
-	            broadcastid: broadcastid,
-	            userid: connection.userid,
-	            typeOfStreams: connection.session
-	        });
-	    };
-	
-	    // this event is emitted when a broadcast is already created.
-	    socket.on('join-broadcaster', function (broadcaster, typeOfStreams) {
-	        connection.session = typeOfStreams;
-	        connection.channel = connection.sessionid = broadcaster.userid;
-	
-	        connection.sdpConstraints.mandatory = {
-	            OfferToReceiveVideo: !!connection.session.video,
-	            OfferToReceiveAudio: !!connection.session.audio
-	        };
-	
-	        connection.join({
-	            sessionid: broadcaster.userid,
-	            userid: broadcaster.userid,
-	            extra: {},
-	            session: connection.session
-	        });
-	    });
-	
-	    // this event is emitted when a broadcast is absent.
-	    socket.on('start-broadcasting', function (typeOfStreams) {
-	        // host i.e. sender should always use this!
-	        connection.sdpConstraints.mandatory = {
-	            OfferToReceiveVideo: false,
-	            OfferToReceiveAudio: false
-	        };
-	        connection.session = typeOfStreams;
-	        connection.open({
-	            dontTransmit: true
-	        });
-	
-	        if (connection.broadcastingConnection) {
-	            // if new person is given the initiation/host/moderation control
-	            connection.broadcastingConnection.close();
-	            connection.broadcastingConnection = null;
-	        }
-	    });
-	
-	    window.onbeforeunload = function () {
-	        // Firefox is weird!
-	        document.getElementById('startStream').disabled = false;
-	    };
-	};
 
 /***/ }
 /******/ ]);

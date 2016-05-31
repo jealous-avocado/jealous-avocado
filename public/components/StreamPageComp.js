@@ -1,16 +1,14 @@
-import {socketsTest} from '../socketioRTC';
-
 class StreamPageComp extends React.Component {
   constructor(props) {
     super(props);
   }
 
   componentDidMount() {
-    // socketsTest();
 
     var connection = new RTCMultiConnection().connect();
     
     document.querySelector('#startStream').onclick = function() {
+
         connection.open();
         connection.direction = 'one-way';
     };
@@ -22,6 +20,9 @@ class StreamPageComp extends React.Component {
     return (
       <div>
         <div>User Page </div>
+
+
+
         <button id='startStream'> Start Stream </button>
         <div id="videos-container"></div>
       </div>

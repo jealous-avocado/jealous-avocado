@@ -14,9 +14,9 @@ module.exports = {
     ]
   }, 
 
-  devtool: 'source-map',
+  devtool: 'source-map'
 
-  historyApiFallback: {
-    index: './public/index.html'
-  }
+  // historyApiFallback: {
+  //   index: './public/index.html'
+  // }
 }
