@@ -6,7 +6,7 @@ class TopicPage extends React.Component {
   constructor() {
     super();
     this.state = {
-      topic: null
+      topic: 'World News'
     };
   }
 
@@ -14,21 +14,24 @@ class TopicPage extends React.Component {
     // this.setState({ topic: clickedTopic});
   }
 
-  //
-  render() {
-    <div>
-      <div> Topic Page </div> <br></br>
+  componentWillMount() {
+    const topic = window.location.pathname.split('news/')[1];
+    if (topic) {
+      this.setState({
+        topic: topic
+      });
+    }
 
-      <div className='row'>
-        <div className="col-md-6">
-          //set up tabs
-          <NewsArticles />
-        </div>
-        <div className="col-md-6">
-          <NewsVideos />
-        </div>
+  }
+
+  render() {
+    return (
+      <div>
+        <div> Topic Page </div> <br></br>
+        <div> {this.state.topic} </div>
+        <NewsArticles topic={this.state.topic}/>
       </div>
-    </div>
+    );
   }
 
 };

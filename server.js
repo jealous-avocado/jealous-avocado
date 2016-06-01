@@ -1,6 +1,3 @@
-import routes from 
-
-
 var express = require('express');
 var bodyParser = require('body-parser');
 var _ = require('underscore');
@@ -48,7 +45,11 @@ app.get('/signout', function (req, res) {
  res.redirect('/');
 });
 
-
+app.get('/getArticles', (req, res) => {
+  console.log(req.query, 'url');
+  //
+  res.end();
+});
 
 app.get('*', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');

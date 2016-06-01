@@ -46,19 +46,19 @@
 
 	'use strict';
 	
-	var express = __webpack_require__(1);
-	var bodyParser = __webpack_require__(2);
-	var _ = __webpack_require__(3);
-	var request = __webpack_require__(4);
-	var bodyParser = __webpack_require__(2);
-	var session = __webpack_require__(5);
+	var express = __webpack_require__(13);
+	var bodyParser = __webpack_require__(14);
+	var _ = __webpack_require__(15);
+	var request = __webpack_require__(16);
+	var bodyParser = __webpack_require__(14);
+	var session = __webpack_require__(17);
 	var app = express();
 	
-	var server = __webpack_require__(6).Server(app);
+	var server = __webpack_require__(18).Server(app);
 	
 	var PORT = process.env.PORT || 3000;
-	var db = __webpack_require__(7);
-	var User = __webpack_require__(10);
+	var db = __webpack_require__(19);
+	var User = __webpack_require__(22);
 	
 	app.use(bodyParser.urlencoded({
 	  extended: true
@@ -91,6 +91,12 @@
 	  res.redirect('/');
 	});
 	
+	app.get('/getArticles', function (req, res) {
+	  console.log(req.query, 'url');
+	  //
+	  res.end();
+	});
+	
 	app.get('*', function (req, res) {
 	  res.sendFile(__dirname + '/public/index.html');
 	});
@@ -100,48 +106,60 @@
 	});
 
 /***/ },
-/* 1 */
+/* 1 */,
+/* 2 */,
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */
 /***/ function(module, exports) {
 
 	module.exports = require("express");
 
 /***/ },
-/* 2 */
+/* 14 */
 /***/ function(module, exports) {
 
 	module.exports = require("body-parser");
 
 /***/ },
-/* 3 */
+/* 15 */
 /***/ function(module, exports) {
 
 	module.exports = require("underscore");
 
 /***/ },
-/* 4 */
+/* 16 */
 /***/ function(module, exports) {
 
 	module.exports = require("request");
 
 /***/ },
-/* 5 */
+/* 17 */
 /***/ function(module, exports) {
 
 	module.exports = require("express-session");
 
 /***/ },
-/* 6 */
+/* 18 */
 /***/ function(module, exports) {
 
 	module.exports = require("http");
 
 /***/ },
-/* 7 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var knex = __webpack_require__(8)({
+	var knex = __webpack_require__(20)({
 	  client: 'mysql',
 	  connection: {
 	    host: '127.0.0.1',
@@ -152,7 +170,7 @@
 	  }
 	});
 	
-	var db = __webpack_require__(9)(knex);
+	var db = __webpack_require__(21)(knex);
 	
 	db.knex.schema.hasTable('users').then(function (exists) {
 	  if (!exists) {
@@ -238,24 +256,24 @@
 	module.exports = db;
 
 /***/ },
-/* 8 */
+/* 20 */
 /***/ function(module, exports) {
 
 	module.exports = require("knex");
 
 /***/ },
-/* 9 */
+/* 21 */
 /***/ function(module, exports) {
 
 	module.exports = require("bookshelf");
 
 /***/ },
-/* 10 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var db = __webpack_require__(7);
+	var db = __webpack_require__(19);
 	
 	var User = db.Model.extend({
 	  tableName: 'users',
