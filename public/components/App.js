@@ -1,5 +1,4 @@
 import {Link} from 'react-router';
-import PublicPage from './PublicPage';
 
 class App extends React.Component {
   constructor() {
@@ -21,8 +20,6 @@ class App extends React.Component {
       <div>
         <Link to="/signin"> Sign in </Link>
         <br></br>
-
-        <PublicPage />
 
         {this.props.children}
 
