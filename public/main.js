@@ -54,7 +54,7 @@
 	
 	var _reactDom = __webpack_require__(219);
 	
-	var _routes = __webpack_require__(227);
+	var _routes = __webpack_require__(224);
 	
 	var _routes2 = _interopRequireDefault(_routes);
 	
@@ -25279,10 +25279,27 @@
 	  function PublicPage() {
 	    _classCallCheck(this, PublicPage);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(PublicPage).call(this));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PublicPage).call(this));
+	
+	    _this.state = {
+	      videos: ['video1', 'video2', 'video3', 'video4', 'video5', 'video6'],
+	      articles: ['article1', 'article2', 'article3', 'article4', 'article5'],
+	      currentVideo: null
+	    };
+	    return _this;
 	  }
 	
 	  _createClass(PublicPage, [{
+	    key: 'updateVideo',
+	    value: function updateVideo(video) {
+	      this.setState({ currentVideo: video });
+	    }
+	  }, {
+	    key: 'updateArticle',
+	    value: function updateArticle(article) {
+	      this.setState({ articles: articles });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return React.createElement(
@@ -25293,13 +25310,38 @@
 	          { className: 'row' },
 	          React.createElement(
 	            'div',
-	            { className: 'col-md-5' },
-	            ' Public Page '
+	            { className: 'col-md-6' },
+	            ' Current Video',
+	            React.createElement('iframe', { width: '560', height: '315', src: 'https://www.youtube.com/embed/Dd7FixvoKBw', frameborder: '0', allowfullscreen: true }),
+	            '            ',
+	            React.createElement(
+	              'div',
+	              { id: 'articles' },
+	              ' Trending Articles',
+	              this.state.articles.map(function (article) {
+	                return React.createElement(
+	                  'li',
+	                  null,
+	                  ' ',
+	                  article,
+	                  ' '
+	                );
+	              })
+	            )
 	          ),
 	          React.createElement(
 	            'div',
-	            { className: 'col-md-7' },
-	            ' Current Videos '
+	            { className: 'col-md-6' },
+	            ' Trending Videos',
+	            this.state.videos.map(function (video) {
+	              return React.createElement(
+	                'li',
+	                null,
+	                ' ',
+	                video,
+	                ' '
+	              );
+	            })
 	          )
 	        )
 	      );
@@ -25460,17 +25502,55 @@
 
 	'use strict';
 	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(158);
+	
+	var _App = __webpack_require__(220);
+	
+	var _App2 = _interopRequireDefault(_App);
+	
+	var _Signin = __webpack_require__(222);
+	
+	var _Signin2 = _interopRequireDefault(_Signin);
+	
+	var _TopicPage = __webpack_require__(225);
+	
+	var _TopicPage2 = _interopRequireDefault(_TopicPage);
+	
+	var _StreamPageComp = __webpack_require__(223);
+	
+	var _StreamPageComp2 = _interopRequireDefault(_StreamPageComp);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	module.exports = _react2.default.createElement(
+	  _reactRouter.Route,
+	  { path: '/', component: _App2.default },
+	  _react2.default.createElement(_reactRouter.Route, { path: '/signin', component: _Signin2.default }),
+	  _react2.default.createElement(_reactRouter.Route, { path: '/:username', component: _StreamPageComp2.default }),
+	  _react2.default.createElement(_reactRouter.Route, { path: '/news', component: _TopicPage2.default })
+	);
+
+/***/ },
+/* 225 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _NewsArticles = __webpack_require__(225);
+	var _NewsArticles = __webpack_require__(226);
 	
 	var _NewsArticles2 = _interopRequireDefault(_NewsArticles);
 	
-	var _NewsVideos = __webpack_require__(226);
+	var _NewsVideos = __webpack_require__(227);
 	
 	var _NewsVideos2 = _interopRequireDefault(_NewsVideos);
 	
@@ -25544,7 +25624,7 @@
 	exports.default = TopicPage;
 
 /***/ },
-/* 225 */
+/* 226 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -25576,7 +25656,7 @@
 	exports.default = NewsArticles;
 
 /***/ },
-/* 226 */
+/* 227 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -25606,44 +25686,6 @@
 	;
 	
 	exports.default = NewsVideos;
-
-/***/ },
-/* 227 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRouter = __webpack_require__(158);
-	
-	var _App = __webpack_require__(220);
-	
-	var _App2 = _interopRequireDefault(_App);
-	
-	var _Signin = __webpack_require__(222);
-	
-	var _Signin2 = _interopRequireDefault(_Signin);
-	
-	var _TopicPage = __webpack_require__(224);
-	
-	var _TopicPage2 = _interopRequireDefault(_TopicPage);
-	
-	var _StreamPageComp = __webpack_require__(223);
-	
-	var _StreamPageComp2 = _interopRequireDefault(_StreamPageComp);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	module.exports = _react2.default.createElement(
-	  _reactRouter.Route,
-	  { path: '/', component: _App2.default },
-	  _react2.default.createElement(_reactRouter.Route, { path: '/signin', component: _Signin2.default }),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/:username', component: _StreamPageComp2.default }),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/news', component: _TopicPage2.default })
-	);
 
 /***/ }
 /******/ ]);
