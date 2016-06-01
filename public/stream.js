@@ -52,7 +52,7 @@
 	
 	var _reactDom = __webpack_require__(219);
 	
-	var _StreamPageComp = __webpack_require__(223);
+	var _StreamPageComp = __webpack_require__(226);
 	
 	var _StreamPageComp2 = _interopRequireDefault(_StreamPageComp);
 	
@@ -19733,7 +19733,10 @@
 /* 220 */,
 /* 221 */,
 /* 222 */,
-/* 223 */
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */
 /***/ function(module, exports) {
 
 	'use strict';
