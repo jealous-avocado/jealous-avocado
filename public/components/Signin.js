@@ -24,13 +24,13 @@ class Signin extends React.Component {
 
     var userObj = this.escape.apply(this, {username: username, password: password});
 
-    this.props.dispatch(actions.updateUser(username));
 
     $.post('/signin', userObj)
     .done(() => {
-      // window.location = '/'+;
-      // return to home page view with homepage rendering components that are visible for signed in user
+      this.props.dispatch(actions.updateUser(username));
 
+      $('#signinForm').toggle();
+      
     });
     // .fail(e => console.log(e, 'error'));
     // on fail --> present user with failed auth message
@@ -40,7 +40,7 @@ class Signin extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.postUser.bind(this)}>
+        <form id="signinForm" onSubmit={this.postUser.bind(this)}>
           <input id='username' placeholder='username'/>
           <input id='password' placeholder='password' type='password' />
           <input type='submit'></input>

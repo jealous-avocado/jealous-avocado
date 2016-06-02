@@ -13,7 +13,8 @@ class NewsArticles extends React.Component {
 
   componentWillMount() {
   //query database for topic and pull out the articles for that topic
-  console.log(this.props.topic, 'topic');
+  // console.log(this.props.topic, 'topic');
+  console.log(this.props.params, ' | topic');
     this.queryDB()
       .done(r => {
         //populate the component div with the articles returned

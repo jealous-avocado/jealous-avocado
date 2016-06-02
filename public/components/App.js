@@ -12,6 +12,13 @@ class App extends React.Component {
     // };
   }
 
+  componentDidUpdate() {
+    if (this.props.user.username) {
+      console.log('user signed in');
+    } else {
+      console.log('user not signed in');
+    }
+  }
 
   render() {
 

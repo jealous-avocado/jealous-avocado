@@ -25288,6 +25288,15 @@
 	  }
 	
 	  _createClass(App, [{
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      if (this.props.user.username) {
+	        console.log('user signed in');
+	      } else {
+	        console.log('user not signed in');
+	      }
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	
@@ -26809,18 +26818,18 @@
 	  }, {
 	    key: 'postUser',
 	    value: function postUser(e) {
+	      var _this2 = this;
+	
 	      e.preventDefault();
 	      var username = $('#username').val(); // --> grabs username input
 	      var password = $('#password').val();
 	
 	      var userObj = this.escape.apply(this, { username: username, password: password });
 	
-	      this.props.dispatch(_actions2.default.updateUser(username));
-	
 	      $.post('/signin', userObj).done(function () {
-	        // window.location = '/'+;
-	        // return to home page view with homepage rendering components that are visible for signed in user
+	        _this2.props.dispatch(_actions2.default.updateUser(username));
 	
+	        $('#signinForm').toggle();
 	      });
 	      // .fail(e => console.log(e, 'error'));
 	      // on fail --> present user with failed auth message
@@ -26833,7 +26842,7 @@
 	        null,
 	        React.createElement(
 	          'form',
-	          { onSubmit: this.postUser.bind(this) },
+	          { id: 'signinForm', onSubmit: this.postUser.bind(this) },
 	          React.createElement('input', { id: 'username', placeholder: 'username' }),
 	          React.createElement('input', { id: 'password', placeholder: 'password', type: 'password' }),
 	          React.createElement('input', { type: 'submit' })
@@ -26991,7 +27000,8 @@
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
 	      //query database for topic and pull out the articles for that topic
-	      console.log(this.props.topic, 'topic');
+	      // console.log(this.props.topic, 'topic');
+	      console.log(this.props.params, ' | topic');
 	      this.queryDB().done(function (r) {
 	        //populate the component div with the articles returned
 	        /*
