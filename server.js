@@ -30,14 +30,14 @@ app.post('/signin', function (req, res) {
   .then(function(user) {
     if (!user) {
       res.status(404);
-      console.log(user);
-      res.end();
-    } else {
       var newUser = new User({
         name: username,
         password: password
       });
       newUser.save();
+      res.end();
+    } else {
+      console.log(user);
       res.status(201);
       res.end();
     }
