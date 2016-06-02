@@ -24,17 +24,17 @@ app.use(express.static(__dirname + '/public')); //express static will serve up i
 app.post('/signin', function (req, res) {
  var username = req.body.username;
  var password = req.body.password;
- // new User({ name: username })
- //  .fetch()
- //  .then(function(user) {
- //    if (!user) {
- //      res.status(404);
- //      res.end();
- //    } else {
- //      res.status(201);
- //      res.end();
- //    }
- //  });
+ new User({ name: username })
+  .fetch()
+  .then(function(user) {
+    if (!user) {
+      res.status(404);
+      res.end();
+    } else {
+      res.status(201);
+      res.end();
+    }
+  });
 res.status(201);
 res.end();
 
