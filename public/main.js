@@ -25424,7 +25424,7 @@
 	      var username = $('#username').val(); // --> grabs username input
 	      var password = $('#password').val();
 	
-	      var userObj = this.escape.apply(this, { username: username, password: password });
+	      var userObj = { username: username, password: password };
 	
 	      $.post('/signin', userObj).done(function () {
 	        _this2.props.dispatch(_actions2.default.signinUser(username));

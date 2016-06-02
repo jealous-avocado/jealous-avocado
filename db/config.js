@@ -1,11 +1,17 @@
 var knex = require('knex') ({
+  // >>>>> Heroku Postgres DB
+
+  // client: 'pg',
+  // connection: process.env.DATABASE_URL
+
+  // >>>>> Local DB  
+  
   client: 'mysql',
   connection: {
     host: '127.0.0.1',
     user: 'root',
     database: 'rep',
-    charset: 'utf8', 
-    password: 'kk'
+    charset: 'utf8'
   }
 });
 
