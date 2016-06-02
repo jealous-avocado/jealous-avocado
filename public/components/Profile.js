@@ -2,7 +2,6 @@
 class Profile extends React.Component {
   constructor() {
     super();
-    };
   }
 
   render() {
