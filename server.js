@@ -29,15 +29,15 @@ app.post('/signin', function (req, res) {
   .fetch()
   .then(function(user) {
     if (!user) {
+      // var newUser = new User({
+      //   name: username,
+      //   password: password
+      // });
+      // newUser.save();
       res.status(404);
-      var newUser = new User({
-        name: username,
-        password: password
-      });
-      newUser.save();
       res.end();
     } else {
-      console.log(user);
+      // console.log(user);
       res.status(201);
       res.end();
     }

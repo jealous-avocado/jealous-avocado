@@ -20,11 +20,7 @@ class Signin extends React.Component {
     let username = $('#username').val(); // --> grabs username input
     let password = $('#password').val();
 
-    console.log('signin page', username, password);
-
     var userObj = this.escape.call(this, {username: username, password: password});
-
-    console.log('signin page', userObj);
 
     $.post('/signin', userObj)
     .done(() => {
