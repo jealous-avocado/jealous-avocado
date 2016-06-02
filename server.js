@@ -33,7 +33,7 @@ app.post('/signin', function (req, res) {
       res.end();
     } else {
       var newUser = new User({
-        username: username,
+        name: username,
         password: password
       });
       newUser.save();
