@@ -19,6 +19,9 @@ class Signin extends React.Component {
 
   postUser(e) {
     e.preventDefault();
+
+    // console.log('route props: ', this.props);
+
     let username = $('#username').val(); // --> grabs username input
     let password = $('#password').val();
 
@@ -27,9 +30,11 @@ class Signin extends React.Component {
 
     $.post('/signin', userObj)
     .done(() => {
-      this.props.dispatch(actions.updateUser(username));
+      this.props.dispatch(actions.signinUser(username));
 
-      $('#signinForm').toggle();
+      window.localStorage.setItem('state', JSON.stringify(this.props));
+
+      $('#signinForm').hide();
       
     });
     // .fail(e => console.log(e, 'error'));

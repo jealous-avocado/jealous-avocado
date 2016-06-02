@@ -5,13 +5,18 @@ import routes from './components/routes.js';
 import configureStore from './redux/store';
 import { Provider } from 'react-redux';
 
+let state = window.localStorage.state ? JSON.parse(window.localStorage.state) : null;
+
 let initialState = {
   user: {
-    username: null
+    username: state ? state.user.username : null
   }
 };
 
+
+
 let store = configureStore(initialState);
+
 
 render((
   <Provider store = {store} >
