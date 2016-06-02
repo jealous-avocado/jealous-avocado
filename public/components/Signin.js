@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+import actions from '../redux/actions';
 
 class Signin extends React.Component {
   constructor(props) {
@@ -21,6 +23,8 @@ class Signin extends React.Component {
     let password = $('#password').val();
 
     var userObj = this.escape.apply(this, {username: username, password: password});
+
+    this.props.dispatch(actions.updateUser(username));
 
     $.post('/signin', userObj)
     .done(() => {
@@ -46,4 +50,8 @@ class Signin extends React.Component {
   }
 }
 
-export default Signin;
+function mapStatetoProps(state) {
+  return state;
+}
+
+export default connect(mapStatetoProps)(Signin);

@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon server.bundle.js",
     "build": "npm run build:client && npm run build:server",
-    "build:client": "webpack-dev-server --inline --content-watch",
+    "build:client": "webpack --watch",
     "build:server": "webpack --config webpack.server.config.js --watch",
     "db": "mysql.server start"
   },
@@ -23,8 +23,11 @@
     "mysql": "^2.10.2",
     "react": "^0.14.8",
     "react-dom": "^0.14.8",
+    "react-redux": "^4.4.5",
     "react-router": "^2.4.1",
     "react-toggle-display": "^2.0.2",
+    "redux": "^3.5.2",
+    "redux-logger": "^2.6.1",
     "request": "^2.72.0",
     "socket.io": "^1.4.6",
     "underscore": "^1.8.3"

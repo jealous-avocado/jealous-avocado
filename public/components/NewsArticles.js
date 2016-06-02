@@ -28,19 +28,21 @@ class NewsArticles extends React.Component {
 
   render() {
    return (
-    <div>
-      <div> Map over all data received from query and render the articles 
+      <div> 
+        <div> Map over all data received from query and render the articles </div>
+        <br></br>
+
         <div> 
+        Articles Here
           {
             this.state.articles.map( article => {
               <NewsArticleEntry key={article.title} article = {article} />
             })
           }
         </div>
+        
+        <pre>{}</pre>
       </div>
-
-      <pre>{}</pre>
-    </div>
 
     )
   }

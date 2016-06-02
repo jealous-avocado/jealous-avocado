@@ -29,7 +29,12 @@ class TopicPage extends React.Component {
       <div>
         <div> Topic Page </div> <br></br>
         <div> {this.state.topic} </div>
-        <NewsArticles topic={this.state.topic}/>
+        <div className='col-md-7'>
+          <NewsArticles topic={this.state.topic}/>
+        </div>
+        <div className='col-md-5'>
+          <NewsVideos topic={this.state.topic}/>
+        </div>
       </div>
     );
   }

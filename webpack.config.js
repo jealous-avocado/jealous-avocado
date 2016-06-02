@@ -6,8 +6,6 @@ module.exports =
       stream: './public/streamPage.js'
     },
 
-    // target: 'node',
-
     output: {
       filename: './public/[name].js'
     },
