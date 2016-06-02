@@ -25340,7 +25340,7 @@
 	      var username = $('#username').val(); // --> grabs username input
 	      var password = $('#password').val();
 	
-	      var userObj = this.escape.call(this, { username: username, password: password });
+	      var userObj = { username: username, password: password };
 	
 	      $.post('/signin', userObj).done(function () {
 	        // window.location = '/'+;
