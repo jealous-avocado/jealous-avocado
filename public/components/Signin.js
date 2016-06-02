@@ -20,8 +20,6 @@ class Signin extends React.Component {
   postUser(e) {
     e.preventDefault();
 
-    // console.log('route props: ', this.props);
-
     let username = $('#username').val(); // --> grabs username input
     let password = $('#password').val();
 

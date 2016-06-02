@@ -28,17 +28,23 @@ class App extends React.Component {
     //dispatch logout user action
     let username = this.props.user.username;
     this.props.dispatch(actions.logoutUser());
+    delete window.localStorage.state;
   }
 
   render() {
 
     return (
       <div>
-        <Link to="/signin"> Sign in </Link>
+        <ToggleDisplay show={!this.props.user.username}>
+          <Link to="/signin"> Sign in </Link>
+        </ToggleDisplay>
+
         <Link to="/news"> NEWS </Link>
+
         <ToggleDisplay show={!!this.props.user.username}>
           <button onClick={this.signout.bind(this)}> Log Out </button>
         </ToggleDisplay>
+        
         <br></br>
 
 

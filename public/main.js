@@ -25316,6 +25316,7 @@
 	      //dispatch logout user action
 	      var username = this.props.user.username;
 	      this.props.dispatch(_actions2.default.logoutUser());
+	      delete window.localStorage.state;
 	    }
 	  }, {
 	    key: 'render',
@@ -25325,9 +25326,13 @@
 	        'div',
 	        null,
 	        React.createElement(
-	          _reactRouter.Link,
-	          { to: '/signin' },
-	          ' Sign in '
+	          _reactToggleDisplay2.default,
+	          { show: !this.props.user.username },
+	          React.createElement(
+	            _reactRouter.Link,
+	            { to: '/signin' },
+	            ' Sign in '
+	          )
 	        ),
 	        React.createElement(
 	          _reactRouter.Link,
@@ -25418,8 +25423,6 @@
 	      var _this2 = this;
 	
 	      e.preventDefault();
-	
-	      // console.log('route props: ', this.props);
 	
 	      var username = $('#username').val(); // --> grabs username input
 	      var password = $('#password').val();
@@ -27214,7 +27217,7 @@
 
 /***/ },
 /* 247 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -27223,6 +27226,14 @@
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _reactToggleDisplay = __webpack_require__(252);
+	
+	var _reactToggleDisplay2 = _interopRequireDefault(_reactToggleDisplay);
+	
+	var _reactRedux = __webpack_require__(223);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -27246,10 +27257,22 @@
 	      var connection = new RTCMultiConnection().connect();
 	
 	      document.querySelector('#startStream').onclick = function () {
-	
 	        connection.open();
 	        connection.direction = 'one-way';
+	        $('#startStream').hide();
+	        $('#stopStream').show();
 	      };
+	
+	      document.querySelector('#stopStream').onclick = function () {
+	        connection.close();
+	        $('#stopStream').hide();
+	        $('#startStream').show();
+	      };
+	    }
+	  }, {
+	    key: 'matchUsertoURL',
+	    value: function matchUsertoURL() {
+	      return this.props.user.username === this.props.params.username;
 	    }
 	  }, {
 	    key: 'render',
@@ -27263,9 +27286,18 @@
 	          'User Page '
 	        ),
 	        React.createElement(
-	          'button',
-	          { id: 'startStream' },
-	          ' Start Stream '
+	          _reactToggleDisplay2.default,
+	          { show: this.matchUsertoURL.bind(this)() },
+	          React.createElement(
+	            'button',
+	            { id: 'startStream' },
+	            ' Start Stream '
+	          ),
+	          React.createElement(
+	            'button',
+	            { id: 'stopStream', style: { 'display': 'none' } },
+	            ' Stop Stream '
+	          )
 	        ),
 	        React.createElement('div', { id: 'videos-container' })
 	      );
@@ -27275,7 +27307,11 @@
 	  return StreamPageComp;
 	}(React.Component);
 	
-	exports.default = StreamPageComp;
+	function mapStatetoProps(state) {
+	  return state;
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(StreamPageComp);
 
 /***/ },
 /* 248 */
