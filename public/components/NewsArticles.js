@@ -13,7 +13,8 @@ class NewsArticles extends React.Component {
 
   componentWillMount() {
   //query database for topic and pull out the articles for that topic
-  console.log(this.props.topic, 'topic');
+  // console.log(this.props.topic, 'topic');
+  console.log(this.props.params, ' | topic');
     this.queryDB()
       .done(r => {
         //populate the component div with the articles returned
@@ -28,19 +29,21 @@ class NewsArticles extends React.Component {
 
   render() {
    return (
-    <div>
-      <div> Map over all data received from query and render the articles 
+      <div> 
+        <div> Map over all data received from query and render the articles </div>
+        <br></br>
+
         <div> 
+        Articles Here
           {
             this.state.articles.map( article => {
               <NewsArticleEntry key={article.title} article = {article} />
             })
           }
         </div>
+        
+        <pre>{}</pre>
       </div>
-
-      <pre>{}</pre>
-    </div>
 
     )
   }

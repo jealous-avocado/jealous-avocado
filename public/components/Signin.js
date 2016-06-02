@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+import actions from '../redux/actions';
 
 class Signin extends React.Component {
   constructor(props) {
@@ -22,11 +24,13 @@ class Signin extends React.Component {
 
     var userObj = this.escape.apply(this, {username: username, password: password});
 
+
     $.post('/signin', userObj)
     .done(() => {
-      // window.location = '/'+;
-      // return to home page view with homepage rendering components that are visible for signed in user
+      this.props.dispatch(actions.updateUser(username));
 
+      $('#signinForm').toggle();
+      
     });
     // .fail(e => console.log(e, 'error'));
     // on fail --> present user with failed auth message
@@ -36,7 +40,7 @@ class Signin extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.postUser.bind(this)}>
+        <form id="signinForm" onSubmit={this.postUser.bind(this)}>
           <input id='username' placeholder='username'/>
           <input id='password' placeholder='password' type='password' />
           <input type='submit'></input>
@@ -46,4 +50,8 @@ class Signin extends React.Component {
   }
 }
 
-export default Signin;
+function mapStatetoProps(state) {
+  return state;
+}
+
+export default connect(mapStatetoProps)(Signin);

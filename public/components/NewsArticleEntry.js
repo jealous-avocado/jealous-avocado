@@ -1,8 +1,8 @@
 window.NewsArticleEntry = ({article}) => {
   return (
     <div>
-      <div> {article.title} </div>
-      <div> {article.url} </div>
+      <div> Article title: {article.title} </div>
+      <div> Article URL: {article.url} </div>
     </div>
   );
 };

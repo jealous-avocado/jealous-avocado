@@ -2,8 +2,19 @@ import React from 'react';
 import {Route, Router, Link, browserHistory} from 'react-router';
 import {render} from 'react-dom';
 import routes from './components/routes.js';
+import configureStore from './redux/store';
+import { Provider } from 'react-redux';
 
+let initialState = {
+  user: {
+    username: null
+  }
+};
+
+let store = configureStore(initialState);
 
 render((
-  <Router routes={routes} history={browserHistory} />
+  <Provider store = {store} >
+    <Router routes={routes} history={browserHistory} />
+  </Provider>
   ), document.getElementById('app'));
