@@ -1,5 +1,7 @@
 const UPDATE_CURRENT_USER = 'UPDATE_CURRENT_USER';
 const LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
+
+
 let actions = {
   signinUser: (username) => {
     return {

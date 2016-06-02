@@ -26911,6 +26911,7 @@
 	});
 	var UPDATE_CURRENT_USER = 'UPDATE_CURRENT_USER';
 	var LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
+	
 	var actions = {
 	  signinUser: function signinUser(username) {
 	    return {
