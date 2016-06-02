@@ -1,7 +1,9 @@
 const UPDATE_CURRENT_USER = 'UPDATE_CURRENT_USER';
+const LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
+
 
 let actions = {
-  updateUser: (username) => {
+  signinUser: (username) => {
     return {
       type: UPDATE_CURRENT_USER,
       name: username
@@ -12,6 +14,13 @@ let actions = {
     return {
       type: UPDATE_TOPIC, 
       topic: topic
+    }
+  }, 
+
+  logoutUser: () => {
+    return {
+      type: LOGOUT_CURRENT_USER,
+      name: null
     }
   }
 };

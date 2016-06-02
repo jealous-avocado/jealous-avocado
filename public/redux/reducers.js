@@ -8,6 +8,13 @@ let reducer = function(state, action) {
           username: action.name
         }
       });
+    case "LOGOUT_CURRENT_USER":
+      return Object.assign({}, state, {
+        user: {
+          username: action.name
+        }
+      });
+
     default:
       return state;
   }

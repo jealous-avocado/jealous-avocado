@@ -9,11 +9,11 @@ import PublicPage from './PublicPage';
 
 module.exports = (
   <Route path='/' component={App}>
+    <IndexRoute component={PublicPage} />
     <Route path='/signin' component={Signin} />
     <Route path='/news' component={TopicPage}> 
       <Route path='/news/:topic' component={NewsArticles}/>
     </Route>
-    <Route path='/public' component={PublicPage} />
     <Route path='/:username' component={StreamPageComp} />
   </Route>
 )

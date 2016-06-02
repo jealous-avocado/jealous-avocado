@@ -1,6 +1,6 @@
 import NewsArticles from './NewsArticles';
 import NewsVideos from './NewsVideos';
-
+import { connect } from 'react-redux';
 
 class TopicPage extends React.Component {
   constructor() {
@@ -15,6 +15,8 @@ class TopicPage extends React.Component {
   }
 
   componentWillMount() {
+    console.log('userTP: ', this.props.user.username);
+
     const topic = window.location.pathname.split('news/')[1];
     if (topic) {
       this.setState({
@@ -41,4 +43,8 @@ class TopicPage extends React.Component {
 
 };
 
-export default TopicPage;
+function mapStatetoProps(state) {
+  return state;
+}
+
+export default connect(mapStatetoProps)(TopicPage);
