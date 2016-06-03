@@ -1,24 +1,24 @@
-var express = require('express');
+var Promise = require('bluebird');
 var bodyParser = require('body-parser');
 var _ = require('underscore');
-var request = require('request');
+var request = require('request-promise');
 var bodyParser = require('body-parser')
 var session = require('express-session');
+var express = require('express');
+
 var app = express();
-
 var server = require('http').Server(app);
-
-
 var PORT = process.env.PORT || 3000;
+
 var db = require('./db/config');
 var User = require('./db/models/user.js');
+
+var alchemyAPI = require('./alchemy.config.js');
 
 app.use(bodyParser.urlencoded({     
  extended: true
 }));
-
 app.use(bodyParser.json());
-
 app.use(express.static(__dirname + '/public')); //express static will serve up index.html by default upon requesting root url
 
 app.post('/signin', function (req, res) {
@@ -53,8 +53,11 @@ app.get('/signout', function (req, res) {
 });
 
 app.get('/getArticles', (req, res) => {
-  console.log(req.query, 'url');
-  //
+  console.log(req.query.topic, 'url');
+  
+  request.get(alchemyAPI.getNewsURL(req.query.topic))
+    .then(r => console.log(r, 'RESULTS'));
+  
   res.end();
 });
 
