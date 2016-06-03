@@ -1,6 +1,7 @@
 import NewsArticles from './NewsArticles';
 import NewsVideos from './NewsVideos';
 import { connect } from 'react-redux';
+import actions from '../redux/actions';
 
 class TopicPage extends React.Component {
   constructor() {
@@ -12,26 +13,22 @@ class TopicPage extends React.Component {
   }
 
   componentWillMount() {
-    const topic = this.props.params.topic;
+    const topic = this.props.params.topic ? this.props.params.topic.toUpperCase() : 'World News';
     console.log(topic, 'topic');
-    if (topic) {
-      this.setState({
-        topic: topic
-      });
-    }
+    this.props.dispatch(actions.updateTopic(topic));
 
   }
 
   render() {
     return (
       <div>
-        <div> Topic Page </div> <br></br>
-        <div> {this.state.topic} </div>
+        <div> The Latest in {this.props.newsTopic} </div> <br></br>
+        
         <div className='col-md-7'>
-          <NewsArticles topic={this.state.topic}/>
+          <NewsArticles topic={this.props.newsTopic}/>
         </div>
         <div className='col-md-5'>
-          <NewsVideos topic={this.state.topic}/>
+          <NewsVideos topic={this.props.newsTopic}/>
         </div>
       </div>
     );

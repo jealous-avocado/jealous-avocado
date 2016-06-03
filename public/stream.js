@@ -21394,6 +21394,7 @@
 	        $('#stopStream').show();
 	
 	        var streamTitle = $('#streamTitleInput').val();
+	        $('#streamTitleInput').val('').hide();
 	
 	        componentContext.props.dispatch(actions.updateBroadcasterStreamTopic(streamTitle));
 	
@@ -21409,6 +21410,7 @@
 	      document.querySelector('#enterHashTags').onclick = function () {
 	
 	        var hashTagInput = $('#hashTagInput').val();
+	        $('#hashTagInput').val('');
 	        componentContext.props.dispatch(actions.updateBroadcasterStreamHashtags(hashTagInput));
 	      };
 	    }
@@ -21453,6 +21455,12 @@
 	            { id: 'stopStream', style: { 'display': 'none' } },
 	            ' Stop Stream '
 	          )
+	        ),
+	        React.createElement(
+	          'div',
+	          { id: 'streamTitle' },
+	          'Stream title: ',
+	          this.props.user.stream.title
 	        ),
 	        React.createElement('div', { id: 'videos-container' })
 	      );
