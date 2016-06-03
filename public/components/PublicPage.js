@@ -2,7 +2,7 @@ class PublicPage extends React.Component {
   constructor() {
     super();
     this.state = {
-      videos: ['video1','video2','video3','video4','video5','video6'],
+      videos: ["Nam", "John", "Prateek"],
       articles: ['article1','article2','article3','article4','article5'],
       currentVideo: null
     }
@@ -13,12 +13,30 @@ class PublicPage extends React.Component {
   updateArticle(article) {
     this.setState({articles: articles})
   }
+  genFrame(w, h, streamName) {
+    var port = 3000;
+    var url = "http://localhost:" + port + "/" + streamName;
+    var frame    = document.createElement('iframe');
+    frame.src    = url;
+    frame.width  = w;
+    frame.height = h;
+    frame.setAttribute("frameBorder", 0);
+    document.getElementById("video").appendChild(frame);
+  }
+  
+  componentDidMount () {
+    {this.state.videos.map((video) => 
+     {this.genFrame(200, 90, video)} 
+    )}
+
+  }
+
   render() {
     return (
-      <div className='container-fluid'>
+      <div className='hey'>
         <div className='row'>
           <div className="col-md-6"> Current Video 
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/Dd7FixvoKBw" frameborder="0" allowfullscreen></iframe>            <div id="articles"> Trending Articles
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Dd7FixvoKBw" frameBorder="0" allowFullScreen></iframe>            <div id="articles"> Trending Articles
               {this.state.articles.map((article) => 
               <li> {article} </li>
               )}  
@@ -28,6 +46,8 @@ class PublicPage extends React.Component {
             {this.state.videos.map((video) => 
               <li> {video} </li>
             )}
+            <ul id="video">
+            </ul>
            </div>
         </div>
       </div>
