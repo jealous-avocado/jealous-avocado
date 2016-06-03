@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import actions from '../redux/actions';
 
 class PublicPage extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       videos: ["Nam", "John", "Prateek"],
       articles: ['article1','article2','article3','article4','article5'],
@@ -25,10 +25,12 @@ class PublicPage extends React.Component {
     frame.width  = w;
     frame.height = h;
     frame.setAttribute("frameborder", 0);
-    document.getElementsById('video').appendChild(frame);
+    document.getElementById('video').appendChild(frame);
   }
 
   render() {
+    console.log('this.props.currentStreamers is', this.props.currentStreamers);
+    console.log(this.genFrame);
     return (
       <div className='container-fluid'>
         <div className='row'>
@@ -45,7 +47,7 @@ class PublicPage extends React.Component {
           </div>
 
            <div className="col-md-4 trending"> Trending Videos
-            {this.state.videos.map((video) => 
+            {this.props.currentStreamers.map((video) => 
               <li id="video"> {this.genFrame(200,90,video)} </li>
             )}
            </div>

@@ -5,7 +5,7 @@ var knex = require('knex') ({
     user: 'root',
     database: 'rep',
     charset: 'utf8', 
-    password: 'kk'
+    password: ''
   }
 });
 

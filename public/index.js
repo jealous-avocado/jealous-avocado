@@ -5,12 +5,13 @@ import routes from './components/routes.js';
 import configureStore from './redux/store';
 import { Provider } from 'react-redux';
 
-let state = window.localStorage.state ? JSON.parse(window.localStorage.state) : null;
+let state = (window.localStorage.state === undefined) ? JSON.parse(window.localStorage.state) : null;
 
 let initialState = {
   user: {
     username: state ? state.user.username : null
-  }
+  },
+  currentStreamers: state ? state.currentStreamers : []
 };
 
 

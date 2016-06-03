@@ -21,7 +21,7 @@ let reducer = function(state, action) {
           username: action.name
         },
         id: id++,
-        currentStreamers: currentStreamers.concat(action.currentStreamers)
+        currentStreamers: [...state.currentStreamers, action.currentStreamers]
       });
     default:
       return state;

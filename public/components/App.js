@@ -10,6 +10,7 @@ class App extends React.Component {
 
   componentDidMount() {
     console.log('current user: ', this.props.user.username);
+    console.log('state is', this.state);
   }
 
   componentDidUpdate() {
@@ -75,7 +76,7 @@ class App extends React.Component {
             </div>
           </div>
         </nav>
-        
+
         <Link to="/signin"> Sign in </Link>
         <Link to="/news"> NEWS </Link>
         <ToggleDisplay show={!!this.props.user.username}>

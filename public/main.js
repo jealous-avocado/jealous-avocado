@@ -66,12 +66,13 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var state = window.localStorage.state ? JSON.parse(window.localStorage.state) : null;
+	var state = window.localStorage.state === undefined ? JSON.parse(window.localStorage.state) : null;
 	
 	var initialState = {
 	  user: {
 	    username: state ? state.user.username : null
-	  }
+	  },
+	  currentStreamers: state ? state.currentStreamers : []
 	};
 	
 	var store = (0, _store2.default)(initialState);
@@ -25297,6 +25298,7 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      console.log('current user: ', this.props.user.username);
+	      console.log('state is', this.state);
 	    }
 	  }, {
 	    key: 'componentDidUpdate',
@@ -27647,10 +27649,10 @@
 	var PublicPage = function (_React$Component) {
 	  _inherits(PublicPage, _React$Component);
 	
-	  function PublicPage() {
+	  function PublicPage(props) {
 	    _classCallCheck(this, PublicPage);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PublicPage).call(this));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PublicPage).call(this, props));
 	
 	    _this.state = {
 	      videos: ["Nam", "John", "Prateek"],
@@ -27680,13 +27682,15 @@
 	      frame.width = w;
 	      frame.height = h;
 	      frame.setAttribute("frameborder", 0);
-	      document.getElementsById('video').appendChild(frame);
+	      document.getElementById('video').appendChild(frame);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
 	
+	      console.log('this.props.currentStreamers is', this.props.currentStreamers);
+	      console.log(this.genFrame);
 	      return React.createElement(
 	        'div',
 	        { className: 'container-fluid' },
@@ -27718,7 +27722,7 @@
 	            'div',
 	            { className: 'col-md-4 trending' },
 	            ' Trending Videos',
-	            this.state.videos.map(function (video) {
+	            this.props.currentStreamers.map(function (video) {
 	              return React.createElement(
 	                'li',
 	                { id: 'video' },
@@ -27785,6 +27789,9 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
 	// import { UPDATE_CURRENT_USER }
 	
 	var reducer = function reducer(state, action) {
@@ -27808,7 +27815,7 @@
 	          username: action.name
 	        },
 	        id: id++,
-	        currentStreamers: currentStreamers.concat(action.currentStreamers)
+	        currentStreamers: [].concat(_toConsumableArray(state.currentStreamers), [action.currentStreamers])
 	      });
 	    default:
 	      return state;
