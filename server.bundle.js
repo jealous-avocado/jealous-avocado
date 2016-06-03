@@ -98,10 +98,16 @@
 	});
 	
 	app.get('/getArticles', function (req, res) {
-	  console.log(req.query.topic, 'url');
+	  var allURLS = [];
 	
-	  request.get(alchemyAPI.getNewsURL(req.query.topic)).then(function (r) {
-	    return console.log(r, 'RESULTS');
+	  //only do a request if necessary -- if there are cached articles, then show those first
+	  request.get(alchemyAPI.getNewsURL(req.query.topic)).then(function (d) {
+	    /*
+	    d = JSON.parse(d);
+	    d.result.docs.forEach(doc => {
+	      allURLS.push(doc.source.enriched.url.url);
+	    });
+	    */
 	  });
 	
 	  res.end();
@@ -309,11 +315,11 @@
 	module.exports = {
 	  KEY: '5271f6ac77beb97a142fe534297b65aaebd9ed5a',
 	  getNewsURL: function getNewsURL(topic) {
-	    return 'https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=2\n    &apikey=' + module.exports.KEY + '&return=enriched.url.url&q.enriched.url.concepts.concept.text=' + topic;
+	    return 'https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=2&apikey=' + module.exports.KEY + '&return=enriched.url.url&q.enriched.url.concepts.concept.text=' + topic;
 	  },
 	
 	  getTextURL: function getTextURL(link) {
-	    return 'http://gateway-a.watsonplatform.net/calls/url/URLGetText\n    ?apikey=' + module.exports.KEY + '\n    &outputMode=json\n    &url=' + link;
+	    return 'http://gateway-a.watsonplatform.net/calls/url/URLGetText?apikey=' + module.exports.KEY + '&outputMode=json&url=' + link;
 	  }
 	};
 

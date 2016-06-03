@@ -53,10 +53,19 @@ app.get('/signout', function (req, res) {
 });
 
 app.get('/getArticles', (req, res) => {
-  console.log(req.query.topic, 'url');
-  
+  var allURLS = [];
+
+  //only do a request if necessary -- if there are cached articles, then show those first
   request.get(alchemyAPI.getNewsURL(req.query.topic))
-    .then(r => console.log(r, 'RESULTS'));
+    .then(d => {
+      /*
+      d = JSON.parse(d);
+      d.result.docs.forEach(doc => {
+        allURLS.push(doc.source.enriched.url.url);
+      });
+      */
+    });
+    
   
   res.end();
 });
