@@ -68,11 +68,29 @@
 	
 	var state = window.localStorage.state ? JSON.parse(window.localStorage.state) : null;
 	
+<<<<<<< 4a8a0e6304d94bac20aa8072a989b231e4ab0841
 	var initialState = {
 	  user: {
 	    username: state ? state.user.username : null
 	  }
 	};
+=======
+	var store = (0, _store2.default)();
+	
+	if (state) {
+	  console.log(state.user.username, 'STATE index.js');
+	  var initialState = {
+	    user: {
+	      username: state.user.username,
+	      stream: {
+	        title: state.user.stream.title,
+	        hashtags: state.user.stream.hashtags
+	      }
+	    },
+	    newsTopic: state.newsTopic,
+	    articles: state.articles
+	  };
+>>>>>>> update gitignore, begin working with alchemy api for topicpage
 	
 	var store = (0, _store2.default)(initialState);
 	
@@ -27030,7 +27048,11 @@
 	var UPDATE_BROADCASTER_STREAM_TOPIC = 'UPDATE_BROADCASTER_STREAM_TOPIC';
 	var UPDATE_BROADCASTER_STREAM_HASHTAGS = 'UPDATE_BROADCASTER_STREAM_HASHTAGS';
 	var UPDATE_NEWS_PAGE_TOPIC = 'UPDATE_NEWS_PAGE_TOPIC';
+<<<<<<< 4a8a0e6304d94bac20aa8072a989b231e4ab0841
 >>>>>>> add functionality to topicPage and streamPageComp
+=======
+	var UPDATE_NEWS_ARTICLES = 'UPDATE_NEWS_ARTICLES';
+>>>>>>> update gitignore, begin working with alchemy api for topicpage
 	
 	var actions = {
 	  signinUser: function signinUser(username) {
@@ -27045,6 +27067,26 @@
 	      type: UPDATE_NEWS_PAGE_TOPIC,
 	      topic: topic
 	    };
+	  },
+	
+	  updateNewsArticles: function updateNewsArticles(articles) {
+	    return {
+	      type: UPDATE_NEWS_ARTICLES,
+	      articles: articles
+	    };
+	  },
+	
+	  fetchNewsArticles: function fetchNewsArticles(query) {
+	    //async fetch to alchemy api or nyt api
+	    //return a function that returns a promised fetch request
+	    /*
+	    var context = this;
+	    return dispatch => {
+	      //dispatch another action that tells user that we are fetching ??
+	      return fetch(url+query)
+	        .then(result => dispatch(context.updateNewsArticles(result)));
+	    }
+	    */
 	  },
 	
 	  logoutUser: function logoutUser() {
@@ -28406,7 +28448,7 @@
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
 	      var topic = this.props.params.topic ? this.props.params.topic.toUpperCase() : 'World News';
-	      console.log(topic, 'topic');
+	
 	      this.props.dispatch(_actions2.default.updateTopic(topic));
 	    }
 	  }, {
@@ -28427,7 +28469,7 @@
 	        React.createElement(
 	          'div',
 	          { className: 'col-md-7' },
-	          React.createElement(_NewsArticles2.default, { topic: this.props.newsTopic })
+	          React.createElement(_NewsArticles2.default, { topic: this.props.newsTopic, articles: this.props.articles, dispatch: this.props.dispatch })
 	        ),
 	        React.createElement(
 	          'div',
@@ -28474,9 +28516,6 @@
 	    _classCallCheck(this, NewsArticles);
 	
 	    return _possibleConstructorReturn(this, Object.getPrototypeOf(NewsArticles).call(this, props));
-	    // this.state = {
-	    //   articles: []
-	    // };
 	  }
 	
 >>>>>>> add functionality to topicPage and streamPageComp
@@ -28518,7 +28557,7 @@
 	          'div',
 	          null,
 	          'Articles Here',
-	          this.state.articles.map(function (article) {
+	          this.props.articles.map(function (article) {
 	            React.createElement(NewsArticleEntry, { key: article.title, article: article });
 	          })
 	        ),
@@ -28869,7 +28908,8 @@
 	        hashtags: []
 	      }
 	    },
-	    newsTopic: 'WORLD NEWS'
+	    newsTopic: 'WORLD NEWS',
+	    articles: []
 	  } : arguments[0];
 >>>>>>> add functionality to topicPage and streamPageComp
 	
@@ -28938,7 +28978,14 @@
 	      return Object.assign({}, state, {
 	        newsTopic: action.topic
 	      });
+<<<<<<< 4a8a0e6304d94bac20aa8072a989b231e4ab0841
 >>>>>>> add functionality to topicPage and streamPageComp
+=======
+	    case "UPDATE_NEWS_ARTICLES":
+	      return Object.assign({}, state, {
+	        articles: action.articles
+	      });
+>>>>>>> update gitignore, begin working with alchemy api for topicpage
 	    default:
 	      return state;
 	  }

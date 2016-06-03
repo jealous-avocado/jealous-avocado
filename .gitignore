@@ -5,8 +5,11 @@
 node_modules/
 
 ## Compiled files ##
-public/compiled/
 public/lib
+main.js
+main.js.map
+stream.js
+stream.js.map
 
 #external disk files
 .Trashes

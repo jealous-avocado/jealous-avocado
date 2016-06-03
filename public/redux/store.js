@@ -18,7 +18,8 @@ export default function configureStore(
         hashtags: []
       }
     }, 
-    newsTopic: 'WORLD NEWS'
+    newsTopic: 'WORLD NEWS',
+    articles: []
   }
 ) {
 >>>>>>> add functionality to topicPage and streamPageComp

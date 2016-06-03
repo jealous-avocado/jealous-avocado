@@ -21341,7 +21341,84 @@
 
 
 /***/ },
+<<<<<<< 4a8a0e6304d94bac20aa8072a989b231e4ab0841
 /* 243 */,
+=======
+/* 243 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var UPDATE_CURRENT_USER = 'UPDATE_CURRENT_USER';
+	var LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
+	var UPDATE_BROADCASTER_STREAM_TOPIC = 'UPDATE_BROADCASTER_STREAM_TOPIC';
+	var UPDATE_BROADCASTER_STREAM_HASHTAGS = 'UPDATE_BROADCASTER_STREAM_HASHTAGS';
+	var UPDATE_NEWS_PAGE_TOPIC = 'UPDATE_NEWS_PAGE_TOPIC';
+	var UPDATE_NEWS_ARTICLES = 'UPDATE_NEWS_ARTICLES';
+	
+	var actions = {
+	  signinUser: function signinUser(username) {
+	    return {
+	      type: UPDATE_CURRENT_USER,
+	      name: username
+	    };
+	  },
+	
+	  updateTopic: function updateTopic(topic) {
+	    return {
+	      type: UPDATE_NEWS_PAGE_TOPIC,
+	      topic: topic
+	    };
+	  }, //for when a user clicks on a topic
+	
+	  updateBroadcasterStreamTopic: function updateBroadcasterStreamTopic(title) {
+	    return {
+	      type: UPDATE_BROADCASTER_STREAM_TOPIC,
+	      title: title
+	    };
+	  },
+	
+	  updateBroadcasterStreamHashtags: function updateBroadcasterStreamHashtags(hashtag) {
+	    return {
+	      type: UPDATE_BROADCASTER_STREAM_HASHTAGS,
+	      hashtag: hashtag
+	    };
+	  },
+	
+	  updateNewsArticles: function updateNewsArticles(articles) {
+	    return {
+	      type: UPDATE_NEWS_ARTICLES,
+	      articles: articles
+	    };
+	  },
+	
+	  fetchNewsArticles: function fetchNewsArticles(query) {
+	    //async fetch to alchemy api or nyt api
+	    //return a function that returns a promised fetch request
+	    /*
+	    var context = this;
+	    return dispatch => {
+	      //dispatch another action that tells user that we are fetching ??
+	      return fetch(url+query)
+	        .then(result => dispatch(context.updateNewsArticles(result)));
+	    }
+	    */
+	  },
+	
+	  logoutUser: function logoutUser() {
+	    return {
+	      type: LOGOUT_CURRENT_USER
+	    };
+	  }
+	};
+	
+	exports.default = actions;
+
+/***/ },
+>>>>>>> update gitignore, begin working with alchemy api for topicpage
 /* 244 */,
 /* 245 */,
 /* 246 */,
