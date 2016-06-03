@@ -46,26 +46,27 @@
 
 	'use strict';
 	
-	var express = __webpack_require__(1);
+	var Promise = __webpack_require__(1);
 	var bodyParser = __webpack_require__(2);
 	var _ = __webpack_require__(3);
 	var request = __webpack_require__(4);
 	var bodyParser = __webpack_require__(2);
 	var session = __webpack_require__(5);
+	var express = __webpack_require__(6);
+	
 	var app = express();
-	
-	var server = __webpack_require__(6).Server(app);
-	
+	var server = __webpack_require__(7).Server(app);
 	var PORT = process.env.PORT || 3000;
-	var db = __webpack_require__(7);
-	var User = __webpack_require__(10);
+	
+	var db = __webpack_require__(8);
+	var User = __webpack_require__(11);
+	
+	var alchemyAPI = __webpack_require__(12);
 	
 	app.use(bodyParser.urlencoded({
 	  extended: true
 	}));
-	
 	app.use(bodyParser.json());
-	
 	app.use(express.static(__dirname + '/public')); //express static will serve up index.html by default upon requesting root url
 	
 	app.post('/signin', function (req, res) {
@@ -97,8 +98,12 @@
 	});
 	
 	app.get('/getArticles', function (req, res) {
-	  console.log(req.query, 'url');
-	  //
+	  console.log(req.query.topic, 'url');
+	
+	  request.get(alchemyAPI.getNewsURL(req.query.topic)).then(function (r) {
+	    return console.log(r, 'RESULTS');
+	  });
+	
 	  res.end();
 	});
 	
@@ -114,7 +119,7 @@
 /* 1 */
 /***/ function(module, exports) {
 
-	module.exports = require("express");
+	module.exports = require("bluebird");
 
 /***/ },
 /* 2 */
@@ -132,7 +137,7 @@
 /* 4 */
 /***/ function(module, exports) {
 
-	module.exports = require("request");
+	module.exports = require("request-promise");
 
 /***/ },
 /* 5 */
@@ -144,15 +149,21 @@
 /* 6 */
 /***/ function(module, exports) {
 
-	module.exports = require("http");
+	module.exports = require("express");
 
 /***/ },
 /* 7 */
+/***/ function(module, exports) {
+
+	module.exports = require("http");
+
+/***/ },
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var knex = __webpack_require__(8)({
+	var knex = __webpack_require__(9)({
 	  // >>>>> Heroku Postgres DB
 	
 	  // client: 'pg',
@@ -170,7 +181,7 @@
 	  }
 	});
 	
-	var db = __webpack_require__(9)(knex);
+	var db = __webpack_require__(10)(knex);
 	
 	db.knex.schema.hasTable('users').then(function (exists) {
 	  if (!exists) {
@@ -256,24 +267,24 @@
 	module.exports = db;
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
 	module.exports = require("knex");
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports) {
 
 	module.exports = require("bookshelf");
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var db = __webpack_require__(7);
+	var db = __webpack_require__(8);
 	
 	var User = db.Model.extend({
 	  tableName: 'users',
@@ -288,6 +299,23 @@
 	module.exports = User;
 	
 	//Add password hashing with bcrypt, etc
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	module.exports = {
+	  KEY: '5271f6ac77beb97a142fe534297b65aaebd9ed5a',
+	  getNewsURL: function getNewsURL(topic) {
+	    return 'https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=2\n    &apikey=' + module.exports.KEY + '&return=enriched.url.url&q.enriched.url.concepts.concept.text=' + topic;
+	  },
+	
+	  getTextURL: function getTextURL(link) {
+	    return 'http://gateway-a.watsonplatform.net/calls/url/URLGetText\n    ?apikey=' + module.exports.KEY + '\n    &outputMode=json\n    &url=' + link;
+	  }
+	};
 
 /***/ }
 /******/ ]);

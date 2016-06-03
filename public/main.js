@@ -27315,8 +27315,8 @@
 	      return $.get(url);
 	    }
 	  }, {
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
 	      //query database for topic and pull out the articles for that topic
 	
 	      this.queryDB().done(function (r) {
@@ -27326,6 +27326,7 @@
 	          articles: r
 	        });
 	        */
+	        console.log('done');
 	      }).fail(function (e) {
 	        return console.log('E: ', e);
 	      });

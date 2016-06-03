@@ -8,9 +8,8 @@ class NewsArticles extends React.Component {
     return $.get(url);
   }
 
-  componentWillMount() {
+  componentDidUpdate() {
   //query database for topic and pull out the articles for that topic
-
 
     this.queryDB()
       .done(r => {
@@ -20,6 +19,7 @@ class NewsArticles extends React.Component {
           articles: r
         });
         */
+        console.log('done');
       })
       .fail(e => console.log('E: ', e));
   }

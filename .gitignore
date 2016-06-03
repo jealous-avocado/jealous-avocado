@@ -11,6 +11,9 @@ main.js.map
 stream.js
 stream.js.map
 
+## alchemyConfig files ##
+alchemy.config.js
+
 #external disk files
 .Trashes
 
