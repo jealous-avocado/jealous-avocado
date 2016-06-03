@@ -28,7 +28,7 @@ let actions = {
   updateCurrentStreamers: (streamer) => {
     return {
       type: UPDATE_CURRENT_STREAMER,
-      currentStreamers: currentStreamers.concat(streamer)
+      currentStreamers: streamer
     }
   }
 };

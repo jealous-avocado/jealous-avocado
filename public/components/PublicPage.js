@@ -5,7 +5,7 @@ class PublicPage extends React.Component {
   constructor() {
     super();
     this.state = {
-      videos: [],
+      videos: ["Nam", "John", "Prateek"],
       articles: ['article1','article2','article3','article4','article5'],
       currentVideo: null
     }
@@ -25,7 +25,7 @@ class PublicPage extends React.Component {
     frame.width  = w;
     frame.height = h;
     frame.setAttribute("frameborder", 0);
-    document.getElementsByClassName('video').appendChild(frame);
+    document.getElementsById('video').appendChild(frame);
   }
 
   render() {
@@ -46,15 +46,15 @@ class PublicPage extends React.Component {
 
            <div className="col-md-4 trending"> Trending Videos
             {this.state.videos.map((video) => 
-              <li className="video"> {video} </li>
+              <li id="video"> {this.genFrame(200,90,video)} </li>
             )}
            </div>
         </div>
       </div>
     );
 
-    }
   }
+}
 
 
 function mapStatetoProps(state) {

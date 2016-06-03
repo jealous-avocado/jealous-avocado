@@ -27161,7 +27161,7 @@
 	  updateCurrentStreamers: function updateCurrentStreamers(streamer) {
 	    return {
 	      type: UPDATE_CURRENT_STREAMER,
-	      currentStreamers: currentStreamers.concat(streamer)
+	      currentStreamers: streamer
 	    };
 	  }
 	};
@@ -27542,7 +27542,7 @@
 
 /***/ },
 /* 250 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -27551,6 +27551,14 @@
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _reactRedux = __webpack_require__(222);
+	
+	var _actions = __webpack_require__(245);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -27574,9 +27582,10 @@
 	      var connection = new RTCMultiConnection().connect();
 	
 	      document.querySelector('#startStream').onclick = function () {
-	
 	        connection.open();
 	        connection.direction = 'one-way';
+	        this.props.dispatch(_actions2.default.updateCurrentStreamers(streamer));
+	        window.localStorage.setItem('state', JSON.stringify(this.props));
 	      };
 	    }
 	  }, {
@@ -27603,7 +27612,11 @@
 	  return StreamPageComp;
 	}(React.Component);
 	
-	exports.default = StreamPageComp;
+	function mapStatetoProps(state) {
+	  return state;
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(StreamPageComp);
 
 /***/ },
 /* 251 */
@@ -27640,7 +27653,7 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PublicPage).call(this));
 	
 	    _this.state = {
-	      videos: [],
+	      videos: ["Nam", "John", "Prateek"],
 	      articles: ['article1', 'article2', 'article3', 'article4', 'article5'],
 	      currentVideo: null
 	    };
@@ -27667,11 +27680,13 @@
 	      frame.width = w;
 	      frame.height = h;
 	      frame.setAttribute("frameborder", 0);
-	      document.getElementsByClassName('video').appendChild(frame);
+	      document.getElementsById('video').appendChild(frame);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+	
 	      return React.createElement(
 	        'div',
 	        { className: 'container-fluid' },
@@ -27706,9 +27721,9 @@
 	            this.state.videos.map(function (video) {
 	              return React.createElement(
 	                'li',
-	                { className: 'video' },
+	                { id: 'video' },
 	                ' ',
-	                video,
+	                _this2.genFrame(200, 90, video),
 	                ' '
 	              );
 	            })
@@ -27773,6 +27788,7 @@
 	// import { UPDATE_CURRENT_USER }
 	
 	var reducer = function reducer(state, action) {
+	  var id = 0;
 	  switch (action.type) {
 	    case "UPDATE_CURRENT_USER":
 	      return Object.assign({}, state, {
@@ -27788,7 +27804,11 @@
 	      });
 	    case "UPDATE_CURRENT_STREAMER":
 	      return Object.assign({}, state, {
-	        currentStreamers: action.currentStreamers
+	        user: {
+	          username: action.name
+	        },
+	        id: id++,
+	        currentStreamers: currentStreamers.concat(action.currentStreamers)
 	      });
 	    default:
 	      return state;
