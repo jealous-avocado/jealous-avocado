@@ -9,7 +9,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log('current user: ', this.props.user.username);
+    console.log('store in app: ', this.props);
   }
 
   componentDidUpdate() {
@@ -19,7 +19,7 @@ class App extends React.Component {
       console.log('user not signed in');
     }
     
-    console.log('current user: ', this.props.user.username);
+    console.log('current user(log in app did update): ', this.props.user.username);
 
   }
 

@@ -52,7 +52,7 @@
 	
 	var _reactDom = __webpack_require__(219);
 	
-	var _StreamPageComp = __webpack_require__(247);
+	var _StreamPageComp = __webpack_require__(249);
 	
 	var _StreamPageComp2 = _interopRequireDefault(_StreamPageComp);
 	
@@ -19836,8 +19836,7 @@
 /***/ },
 /* 220 */,
 /* 221 */,
-/* 222 */,
-/* 223 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19845,11 +19844,11 @@
 	exports.__esModule = true;
 	exports.connect = exports.Provider = undefined;
 	
-	var _Provider = __webpack_require__(224);
+	var _Provider = __webpack_require__(223);
 	
 	var _Provider2 = _interopRequireDefault(_Provider);
 	
-	var _connect = __webpack_require__(227);
+	var _connect = __webpack_require__(226);
 	
 	var _connect2 = _interopRequireDefault(_connect);
 	
@@ -19859,7 +19858,7 @@
 	exports.connect = _connect2["default"];
 
 /***/ },
-/* 224 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -19869,11 +19868,11 @@
 	
 	var _react = __webpack_require__(1);
 	
-	var _storeShape = __webpack_require__(225);
+	var _storeShape = __webpack_require__(224);
 	
 	var _storeShape2 = _interopRequireDefault(_storeShape);
 	
-	var _warning = __webpack_require__(226);
+	var _warning = __webpack_require__(225);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -19943,7 +19942,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 225 */
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19959,7 +19958,7 @@
 	});
 
 /***/ },
-/* 226 */
+/* 225 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -19988,7 +19987,7 @@
 	}
 
 /***/ },
-/* 227 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -20000,23 +19999,23 @@
 	
 	var _react = __webpack_require__(1);
 	
-	var _storeShape = __webpack_require__(225);
+	var _storeShape = __webpack_require__(224);
 	
 	var _storeShape2 = _interopRequireDefault(_storeShape);
 	
-	var _shallowEqual = __webpack_require__(228);
+	var _shallowEqual = __webpack_require__(227);
 	
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 	
-	var _wrapActionCreators = __webpack_require__(229);
+	var _wrapActionCreators = __webpack_require__(228);
 	
 	var _wrapActionCreators2 = _interopRequireDefault(_wrapActionCreators);
 	
-	var _warning = __webpack_require__(226);
+	var _warning = __webpack_require__(225);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _isPlainObject = __webpack_require__(232);
+	var _isPlainObject = __webpack_require__(231);
 	
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 	
@@ -20387,7 +20386,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 228 */
+/* 227 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -20418,7 +20417,7 @@
 	}
 
 /***/ },
-/* 229 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20426,7 +20425,7 @@
 	exports.__esModule = true;
 	exports["default"] = wrapActionCreators;
 	
-	var _redux = __webpack_require__(230);
+	var _redux = __webpack_require__(229);
 	
 	function wrapActionCreators(actionCreators) {
 	  return function (dispatch) {
@@ -20435,7 +20434,7 @@
 	}
 
 /***/ },
-/* 230 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -20443,27 +20442,27 @@
 	exports.__esModule = true;
 	exports.compose = exports.applyMiddleware = exports.bindActionCreators = exports.combineReducers = exports.createStore = undefined;
 	
-	var _createStore = __webpack_require__(231);
+	var _createStore = __webpack_require__(230);
 	
 	var _createStore2 = _interopRequireDefault(_createStore);
 	
-	var _combineReducers = __webpack_require__(238);
+	var _combineReducers = __webpack_require__(237);
 	
 	var _combineReducers2 = _interopRequireDefault(_combineReducers);
 	
-	var _bindActionCreators = __webpack_require__(240);
+	var _bindActionCreators = __webpack_require__(239);
 	
 	var _bindActionCreators2 = _interopRequireDefault(_bindActionCreators);
 	
-	var _applyMiddleware = __webpack_require__(241);
+	var _applyMiddleware = __webpack_require__(240);
 	
 	var _applyMiddleware2 = _interopRequireDefault(_applyMiddleware);
 	
-	var _compose = __webpack_require__(242);
+	var _compose = __webpack_require__(241);
 	
 	var _compose2 = _interopRequireDefault(_compose);
 	
-	var _warning = __webpack_require__(239);
+	var _warning = __webpack_require__(238);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -20487,7 +20486,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 231 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20496,11 +20495,11 @@
 	exports.ActionTypes = undefined;
 	exports["default"] = createStore;
 	
-	var _isPlainObject = __webpack_require__(232);
+	var _isPlainObject = __webpack_require__(231);
 	
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 	
-	var _symbolObservable = __webpack_require__(236);
+	var _symbolObservable = __webpack_require__(235);
 	
 	var _symbolObservable2 = _interopRequireDefault(_symbolObservable);
 	
@@ -20754,12 +20753,12 @@
 	}
 
 /***/ },
-/* 232 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getPrototype = __webpack_require__(233),
-	    isHostObject = __webpack_require__(234),
-	    isObjectLike = __webpack_require__(235);
+	var getPrototype = __webpack_require__(232),
+	    isHostObject = __webpack_require__(233),
+	    isObjectLike = __webpack_require__(234);
 	
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -20830,7 +20829,7 @@
 
 
 /***/ },
-/* 233 */
+/* 232 */
 /***/ function(module, exports) {
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
@@ -20851,7 +20850,7 @@
 
 
 /***/ },
-/* 234 */
+/* 233 */
 /***/ function(module, exports) {
 
 	/**
@@ -20877,7 +20876,7 @@
 
 
 /***/ },
-/* 235 */
+/* 234 */
 /***/ function(module, exports) {
 
 	/**
@@ -20912,18 +20911,18 @@
 
 
 /***/ },
-/* 236 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/* global window */
 	'use strict';
 	
-	module.exports = __webpack_require__(237)(global || window || this);
+	module.exports = __webpack_require__(236)(global || window || this);
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 237 */
+/* 236 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20948,7 +20947,7 @@
 
 
 /***/ },
-/* 238 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -20956,13 +20955,13 @@
 	exports.__esModule = true;
 	exports["default"] = combineReducers;
 	
-	var _createStore = __webpack_require__(231);
+	var _createStore = __webpack_require__(230);
 	
-	var _isPlainObject = __webpack_require__(232);
+	var _isPlainObject = __webpack_require__(231);
 	
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 	
-	var _warning = __webpack_require__(239);
+	var _warning = __webpack_require__(238);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -21081,7 +21080,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 239 */
+/* 238 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21111,7 +21110,7 @@
 	}
 
 /***/ },
-/* 240 */
+/* 239 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21167,7 +21166,7 @@
 	}
 
 /***/ },
-/* 241 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21178,7 +21177,7 @@
 	
 	exports["default"] = applyMiddleware;
 	
-	var _compose = __webpack_require__(242);
+	var _compose = __webpack_require__(241);
 	
 	var _compose2 = _interopRequireDefault(_compose);
 	
@@ -21230,7 +21229,7 @@
 	}
 
 /***/ },
-/* 242 */
+/* 241 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -21275,113 +21274,7 @@
 	}
 
 /***/ },
-/* 243 */,
-/* 244 */,
-/* 245 */,
-/* 246 */,
-/* 247 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _reactToggleDisplay = __webpack_require__(252);
-	
-	var _reactToggleDisplay2 = _interopRequireDefault(_reactToggleDisplay);
-	
-	var _reactRedux = __webpack_require__(223);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var StreamPageComp = function (_React$Component) {
-	  _inherits(StreamPageComp, _React$Component);
-	
-	  function StreamPageComp(props) {
-	    _classCallCheck(this, StreamPageComp);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(StreamPageComp).call(this, props));
-	  }
-	
-	  _createClass(StreamPageComp, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	
-	      var connection = new RTCMultiConnection().connect();
-	
-	      document.querySelector('#startStream').onclick = function () {
-	        connection.open();
-	        connection.direction = 'one-way';
-	        $('#startStream').hide();
-	        $('#stopStream').show();
-	      };
-	
-	      document.querySelector('#stopStream').onclick = function () {
-	        connection.close();
-	        $('#stopStream').hide();
-	        $('#startStream').show();
-	      };
-	    }
-	  }, {
-	    key: 'matchUsertoURL',
-	    value: function matchUsertoURL() {
-	      return this.props.user.username === this.props.params.username;
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'div',
-	        null,
-	        React.createElement(
-	          'div',
-	          null,
-	          'User Page '
-	        ),
-	        React.createElement(
-	          _reactToggleDisplay2.default,
-	          { show: this.matchUsertoURL.bind(this)() },
-	          React.createElement(
-	            'button',
-	            { id: 'startStream' },
-	            ' Start Stream '
-	          ),
-	          React.createElement(
-	            'button',
-	            { id: 'stopStream', style: { 'display': 'none' } },
-	            ' Stop Stream '
-	          )
-	        ),
-	        React.createElement('div', { id: 'videos-container' })
-	      );
-	    }
-	  }]);
-	
-	  return StreamPageComp;
-	}(React.Component);
-	
-	function mapStatetoProps(state) {
-	  return state;
-	}
-	
-	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(StreamPageComp);
-
-/***/ },
-/* 248 */,
-/* 249 */,
-/* 250 */,
-/* 251 */,
-/* 252 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
@@ -21446,6 +21339,182 @@
 		return ToggleDisplay;
 	});
 
+
+/***/ },
+/* 243 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var UPDATE_CURRENT_USER = 'UPDATE_CURRENT_USER';
+	var LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
+	var UPDATE_BROADCASTER_STREAM_TOPIC = 'UPDATE_BROADCASTER_STREAM_TOPIC';
+	var UPDATE_BROADCASTER_STREAM_HASHTAGS = 'UPDATE_BROADCASTER_STREAM_HASHTAGS';
+	
+	var actions = {
+	  signinUser: function signinUser(username) {
+	    return {
+	      type: UPDATE_CURRENT_USER,
+	      name: username
+	    };
+	  },
+	
+	  updateTopic: function updateTopic(topic) {
+	    return {
+	      type: UPDATE_TOPIC,
+	      topic: topic
+	    };
+	  }, //for when a user clicks on a topic
+	
+	  updateBroadcasterStreamTopic: function updateBroadcasterStreamTopic(title) {
+	    return {
+	      type: UPDATE_BROADCASTER_STREAM_TOPIC,
+	      title: title
+	    };
+	  },
+	
+	  updateBroadcasterStreamHashtags: function updateBroadcasterStreamHashtags(hashtag) {
+	    return {
+	      type: UPDATE_BROADCASTER_STREAM_HASHTAGS,
+	      hashtag: hashtag
+	    };
+	  },
+	
+	  logoutUser: function logoutUser() {
+	    return {
+	      type: LOGOUT_CURRENT_USER,
+	      name: null
+	    };
+	  }
+	};
+	
+	exports.default = actions;
+
+/***/ },
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */,
+/* 248 */,
+/* 249 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _reactToggleDisplay = __webpack_require__(242);
+	
+	var _reactToggleDisplay2 = _interopRequireDefault(_reactToggleDisplay);
+	
+	var _reactRedux = __webpack_require__(222);
+	
+	var _actions = __webpack_require__(243);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var StreamPageComp = function (_React$Component) {
+	  _inherits(StreamPageComp, _React$Component);
+	
+	  function StreamPageComp(props) {
+	    _classCallCheck(this, StreamPageComp);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(StreamPageComp).call(this, props));
+	  }
+	
+	  _createClass(StreamPageComp, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	
+	      var connection = new RTCMultiConnection().connect();
+	      var componentContext = this;
+	
+	      document.querySelector('#startStream').onclick = function () {
+	        connection.open();
+	        connection.direction = 'one-way';
+	        $('#startStream').hide();
+	        $('#stopStream').show();
+	
+	        var streamTitle = $('#streamTitleInput').val();
+	        var hashTagInput = $('#hashTagInput').val();
+	
+	        componentContext.props.dispatch(_actions2.default.updateBroadcasterStreamTopic(streamTitle));
+	
+	        componentContext.props.dispatch(_actions2.default.updateBroadcasterStreamHashtags(hashTagInput));
+	      };
+	
+	      document.querySelector('#stopStream').onclick = function () {
+	        connection.close();
+	        $('#stopStream').hide();
+	        $('#startStream').show();
+	      };
+	    }
+	  }, {
+	    key: 'matchUsertoURL',
+	    value: function matchUsertoURL() {
+	      return this.props.user.username === this.props.params.username;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          'div',
+	          null,
+	          'User Page '
+	        ),
+	        React.createElement(
+	          _reactToggleDisplay2.default,
+	          { show: this.matchUsertoURL.bind(this)() },
+	          React.createElement('input', { id: 'streamTitleInput', placeholder: 'Title the stream' }),
+	          React.createElement('input', { id: 'hashTagInput', placeholder: 'Enter a topic tag' }),
+	          React.createElement(
+	            'button',
+	            { id: 'startStream' },
+	            ' Start Stream '
+	          ),
+	          React.createElement(
+	            'button',
+	            { id: 'stopStream', style: { 'display': 'none' } },
+	            ' Stop Stream '
+	          )
+	        ),
+	        React.createElement(
+	          'div',
+	          { id: 'streamTitle' },
+	          'Stream title: ',
+	          this.props.user.stream.title
+	        ),
+	        React.createElement('div', { id: 'videos-container' })
+	      );
+	    }
+	  }]);
+	
+	  return StreamPageComp;
+	}(React.Component);
+	
+	function mapStatetoProps(state) {
+	  return state;
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(StreamPageComp);
 
 /***/ }
 /******/ ]);

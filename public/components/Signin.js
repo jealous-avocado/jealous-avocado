@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import actions from '../redux/actions';
+var _ = require('underscore');
 
 class Signin extends React.Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class Signin extends React.Component {
   postUser(e) {
     e.preventDefault();
 
-    let username = $('#username').val(); // --> grabs username input
+    let username = $('#username').val();
     let password = $('#password').val();
 
     var userObj = this.escape.call(this, {username: username, password: password});
@@ -30,8 +31,10 @@ class Signin extends React.Component {
     .done(() => {
       this.props.dispatch(actions.signinUser(username));
 
+
       window.localStorage.setItem('state', JSON.stringify(this.props));
 
+      console.log('props signin: ', this.props);
       $('#signinForm').hide();
       
     });
