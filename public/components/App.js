@@ -80,19 +80,3 @@ function mapStatetoProps(state) {
 }
 
 export default connect(mapStatetoProps)(App);
-//         <Link to="/signin"> Sign in </Link>
-
-//         <ToggleDisplay show={!this.props.user.username}>
-//           <Link to="/signin"> Sign in </Link>
-//         </ToggleDisplay>
-
-
-//         <ToggleDisplay show={!this.props.user.username}>
-//           <Link to="/signin"> Sign in </Link>
-//         </ToggleDisplay>
-
-//         <Link to="/news"> NEWS </Link>
-
-//         <ToggleDisplay show={!!this.props.user.username}>
-//           <button onClick={this.signout.bind(this)}> Log Out </button>
-//         </ToggleDisplay>
