@@ -8,32 +8,19 @@ class App extends React.Component {
     super();
   }
 
-  componentDidMount() {
-    console.log('current user: ', this.props.user.username);
-  }
-
-  componentDidUpdate() {
-    if (this.props.user.username) {
-      console.log('user signed in : ', this.props.user.username);
-    } else {
-      console.log('user not signed in');
-    }
-    
-    console.log('current user: ', this.props.user.username);
-
-  }
-
   signout() {
-    // delete window.localStorage.state;
-    //dispatch logout user action
+
     let username = this.props.user.username;
     this.props.dispatch(actions.logoutUser());
+    delete window.localStorage.state;
+    window.location.assign('/');
   }
 
   render() {
 
     return (
       <div>
+
         <nav className="navbar navbar-inverse">
             <div className="container-fluid">
               <div className="navbar-header">
@@ -75,11 +62,7 @@ class App extends React.Component {
               </div>
             </div>
           </nav>
-        <Link to="/signin"> Sign in </Link>
-        <Link to="/news"> NEWS </Link>
-        <ToggleDisplay show={!!this.props.user.username}>
-          <button onClick={this.signout.bind(this)}> Log Out </button>
-        </ToggleDisplay>
+
         <br></br>
 
 

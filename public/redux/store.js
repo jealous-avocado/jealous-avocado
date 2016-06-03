@@ -6,6 +6,19 @@ let finalcreateStore = compose(
   applyMiddleware(logger())
 )(createStore);
 
-export default function configureStore(initialState = {user: { username: null}}) {
+
+export default function configureStore(
+  initialState = {
+    user: {
+      username: null, 
+      stream: {
+        title: null, 
+        hashtags: []
+      }
+    }, 
+    newsTopic: 'WORLD NEWS',
+    articles: []
+  }
+) {
   return finalcreateStore(reducer, initialState);
 }

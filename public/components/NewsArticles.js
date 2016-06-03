@@ -1,9 +1,6 @@
 class NewsArticles extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      articles: []
-    };
   }
 
   queryDB() {
@@ -13,8 +10,8 @@ class NewsArticles extends React.Component {
 
   componentWillMount() {
   //query database for topic and pull out the articles for that topic
-  // console.log(this.props.topic, 'topic');
-  console.log(this.props.params, ' | topic');
+
+
     this.queryDB()
       .done(r => {
         //populate the component div with the articles returned
@@ -36,7 +33,7 @@ class NewsArticles extends React.Component {
         <div> 
         Articles Here
           {
-            this.state.articles.map( article => {
+            this.props.articles.map( article => {
               <NewsArticleEntry key={article.title} article = {article} />
             })
           }

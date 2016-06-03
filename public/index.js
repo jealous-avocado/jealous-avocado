@@ -7,15 +7,25 @@ import { Provider } from 'react-redux';
 
 let state = window.localStorage.state ? JSON.parse(window.localStorage.state) : null;
 
-let initialState = {
-  user: {
-    username: state ? state.user.username : null
-  }
-};
 
+let store = configureStore();
 
-
-let store = configureStore(initialState);
+if (state) {
+  console.log(state.user.username, 'STATE index.js');
+  let initialState = {
+    user: {
+      username: state.user.username,
+      stream: {
+        title: state.user.stream.title, 
+        hashtags: state.user.stream.hashtags
+      }
+    },
+    newsTopic: state.newsTopic,
+    articles: state.articles 
+  };  
+  
+  store = configureStore(initialState);
+} 
 
 
 render((
