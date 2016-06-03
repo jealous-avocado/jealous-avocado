@@ -28,12 +28,14 @@ class App extends React.Component {
     //dispatch logout user action
     let username = this.props.user.username;
     this.props.dispatch(actions.logoutUser());
+    delete window.localStorage.state;
   }
 
   render() {
 
     return (
       <div>
+
         <nav className="navbar navbar-inverse">
             <div className="container-fluid">
               <div className="navbar-header">
@@ -76,10 +78,12 @@ class App extends React.Component {
             </div>
           </nav>
         <Link to="/signin"> Sign in </Link>
-        <Link to="/news"> NEWS </Link>
-        <ToggleDisplay show={!!this.props.user.username}>
-          <button onClick={this.signout.bind(this)}> Log Out </button>
+
+        <ToggleDisplay show={!this.props.user.username}>
+          <Link to="/signin"> Sign in </Link>
         </ToggleDisplay>
+
+        
         <br></br>
 
 

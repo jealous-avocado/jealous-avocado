@@ -58,7 +58,7 @@
 	
 	var _routes2 = _interopRequireDefault(_routes);
 	
-	var _store = __webpack_require__(252);
+	var _store = __webpack_require__(251);
 	
 	var _store2 = _interopRequireDefault(_store);
 	
@@ -25217,23 +25217,23 @@
 	
 	var _App2 = _interopRequireDefault(_App);
 	
-	var _Signin = __webpack_require__(246);
+	var _Signin = __webpack_require__(244);
 	
 	var _Signin2 = _interopRequireDefault(_Signin);
 	
-	var _TopicPage = __webpack_require__(247);
+	var _TopicPage = __webpack_require__(246);
 	
 	var _TopicPage2 = _interopRequireDefault(_TopicPage);
 	
-	var _StreamPageComp = __webpack_require__(250);
+	var _StreamPageComp = __webpack_require__(249);
 	
 	var _StreamPageComp2 = _interopRequireDefault(_StreamPageComp);
 	
-	var _NewsArticles = __webpack_require__(248);
+	var _NewsArticles = __webpack_require__(247);
 	
 	var _NewsArticles2 = _interopRequireDefault(_NewsArticles);
 	
-	var _PublicPage = __webpack_require__(251);
+	var _PublicPage = __webpack_require__(250);
 	
 	var _PublicPage2 = _interopRequireDefault(_PublicPage);
 	
@@ -25268,11 +25268,11 @@
 	
 	var _reactRedux = __webpack_require__(222);
 	
-	var _reactToggleDisplay = __webpack_require__(244);
+	var _reactToggleDisplay = __webpack_require__(242);
 	
 	var _reactToggleDisplay2 = _interopRequireDefault(_reactToggleDisplay);
 	
-	var _actions = __webpack_require__(245);
+	var _actions = __webpack_require__(243);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
@@ -25316,6 +25316,7 @@
 	      //dispatch logout user action
 	      var username = this.props.user.username;
 	      this.props.dispatch(_actions2.default.logoutUser());
+	      delete window.localStorage.state;
 	    }
 	  }, {
 	    key: 'render',
@@ -25477,17 +25478,12 @@
 	          ' Sign in '
 	        ),
 	        React.createElement(
-	          _reactRouter.Link,
-	          { to: '/news' },
-	          ' NEWS '
-	        ),
-	        React.createElement(
 	          _reactToggleDisplay2.default,
-	          { show: !!this.props.user.username },
+	          { show: !this.props.user.username },
 	          React.createElement(
-	            'button',
-	            { onClick: this.signout.bind(this) },
-	            ' Log Out '
+	            _reactRouter.Link,
+	            { to: '/signin' },
+	            ' Sign in '
 	          )
 	        ),
 	        React.createElement('br', null),
@@ -25696,11 +25692,11 @@
 	
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 	
-	var _hoistNonReactStatics = __webpack_require__(242);
+	var _hoistNonReactStatics = __webpack_require__(199);
 	
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 	
-	var _invariant = __webpack_require__(243);
+	var _invariant = __webpack_require__(166);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -26952,112 +26948,6 @@
 
 /***/ },
 /* 242 */
-/***/ function(module, exports) {
-
-	/**
-	 * Copyright 2015, Yahoo! Inc.
-	 * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
-	 */
-	'use strict';
-	
-	var REACT_STATICS = {
-	    childContextTypes: true,
-	    contextTypes: true,
-	    defaultProps: true,
-	    displayName: true,
-	    getDefaultProps: true,
-	    mixins: true,
-	    propTypes: true,
-	    type: true
-	};
-	
-	var KNOWN_STATICS = {
-	    name: true,
-	    length: true,
-	    prototype: true,
-	    caller: true,
-	    arguments: true,
-	    arity: true
-	};
-	
-	module.exports = function hoistNonReactStatics(targetComponent, sourceComponent) {
-	    if (typeof sourceComponent !== 'string') { // don't hoist over string (html) components
-	        var keys = Object.getOwnPropertyNames(sourceComponent);
-	        for (var i=0; i<keys.length; ++i) {
-	            if (!REACT_STATICS[keys[i]] && !KNOWN_STATICS[keys[i]]) {
-	                try {
-	                    targetComponent[keys[i]] = sourceComponent[keys[i]];
-	                } catch (error) {
-	
-	                }
-	            }
-	        }
-	    }
-	
-	    return targetComponent;
-	};
-
-
-/***/ },
-/* 243 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright 2013-2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 */
-	
-	'use strict';
-	
-	/**
-	 * Use invariant() to assert state which your program assumes to be true.
-	 *
-	 * Provide sprintf-style format (only %s is supported) and arguments
-	 * to provide information about what broke and what you were
-	 * expecting.
-	 *
-	 * The invariant message will be stripped in production, but the invariant
-	 * will remain to ensure logic does not differ in production.
-	 */
-	
-	var invariant = function(condition, format, a, b, c, d, e, f) {
-	  if (process.env.NODE_ENV !== 'production') {
-	    if (format === undefined) {
-	      throw new Error('invariant requires an error message argument');
-	    }
-	  }
-	
-	  if (!condition) {
-	    var error;
-	    if (format === undefined) {
-	      error = new Error(
-	        'Minified exception occurred; use the non-minified dev environment ' +
-	        'for the full error message and additional helpful warnings.'
-	      );
-	    } else {
-	      var args = [a, b, c, d, e, f];
-	      var argIndex = 0;
-	      error = new Error(
-	        format.replace(/%s/g, function() { return args[argIndex++]; })
-	      );
-	      error.name = 'Invariant Violation';
-	    }
-	
-	    error.framesToPop = 1; // we don't care about invariant's own frame
-	    throw error;
-	  }
-	};
-	
-	module.exports = invariant;
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
-
-/***/ },
-/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
@@ -27124,7 +27014,7 @@
 
 
 /***/ },
-/* 245 */
+/* 243 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -27161,7 +27051,7 @@
 	exports.default = actions;
 
 /***/ },
-/* 246 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27174,7 +27064,7 @@
 	
 	var _reactRedux = __webpack_require__(222);
 	
-	var _actions = __webpack_require__(245);
+	var _actions = __webpack_require__(243);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
@@ -27213,8 +27103,6 @@
 	      var _this2 = this;
 	
 	      e.preventDefault();
-	
-	      // console.log('route props: ', this.props);
 	
 	      var username = $('#username').val(); // --> grabs username input
 	      var password = $('#password').val();
@@ -27258,7 +27146,8 @@
 	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(Signin);
 
 /***/ },
-/* 247 */
+/* 245 */,
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27269,11 +27158,11 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _NewsArticles = __webpack_require__(248);
+	var _NewsArticles = __webpack_require__(247);
 	
 	var _NewsArticles2 = _interopRequireDefault(_NewsArticles);
 	
-	var _NewsVideos = __webpack_require__(249);
+	var _NewsVideos = __webpack_require__(248);
 	
 	var _NewsVideos2 = _interopRequireDefault(_NewsVideos);
 	
@@ -27364,7 +27253,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(TopicPage);
 
 /***/ },
-/* 248 */
+/* 247 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -27451,7 +27340,7 @@
 	exports.default = NewsArticles;
 
 /***/ },
-/* 249 */
+/* 248 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -27533,8 +27422,8 @@
 	exports.default = NewsVideos;
 
 /***/ },
-/* 250 */
-/***/ function(module, exports) {
+/* 249 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -27543,6 +27432,14 @@
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _reactToggleDisplay = __webpack_require__(242);
+	
+	var _reactToggleDisplay2 = _interopRequireDefault(_reactToggleDisplay);
+	
+	var _reactRedux = __webpack_require__(222);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -27566,10 +27463,22 @@
 	      var connection = new RTCMultiConnection().connect();
 	
 	      document.querySelector('#startStream').onclick = function () {
-	
 	        connection.open();
 	        connection.direction = 'one-way';
+	        $('#startStream').hide();
+	        $('#stopStream').show();
 	      };
+	
+	      document.querySelector('#stopStream').onclick = function () {
+	        connection.close();
+	        $('#stopStream').hide();
+	        $('#startStream').show();
+	      };
+	    }
+	  }, {
+	    key: 'matchUsertoURL',
+	    value: function matchUsertoURL() {
+	      return this.props.user.username === this.props.params.username;
 	    }
 	  }, {
 	    key: 'render',
@@ -27583,9 +27492,18 @@
 	          'User Page '
 	        ),
 	        React.createElement(
-	          'button',
-	          { id: 'startStream' },
-	          ' Start Stream '
+	          _reactToggleDisplay2.default,
+	          { show: this.matchUsertoURL.bind(this)() },
+	          React.createElement(
+	            'button',
+	            { id: 'startStream' },
+	            ' Start Stream '
+	          ),
+	          React.createElement(
+	            'button',
+	            { id: 'stopStream', style: { 'display': 'none' } },
+	            ' Stop Stream '
+	          )
 	        ),
 	        React.createElement('div', { id: 'videos-container' })
 	      );
@@ -27595,10 +27513,14 @@
 	  return StreamPageComp;
 	}(React.Component);
 	
-	exports.default = StreamPageComp;
+	function mapStatetoProps(state) {
+	  return state;
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(StreamPageComp);
 
 /***/ },
-/* 251 */
+/* 250 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -27696,7 +27618,7 @@
 	exports.default = PublicPage;
 
 /***/ },
-/* 252 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27708,11 +27630,11 @@
 	
 	var _redux = __webpack_require__(229);
 	
-	var _reducers = __webpack_require__(253);
+	var _reducers = __webpack_require__(252);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
-	var _reduxLogger = __webpack_require__(254);
+	var _reduxLogger = __webpack_require__(253);
 	
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 	
@@ -27727,7 +27649,7 @@
 	}
 
 /***/ },
-/* 253 */
+/* 252 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -27760,7 +27682,7 @@
 	exports.default = reducer;
 
 /***/ },
-/* 254 */
+/* 253 */
 /***/ function(module, exports) {
 
 	"use strict";
