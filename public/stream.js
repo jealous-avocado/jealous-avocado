@@ -21392,12 +21392,24 @@
 	        connection.direction = 'one-way';
 	        $('#startStream').hide();
 	        $('#stopStream').show();
+	
+	        var streamTitle = $('#streamTitleInput').val();
+	
+	        componentContext.props.dispatch(actions.updateBroadcasterStreamTopic(streamTitle));
+	
+	        console.log(componentContext.props.user, 'PROPS');
 	      };
 	
 	      document.querySelector('#stopStream').onclick = function () {
 	        connection.close();
 	        $('#stopStream').hide();
 	        $('#startStream').show();
+	      };
+	
+	      document.querySelector('#enterHashTags').onclick = function () {
+	
+	        var hashTagInput = $('#hashTagInput').val();
+	        componentContext.props.dispatch(actions.updateBroadcasterStreamHashtags(hashTagInput));
 	      };
 	    }
 	  }, {
@@ -21423,6 +21435,18 @@
 	            'button',
 	            { id: 'startStream' },
 	            ' Start Stream '
+	          ),
+	          React.createElement('input', { id: 'streamTitleInput', placeholder: 'Title the stream' }),
+	          React.createElement(
+	            'button',
+	            { id: 'startStream' },
+	            ' Start Stream '
+	          ),
+	          React.createElement('input', { id: 'hashTagInput', placeholder: 'Enter a topic tag' }),
+	          React.createElement(
+	            'button',
+	            { id: 'enterHashTags' },
+	            ' Enter tags '
 	          ),
 	          React.createElement(
 	            'button',

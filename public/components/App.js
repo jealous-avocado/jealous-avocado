@@ -8,6 +8,7 @@ class App extends React.Component {
     super();
   }
 
+
   componentDidMount() {
     console.log('current user: ', this.props.user.username);
   }
@@ -24,8 +25,7 @@ class App extends React.Component {
   }
 
   signout() {
-    // delete window.localStorage.state;
-    //dispatch logout user action
+    
     let username = this.props.user.username;
     this.props.dispatch(actions.logoutUser());
     delete window.localStorage.state;

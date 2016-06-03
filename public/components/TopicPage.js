@@ -5,9 +5,6 @@ import { connect } from 'react-redux';
 class TopicPage extends React.Component {
   constructor() {
     super();
-    this.state = {
-      topic: 'World News'
-    };
   }
 
   topicClickHandler(clickedTopic) {
@@ -15,9 +12,8 @@ class TopicPage extends React.Component {
   }
 
   componentWillMount() {
-    console.log('userTP: ', this.props.user.username);
-
-    const topic = window.location.pathname.split('news/')[1];
+    const topic = this.props.params.topic;
+    console.log(topic, 'topic');
     if (topic) {
       this.setState({
         topic: topic
