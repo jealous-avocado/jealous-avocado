@@ -27528,7 +27528,7 @@
 	            'div',
 	            { className: 'col-md-6' },
 	            ' Trending Videos',
-	            this.state.videos.map(function (video) {
+	            this.state.video.map(function (video) {
 	              return React.createElement(
 	                'li',
 	                null,

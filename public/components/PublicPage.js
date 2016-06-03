@@ -25,7 +25,7 @@ class PublicPage extends React.Component {
             </div>
           </div>
           <div className="col-md-6"> Trending Videos
-            {this.state.videos.map((video) => 
+            {this.state.video.map((video) => 
               <li> {video} </li>
             )}
            </div>
