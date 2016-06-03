@@ -165,7 +165,8 @@
 	    host: '127.0.0.1',
 	    user: 'root',
 	    database: 'rep',
-	    charset: 'utf8'
+	    charset: 'utf8',
+	    password: 'kk'
 	  }
 	});
 	

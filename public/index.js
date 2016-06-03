@@ -8,17 +8,6 @@ import { Provider } from 'react-redux';
 let state = window.localStorage.state ? JSON.parse(window.localStorage.state) : null;
 
 
-let initialState = {
-  user: {
-    username: state ? state.user.username : null
-  }
-};
-
-
-
-let store = configureStore(initialState);
-
-
 let store = configureStore();
 
 if (state) {
@@ -37,7 +26,6 @@ if (state) {
   
   store = configureStore(initialState);
 } 
-
 
 
 render((
