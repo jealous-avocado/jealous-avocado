@@ -9,11 +9,11 @@ class StreamPageComp extends React.Component {
   componentDidMount() {
 
     var connection = new RTCMultiConnection().connect();
-    
+    var componentContext = this;
     document.querySelector('#startStream').onclick = function() {
         connection.open();
         connection.direction = 'one-way';
-        this.props.dispatch(actions.updateCurrentStreamers(streamer));
+        componentContext.props.dispatch(actions.updateCurrentStreamers(componentContext.props.user.username));
         window.localStorage.setItem('state', JSON.stringify(this.props));
     };
   }

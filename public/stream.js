@@ -21365,11 +21365,11 @@
 	    value: function componentDidMount() {
 	
 	      var connection = new RTCMultiConnection().connect();
-	
+	      var componentContext = this;
 	      document.querySelector('#startStream').onclick = function () {
 	        connection.open();
 	        connection.direction = 'one-way';
-	        this.props.dispatch(_actions2.default.updateCurrentStreamers(streamer));
+	        componentContext.props.dispatch(_actions2.default.updateCurrentStreamers(componentContext.props.user.username));
 	        window.localStorage.setItem('state', JSON.stringify(this.props));
 	      };
 	    }
