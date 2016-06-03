@@ -1,6 +1,9 @@
 import ToggleDisplay from 'react-toggle-display';
 import { connect } from 'react-redux';
 
+import actions from '../redux/actions';
+
+
 class StreamPageComp extends React.Component {
   constructor(props) {
     super(props);
@@ -9,13 +12,13 @@ class StreamPageComp extends React.Component {
   componentDidMount() {
 
     var connection = new RTCMultiConnection().connect();
+    var componentContext = this;
     
     document.querySelector('#startStream').onclick = function() {
       connection.open();
       connection.direction = 'one-way';
       $('#startStream').hide();
       $('#stopStream').show();
-
 
       let streamTitle = $('#streamTitleInput').val();
       $('#streamTitleInput').val('').hide();
@@ -26,14 +29,14 @@ class StreamPageComp extends React.Component {
 
       console.log(componentContext.props.user, 'PROPS');
 
-
     };
 
     document.querySelector('#stopStream').onclick = function() {
       connection.close();
       $('#stopStream').hide();
       $('#startStream').show();
-   };
+
+    };
 
     document.querySelector('#enterHashTags').onclick = function() {
       
@@ -42,9 +45,12 @@ class StreamPageComp extends React.Component {
       componentContext.props.dispatch(
         actions.updateBroadcasterStreamHashtags(hashTagInput)
       );
-
     };
 
+  }
+
+  matchUsertoURL() {
+    return this.props.user.username === this.props.params.username;
   }
 
   matchUsertoURL() {
@@ -58,17 +64,14 @@ class StreamPageComp extends React.Component {
 
         <ToggleDisplay show={this.matchUsertoURL.bind(this)()}>
 
-          <button id='startStream'> Start Stream </button>
-
-
           <input id='streamTitleInput' placeholder='Title the stream'/>
           <button id='startStream'> Start Stream </button>
           
           <input id='hashTagInput' placeholder='Enter a topic tag'/>
           <button id='enterHashTags'> Enter tags </button>
           
-
           <button id='stopStream' style={{'display': 'none'}}> Stop Stream </button>
+
         </ToggleDisplay>
 
 

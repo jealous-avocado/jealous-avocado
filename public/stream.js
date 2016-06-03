@@ -21341,7 +21341,100 @@
 
 
 /***/ },
-/* 243 */,
+/* 243 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _actions;
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	var UPDATE_CURRENT_USER = 'UPDATE_CURRENT_USER';
+	var LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
+	var UPDATE_BROADCASTER_STREAM_TOPIC = 'UPDATE_BROADCASTER_STREAM_TOPIC';
+	var UPDATE_BROADCASTER_STREAM_HASHTAGS = 'UPDATE_BROADCASTER_STREAM_HASHTAGS';
+	var UPDATE_NEWS_PAGE_TOPIC = 'UPDATE_NEWS_PAGE_TOPIC';
+	var UPDATE_NEWS_ARTICLES = 'UPDATE_NEWS_ARTICLES';
+	
+	var actions = (_actions = {
+	  signinUser: function signinUser(username) {
+	    return {
+	      type: UPDATE_CURRENT_USER,
+	      name: username
+	    };
+	  },
+	
+	  updateTopic: function updateTopic(topic) {
+	    return {
+	      type: UPDATE_NEWS_PAGE_TOPIC,
+	      topic: topic
+	    };
+	  }, //for when a user clicks on a topic
+	
+	  updateBroadcasterStreamTopic: function updateBroadcasterStreamTopic(title) {
+	    return {
+	      type: UPDATE_BROADCASTER_STREAM_TOPIC,
+	      title: title
+	    };
+	  },
+	
+	  updateBroadcasterStreamHashtags: function updateBroadcasterStreamHashtags(hashtag) {
+	    return {
+	      type: UPDATE_BROADCASTER_STREAM_HASHTAGS,
+	      hashtag: hashtag
+	    };
+	  },
+	
+	  updateNewsArticles: function updateNewsArticles(articles) {
+	    return {
+	      type: UPDATE_NEWS_ARTICLES,
+	      articles: articles
+	    };
+	  },
+	
+	  fetchNewsArticles: function fetchNewsArticles(query) {
+	    //async fetch to alchemy api or nyt api
+	    //return a function that returns a promised fetch request
+	    /*
+	    var context = this;
+	    return dispatch => {
+	      //dispatch another action that tells user that we are fetching ??
+	      return fetch(url+query)
+	        .then(result => dispatch(context.updateNewsArticles(result)));
+	    }
+	    */
+	  }
+	
+	}, _defineProperty(_actions, 'updateNewsArticles', function updateNewsArticles(articles) {
+	  return {
+	    type: UPDATE_NEWS_ARTICLES,
+	    articles: articles
+	  };
+	}), _defineProperty(_actions, 'fetchNewsArticles', function fetchNewsArticles(query) {
+	  //async fetch to alchemy api or nyt api
+	  //return a function that returns a promised fetch request
+	  /*
+	  var context = this;
+	  return dispatch => {
+	    //dispatch another action that tells user that we are fetching ??
+	    return fetch(url+query)
+	      .then(result => dispatch(context.updateNewsArticles(result)));
+	  }
+	  */
+	}), _defineProperty(_actions, 'logoutUser', function logoutUser() {
+	  return {
+	    type: LOGOUT_CURRENT_USER
+	  };
+	}), _actions);
+	
+	exports.default = actions;
+
+/***/ },
 /* 244 */,
 /* 245 */,
 /* 246 */,
@@ -21362,6 +21455,10 @@
 	var _reactToggleDisplay2 = _interopRequireDefault(_reactToggleDisplay);
 	
 	var _reactRedux = __webpack_require__(222);
+	
+	var _actions = __webpack_require__(243);
+	
+	var _actions2 = _interopRequireDefault(_actions);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21385,6 +21482,7 @@
 	    value: function componentDidMount() {
 	
 	      var connection = new RTCMultiConnection().connect();
+	      var componentContext = this;
 	
 	      document.querySelector('#startStream').onclick = function () {
 	        connection.open();
@@ -21395,7 +21493,7 @@
 	        var streamTitle = $('#streamTitleInput').val();
 	        $('#streamTitleInput').val('').hide();
 	
-	        componentContext.props.dispatch(actions.updateBroadcasterStreamTopic(streamTitle));
+	        componentContext.props.dispatch(_actions2.default.updateBroadcasterStreamTopic(streamTitle));
 	
 	        console.log(componentContext.props.user, 'PROPS');
 	      };
@@ -21410,8 +21508,13 @@
 	
 	        var hashTagInput = $('#hashTagInput').val();
 	        $('#hashTagInput').val('');
-	        componentContext.props.dispatch(actions.updateBroadcasterStreamHashtags(hashTagInput));
+	        componentContext.props.dispatch(_actions2.default.updateBroadcasterStreamHashtags(hashTagInput));
 	      };
+	    }
+	  }, {
+	    key: 'matchUsertoURL',
+	    value: function matchUsertoURL() {
+	      return this.props.user.username === this.props.params.username;
 	    }
 	  }, {
 	    key: 'matchUsertoURL',
@@ -21432,11 +21535,6 @@
 	        React.createElement(
 	          _reactToggleDisplay2.default,
 	          { show: this.matchUsertoURL.bind(this)() },
-	          React.createElement(
-	            'button',
-	            { id: 'startStream' },
-	            ' Start Stream '
-	          ),
 	          React.createElement('input', { id: 'streamTitleInput', placeholder: 'Title the stream' }),
 	          React.createElement(
 	            'button',

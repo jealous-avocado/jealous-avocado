@@ -13,7 +13,8 @@ let reducer = function(state, action) {
     case "UPDATE_CURRENT_USER": 
       return Object.assign({}, state, {
         user: {
-          username: action.name
+          username: action.name, 
+          stream: state.user.stream
         }
       });
     case "LOGOUT_CURRENT_USER":
