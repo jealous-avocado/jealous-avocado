@@ -27134,6 +27134,7 @@
 	});
 	var UPDATE_CURRENT_USER = 'UPDATE_CURRENT_USER';
 	var LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
+	var UPDATE_CURRENT_STREAMER = 'UPDATE_CURRENT_STREAMER';
 	
 	var actions = {
 	  signinUser: function signinUser(username) {
@@ -27154,6 +27155,13 @@
 	    return {
 	      type: LOGOUT_CURRENT_USER,
 	      name: null
+	    };
+	  },
+	
+	  updateCurrentStreamers: function updateCurrentStreamers(streamer) {
+	    return {
+	      type: UPDATE_CURRENT_STREAMER,
+	      currentStreamers: currentStreamers.concat(streamer)
 	    };
 	  }
 	};
@@ -27745,7 +27753,10 @@
 	var finalcreateStore = (0, _redux.compose)((0, _redux.applyMiddleware)((0, _reduxLogger2.default)()))(_redux.createStore);
 	
 	function configureStore() {
-	  var initialState = arguments.length <= 0 || arguments[0] === undefined ? { user: { username: null } } : arguments[0];
+	  var initialState = arguments.length <= 0 || arguments[0] === undefined ? {
+	    user: { username: null },
+	    currentStreamers: []
+	  } : arguments[0];
 	
 	  return finalcreateStore(_reducers2.default, initialState);
 	}
@@ -27775,7 +27786,10 @@
 	          username: action.name
 	        }
 	      });
-	
+	    case "UPDATE_CURRENT_STREAMER":
+	      return Object.assign({}, state, {
+	        currentStreamers: action.currentStreamers
+	      });
 	    default:
 	      return state;
 	  }

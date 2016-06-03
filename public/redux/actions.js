@@ -1,5 +1,6 @@
 const UPDATE_CURRENT_USER = 'UPDATE_CURRENT_USER';
 const LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
+const UPDATE_CURRENT_STREAMER = 'UPDATE_CURRENT_STREAMER';
 
 
 let actions = {
@@ -21,6 +22,13 @@ let actions = {
     return {
       type: LOGOUT_CURRENT_USER,
       name: null
+    }
+  },
+
+  updateCurrentStreamers: (streamer) => {
+    return {
+      type: UPDATE_CURRENT_STREAMER,
+      currentStreamers: currentStreamers.concat(streamer)
     }
   }
 };

@@ -14,7 +14,10 @@ let reducer = function(state, action) {
           username: action.name
         }
       });
-
+    case "UPDATE_CURRENT_STREAMER":
+      return Object.assign({}, state, {
+        currentStreamers: action.currentStreamers
+      });
     default:
       return state;
   }

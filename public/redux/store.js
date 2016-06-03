@@ -6,6 +6,11 @@ let finalcreateStore = compose(
   applyMiddleware(logger())
 )(createStore);
 
-export default function configureStore(initialState = {user: { username: null}}) {
+export default function configureStore(initialState = 
+  {
+    user: { username: null},
+    currentStreamers: []
+  }) 
+  {
   return finalcreateStore(reducer, initialState);
-}
+  }
