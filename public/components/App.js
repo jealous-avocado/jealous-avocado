@@ -8,24 +8,8 @@ class App extends React.Component {
     super();
   }
 
-  componentDidMount() {
-    console.log('store in app: ', this.props);
-  }
-
-  componentDidUpdate() {
-    if (this.props.user.username) {
-      console.log('user signed in : ', this.props.user.username);
-    } else {
-      console.log('user not signed in');
-    }
-    
-    console.log('current user(log in app did update): ', this.props.user.username);
-
-  }
-
   signout() {
-    // delete window.localStorage.state;
-    //dispatch logout user action
+    
     let username = this.props.user.username;
     this.props.dispatch(actions.logoutUser());
     delete window.localStorage.state;

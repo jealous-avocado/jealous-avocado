@@ -21451,17 +21451,22 @@
 	        $('#stopStream').show();
 	
 	        var streamTitle = $('#streamTitleInput').val();
-	        var hashTagInput = $('#hashTagInput').val();
 	
 	        componentContext.props.dispatch(_actions2.default.updateBroadcasterStreamTopic(streamTitle));
 	
-	        componentContext.props.dispatch(_actions2.default.updateBroadcasterStreamHashtags(hashTagInput));
+	        console.log(componentContext.props.user, 'PROPS');
 	      };
 	
 	      document.querySelector('#stopStream').onclick = function () {
 	        connection.close();
 	        $('#stopStream').hide();
 	        $('#startStream').show();
+	      };
+	
+	      document.querySelector('#enterHashTags').onclick = function () {
+	
+	        var hashTagInput = $('#hashTagInput').val();
+	        componentContext.props.dispatch(_actions2.default.updateBroadcasterStreamHashtags(hashTagInput));
 	      };
 	    }
 	  }, {
@@ -21484,11 +21489,16 @@
 	          _reactToggleDisplay2.default,
 	          { show: this.matchUsertoURL.bind(this)() },
 	          React.createElement('input', { id: 'streamTitleInput', placeholder: 'Title the stream' }),
-	          React.createElement('input', { id: 'hashTagInput', placeholder: 'Enter a topic tag' }),
 	          React.createElement(
 	            'button',
 	            { id: 'startStream' },
 	            ' Start Stream '
+	          ),
+	          React.createElement('input', { id: 'hashTagInput', placeholder: 'Enter a topic tag' }),
+	          React.createElement(
+	            'button',
+	            { id: 'enterHashTags' },
+	            ' Enter tags '
 	          ),
 	          React.createElement(
 	            'button',

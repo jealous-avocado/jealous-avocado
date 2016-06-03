@@ -19,15 +19,13 @@ class StreamPageComp extends React.Component {
       $('#stopStream').show();
 
       let streamTitle = $('#streamTitleInput').val();
-      let hashTagInput = $('#hashTagInput').val();
+      
 
       componentContext.props.dispatch( 
         actions.updateBroadcasterStreamTopic(streamTitle)
       );
 
-      componentContext.props.dispatch(
-        actions.updateBroadcasterStreamHashtags(hashTagInput)
-      );
+      console.log(componentContext.props.user, 'PROPS');
 
     };
 
@@ -35,6 +33,15 @@ class StreamPageComp extends React.Component {
       connection.close();
       $('#stopStream').hide();
       $('#startStream').show();
+    };
+
+    document.querySelector('#enterHashTags').onclick = function() {
+      
+      let hashTagInput = $('#hashTagInput').val();
+      componentContext.props.dispatch(
+        actions.updateBroadcasterStreamHashtags(hashTagInput)
+      );
+
     };
 
   }
@@ -51,8 +58,10 @@ class StreamPageComp extends React.Component {
         <ToggleDisplay show={this.matchUsertoURL.bind(this)()}>
 
           <input id='streamTitleInput' placeholder='Title the stream'/>
-          <input id='hashTagInput' placeholder='Enter a topic tag'/>
           <button id='startStream'> Start Stream </button>
+          
+          <input id='hashTagInput' placeholder='Enter a topic tag'/>
+          <button id='enterHashTags'> Enter tags </button>
           
           <button id='stopStream' style={{'display': 'none'}}> Stop Stream </button>
 

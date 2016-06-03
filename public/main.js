@@ -58,9 +58,9 @@
 	
 	var _routes2 = _interopRequireDefault(_routes);
 	
-	var _store2 = __webpack_require__(251);
+	var _store = __webpack_require__(251);
 	
-	var _store3 = _interopRequireDefault(_store2);
+	var _store2 = _interopRequireDefault(_store);
 	
 	var _reactRedux = __webpack_require__(222);
 	
@@ -68,9 +68,10 @@
 	
 	var state = window.localStorage.state ? JSON.parse(window.localStorage.state) : null;
 	
-	var store = (0, _store3.default)();
+	var store = (0, _store2.default)();
 	
 	if (state) {
+	  console.log(state.user.username, 'STATE index.js');
 	  var initialState = {
 	    user: {
 	      username: state.user.username,
@@ -81,7 +82,7 @@
 	    }
 	  };
 	
-	  var _store = (0, _store3.default)(initialState);
+	  store = (0, _store2.default)(initialState);
 	}
 	
 	(0, _reactDom.render)(_react2.default.createElement(
@@ -25302,26 +25303,9 @@
 	  }
 	
 	  _createClass(App, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      console.log('store in app: ', this.props);
-	    }
-	  }, {
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate() {
-	      if (this.props.user.username) {
-	        console.log('user signed in : ', this.props.user.username);
-	      } else {
-	        console.log('user not signed in');
-	      }
-	
-	      console.log('current user(log in app did update): ', this.props.user.username);
-	    }
-	  }, {
 	    key: 'signout',
 	    value: function signout() {
-	      // delete window.localStorage.state;
-	      //dispatch logout user action
+	
 	      var username = this.props.user.username;
 	      this.props.dispatch(_actions2.default.logoutUser());
 	      delete window.localStorage.state;
@@ -28624,12 +28608,7 @@
 	  function TopicPage() {
 	    _classCallCheck(this, TopicPage);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TopicPage).call(this));
-	
-	    _this.state = {
-	      topic: 'World News'
-	    };
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TopicPage).call(this));
 	  }
 	
 	  _createClass(TopicPage, [{
@@ -28640,9 +28619,8 @@
 	  }, {
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      console.log('userTP: ', this.props.user.username);
-	
-	      var topic = window.location.pathname.split('news/')[1];
+	      var topic = this.props.params.topic;
+	      console.log(topic, 'topic');
 	      if (topic) {
 	        this.setState({
 	          topic: topic
@@ -28916,17 +28894,22 @@
 	        $('#stopStream').show();
 	
 	        var streamTitle = $('#streamTitleInput').val();
-	        var hashTagInput = $('#hashTagInput').val();
 	
 	        componentContext.props.dispatch(_actions2.default.updateBroadcasterStreamTopic(streamTitle));
 	
-	        componentContext.props.dispatch(_actions2.default.updateBroadcasterStreamHashtags(hashTagInput));
+	        console.log(componentContext.props.user, 'PROPS');
 	      };
 	
 	      document.querySelector('#stopStream').onclick = function () {
 	        connection.close();
 	        $('#stopStream').hide();
 	        $('#startStream').show();
+	      };
+	
+	      document.querySelector('#enterHashTags').onclick = function () {
+	
+	        var hashTagInput = $('#hashTagInput').val();
+	        componentContext.props.dispatch(_actions2.default.updateBroadcasterStreamHashtags(hashTagInput));
 	      };
 	    }
 	  }, {
@@ -28949,11 +28932,16 @@
 	          _reactToggleDisplay2.default,
 	          { show: this.matchUsertoURL.bind(this)() },
 	          React.createElement('input', { id: 'streamTitleInput', placeholder: 'Title the stream' }),
-	          React.createElement('input', { id: 'hashTagInput', placeholder: 'Enter a topic tag' }),
 	          React.createElement(
 	            'button',
 	            { id: 'startStream' },
 	            ' Start Stream '
+	          ),
+	          React.createElement('input', { id: 'hashTagInput', placeholder: 'Enter a topic tag' }),
+	          React.createElement(
+	            'button',
+	            { id: 'enterHashTags' },
+	            ' Enter tags '
 	          ),
 	          React.createElement(
 	            'button',
@@ -29133,9 +29121,9 @@
 	// import { UPDATE_CURRENT_USER }
 	
 	function getHashtagID(state) {
-	  return state.user.stream.hashtags.reduce(function (memo, id) {
-	    return Math.max(memo, id);
-	  }) + 1;
+	  return state.user.stream.hashtags.reduce(function (memo, hashtag) {
+	    return Math.max(memo, hashtag.id);
+	  }, -1) + 1;
 	}
 	
 	var reducer = function reducer(state, action) {
@@ -29169,7 +29157,7 @@
 	        user: {
 	          username: state.user.username,
 	          stream: {
-	            title: state.stream.title,
+	            title: state.user.stream.title,
 	            hashtags: [{
 	              id: getHashtagID(state),
 	              hashtag: action.hashtag

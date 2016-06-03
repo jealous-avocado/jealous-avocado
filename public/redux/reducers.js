@@ -1,9 +1,9 @@
  // import { UPDATE_CURRENT_USER }
 
 function getHashtagID(state) {
-  return state.user.stream.hashtags.reduce((memo, id) => {
-    return Math.max(memo, id);
-  }) + 1;
+  return state.user.stream.hashtags.reduce((memo, hashtag) => {
+    return Math.max(memo, hashtag.id);
+  }, -1) + 1;
 }
 
 
@@ -38,7 +38,7 @@ let reducer = function(state, action) {
         user: {
           username: state.user.username,
           stream: {
-            title: state.stream.title,
+            title: state.user.stream.title,
             hashtags: [
               {
                 id: getHashtagID(state), 
