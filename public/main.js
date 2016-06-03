@@ -25325,6 +25325,153 @@
 	        'div',
 	        null,
 	        React.createElement(
+	          'nav',
+	          { className: 'navbar navbar-inverse' },
+	          React.createElement(
+	            'div',
+	            { className: 'container-fluid' },
+	            React.createElement(
+	              'div',
+	              { className: 'navbar-header' },
+	              React.createElement(
+	                'button',
+	                { type: 'button', className: 'navbar-toggle collapsed', 'data-toggle': 'collapse', 'data-target': '#bs-example-navbar-collapse-2' },
+	                React.createElement(
+	                  'span',
+	                  { className: 'sr-only' },
+	                  'Toggle navigation'
+	                ),
+	                React.createElement('span', { className: 'icon-bar' }),
+	                React.createElement('span', { className: 'icon-bar' }),
+	                React.createElement('span', { className: 'icon-bar' })
+	              ),
+	              React.createElement(
+	                'a',
+	                { className: 'navbar-brand', href: '#' },
+	                'GoRep'
+	              )
+	            ),
+	            React.createElement(
+	              'div',
+	              { className: 'collapse navbar-collapse', id: 'bs-example-navbar-collapse-2' },
+	              React.createElement(
+	                'ul',
+	                { className: 'nav navbar-nav' },
+	                React.createElement(
+	                  'li',
+	                  null,
+	                  React.createElement(
+	                    _reactRouter.Link,
+	                    { to: '/public' },
+	                    'Public'
+	                  ),
+	                  ' '
+	                ),
+	                React.createElement(
+	                  'li',
+	                  null,
+	                  React.createElement(
+	                    _reactRouter.Link,
+	                    { to: '/news' },
+	                    'News'
+	                  ),
+	                  ' '
+	                ),
+	                React.createElement(
+	                  'li',
+	                  { className: 'dropdown' },
+	                  React.createElement(
+	                    'a',
+	                    { href: '#', className: 'dropdown-toggle', 'data-toggle': 'dropdown', role: 'button', 'aria-expanded': 'false' },
+	                    'Dropdown ',
+	                    React.createElement('span', { className: 'caret' })
+	                  ),
+	                  React.createElement(
+	                    'ul',
+	                    { className: 'dropdown-menu', role: 'menu' },
+	                    React.createElement(
+	                      'li',
+	                      null,
+	                      React.createElement(
+	                        'a',
+	                        { href: '#' },
+	                        'Action'
+	                      )
+	                    ),
+	                    React.createElement(
+	                      'li',
+	                      null,
+	                      React.createElement(
+	                        'a',
+	                        { href: '#' },
+	                        'Another action'
+	                      )
+	                    ),
+	                    React.createElement(
+	                      'li',
+	                      null,
+	                      React.createElement(
+	                        'a',
+	                        { href: '#' },
+	                        'Something else here'
+	                      )
+	                    ),
+	                    React.createElement('li', { className: 'divider' }),
+	                    React.createElement(
+	                      'li',
+	                      null,
+	                      React.createElement(
+	                        'a',
+	                        { href: '#' },
+	                        'Separated link'
+	                      )
+	                    ),
+	                    React.createElement('li', { className: 'divider' }),
+	                    React.createElement(
+	                      'li',
+	                      null,
+	                      React.createElement(
+	                        'a',
+	                        { href: '#' },
+	                        'One more separated link'
+	                      )
+	                    )
+	                  )
+	                )
+	              ),
+	              React.createElement(
+	                'form',
+	                { className: 'navbar-form navbar-left', role: 'search' },
+	                React.createElement(
+	                  'div',
+	                  { className: 'form-group' },
+	                  React.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Search' })
+	                ),
+	                React.createElement(
+	                  'button',
+	                  { type: 'submit', className: 'btn btn-default' },
+	                  'Submit'
+	                )
+	              ),
+	              React.createElement(
+	                'ul',
+	                { className: 'nav navbar-nav navbar-right' },
+	                React.createElement(
+	                  'li',
+	                  null,
+	                  '  ',
+	                  React.createElement(
+	                    _reactRouter.Link,
+	                    { to: '/signin' },
+	                    ' Sign in '
+	                  ),
+	                  ' '
+	                )
+	              )
+	            )
+	          )
+	        ),
+	        React.createElement(
 	          _reactRouter.Link,
 	          { to: '/signin' },
 	          ' Sign in '

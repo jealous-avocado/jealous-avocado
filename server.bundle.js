@@ -71,17 +71,22 @@
 	app.post('/signin', function (req, res) {
 	  var username = req.body.username;
 	  var password = req.body.password;
-	  // new User({ name: username })
-	  //  .fetch()
-	  //  .then(function(user) {
-	  //    if (!user) {
-	  //      res.status(404);
-	  //      res.end();
-	  //    } else {
-	  //      res.status(201);
-	  //      res.end();
-	  //    }
-	  //  });
+	  console.log(username, password);
+	  new User({ name: username }).fetch().then(function (user) {
+	    if (!user) {
+	      // var newUser = new User({
+	      //   name: username,
+	      //   password: password
+	      // });
+	      // newUser.save();
+	      res.status(404);
+	      res.end();
+	    } else {
+	      // console.log(user);
+	      res.status(201);
+	      res.end();
+	    }
+	  });
 	  res.status(201);
 	  res.end();
 	});
@@ -148,13 +153,19 @@
 	'use strict';
 	
 	var knex = __webpack_require__(8)({
+	  // >>>>> Heroku Postgres DB
+	
+	  // client: 'pg',
+	  // connection: process.env.DATABASE_URL
+	
+	  // >>>>> Local DB 
+	
 	  client: 'mysql',
 	  connection: {
 	    host: '127.0.0.1',
 	    user: 'root',
 	    database: 'rep',
-	    charset: 'utf8',
-	    password: 'kk'
+	    charset: 'utf8'
 	  }
 	});
 	

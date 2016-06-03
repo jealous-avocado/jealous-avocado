@@ -52,7 +52,7 @@
 	
 	var _reactDom = __webpack_require__(219);
 	
-	var _StreamPageComp = __webpack_require__(247);
+	var _StreamPageComp = __webpack_require__(250);
 	
 	var _StreamPageComp2 = _interopRequireDefault(_StreamPageComp);
 	
@@ -19757,14 +19757,10 @@
 /* 244 */,
 /* 245 */,
 /* 246 */,
-<<<<<<< HEAD
-/* 247 */
-=======
 /* 247 */,
 /* 248 */,
 /* 249 */,
 /* 250 */
->>>>>>> adding main and stream
 /***/ function(module, exports) {
 
 	'use strict';
