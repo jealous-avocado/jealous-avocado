@@ -54,6 +54,10 @@ let reducer = function(state, action) {
       return Object.assign({}, state, {
         newsTopic: action.topic
       });
+    case "UPDATE_NEWS_ARTICLES":
+      return Object.assign({}, state, {
+        articles: action.articles
+      });
     default:
       return state;
   }

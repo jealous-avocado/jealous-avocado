@@ -1,9 +1,6 @@
 class NewsArticles extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   articles: []
-    // };
   }
 
   queryDB() {
@@ -36,7 +33,7 @@ class NewsArticles extends React.Component {
         <div> 
         Articles Here
           {
-            this.state.articles.map( article => {
+            this.props.articles.map( article => {
               <NewsArticleEntry key={article.title} article = {article} />
             })
           }

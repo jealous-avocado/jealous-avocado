@@ -19,7 +19,9 @@ if (state) {
         title: state.user.stream.title, 
         hashtags: state.user.stream.hashtags
       }
-    }, 
+    },
+    newsTopic: state.newsTopic,
+    articles: state.articles 
   };  
   
   store = configureStore(initialState);

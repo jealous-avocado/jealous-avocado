@@ -21354,6 +21354,7 @@
 	var UPDATE_BROADCASTER_STREAM_TOPIC = 'UPDATE_BROADCASTER_STREAM_TOPIC';
 	var UPDATE_BROADCASTER_STREAM_HASHTAGS = 'UPDATE_BROADCASTER_STREAM_HASHTAGS';
 	var UPDATE_NEWS_PAGE_TOPIC = 'UPDATE_NEWS_PAGE_TOPIC';
+	var UPDATE_NEWS_ARTICLES = 'UPDATE_NEWS_ARTICLES';
 	
 	var actions = {
 	  signinUser: function signinUser(username) {
@@ -21382,6 +21383,26 @@
 	      type: UPDATE_BROADCASTER_STREAM_HASHTAGS,
 	      hashtag: hashtag
 	    };
+	  },
+	
+	  updateNewsArticles: function updateNewsArticles(articles) {
+	    return {
+	      type: UPDATE_NEWS_ARTICLES,
+	      articles: articles
+	    };
+	  },
+	
+	  fetchNewsArticles: function fetchNewsArticles(query) {
+	    //async fetch to alchemy api or nyt api
+	    //return a function that returns a promised fetch request
+	    /*
+	    var context = this;
+	    return dispatch => {
+	      //dispatch another action that tells user that we are fetching ??
+	      return fetch(url+query)
+	        .then(result => dispatch(context.updateNewsArticles(result)));
+	    }
+	    */
 	  },
 	
 	  logoutUser: function logoutUser() {

@@ -14,7 +14,7 @@ class TopicPage extends React.Component {
 
   componentWillMount() {
     const topic = this.props.params.topic ? this.props.params.topic.toUpperCase() : 'World News';
-    console.log(topic, 'topic');
+
     this.props.dispatch(actions.updateTopic(topic));
 
   }
@@ -25,7 +25,7 @@ class TopicPage extends React.Component {
         <div> The Latest in {this.props.newsTopic} </div> <br></br>
         
         <div className='col-md-7'>
-          <NewsArticles topic={this.props.newsTopic}/>
+          <NewsArticles topic={this.props.newsTopic} articles={this.props.articles} dispatch={this.props.dispatch}/>
         </div>
         <div className='col-md-5'>
           <NewsVideos topic={this.props.newsTopic}/>
