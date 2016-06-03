@@ -19,8 +19,11 @@ let reducer = function(state, action) {
     case "LOGOUT_CURRENT_USER":
       return Object.assign({}, state, {
         user: {
-          username: action.name, 
-          stream: state.user.stream
+          username: null, 
+          stream: {
+            title: null, 
+            hashtags: []
+          }
         }
       });
     case "UPDATE_BROADCASTER_STREAM_TOPIC":
@@ -46,6 +49,10 @@ let reducer = function(state, action) {
               }, ...state.user.stream.hashtags]
           }
         }
+      });
+    case "UPDATE_NEWS_PAGE_TOPIC":
+      return Object.assign({}, state, {
+        newsTopic: action.topic
       });
     default:
       return state;

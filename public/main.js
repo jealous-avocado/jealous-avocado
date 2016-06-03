@@ -25309,6 +25309,7 @@
 	      var username = this.props.user.username;
 	      this.props.dispatch(_actions2.default.logoutUser());
 	      delete window.localStorage.state;
+	      window.location.assign('/');
 	    }
 	  }, {
 	    key: 'render',
@@ -26880,6 +26881,7 @@
 	var LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
 	var UPDATE_BROADCASTER_STREAM_TOPIC = 'UPDATE_BROADCASTER_STREAM_TOPIC';
 	var UPDATE_BROADCASTER_STREAM_HASHTAGS = 'UPDATE_BROADCASTER_STREAM_HASHTAGS';
+	var UPDATE_NEWS_PAGE_TOPIC = 'UPDATE_NEWS_PAGE_TOPIC';
 	
 	var actions = {
 	  signinUser: function signinUser(username) {
@@ -26891,7 +26893,7 @@
 	
 	  updateTopic: function updateTopic(topic) {
 	    return {
-	      type: UPDATE_TOPIC,
+	      type: UPDATE_NEWS_PAGE_TOPIC,
 	      topic: topic
 	    };
 	  }, //for when a user clicks on a topic
@@ -26912,8 +26914,7 @@
 	
 	  logoutUser: function logoutUser() {
 	    return {
-	      type: LOGOUT_CURRENT_USER,
-	      name: null
+	      type: LOGOUT_CURRENT_USER
 	    };
 	  }
 	};
@@ -28594,6 +28595,10 @@
 	
 	var _reactRedux = __webpack_require__(222);
 	
+	var _actions = __webpack_require__(243);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -28619,13 +28624,9 @@
 	  }, {
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      var topic = this.props.params.topic;
+	      var topic = this.props.params.topic ? this.props.params.topic.toUpperCase() : 'World News';
 	      console.log(topic, 'topic');
-	      if (topic) {
-	        this.setState({
-	          topic: topic
-	        });
-	      }
+	      this.props.dispatch(_actions2.default.updateTopic(topic));
 	    }
 	  }, {
 	    key: 'render',
@@ -28636,26 +28637,21 @@
 	        React.createElement(
 	          'div',
 	          null,
-	          ' Topic Page '
+	          ' The Latest in ',
+	          this.props.newsTopic,
+	          ' '
 	        ),
 	        ' ',
 	        React.createElement('br', null),
 	        React.createElement(
 	          'div',
-	          null,
-	          ' ',
-	          this.state.topic,
-	          ' '
-	        ),
-	        React.createElement(
-	          'div',
 	          { className: 'col-md-7' },
-	          React.createElement(_NewsArticles2.default, { topic: this.state.topic })
+	          React.createElement(_NewsArticles2.default, { topic: this.props.newsTopic })
 	        ),
 	        React.createElement(
 	          'div',
 	          { className: 'col-md-5' },
-	          React.createElement(_NewsVideos2.default, { topic: this.state.topic })
+	          React.createElement(_NewsVideos2.default, { topic: this.props.newsTopic })
 	        )
 	      );
 	    }
@@ -28696,12 +28692,10 @@
 	  function NewsArticles(props) {
 	    _classCallCheck(this, NewsArticles);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NewsArticles).call(this, props));
-	
-	    _this.state = {
-	      articles: []
-	    };
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(NewsArticles).call(this, props));
+	    // this.state = {
+	    //   articles: []
+	    // };
 	  }
 	
 	  _createClass(NewsArticles, [{
@@ -28714,8 +28708,7 @@
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
 	      //query database for topic and pull out the articles for that topic
-	      // console.log(this.props.topic, 'topic');
-	      console.log(this.props.params, ' | topic');
+	
 	      this.queryDB().done(function (r) {
 	        //populate the component div with the articles returned
 	        /*
@@ -28894,6 +28887,7 @@
 	        $('#stopStream').show();
 	
 	        var streamTitle = $('#streamTitleInput').val();
+	        $('#streamTitleInput').val('').hide();
 	
 	        componentContext.props.dispatch(_actions2.default.updateBroadcasterStreamTopic(streamTitle));
 	
@@ -28909,6 +28903,7 @@
 	      document.querySelector('#enterHashTags').onclick = function () {
 	
 	        var hashTagInput = $('#hashTagInput').val();
+	        $('#hashTagInput').val('');
 	        componentContext.props.dispatch(_actions2.default.updateBroadcasterStreamHashtags(hashTagInput));
 	      };
 	    }
@@ -29100,7 +29095,8 @@
 	        title: null,
 	        hashtags: []
 	      }
-	    }
+	    },
+	    newsTopic: 'WORLD NEWS'
 	  } : arguments[0];
 	
 	  return finalcreateStore(_reducers2.default, initialState);
@@ -29138,8 +29134,11 @@
 	    case "LOGOUT_CURRENT_USER":
 	      return Object.assign({}, state, {
 	        user: {
-	          username: action.name,
-	          stream: state.user.stream
+	          username: null,
+	          stream: {
+	            title: null,
+	            hashtags: []
+	          }
 	        }
 	      });
 	    case "UPDATE_BROADCASTER_STREAM_TOPIC":
@@ -29164,6 +29163,10 @@
 	            }].concat(_toConsumableArray(state.user.stream.hashtags))
 	          }
 	        }
+	      });
+	    case "UPDATE_NEWS_PAGE_TOPIC":
+	      return Object.assign({}, state, {
+	        newsTopic: action.topic
 	      });
 	    default:
 	      return state;

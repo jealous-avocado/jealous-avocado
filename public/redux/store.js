@@ -14,7 +14,8 @@ export default function configureStore(
         title: null, 
         hashtags: []
       }
-    }
+    }, 
+    newsTopic: 'WORLD NEWS'
   }
 ) {
   return finalcreateStore(reducer, initialState);

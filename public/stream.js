@@ -21353,6 +21353,7 @@
 	var LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
 	var UPDATE_BROADCASTER_STREAM_TOPIC = 'UPDATE_BROADCASTER_STREAM_TOPIC';
 	var UPDATE_BROADCASTER_STREAM_HASHTAGS = 'UPDATE_BROADCASTER_STREAM_HASHTAGS';
+	var UPDATE_NEWS_PAGE_TOPIC = 'UPDATE_NEWS_PAGE_TOPIC';
 	
 	var actions = {
 	  signinUser: function signinUser(username) {
@@ -21364,7 +21365,7 @@
 	
 	  updateTopic: function updateTopic(topic) {
 	    return {
-	      type: UPDATE_TOPIC,
+	      type: UPDATE_NEWS_PAGE_TOPIC,
 	      topic: topic
 	    };
 	  }, //for when a user clicks on a topic
@@ -21385,8 +21386,7 @@
 	
 	  logoutUser: function logoutUser() {
 	    return {
-	      type: LOGOUT_CURRENT_USER,
-	      name: null
+	      type: LOGOUT_CURRENT_USER
 	    };
 	  }
 	};
@@ -21451,6 +21451,7 @@
 	        $('#stopStream').show();
 	
 	        var streamTitle = $('#streamTitleInput').val();
+	        $('#streamTitleInput').val('').hide();
 	
 	        componentContext.props.dispatch(_actions2.default.updateBroadcasterStreamTopic(streamTitle));
 	
@@ -21466,6 +21467,7 @@
 	      document.querySelector('#enterHashTags').onclick = function () {
 	
 	        var hashTagInput = $('#hashTagInput').val();
+	        $('#hashTagInput').val('');
 	        componentContext.props.dispatch(_actions2.default.updateBroadcasterStreamHashtags(hashTagInput));
 	      };
 	    }

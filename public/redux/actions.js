@@ -2,6 +2,8 @@ const UPDATE_CURRENT_USER = 'UPDATE_CURRENT_USER';
 const LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
 const UPDATE_BROADCASTER_STREAM_TOPIC = 'UPDATE_BROADCASTER_STREAM_TOPIC';
 const UPDATE_BROADCASTER_STREAM_HASHTAGS = 'UPDATE_BROADCASTER_STREAM_HASHTAGS';
+const UPDATE_NEWS_PAGE_TOPIC = 'UPDATE_NEWS_PAGE_TOPIC';
+
 
 let actions = {
   signinUser: (username) => {
@@ -13,7 +15,7 @@ let actions = {
 
   updateTopic: (topic) => {
     return {
-      type: UPDATE_TOPIC, 
+      type: UPDATE_NEWS_PAGE_TOPIC, 
       topic: topic
     }
   }, //for when a user clicks on a topic
@@ -34,8 +36,7 @@ let actions = {
 
   logoutUser: () => {
     return {
-      type: LOGOUT_CURRENT_USER,
-      name: null
+      type: LOGOUT_CURRENT_USER
     }
   }
 };

@@ -9,10 +9,11 @@ class App extends React.Component {
   }
 
   signout() {
-    
+
     let username = this.props.user.username;
     this.props.dispatch(actions.logoutUser());
     delete window.localStorage.state;
+    window.location.assign('/');
   }
 
   render() {
