@@ -4,6 +4,7 @@ var _ = require('underscore');
 var request = require('request-promise');
 var bodyParser = require('body-parser')
 var session = require('express-session');
+var knexSessionStore = require('connect-session-knex')(session);
 var express = require('express');
 
 var app = express();
@@ -17,11 +18,27 @@ var Article = require('./db/models/article.js');
 
 var alchemyAPI = require('./alchemy.config.js');
 
+var sessionStore = new knexSessionStore({
+  knex: db.knex,
+  tablename: 'sessions'
+});
+
 app.use(bodyParser.urlencoded({     
  extended: true
 }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public')); //express static will serve up index.html by default upon requesting root url
+
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 7 //1 week
+  },
+  store: sessionStore
+}));
+
 
 app.post('/signin', function (req, res) {
  var username = req.body.username;
