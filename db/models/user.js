@@ -14,13 +14,10 @@ var User = db.Model.extend({
   videos: function() {
     return this.hasMany(Video);
   },
-  checkPassword: function() {
-
-  },
-  hashPassword: function(nonHashedPW) {
-    bcrypt.hash(nonHashedPW, null, null, function(err, hash){
-
-    });
+  checkPassword: function(checkPW, callback) {
+    bcrypt.compare(checkPW, this.get('password'), function(err, isMatch) {
+      callback(isMatch);
+    })
   }
 });
 

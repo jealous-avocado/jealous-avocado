@@ -71,22 +71,21 @@ app.post('/signin', function (req, res) {
   .fetch()
   .then(function(user) {
     if (!user) {
-      // var newUser = new User({
-      //   name: username,
-      //   password: password
-      // });
-      // newUser.save();
       res.status(404);
       res.end();
     } else {
       // console.log(user);
-      res.status(201);
-      res.end();
+      user.checkPassword(password, function(isMatch){
+        if(isMatch){
+          res.status(201);
+          res.end();
+        } else {
+          res.status(404);
+          res.end();
+        }
+      })
     }
   });
-res.status(201);
-res.end();
-
 });
 
 app.get('/signout', function (req, res) {
