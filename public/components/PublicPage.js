@@ -1,3 +1,6 @@
+import { connect } from 'react-redux';
+import actions from '../redux/actions';
+
 class PublicPage extends React.Component {
   constructor() {
     super();
@@ -16,17 +19,19 @@ class PublicPage extends React.Component {
   genFrame(w, h, streamName) {
     var port = 3000;
     var url = "http://localhost:" + port + "/" + streamName;
-    var frame    = document.createElement('iframe');
+    var frame = document.createElement('iframe');
+    var list = document.createElement('LI');
     frame.src    = url;
     frame.width  = w;
     frame.height = h;
     frame.setAttribute("frameBorder", 0);
-    document.getElementById("video").appendChild(frame);
+    list.appendChild(frame);
+    document.getElementById("video").appendChild(list);
   }
   
   componentDidMount () {
-    {this.state.videos.map((video) => 
-     {this.genFrame(200, 90, video)} 
+    {this.state.videos.map((video) =>
+     {this.genFrame(200, 90, video)}
     )}
 
   }
@@ -43,12 +48,9 @@ class PublicPage extends React.Component {
             </div>
           </div>
           <div className="col-md-6"> Trending Videos
-            {this.state.videos.map((video) => 
-              <li> {video} </li>
-            )}
-            <ul id="video">
+            <ul id='video'>
             </ul>
-           </div>
+          </div>
         </div>
       </div>
     );
@@ -56,4 +58,8 @@ class PublicPage extends React.Component {
   }
 }
 
-export default PublicPage;
+function mapStatetoProps(state) {
+  return state;
+}
+
+export default connect(mapStatetoProps)(PublicPage);

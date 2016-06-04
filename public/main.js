@@ -58,7 +58,7 @@
 	
 	var _routes2 = _interopRequireDefault(_routes);
 	
-	var _store = __webpack_require__(252);
+	var _store = __webpack_require__(253);
 	
 	var _store2 = _interopRequireDefault(_store);
 	
@@ -81,7 +81,8 @@
 	      }
 	    },
 	    newsTopic: state.newsTopic,
-	    articles: state.articles
+	    articles: state.articles,
+	    currentStreamers: state.currentStreamer
 	  };
 	
 	  store = (0, _store2.default)(initialState);
@@ -25232,19 +25233,19 @@
 	
 	var _Signin2 = _interopRequireDefault(_Signin);
 	
-	var _TopicPage = __webpack_require__(247);
+	var _TopicPage = __webpack_require__(248);
 	
 	var _TopicPage2 = _interopRequireDefault(_TopicPage);
 	
-	var _StreamPageComp = __webpack_require__(250);
+	var _StreamPageComp = __webpack_require__(251);
 	
 	var _StreamPageComp2 = _interopRequireDefault(_StreamPageComp);
 	
-	var _NewsArticles = __webpack_require__(248);
+	var _NewsArticles = __webpack_require__(249);
 	
 	var _NewsArticles2 = _interopRequireDefault(_NewsArticles);
 	
-	var _PublicPage = __webpack_require__(251);
+	var _PublicPage = __webpack_require__(252);
 	
 	var _PublicPage2 = _interopRequireDefault(_PublicPage);
 	
@@ -27120,6 +27121,7 @@
 	var UPDATE_BROADCASTER_STREAM_HASHTAGS = 'UPDATE_BROADCASTER_STREAM_HASHTAGS';
 	var UPDATE_NEWS_PAGE_TOPIC = 'UPDATE_NEWS_PAGE_TOPIC';
 	var UPDATE_NEWS_ARTICLES = 'UPDATE_NEWS_ARTICLES';
+	var UPDATE_CURRENT_STREAMER = 'UPDATE_CURRENT_STREAMER';
 	
 	var actions = (_actions = {
 	  signinUser: function signinUser(username) {
@@ -27190,6 +27192,11 @@
 	  return {
 	    type: LOGOUT_CURRENT_USER
 	  };
+	}), _defineProperty(_actions, 'updateCurrentStreamer', function updateCurrentStreamer(streamer) {
+	  return {
+	    type: UPDATE_CURRENT_STREAMER,
+	    addStreamer: streamer
+	  };
 	}), _actions);
 	
 	exports.default = actions;
@@ -27220,7 +27227,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var _ = __webpack_require__(255);
+	var _ = __webpack_require__(247);
 	
 	var Signin = function (_React$Component) {
 	  _inherits(Signin, _React$Component);
@@ -27294,874 +27301,6 @@
 
 /***/ },
 /* 247 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _NewsArticles = __webpack_require__(248);
-	
-	var _NewsArticles2 = _interopRequireDefault(_NewsArticles);
-	
-	var _NewsVideos = __webpack_require__(249);
-	
-	var _NewsVideos2 = _interopRequireDefault(_NewsVideos);
-	
-	var _reactRedux = __webpack_require__(222);
-	
-	var _actions = __webpack_require__(245);
-	
-	var _actions2 = _interopRequireDefault(_actions);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var TopicPage = function (_React$Component) {
-	  _inherits(TopicPage, _React$Component);
-	
-	  function TopicPage() {
-	    _classCallCheck(this, TopicPage);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TopicPage).call(this));
-	  }
-	
-	  _createClass(TopicPage, [{
-	    key: 'topicClickHandler',
-	    value: function topicClickHandler(clickedTopic) {
-	      // this.setState({ topic: clickedTopic});
-	    }
-	  }, {
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      var topic = this.props.params.topic ? this.props.params.topic.toUpperCase() : 'World News';
-	
-	      this.props.dispatch(_actions2.default.updateTopic(topic));
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'div',
-	        null,
-	        React.createElement(
-	          'div',
-	          null,
-	          ' The Latest in ',
-	          this.props.newsTopic,
-	          ' '
-	        ),
-	        ' ',
-	        React.createElement('br', null),
-	        React.createElement(
-	          'div',
-	          { className: 'col-md-7' },
-	          React.createElement(_NewsArticles2.default, { topic: this.props.newsTopic, articles: this.props.articles, dispatch: this.props.dispatch })
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'col-md-5' },
-	          React.createElement(_NewsVideos2.default, { topic: this.props.newsTopic })
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return TopicPage;
-	}(React.Component);
-	
-	;
-	
-	function mapStatetoProps(state) {
-	  return state;
-	}
-	
-	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(TopicPage);
-
-/***/ },
-/* 248 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var NewsArticles = function (_React$Component) {
-	  _inherits(NewsArticles, _React$Component);
-	
-	  function NewsArticles(props) {
-	    _classCallCheck(this, NewsArticles);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(NewsArticles).call(this, props));
-	  }
-	
-	  _createClass(NewsArticles, [{
-	    key: 'queryDB',
-	    value: function queryDB() {
-	      var url = '/getArticles?topic=' + this.props.topic;
-	      return $.get(url);
-	    }
-	  }, {
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      //query database for topic and pull out the articles for that topic
-	
-	      this.queryDB().done(function (r) {
-	        //populate the component div with the articles returned
-	        /*
-	        this.setState({
-	          articles: r
-	        });
-	        */
-	      }).fail(function (e) {
-	        return console.log('E: ', e);
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'div',
-	        null,
-	        React.createElement(
-	          'div',
-	          null,
-	          ' Map over all data received from query and render the articles '
-	        ),
-	        React.createElement('br', null),
-	        React.createElement(
-	          'div',
-	          null,
-	          'Articles Here',
-	          this.props.articles.map(function (article) {
-	            React.createElement(NewsArticleEntry, { key: article.title, article: article });
-	          })
-	        ),
-	        React.createElement('pre', null)
-	      );
-	    }
-	  }]);
-	
-	  return NewsArticles;
-	}(React.Component);
-	
-	;
-	
-	exports.default = NewsArticles;
-
-/***/ },
-/* 249 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var NewsVideos = function (_React$Component) {
-	  _inherits(NewsVideos, _React$Component);
-	
-	  function NewsVideos(props) {
-	    _classCallCheck(this, NewsVideos);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NewsVideos).call(this, props));
-	
-	    _this.state = {
-	      videos: []
-	    };
-	    return _this;
-	  }
-	
-	  _createClass(NewsVideos, [{
-	    key: 'queryDB',
-	    value: function queryDB() {
-	      var url = '/getVideos?topic=' + this.props.topic;
-	      return $.get(url);
-	    }
-	  }, {
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      this.queryDB().done(function (r) {
-	        /*
-	        thissetState({
-	          videos: r
-	        });
-	        */
-	      }).fail(function (e) {
-	        return console.log('E: ', e);
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'div',
-	        null,
-	        React.createElement(
-	          'div',
-	          null,
-	          ' Map over videos gotten from DB and show them here '
-	        ),
-	        React.createElement('br', null),
-	        React.createElement(
-	          'div',
-	          null,
-	          'Temporary News Videos Area',
-	          this.state.videos.map(function (video) {
-	            React.createElement(NewsVideoEntry, { key: video.title, video: video });
-	          })
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return NewsVideos;
-	}(React.Component);
-	
-	;
-	
-	exports.default = NewsVideos;
-
-/***/ },
-/* 250 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _reactToggleDisplay = __webpack_require__(244);
-	
-	var _reactToggleDisplay2 = _interopRequireDefault(_reactToggleDisplay);
-	
-	var _reactRedux = __webpack_require__(222);
-	
-	var _actions = __webpack_require__(245);
-	
-	var _actions2 = _interopRequireDefault(_actions);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var StreamPageComp = function (_React$Component) {
-	  _inherits(StreamPageComp, _React$Component);
-	
-	  function StreamPageComp(props) {
-	    _classCallCheck(this, StreamPageComp);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(StreamPageComp).call(this, props));
-	  }
-	
-	  _createClass(StreamPageComp, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	
-	      var connection = new RTCMultiConnection().connect();
-	      var componentContext = this;
-	
-	      document.querySelector('#startStream').onclick = function () {
-	        connection.open();
-	        connection.direction = 'one-way';
-	        $('#startStream').hide();
-	        $('#stopStream').show();
-	
-	        var streamTitle = $('#streamTitleInput').val();
-	        $('#streamTitleInput').val('').hide();
-	
-	        componentContext.props.dispatch(_actions2.default.updateBroadcasterStreamTopic(streamTitle));
-	
-	        console.log(componentContext.props.user, 'PROPS');
-	      };
-	
-	      document.querySelector('#stopStream').onclick = function () {
-	        connection.close();
-	        $('#stopStream').hide();
-	        $('#startStream').show();
-	      };
-	
-	      document.querySelector('#enterHashTags').onclick = function () {
-	
-	        var hashTagInput = $('#hashTagInput').val();
-	        $('#hashTagInput').val('');
-	        componentContext.props.dispatch(_actions2.default.updateBroadcasterStreamHashtags(hashTagInput));
-	      };
-	    }
-	  }, {
-	    key: 'matchUsertoURL',
-	    value: function matchUsertoURL() {
-	      return this.props.user.username === this.props.params.username;
-	    }
-	  }, {
-	    key: 'matchUsertoURL',
-	    value: function matchUsertoURL() {
-	      return this.props.user.username === this.props.params.username;
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'div',
-	        null,
-	        React.createElement(
-	          'div',
-	          null,
-	          'User Page '
-	        ),
-	        React.createElement(
-	          _reactToggleDisplay2.default,
-	          { show: this.matchUsertoURL.bind(this)() },
-	          React.createElement('input', { id: 'streamTitleInput', placeholder: 'Title the stream' }),
-	          React.createElement(
-	            'button',
-	            { id: 'startStream' },
-	            ' Start Stream '
-	          ),
-	          React.createElement('input', { id: 'hashTagInput', placeholder: 'Enter a topic tag' }),
-	          React.createElement(
-	            'button',
-	            { id: 'enterHashTags' },
-	            ' Enter tags '
-	          ),
-	          React.createElement(
-	            'button',
-	            { id: 'stopStream', style: { 'display': 'none' } },
-	            ' Stop Stream '
-	          )
-	        ),
-	        React.createElement(
-	          'div',
-	          { id: 'streamTitle' },
-	          'Stream title: ',
-	          this.props.user.stream.title
-	        ),
-	        React.createElement('div', { id: 'videos-container' })
-	      );
-	    }
-	  }]);
-	
-	  return StreamPageComp;
-	}(React.Component);
-	
-	function mapStatetoProps(state) {
-	  return state;
-	}
-	
-	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(StreamPageComp);
-
-/***/ },
-/* 251 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var PublicPage = function (_React$Component) {
-	  _inherits(PublicPage, _React$Component);
-	
-	  function PublicPage() {
-	    _classCallCheck(this, PublicPage);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PublicPage).call(this));
-	
-	    _this.state = {
-	      videos: ["Nam", "John", "Prateek"],
-	      articles: ['article1', 'article2', 'article3', 'article4', 'article5'],
-	      currentVideo: null
-	    };
-	    return _this;
-	  }
-	
-	  _createClass(PublicPage, [{
-	    key: "updateVideo",
-	    value: function updateVideo(video) {
-	      this.setState({ currentVideo: video });
-	    }
-	  }, {
-	    key: "updateArticle",
-	    value: function updateArticle(article) {
-	      this.setState({ articles: articles });
-	    }
-	  }, {
-	    key: "genFrame",
-	    value: function genFrame(w, h, streamName) {
-	      var port = 3000;
-	      var url = "http://localhost:" + port + "/" + streamName;
-	      var frame = document.createElement('iframe');
-	      frame.src = url;
-	      frame.width = w;
-	      frame.height = h;
-	      frame.setAttribute("frameBorder", 0);
-	      document.getElementById("video").appendChild(frame);
-	    }
-	  }, {
-	    key: "componentDidMount",
-	    value: function componentDidMount() {
-	      var _this2 = this;
-	
-	      {
-	        this.state.videos.map(function (video) {
-	          _this2.genFrame(200, 90, video);
-	        });
-	      }
-	    }
-	  }, {
-	    key: "render",
-	    value: function render() {
-	      return React.createElement(
-	        "div",
-	        { className: "hey" },
-	        React.createElement(
-	          "div",
-	          { className: "row" },
-	          React.createElement(
-	            "div",
-	            { className: "col-md-6" },
-	            " Current Video",
-	            React.createElement("iframe", { width: "560", height: "315", src: "https://www.youtube.com/embed/Dd7FixvoKBw", frameBorder: "0", allowFullScreen: true }),
-	            "            ",
-	            React.createElement(
-	              "div",
-	              { id: "articles" },
-	              " Trending Articles",
-	              this.state.articles.map(function (article) {
-	                return React.createElement(
-	                  "li",
-	                  null,
-	                  " ",
-	                  article,
-	                  " "
-	                );
-	              })
-	            )
-	          ),
-	          React.createElement(
-	            "div",
-	            { className: "col-md-6" },
-	            " Trending Videos",
-	            this.state.videos.map(function (video) {
-	              return React.createElement(
-	                "li",
-	                null,
-	                " ",
-	                video,
-	                " "
-	              );
-	            }),
-	            React.createElement("ul", { id: "video" })
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return PublicPage;
-	}(React.Component);
-	
-	exports.default = PublicPage;
-
-/***/ },
-/* 252 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = configureStore;
-	
-	var _redux = __webpack_require__(229);
-	
-	var _reducers = __webpack_require__(253);
-	
-	var _reducers2 = _interopRequireDefault(_reducers);
-	
-	var _reduxLogger = __webpack_require__(254);
-	
-	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var finalcreateStore = (0, _redux.compose)((0, _redux.applyMiddleware)((0, _reduxLogger2.default)()))(_redux.createStore);
-	
-	function configureStore() {
-	  var initialState = arguments.length <= 0 || arguments[0] === undefined ? {
-	    user: {
-	      username: null,
-	      stream: {
-	        title: null,
-	        hashtags: []
-	      }
-	    },
-	    newsTopic: 'WORLD NEWS',
-	    articles: []
-	  } : arguments[0];
-	
-	  return finalcreateStore(_reducers2.default, initialState);
-	}
-
-/***/ },
-/* 253 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-	
-	// import { UPDATE_CURRENT_USER }
-	
-	function getHashtagID(state) {
-	  return state.user.stream.hashtags.reduce(function (memo, hashtag) {
-	    return Math.max(memo, hashtag.id);
-	  }, -1) + 1;
-	}
-	
-	var reducer = function reducer(state, action) {
-	  switch (action.type) {
-	    case "UPDATE_CURRENT_USER":
-	      return Object.assign({}, state, {
-	        user: {
-	          username: action.name,
-	          stream: state.user.stream
-	        }
-	      });
-	    case "LOGOUT_CURRENT_USER":
-	      return Object.assign({}, state, {
-	        user: {
-	          username: null,
-	          stream: {
-	            title: null,
-	            hashtags: []
-	          }
-	        }
-	      });
-	    case "UPDATE_BROADCASTER_STREAM_TOPIC":
-	      return Object.assign({}, state, {
-	        user: {
-	          username: state.user.username,
-	          stream: {
-	            title: action.title,
-	            hashtags: state.user.stream.hashtags
-	          }
-	        }
-	      });
-	    case "UPDATE_BROADCASTER_STREAM_HASHTAGS":
-	      return Object.assign({}, state, {
-	        user: {
-	          username: state.user.username,
-	          stream: {
-	            title: state.user.stream.title,
-	            hashtags: [{
-	              id: getHashtagID(state),
-	              hashtag: action.hashtag
-	            }].concat(_toConsumableArray(state.user.stream.hashtags))
-	          }
-	        }
-	      });
-	
-	    case "UPDATE_NEWS_PAGE_TOPIC":
-	      return Object.assign({}, state, {
-	        newsTopic: action.topic
-	      });
-	    case "UPDATE_NEWS_ARTICLES":
-	      return Object.assign({}, state, {
-	        articles: action.articles
-	      });
-	
-	    default:
-	      return state;
-	  }
-	};
-	
-	exports.default = reducer;
-
-/***/ },
-/* 254 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-	
-	function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
-	
-	var repeat = function repeat(str, times) {
-	  return new Array(times + 1).join(str);
-	};
-	var pad = function pad(num, maxLength) {
-	  return repeat("0", maxLength - num.toString().length) + num;
-	};
-	var formatTime = function formatTime(time) {
-	  return "@ " + pad(time.getHours(), 2) + ":" + pad(time.getMinutes(), 2) + ":" + pad(time.getSeconds(), 2) + "." + pad(time.getMilliseconds(), 3);
-	};
-	
-	// Use the new performance api to get better precision if available
-	var timer = typeof performance !== "undefined" && typeof performance.now === "function" ? performance : Date;
-	
-	/**
-	 * parse the level option of createLogger
-	 *
-	 * @property {string | function | object} level - console[level]
-	 * @property {object} action
-	 * @property {array} payload
-	 * @property {string} type
-	 */
-	
-	function getLogLevel(level, action, payload, type) {
-	  switch (typeof level === "undefined" ? "undefined" : _typeof(level)) {
-	    case "object":
-	      return typeof level[type] === "function" ? level[type].apply(level, _toConsumableArray(payload)) : level[type];
-	    case "function":
-	      return level(action);
-	    default:
-	      return level;
-	  }
-	}
-	
-	/**
-	 * Creates logger with followed options
-	 *
-	 * @namespace
-	 * @property {object} options - options for logger
-	 * @property {string | function | object} options.level - console[level]
-	 * @property {boolean} options.duration - print duration of each action?
-	 * @property {boolean} options.timestamp - print timestamp with each action?
-	 * @property {object} options.colors - custom colors
-	 * @property {object} options.logger - implementation of the `console` API
-	 * @property {boolean} options.logErrors - should errors in action execution be caught, logged, and re-thrown?
-	 * @property {boolean} options.collapsed - is group collapsed?
-	 * @property {boolean} options.predicate - condition which resolves logger behavior
-	 * @property {function} options.stateTransformer - transform state before print
-	 * @property {function} options.actionTransformer - transform action before print
-	 * @property {function} options.errorTransformer - transform error before print
-	 */
-	
-	function createLogger() {
-	  var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	  var _options$level = options.level;
-	  var level = _options$level === undefined ? "log" : _options$level;
-	  var _options$logger = options.logger;
-	  var logger = _options$logger === undefined ? console : _options$logger;
-	  var _options$logErrors = options.logErrors;
-	  var logErrors = _options$logErrors === undefined ? true : _options$logErrors;
-	  var collapsed = options.collapsed;
-	  var predicate = options.predicate;
-	  var _options$duration = options.duration;
-	  var duration = _options$duration === undefined ? false : _options$duration;
-	  var _options$timestamp = options.timestamp;
-	  var timestamp = _options$timestamp === undefined ? true : _options$timestamp;
-	  var transformer = options.transformer;
-	  var _options$stateTransfo = options.stateTransformer;
-	  var // deprecated
-	  stateTransformer = _options$stateTransfo === undefined ? function (state) {
-	    return state;
-	  } : _options$stateTransfo;
-	  var _options$actionTransf = options.actionTransformer;
-	  var actionTransformer = _options$actionTransf === undefined ? function (actn) {
-	    return actn;
-	  } : _options$actionTransf;
-	  var _options$errorTransfo = options.errorTransformer;
-	  var errorTransformer = _options$errorTransfo === undefined ? function (error) {
-	    return error;
-	  } : _options$errorTransfo;
-	  var _options$colors = options.colors;
-	  var colors = _options$colors === undefined ? {
-	    title: function title() {
-	      return "#000000";
-	    },
-	    prevState: function prevState() {
-	      return "#9E9E9E";
-	    },
-	    action: function action() {
-	      return "#03A9F4";
-	    },
-	    nextState: function nextState() {
-	      return "#4CAF50";
-	    },
-	    error: function error() {
-	      return "#F20404";
-	    }
-	  } : _options$colors;
-	
-	  // exit if console undefined
-	
-	  if (typeof logger === "undefined") {
-	    return function () {
-	      return function (next) {
-	        return function (action) {
-	          return next(action);
-	        };
-	      };
-	    };
-	  }
-	
-	  if (transformer) {
-	    console.error("Option 'transformer' is deprecated, use stateTransformer instead");
-	  }
-	
-	  var logBuffer = [];
-	  function printBuffer() {
-	    logBuffer.forEach(function (logEntry, key) {
-	      var started = logEntry.started;
-	      var startedTime = logEntry.startedTime;
-	      var action = logEntry.action;
-	      var prevState = logEntry.prevState;
-	      var error = logEntry.error;
-	      var took = logEntry.took;
-	      var nextState = logEntry.nextState;
-	
-	      var nextEntry = logBuffer[key + 1];
-	      if (nextEntry) {
-	        nextState = nextEntry.prevState;
-	        took = nextEntry.started - started;
-	      }
-	      // message
-	      var formattedAction = actionTransformer(action);
-	      var isCollapsed = typeof collapsed === "function" ? collapsed(function () {
-	        return nextState;
-	      }, action) : collapsed;
-	
-	      var formattedTime = formatTime(startedTime);
-	      var titleCSS = colors.title ? "color: " + colors.title(formattedAction) + ";" : null;
-	      var title = "action " + (timestamp ? formattedTime : "") + " " + formattedAction.type + " " + (duration ? "(in " + took.toFixed(2) + " ms)" : "");
-	
-	      // render
-	      try {
-	        if (isCollapsed) {
-	          if (colors.title) logger.groupCollapsed("%c " + title, titleCSS);else logger.groupCollapsed(title);
-	        } else {
-	          if (colors.title) logger.group("%c " + title, titleCSS);else logger.group(title);
-	        }
-	      } catch (e) {
-	        logger.log(title);
-	      }
-	
-	      var prevStateLevel = getLogLevel(level, formattedAction, [prevState], "prevState");
-	      var actionLevel = getLogLevel(level, formattedAction, [formattedAction], "action");
-	      var errorLevel = getLogLevel(level, formattedAction, [error, prevState], "error");
-	      var nextStateLevel = getLogLevel(level, formattedAction, [nextState], "nextState");
-	
-	      if (prevStateLevel) {
-	        if (colors.prevState) logger[prevStateLevel]("%c prev state", "color: " + colors.prevState(prevState) + "; font-weight: bold", prevState);else logger[prevStateLevel]("prev state", prevState);
-	      }
-	
-	      if (actionLevel) {
-	        if (colors.action) logger[actionLevel]("%c action", "color: " + colors.action(formattedAction) + "; font-weight: bold", formattedAction);else logger[actionLevel]("action", formattedAction);
-	      }
-	
-	      if (error && errorLevel) {
-	        if (colors.error) logger[errorLevel]("%c error", "color: " + colors.error(error, prevState) + "; font-weight: bold", error);else logger[errorLevel]("error", error);
-	      }
-	
-	      if (nextStateLevel) {
-	        if (colors.nextState) logger[nextStateLevel]("%c next state", "color: " + colors.nextState(nextState) + "; font-weight: bold", nextState);else logger[nextStateLevel]("next state", nextState);
-	      }
-	
-	      try {
-	        logger.groupEnd();
-	      } catch (e) {
-	        logger.log("—— log end ——");
-	      }
-	    });
-	    logBuffer.length = 0;
-	  }
-	
-	  return function (_ref) {
-	    var getState = _ref.getState;
-	    return function (next) {
-	      return function (action) {
-	        // exit early if predicate function returns false
-	        if (typeof predicate === "function" && !predicate(getState, action)) {
-	          return next(action);
-	        }
-	
-	        var logEntry = {};
-	        logBuffer.push(logEntry);
-	
-	        logEntry.started = timer.now();
-	        logEntry.startedTime = new Date();
-	        logEntry.prevState = stateTransformer(getState());
-	        logEntry.action = action;
-	
-	        var returnedValue = undefined;
-	        if (logErrors) {
-	          try {
-	            returnedValue = next(action);
-	          } catch (e) {
-	            logEntry.error = errorTransformer(e);
-	          }
-	        } else {
-	          returnedValue = next(action);
-	        }
-	
-	        logEntry.took = timer.now() - logEntry.started;
-	        logEntry.nextState = stateTransformer(getState());
-	
-	        printBuffer();
-	
-	        if (logEntry.error) throw logEntry.error;
-	        return returnedValue;
-	      };
-	    };
-	  };
-	}
-	
-	module.exports = createLogger;
-
-/***/ },
-/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.8.3
@@ -29713,6 +28852,886 @@
 	  }
 	}.call(this));
 
+
+/***/ },
+/* 248 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _NewsArticles = __webpack_require__(249);
+	
+	var _NewsArticles2 = _interopRequireDefault(_NewsArticles);
+	
+	var _NewsVideos = __webpack_require__(250);
+	
+	var _NewsVideos2 = _interopRequireDefault(_NewsVideos);
+	
+	var _reactRedux = __webpack_require__(222);
+	
+	var _actions = __webpack_require__(245);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var TopicPage = function (_React$Component) {
+	  _inherits(TopicPage, _React$Component);
+	
+	  function TopicPage() {
+	    _classCallCheck(this, TopicPage);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(TopicPage).call(this));
+	  }
+	
+	  _createClass(TopicPage, [{
+	    key: 'topicClickHandler',
+	    value: function topicClickHandler(clickedTopic) {
+	      // this.setState({ topic: clickedTopic});
+	    }
+	  }, {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var topic = this.props.params.topic ? this.props.params.topic.toUpperCase() : 'World News';
+	
+	      this.props.dispatch(_actions2.default.updateTopic(topic));
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          'div',
+	          null,
+	          ' The Latest in ',
+	          this.props.newsTopic,
+	          ' '
+	        ),
+	        ' ',
+	        React.createElement('br', null),
+	        React.createElement(
+	          'div',
+	          { className: 'col-md-7' },
+	          React.createElement(_NewsArticles2.default, { topic: this.props.newsTopic, articles: this.props.articles, dispatch: this.props.dispatch })
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'col-md-5' },
+	          React.createElement(_NewsVideos2.default, { topic: this.props.newsTopic })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return TopicPage;
+	}(React.Component);
+	
+	;
+	
+	function mapStatetoProps(state) {
+	  return state;
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(TopicPage);
+
+/***/ },
+/* 249 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var NewsArticles = function (_React$Component) {
+	  _inherits(NewsArticles, _React$Component);
+	
+	  function NewsArticles(props) {
+	    _classCallCheck(this, NewsArticles);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(NewsArticles).call(this, props));
+	  }
+	
+	  _createClass(NewsArticles, [{
+	    key: 'queryDB',
+	    value: function queryDB() {
+	      var url = '/getArticles?topic=' + this.props.topic;
+	      return $.get(url);
+	    }
+	  }, {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      //query database for topic and pull out the articles for that topic
+	
+	      this.queryDB().done(function (r) {
+	        //populate the component div with the articles returned
+	        /*
+	        this.setState({
+	          articles: r
+	        });
+	        */
+	      }).fail(function (e) {
+	        return console.log('E: ', e);
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          'div',
+	          null,
+	          ' Map over all data received from query and render the articles '
+	        ),
+	        React.createElement('br', null),
+	        React.createElement(
+	          'div',
+	          null,
+	          'Articles Here',
+	          this.props.articles.map(function (article) {
+	            React.createElement(NewsArticleEntry, { key: article.title, article: article });
+	          })
+	        ),
+	        React.createElement('pre', null)
+	      );
+	    }
+	  }]);
+	
+	  return NewsArticles;
+	}(React.Component);
+	
+	;
+	
+	exports.default = NewsArticles;
+
+/***/ },
+/* 250 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var NewsVideos = function (_React$Component) {
+	  _inherits(NewsVideos, _React$Component);
+	
+	  function NewsVideos(props) {
+	    _classCallCheck(this, NewsVideos);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NewsVideos).call(this, props));
+	
+	    _this.state = {
+	      videos: []
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(NewsVideos, [{
+	    key: 'queryDB',
+	    value: function queryDB() {
+	      var url = '/getVideos?topic=' + this.props.topic;
+	      return $.get(url);
+	    }
+	  }, {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.queryDB().done(function (r) {
+	        /*
+	        thissetState({
+	          videos: r
+	        });
+	        */
+	      }).fail(function (e) {
+	        return console.log('E: ', e);
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          'div',
+	          null,
+	          ' Map over videos gotten from DB and show them here '
+	        ),
+	        React.createElement('br', null),
+	        React.createElement(
+	          'div',
+	          null,
+	          'Temporary News Videos Area',
+	          this.state.videos.map(function (video) {
+	            React.createElement(NewsVideoEntry, { key: video.title, video: video });
+	          })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return NewsVideos;
+	}(React.Component);
+	
+	;
+	
+	exports.default = NewsVideos;
+
+/***/ },
+/* 251 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _reactToggleDisplay = __webpack_require__(244);
+	
+	var _reactToggleDisplay2 = _interopRequireDefault(_reactToggleDisplay);
+	
+	var _reactRedux = __webpack_require__(222);
+	
+	var _actions = __webpack_require__(245);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var StreamPageComp = function (_React$Component) {
+	  _inherits(StreamPageComp, _React$Component);
+	
+	  function StreamPageComp(props) {
+	    _classCallCheck(this, StreamPageComp);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(StreamPageComp).call(this, props));
+	  }
+	
+	  _createClass(StreamPageComp, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	
+	      var connection = new RTCMultiConnection().connect();
+	      var componentContext = this;
+	
+	      document.querySelector('#startStream').onclick = function () {
+	        connection.open();
+	        connection.direction = 'one-way';
+	        $('#startStream').hide();
+	        $('#stopStream').show();
+	
+	        var streamTitle = $('#streamTitleInput').val();
+	        $('#streamTitleInput').val('').hide();
+	
+	        componentContext.props.dispatch(_actions2.default.updateBroadcasterStreamTopic(streamTitle));
+	
+	        console.log(componentContext.props.user, 'PROPS');
+	
+	        componentContext.props.dispatch(_actions2.default.updateCurrentStreamer(componentContext.props.user.username));
+	      };
+	
+	      document.querySelector('#stopStream').onclick = function () {
+	        connection.close();
+	        $('#stopStream').hide();
+	        $('#startStream').show();
+	      };
+	
+	      document.querySelector('#enterHashTags').onclick = function () {
+	
+	        var hashTagInput = $('#hashTagInput').val();
+	        $('#hashTagInput').val('');
+	        componentContext.props.dispatch(_actions2.default.updateBroadcasterStreamHashtags(hashTagInput));
+	      };
+	    }
+	  }, {
+	    key: 'matchUsertoURL',
+	    value: function matchUsertoURL() {
+	      return this.props.user.username === this.props.params.username;
+	    }
+	  }, {
+	    key: 'matchUsertoURL',
+	    value: function matchUsertoURL() {
+	      return this.props.user.username === this.props.params.username;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          'div',
+	          null,
+	          'User Page '
+	        ),
+	        React.createElement(
+	          _reactToggleDisplay2.default,
+	          { show: this.matchUsertoURL.bind(this)() },
+	          React.createElement('input', { id: 'streamTitleInput', placeholder: 'Title the stream' }),
+	          React.createElement(
+	            'button',
+	            { id: 'startStream' },
+	            ' Start Stream '
+	          ),
+	          React.createElement('input', { id: 'hashTagInput', placeholder: 'Enter a topic tag' }),
+	          React.createElement(
+	            'button',
+	            { id: 'enterHashTags' },
+	            ' Enter tags '
+	          ),
+	          React.createElement(
+	            'button',
+	            { id: 'stopStream', style: { 'display': 'none' } },
+	            ' Stop Stream '
+	          )
+	        ),
+	        React.createElement(
+	          'div',
+	          { id: 'streamTitle' },
+	          'Stream title: ',
+	          this.props.user.stream.title
+	        ),
+	        React.createElement('div', { id: 'videos-container' })
+	      );
+	    }
+	  }]);
+	
+	  return StreamPageComp;
+	}(React.Component);
+	
+	function mapStatetoProps(state) {
+	  return state;
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(StreamPageComp);
+
+/***/ },
+/* 252 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _reactRedux = __webpack_require__(222);
+	
+	var _actions = __webpack_require__(245);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var PublicPage = function (_React$Component) {
+	  _inherits(PublicPage, _React$Component);
+	
+	  function PublicPage() {
+	    _classCallCheck(this, PublicPage);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PublicPage).call(this));
+	
+	    _this.state = {
+	      videos: ["Nam", "John", "Prateek"],
+	      articles: ['article1', 'article2', 'article3', 'article4', 'article5'],
+	      currentVideo: null
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(PublicPage, [{
+	    key: 'updateVideo',
+	    value: function updateVideo(video) {
+	      this.setState({ currentVideo: video });
+	    }
+	  }, {
+	    key: 'updateArticle',
+	    value: function updateArticle(article) {
+	      this.setState({ articles: articles });
+	    }
+	  }, {
+	    key: 'genFrame',
+	    value: function genFrame(w, h, streamName) {
+	      var port = 3000;
+	      var url = "http://localhost:" + port + "/" + streamName;
+	      var frame = document.createElement('iframe');
+	      var list = document.createElement('LI');
+	      frame.src = url;
+	      frame.width = w;
+	      frame.height = h;
+	      frame.setAttribute("frameBorder", 0);
+	      list.appendChild(frame);
+	      document.getElementById("video").appendChild(list);
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+	
+	      {
+	        this.state.videos.map(function (video) {
+	          _this2.genFrame(200, 90, video);
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        'div',
+	        { className: 'hey' },
+	        React.createElement(
+	          'div',
+	          { className: 'row' },
+	          React.createElement(
+	            'div',
+	            { className: 'col-md-6' },
+	            ' Current Video',
+	            React.createElement('iframe', { width: '560', height: '315', src: 'https://www.youtube.com/embed/Dd7FixvoKBw', frameBorder: '0', allowFullScreen: true }),
+	            '            ',
+	            React.createElement(
+	              'div',
+	              { id: 'articles' },
+	              ' Trending Articles',
+	              this.state.articles.map(function (article) {
+	                return React.createElement(
+	                  'li',
+	                  null,
+	                  ' ',
+	                  article,
+	                  ' '
+	                );
+	              })
+	            )
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'col-md-6' },
+	            ' Trending Videos',
+	            React.createElement('ul', { id: 'video' })
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return PublicPage;
+	}(React.Component);
+	
+	function mapStatetoProps(state) {
+	  return state;
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(PublicPage);
+
+/***/ },
+/* 253 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = configureStore;
+	
+	var _redux = __webpack_require__(229);
+	
+	var _reducers = __webpack_require__(254);
+	
+	var _reducers2 = _interopRequireDefault(_reducers);
+	
+	var _reduxLogger = __webpack_require__(255);
+	
+	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var finalcreateStore = (0, _redux.compose)((0, _redux.applyMiddleware)((0, _reduxLogger2.default)()))(_redux.createStore);
+	
+	function configureStore() {
+	  var initialState = arguments.length <= 0 || arguments[0] === undefined ? {
+	    user: {
+	      username: null,
+	      stream: {
+	        title: null,
+	        hashtags: []
+	      }
+	    },
+	    newsTopic: 'WORLD NEWS',
+	    articles: [],
+	    currentStreamers: []
+	  } : arguments[0];
+	
+	  return finalcreateStore(_reducers2.default, initialState);
+	}
+
+/***/ },
+/* 254 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	// import { UPDATE_CURRENT_USER }
+	
+	function getHashtagID(state) {
+	  return state.user.stream.hashtags.reduce(function (memo, hashtag) {
+	    return Math.max(memo, hashtag.id);
+	  }, -1) + 1;
+	}
+	
+	var reducer = function reducer(state, action) {
+	  switch (action.type) {
+	    case "UPDATE_CURRENT_USER":
+	      return Object.assign({}, state, {
+	        user: {
+	          username: action.name,
+	          stream: state.user.stream
+	        }
+	      });
+	    case "LOGOUT_CURRENT_USER":
+	      return Object.assign({}, state, {
+	        user: {
+	          username: null,
+	          stream: {
+	            title: null,
+	            hashtags: []
+	          }
+	        }
+	      });
+	    case "UPDATE_BROADCASTER_STREAM_TOPIC":
+	      return Object.assign({}, state, {
+	        user: {
+	          username: state.user.username,
+	          stream: {
+	            title: action.title,
+	            hashtags: state.user.stream.hashtags
+	          }
+	        }
+	      });
+	    case "UPDATE_BROADCASTER_STREAM_HASHTAGS":
+	      return Object.assign({}, state, {
+	        user: {
+	          username: state.user.username,
+	          stream: {
+	            title: state.user.stream.title,
+	            hashtags: [{
+	              id: getHashtagID(state),
+	              hashtag: action.hashtag
+	            }].concat(_toConsumableArray(state.user.stream.hashtags))
+	          }
+	        }
+	      });
+	
+	    case "UPDATE_NEWS_PAGE_TOPIC":
+	      return Object.assign({}, state, {
+	        newsTopic: action.topic
+	      });
+	    case "UPDATE_NEWS_ARTICLES":
+	      return Object.assign({}, state, {
+	        articles: action.articles
+	      });
+	    case "UPDATE_CURRENT_STREAMER":
+	      return Object.assign({}, state, {
+	        currentStreamers: [action.addStreamer].concat(_toConsumableArray(state.currentStreamers))
+	      });
+	
+	    default:
+	      return state;
+	  }
+	};
+	
+	exports.default = reducer;
+
+/***/ },
+/* 255 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+	
+	var repeat = function repeat(str, times) {
+	  return new Array(times + 1).join(str);
+	};
+	var pad = function pad(num, maxLength) {
+	  return repeat("0", maxLength - num.toString().length) + num;
+	};
+	var formatTime = function formatTime(time) {
+	  return "@ " + pad(time.getHours(), 2) + ":" + pad(time.getMinutes(), 2) + ":" + pad(time.getSeconds(), 2) + "." + pad(time.getMilliseconds(), 3);
+	};
+	
+	// Use the new performance api to get better precision if available
+	var timer = typeof performance !== "undefined" && typeof performance.now === "function" ? performance : Date;
+	
+	/**
+	 * parse the level option of createLogger
+	 *
+	 * @property {string | function | object} level - console[level]
+	 * @property {object} action
+	 * @property {array} payload
+	 * @property {string} type
+	 */
+	
+	function getLogLevel(level, action, payload, type) {
+	  switch (typeof level === "undefined" ? "undefined" : _typeof(level)) {
+	    case "object":
+	      return typeof level[type] === "function" ? level[type].apply(level, _toConsumableArray(payload)) : level[type];
+	    case "function":
+	      return level(action);
+	    default:
+	      return level;
+	  }
+	}
+	
+	/**
+	 * Creates logger with followed options
+	 *
+	 * @namespace
+	 * @property {object} options - options for logger
+	 * @property {string | function | object} options.level - console[level]
+	 * @property {boolean} options.duration - print duration of each action?
+	 * @property {boolean} options.timestamp - print timestamp with each action?
+	 * @property {object} options.colors - custom colors
+	 * @property {object} options.logger - implementation of the `console` API
+	 * @property {boolean} options.logErrors - should errors in action execution be caught, logged, and re-thrown?
+	 * @property {boolean} options.collapsed - is group collapsed?
+	 * @property {boolean} options.predicate - condition which resolves logger behavior
+	 * @property {function} options.stateTransformer - transform state before print
+	 * @property {function} options.actionTransformer - transform action before print
+	 * @property {function} options.errorTransformer - transform error before print
+	 */
+	
+	function createLogger() {
+	  var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  var _options$level = options.level;
+	  var level = _options$level === undefined ? "log" : _options$level;
+	  var _options$logger = options.logger;
+	  var logger = _options$logger === undefined ? console : _options$logger;
+	  var _options$logErrors = options.logErrors;
+	  var logErrors = _options$logErrors === undefined ? true : _options$logErrors;
+	  var collapsed = options.collapsed;
+	  var predicate = options.predicate;
+	  var _options$duration = options.duration;
+	  var duration = _options$duration === undefined ? false : _options$duration;
+	  var _options$timestamp = options.timestamp;
+	  var timestamp = _options$timestamp === undefined ? true : _options$timestamp;
+	  var transformer = options.transformer;
+	  var _options$stateTransfo = options.stateTransformer;
+	  var // deprecated
+	  stateTransformer = _options$stateTransfo === undefined ? function (state) {
+	    return state;
+	  } : _options$stateTransfo;
+	  var _options$actionTransf = options.actionTransformer;
+	  var actionTransformer = _options$actionTransf === undefined ? function (actn) {
+	    return actn;
+	  } : _options$actionTransf;
+	  var _options$errorTransfo = options.errorTransformer;
+	  var errorTransformer = _options$errorTransfo === undefined ? function (error) {
+	    return error;
+	  } : _options$errorTransfo;
+	  var _options$colors = options.colors;
+	  var colors = _options$colors === undefined ? {
+	    title: function title() {
+	      return "#000000";
+	    },
+	    prevState: function prevState() {
+	      return "#9E9E9E";
+	    },
+	    action: function action() {
+	      return "#03A9F4";
+	    },
+	    nextState: function nextState() {
+	      return "#4CAF50";
+	    },
+	    error: function error() {
+	      return "#F20404";
+	    }
+	  } : _options$colors;
+	
+	  // exit if console undefined
+	
+	  if (typeof logger === "undefined") {
+	    return function () {
+	      return function (next) {
+	        return function (action) {
+	          return next(action);
+	        };
+	      };
+	    };
+	  }
+	
+	  if (transformer) {
+	    console.error("Option 'transformer' is deprecated, use stateTransformer instead");
+	  }
+	
+	  var logBuffer = [];
+	  function printBuffer() {
+	    logBuffer.forEach(function (logEntry, key) {
+	      var started = logEntry.started;
+	      var startedTime = logEntry.startedTime;
+	      var action = logEntry.action;
+	      var prevState = logEntry.prevState;
+	      var error = logEntry.error;
+	      var took = logEntry.took;
+	      var nextState = logEntry.nextState;
+	
+	      var nextEntry = logBuffer[key + 1];
+	      if (nextEntry) {
+	        nextState = nextEntry.prevState;
+	        took = nextEntry.started - started;
+	      }
+	      // message
+	      var formattedAction = actionTransformer(action);
+	      var isCollapsed = typeof collapsed === "function" ? collapsed(function () {
+	        return nextState;
+	      }, action) : collapsed;
+	
+	      var formattedTime = formatTime(startedTime);
+	      var titleCSS = colors.title ? "color: " + colors.title(formattedAction) + ";" : null;
+	      var title = "action " + (timestamp ? formattedTime : "") + " " + formattedAction.type + " " + (duration ? "(in " + took.toFixed(2) + " ms)" : "");
+	
+	      // render
+	      try {
+	        if (isCollapsed) {
+	          if (colors.title) logger.groupCollapsed("%c " + title, titleCSS);else logger.groupCollapsed(title);
+	        } else {
+	          if (colors.title) logger.group("%c " + title, titleCSS);else logger.group(title);
+	        }
+	      } catch (e) {
+	        logger.log(title);
+	      }
+	
+	      var prevStateLevel = getLogLevel(level, formattedAction, [prevState], "prevState");
+	      var actionLevel = getLogLevel(level, formattedAction, [formattedAction], "action");
+	      var errorLevel = getLogLevel(level, formattedAction, [error, prevState], "error");
+	      var nextStateLevel = getLogLevel(level, formattedAction, [nextState], "nextState");
+	
+	      if (prevStateLevel) {
+	        if (colors.prevState) logger[prevStateLevel]("%c prev state", "color: " + colors.prevState(prevState) + "; font-weight: bold", prevState);else logger[prevStateLevel]("prev state", prevState);
+	      }
+	
+	      if (actionLevel) {
+	        if (colors.action) logger[actionLevel]("%c action", "color: " + colors.action(formattedAction) + "; font-weight: bold", formattedAction);else logger[actionLevel]("action", formattedAction);
+	      }
+	
+	      if (error && errorLevel) {
+	        if (colors.error) logger[errorLevel]("%c error", "color: " + colors.error(error, prevState) + "; font-weight: bold", error);else logger[errorLevel]("error", error);
+	      }
+	
+	      if (nextStateLevel) {
+	        if (colors.nextState) logger[nextStateLevel]("%c next state", "color: " + colors.nextState(nextState) + "; font-weight: bold", nextState);else logger[nextStateLevel]("next state", nextState);
+	      }
+	
+	      try {
+	        logger.groupEnd();
+	      } catch (e) {
+	        logger.log("—— log end ——");
+	      }
+	    });
+	    logBuffer.length = 0;
+	  }
+	
+	  return function (_ref) {
+	    var getState = _ref.getState;
+	    return function (next) {
+	      return function (action) {
+	        // exit early if predicate function returns false
+	        if (typeof predicate === "function" && !predicate(getState, action)) {
+	          return next(action);
+	        }
+	
+	        var logEntry = {};
+	        logBuffer.push(logEntry);
+	
+	        logEntry.started = timer.now();
+	        logEntry.startedTime = new Date();
+	        logEntry.prevState = stateTransformer(getState());
+	        logEntry.action = action;
+	
+	        var returnedValue = undefined;
+	        if (logErrors) {
+	          try {
+	            returnedValue = next(action);
+	          } catch (e) {
+	            logEntry.error = errorTransformer(e);
+	          }
+	        } else {
+	          returnedValue = next(action);
+	        }
+	
+	        logEntry.took = timer.now() - logEntry.started;
+	        logEntry.nextState = stateTransformer(getState());
+	
+	        printBuffer();
+	
+	        if (logEntry.error) throw logEntry.error;
+	        return returnedValue;
+	      };
+	    };
+	  };
+	}
+	
+	module.exports = createLogger;
 
 /***/ }
 /******/ ]);
