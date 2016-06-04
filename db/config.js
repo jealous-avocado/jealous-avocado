@@ -10,9 +10,7 @@ var knex = require('knex') ({
   connection: {
     host: '127.0.0.1',
     user: 'root',
-    database: 'rep',
-    charset: 'utf8', 
-    password: 'kk'
+    database: 'rep'
   }
 });
 
@@ -67,6 +65,20 @@ db.knex.schema.hasTable('streams').then(function(exists) {
       stream.integer('userId');
       stream.integer('topicId');
       stream.timestamps();
+    }).then(function(table) {
+      console.log('Created Table', table);
+    });
+  }
+});
+
+db.knex.schema.hasTable('articles').then(function(exists) {
+  if (!exists){
+    db.knex.schema.createTable('articles', function (article) {
+      article.increments('id').primary();
+      //article.string('title', 255);
+      article.string('url', 1024).unique();
+      article.integer('topicId');
+      article.timestamps();
     }).then(function(table) {
       console.log('Created Table', table);
     });

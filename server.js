@@ -12,6 +12,8 @@ var PORT = process.env.PORT || 3000;
 
 var db = require('./db/config');
 var User = require('./db/models/user.js');
+var Topic = require('./db/models/topic.js');
+var Article = require('./db/models/article.js');
 
 var alchemyAPI = require('./alchemy.config.js');
 
@@ -53,21 +55,73 @@ app.get('/signout', function (req, res) {
 });
 
 app.get('/getArticles', (req, res) => {
+  const MAX_TIME = 86400000; //Longest time to keep articles in db.  (One day = 86400000ms)
   var allURLS = [];
 
-  //only do a request if necessary -- if there are cached articles, then show those first
-  request.get(alchemyAPI.getNewsURL(req.query.topic))
+  //only do an alchemyAPI request if necessary -- if there are cached articles, then show those first
+  var refreshArticles = function(topicId) {
+    Article.fetchAll({topicId: topicId}).then(function(articles){
+      articles.forEach(function(article){
+        article.destroy();
+      });
+    });
+    console.log('querying alchemyAPI for articles', req.query.topic);
+    request.get(alchemyAPI.getNewsURL(req.query.topic))
     .then(d => {
-      /*
       d = JSON.parse(d);
       d.result.docs.forEach(doc => {
-        allURLS.push(doc.source.enriched.url.url);
+        var newArticle = new Article({
+          url: doc.source.enriched.url.url,
+          topicId: topicId
+        }).save();
       });
-      */
+      getArticles(topicId);
     });
-    
-  
-  res.end();
+  };
+
+  //get the articles from the db
+  var getArticles = function(topicId) {
+    Article.fetchAll({topicId: topicId}).then(function(articles){
+      articles.forEach(function(article){
+        //console.log(article.get('url'), article.get('created_at'));
+        allURLS.push(article.get('url'));
+      });
+      res.json(allURLS);
+    });
+  };
+
+  //2. Are there any articles in the db? How recently were they added?
+  var checkArticleAge = function(topicId) {
+    new Article({topicId: topicId}).fetch().then(function(article){
+      if(article){
+        //console.log('oldest article', article.get('created_at'));
+        if(new Date - Date.parse(article.get('created_at')) > MAX_TIME) {
+          //time to update the database with alchemyAPI
+          refreshArticles(topicId);
+        } else {
+          //use articles in database
+          getArticles(topicId);
+        }
+      } else {
+        //need to populate the database with articles for this topic.
+        refreshArticles(topicId);
+      }
+    });
+  }
+
+  //1. does this topic exist in the topics table?
+  new Topic({name:req.query.topic})
+    .fetch()
+    .then(function(topic) {
+      if (!topic) {
+        var reqTopic = new Topic({name:req.query.topic})
+        reqTopic.save().then(function(topic){
+          checkArticleAge(topic.get('id'));
+        });
+      } else {
+        checkArticleAge(topic.get('id'));
+      }
+    });
 });
 
 app.get('*', (req, res) => {
