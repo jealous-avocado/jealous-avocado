@@ -13,6 +13,7 @@ var PORT = process.env.PORT || 3000;
 
 var db = require('./db/config');
 var User = require('./db/models/user.js');
+var bcrypt = require('bcrypt-nodejs');
 var Topic = require('./db/models/topic.js');
 var Article = require('./db/models/article.js');
 
@@ -39,6 +40,28 @@ app.use(session({
   store: sessionStore
 }));
 
+app.post('/signup', function (req, res) {
+  var username = req.body.username;
+  var password = req.body.password;
+  new User({ name: username })
+    .fetch()
+    .then(function(user) {
+      if (user) {
+        res.status(403);
+        res.end('A user with that name already exists!');
+      } else {
+        bcrypt.hash(password, null, null, function(err, hash){
+          var newUser = new User({
+            name: username,
+            password: hash
+          });
+          newUser.save();
+          res.status(304);
+          res.end();
+        });
+      }
+    })
+});
 
 app.post('/signin', function (req, res) {
  var username = req.body.username;

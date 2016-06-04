@@ -59,6 +59,7 @@ class App extends React.Component {
                 <ul className="nav navbar-nav navbar-right">
                   <ToggleDisplay show={!this.props.user.username}>
                     <li> <Link to="/signin"> Sign in </Link> </li>
+                    <li> <Link to="/signup"> Sign up </Link> </li>
                   </ToggleDisplay>
                   <ToggleDisplay show={!!this.props.user.username}>
                     <li> <a href='' onClick={this.signout.bind(this)}> Log Out </a> </li>
