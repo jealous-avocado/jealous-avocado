@@ -2,8 +2,7 @@ module.exports =
   { name: 'client',
 
     entry: {
-      main: './public/index.js',
-      stream: './public/streamPage.js'
+      main: './public/index.js'
     },
 
     output: {

@@ -6,10 +6,12 @@ node_modules/
 
 ## Compiled files ##
 public/lib
-main.js
-main.js.map
-stream.js
-stream.js.map
+public/main.js
+public/main.js.map
+public/stream.js
+public/stream.js.map
+server.bundle.js
+server.bundle.js.map
 
 ## alchemyConfig files ##
 alchemy.config.js
