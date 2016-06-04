@@ -72,7 +72,7 @@
 	app.post('/signin', function (req, res) {
 	  var username = req.body.username;
 	  var password = req.body.password;
-	  console.log(username, password);
+	
 	  new User({ name: username }).fetch().then(function (user) {
 	    if (!user) {
 	      // var newUser = new User({
