@@ -57,7 +57,12 @@ class App extends React.Component {
                   <button type="submit" className="btn btn-default">Submit</button>
                 </form>
                 <ul className="nav navbar-nav navbar-right">
-                  <li>  <Link to="/signin"> Sign in </Link> </li>
+                  <ToggleDisplay show={!this.props.user.username}>
+                    <li> <Link to="/signin"> Sign in </Link> </li>
+                  </ToggleDisplay>
+                  <ToggleDisplay show={!!this.props.user.username}>
+                    <li> <a href='' onClick={this.signout.bind(this)}> Log Out </a> </li>
+                  </ToggleDisplay>
                 </ul>
               </div>
             </div>

@@ -43,6 +43,10 @@ class Signin extends React.Component {
 
   }
 
+  componentDidMount() {
+    $('#signinForm #username').focus();
+  }
+
   render() {
     return (
       <div>

@@ -25453,15 +25453,34 @@
 	                'ul',
 	                { className: 'nav navbar-nav navbar-right' },
 	                React.createElement(
-	                  'li',
-	                  null,
-	                  '  ',
+	                  _reactToggleDisplay2.default,
+	                  { show: !this.props.user.username },
 	                  React.createElement(
-	                    _reactRouter.Link,
-	                    { to: '/signin' },
-	                    ' Sign in '
-	                  ),
-	                  ' '
+	                    'li',
+	                    null,
+	                    ' ',
+	                    React.createElement(
+	                      _reactRouter.Link,
+	                      { to: '/signin' },
+	                      ' Sign in '
+	                    ),
+	                    ' '
+	                  )
+	                ),
+	                React.createElement(
+	                  _reactToggleDisplay2.default,
+	                  { show: !!this.props.user.username },
+	                  React.createElement(
+	                    'li',
+	                    null,
+	                    ' ',
+	                    React.createElement(
+	                      'a',
+	                      { href: '', onClick: this.signout.bind(this) },
+	                      ' Log Out '
+	                    ),
+	                    ' '
+	                  )
 	                )
 	              )
 	            )
@@ -27159,6 +27178,11 @@
 	      });
 	      // .fail(e => console.log(e, 'error'));
 	      // on fail --> present user with failed auth message
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      $('#signinForm #username').focus();
 	    }
 	  }, {
 	    key: 'render',
