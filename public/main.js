@@ -81,7 +81,8 @@
 	      }
 	    },
 	    newsTopic: state.newsTopic,
-	    articles: state.articles
+	    articles: state.articles,
+	    currentStreamers: state.currentStreamer
 	  };
 	
 	  store = (0, _store2.default)(initialState);
@@ -27139,6 +27140,7 @@
 	var UPDATE_BROADCASTER_STREAM_HASHTAGS = 'UPDATE_BROADCASTER_STREAM_HASHTAGS';
 	var UPDATE_NEWS_PAGE_TOPIC = 'UPDATE_NEWS_PAGE_TOPIC';
 	var UPDATE_NEWS_ARTICLES = 'UPDATE_NEWS_ARTICLES';
+	var UPDATE_CURRENT_STREAMER = 'UPDATE_CURRENT_STREAMER';
 	
 	var actions = (_actions = {
 	  signinUser: function signinUser(username) {
@@ -27208,6 +27210,11 @@
 	}), _defineProperty(_actions, 'logoutUser', function logoutUser() {
 	  return {
 	    type: LOGOUT_CURRENT_USER
+	  };
+	}), _defineProperty(_actions, 'updateCurrentStreamer', function updateCurrentStreamer(streamer) {
+	  return {
+	    type: UPDATE_CURRENT_STREAMER,
+	    addStreamer: streamer
 	  };
 	}), _actions);
 	
@@ -29187,6 +29194,8 @@
 	        componentContext.props.dispatch(_actions2.default.updateBroadcasterStreamTopic(streamTitle));
 	
 	        console.log(componentContext.props.user, 'PROPS');
+	
+	        componentContext.props.dispatch(_actions2.default.updateCurrentStreamer(componentContext.props.user.username));
 	      };
 	
 	      document.querySelector('#stopStream').onclick = function () {
@@ -29266,15 +29275,23 @@
 
 /***/ },
 /* 252 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _reactRedux = __webpack_require__(222);
+	
+	var _actions = __webpack_require__(245);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -29299,29 +29316,31 @@
 	  }
 	
 	  _createClass(PublicPage, [{
-	    key: "updateVideo",
+	    key: 'updateVideo',
 	    value: function updateVideo(video) {
 	      this.setState({ currentVideo: video });
 	    }
 	  }, {
-	    key: "updateArticle",
+	    key: 'updateArticle',
 	    value: function updateArticle(article) {
 	      this.setState({ articles: articles });
 	    }
 	  }, {
-	    key: "genFrame",
+	    key: 'genFrame',
 	    value: function genFrame(w, h, streamName) {
 	      var port = 3000;
 	      var url = "http://localhost:" + port + "/" + streamName;
 	      var frame = document.createElement('iframe');
+	      var list = document.createElement('LI');
 	      frame.src = url;
 	      frame.width = w;
 	      frame.height = h;
 	      frame.setAttribute("frameBorder", 0);
-	      document.getElementById("video").appendChild(frame);
+	      list.appendChild(frame);
+	      document.getElementById("video").appendChild(list);
 	    }
 	  }, {
-	    key: "componentDidMount",
+	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      var _this2 = this;
 	
@@ -29332,49 +29351,40 @@
 	      }
 	    }
 	  }, {
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	      return React.createElement(
-	        "div",
-	        { className: "hey" },
+	        'div',
+	        { className: 'hey' },
 	        React.createElement(
-	          "div",
-	          { className: "row" },
+	          'div',
+	          { className: 'row' },
 	          React.createElement(
-	            "div",
-	            { className: "col-md-6" },
-	            " Current Video",
-	            React.createElement("iframe", { width: "560", height: "315", src: "https://www.youtube.com/embed/Dd7FixvoKBw", frameBorder: "0", allowFullScreen: true }),
-	            "            ",
+	            'div',
+	            { className: 'col-md-6' },
+	            ' Current Video',
+	            React.createElement('iframe', { width: '560', height: '315', src: 'https://www.youtube.com/embed/Dd7FixvoKBw', frameBorder: '0', allowFullScreen: true }),
+	            '            ',
 	            React.createElement(
-	              "div",
-	              { id: "articles" },
-	              " Trending Articles",
+	              'div',
+	              { id: 'articles' },
+	              ' Trending Articles',
 	              this.state.articles.map(function (article) {
 	                return React.createElement(
-	                  "li",
+	                  'li',
 	                  null,
-	                  " ",
+	                  ' ',
 	                  article,
-	                  " "
+	                  ' '
 	                );
 	              })
 	            )
 	          ),
 	          React.createElement(
-	            "div",
-	            { className: "col-md-6" },
-	            " Trending Videos",
-	            this.state.videos.map(function (video) {
-	              return React.createElement(
-	                "li",
-	                null,
-	                " ",
-	                video,
-	                " "
-	              );
-	            }),
-	            React.createElement("ul", { id: "video" })
+	            'div',
+	            { className: 'col-md-6' },
+	            ' Trending Videos',
+	            React.createElement('ul', { id: 'video' })
 	          )
 	        )
 	      );
@@ -29384,7 +29394,11 @@
 	  return PublicPage;
 	}(React.Component);
 	
-	exports.default = PublicPage;
+	function mapStatetoProps(state) {
+	  return state;
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(PublicPage);
 
 /***/ },
 /* 253 */
@@ -29421,7 +29435,8 @@
 	      }
 	    },
 	    newsTopic: 'WORLD NEWS',
-	    articles: []
+	    articles: [],
+	    currentStreamers: []
 	  } : arguments[0];
 	
 	  return finalcreateStore(_reducers2.default, initialState);
@@ -29497,6 +29512,10 @@
 	    case "UPDATE_NEWS_ARTICLES":
 	      return Object.assign({}, state, {
 	        articles: action.articles
+	      });
+	    case "UPDATE_CURRENT_STREAMER":
+	      return Object.assign({}, state, {
+	        currentStreamers: [action.addStreamer].concat(_toConsumableArray(state.currentStreamers))
 	      });
 	
 	    default:

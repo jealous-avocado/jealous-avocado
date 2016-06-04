@@ -60,6 +60,10 @@ let reducer = function(state, action) {
       return Object.assign({}, state, {
         articles: action.articles
       });
+    case "UPDATE_CURRENT_STREAMER":
+      return Object.assign({}, state, {
+        currentStreamers: [action.addStreamer,...state.currentStreamers]
+      });  
 
     default:
       return state;

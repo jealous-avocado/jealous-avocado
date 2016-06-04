@@ -1,6 +1,5 @@
 import ToggleDisplay from 'react-toggle-display';
 import { connect } from 'react-redux';
-
 import actions from '../redux/actions';
 
 
@@ -28,6 +27,8 @@ class StreamPageComp extends React.Component {
       );
 
       console.log(componentContext.props.user, 'PROPS');
+
+      componentContext.props.dispatch(actions.updateCurrentStreamer(componentContext.props.user.username));
 
     };
 
