@@ -11,7 +11,7 @@ let state = window.localStorage.state ? JSON.parse(window.localStorage.state) : 
 let store = configureStore();
 
 if (state) {
-  console.log(state.user.username, 'STATE index.js');
+  console.log("state is", state)
   let initialState = {
     user: {
       username: state.user.username,
@@ -22,7 +22,7 @@ if (state) {
     },
     newsTopic: state.newsTopic,
     articles: state.articles,
-    currentStreamers: state.currentStreamer
+    currentStreamers: state.currentStreamers
   };  
   
   store = configureStore(initialState);

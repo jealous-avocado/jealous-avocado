@@ -71,7 +71,7 @@
 	var store = (0, _store2.default)();
 	
 	if (state) {
-	  console.log(state.user.username, 'STATE index.js');
+	  console.log("state is", state);
 	  var initialState = {
 	    user: {
 	      username: state.user.username,
@@ -82,7 +82,7 @@
 	    },
 	    newsTopic: state.newsTopic,
 	    articles: state.articles,
-	    currentStreamers: state.currentStreamer
+	    currentStreamers: state.currentStreamers
 	  };
 	
 	  store = (0, _store2.default)(initialState);
@@ -25323,7 +25323,7 @@
 	        null,
 	        React.createElement(
 	          'nav',
-	          { className: 'navbar navbar-inverse' },
+	          { className: 'navbar navbar-full navbar-inverse bg-primary' },
 	          React.createElement(
 	            'div',
 	            { className: 'hey' },
@@ -25463,20 +25463,20 @@
 	                    ' Sign in '
 	                  ),
 	                  ' '
+	                ),
+	                React.createElement(
+	                  'li',
+	                  null,
+	                  ' currentUser: ',
+	                  this.props.user.username || 'none',
+	                  ' '
 	                )
 	              )
 	            )
 	          )
 	        ),
 	        React.createElement('br', null),
-	        this.props.children,
-	        React.createElement(
-	          'pre',
-	          null,
-	          ' currentUser: ',
-	          this.props.user.username || 'none',
-	          ' '
-	        )
+	        this.props.children
 	      );
 	    }
 	  }]);
@@ -29167,10 +29167,8 @@
 	        $('#streamTitleInput').val('').hide();
 	
 	        componentContext.props.dispatch(_actions2.default.updateBroadcasterStreamTopic(streamTitle));
-	
-	        console.log(componentContext.props.user, 'PROPS');
-	
 	        componentContext.props.dispatch(_actions2.default.updateCurrentStreamer(componentContext.props.user.username));
+	        window.localStorage.setItem('state', JSON.stringify(componentContext.props));
 	      };
 	
 	      document.querySelector('#stopStream').onclick = function () {
@@ -29277,23 +29275,17 @@
 	var PublicPage = function (_React$Component) {
 	  _inherits(PublicPage, _React$Component);
 	
-	  function PublicPage() {
+	  function PublicPage(props) {
 	    _classCallCheck(this, PublicPage);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PublicPage).call(this));
-	
-	    _this.state = {
-	      videos: ["Nam", "John", "Prateek"],
-	      articles: ['article1', 'article2', 'article3', 'article4', 'article5'],
-	      currentVideo: null
-	    };
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(PublicPage).call(this, props));
 	  }
 	
 	  _createClass(PublicPage, [{
-	    key: 'updateVideo',
-	    value: function updateVideo(video) {
-	      this.setState({ currentVideo: video });
+	    key: 'updateCurrentVideo',
+	    value: function updateCurrentVideo(event) {
+	      var src = $(event.currentTarget).find('iframe').attr('src');
+	      $('#currentVideo').attr('src', src);
 	    }
 	  }, {
 	    key: 'updateArticle',
@@ -29301,49 +29293,47 @@
 	      this.setState({ articles: articles });
 	    }
 	  }, {
-	    key: 'genFrame',
-	    value: function genFrame(w, h, streamName) {
-	      var port = 3000;
-	      var url = "http://localhost:" + port + "/" + streamName;
-	      var frame = document.createElement('iframe');
-	      var list = document.createElement('LI');
-	      frame.src = url;
-	      frame.width = w;
-	      frame.height = h;
-	      frame.setAttribute("frameBorder", 0);
-	      list.appendChild(frame);
-	      document.getElementById("video").appendChild(list);
-	    }
-	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      var _this2 = this;
-	
-	      {
-	        this.state.videos.map(function (video) {
-	          _this2.genFrame(200, 90, video);
-	        });
-	      }
+	      $('iframe').on('load', function () {
+	        $("iframe").contents().find('#app').hide();
+	      });
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      console.log('this.props.currentStreamers', this.props.currentStreamers);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+	
 	      return React.createElement(
 	        'div',
-	        { className: 'hey' },
+	        null,
 	        React.createElement(
 	          'div',
 	          { className: 'row' },
 	          React.createElement(
 	            'div',
-	            { className: 'col-md-6' },
-	            ' Current Video',
-	            React.createElement('iframe', { width: '560', height: '315', src: 'https://www.youtube.com/embed/Dd7FixvoKBw', frameBorder: '0', allowFullScreen: true }),
-	            '            ',
+	            { className: 'col-md-8' },
+	            ' ',
+	            React.createElement(
+	              'h2',
+	              null,
+	              'Current Video'
+	            ),
+	            React.createElement('iframe', { id: 'currentVideo', width: '711', height: '400', src: '', frameBorder: '0', allowFullScreen: true }),
 	            React.createElement(
 	              'div',
 	              { id: 'articles' },
-	              ' Trending Articles',
+	              ' ',
+	              React.createElement(
+	                'h2',
+	                null,
+	                'Trending Articles'
+	              ),
 	              this.state.articles.map(function (article) {
 	                return React.createElement(
 	                  'li',
@@ -29357,9 +29347,29 @@
 	          ),
 	          React.createElement(
 	            'div',
-	            { className: 'col-md-6' },
-	            ' Trending Videos',
-	            React.createElement('ul', { id: 'video' })
+	            { className: 'col-md-4' },
+	            ' ',
+	            React.createElement(
+	              'h2',
+	              { id: 'broadcast' },
+	              'Currently Broadcasting'
+	            ),
+	            React.createElement(
+	              'ul',
+	              { id: 'video' },
+	              this.props.currentStreamers.map(function (video) {
+	                return React.createElement(
+	                  'li',
+	                  { className: 'video', onClick: _this2.updateCurrentVideo },
+	                  React.createElement(
+	                    'div',
+	                    { className: 'videoWrapper' },
+	                    React.createElement('iframe', { width: '142', height: '80', src: "http://localhost:3000/" + video, frameBorder: '0', allowFullScreen: true })
+	                  ),
+	                  video + " is reporting on " + _this2.props.user.stream.title
+	                );
+	              })
+	            )
 	          )
 	        )
 	      );
@@ -29489,6 +29499,7 @@
 	        articles: action.articles
 	      });
 	    case "UPDATE_CURRENT_STREAMER":
+	      console.log("state.currentStreamers is", state.currentStreamers);
 	      return Object.assign({}, state, {
 	        currentStreamers: [action.addStreamer].concat(_toConsumableArray(state.currentStreamers))
 	      });

@@ -21,7 +21,7 @@ class App extends React.Component {
     return (
       <div>
 
-        <nav className="navbar navbar-inverse">
+        <nav className="navbar navbar-full navbar-inverse bg-primary">
             <div className="hey">
               <div className="navbar-header">
                 <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
@@ -58,17 +58,13 @@ class App extends React.Component {
                 </form>
                 <ul className="nav navbar-nav navbar-right">
                   <li>  <Link to="/signin"> Sign in </Link> </li>
+                  <li> currentUser: { this.props.user.username || 'none'} </li> 
                 </ul>
               </div>
             </div>
           </nav>
-
         <br></br>
-
-
         {this.props.children}
-
-        <pre> currentUser: { this.props.user.username || 'none'} </pre>
       </div>
     );
   }
