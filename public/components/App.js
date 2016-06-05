@@ -64,6 +64,7 @@ class App extends React.Component {
                     <li> <a href='' onClick={this.signout.bind(this)}> Log Out </a> </li>
                   </ToggleDisplay>        
                   </ul>
+                </ul>
               </div>
             </div>
           </nav>
