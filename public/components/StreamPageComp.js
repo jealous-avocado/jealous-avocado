@@ -25,11 +25,8 @@ class StreamPageComp extends React.Component {
       componentContext.props.dispatch( 
         actions.updateBroadcasterStreamTopic(streamTitle)
       );
-
-      console.log(componentContext.props.user, 'PROPS');
-
       componentContext.props.dispatch(actions.updateCurrentStreamer(componentContext.props.user.username));
-
+      window.localStorage.setItem('state', JSON.stringify(componentContext.props));
     };
 
     document.querySelector('#stopStream').onclick = function() {

@@ -2,53 +2,52 @@ import { connect } from 'react-redux';
 import actions from '../redux/actions';
 
 class PublicPage extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      videos: ["Nam", "John", "Prateek"],
-      articles: ['article1','article2','article3','article4','article5'],
-      currentVideo: null
-    }
+  constructor(props) {
+    super(props);
+  
   }
-  updateVideo(video) {
-    this.setState({currentVideo: video})
+  updateCurrentVideo(event) {
+    var src = $(event.currentTarget).find('iframe').attr('src');
+    $('#currentVideo').attr('src', src);
   }
   updateArticle(article) {
     this.setState({articles: articles})
   }
-  genFrame(w, h, streamName) {
-    var port = 3000;
-    var url = "http://localhost:" + port + "/" + streamName;
-    var frame = document.createElement('iframe');
-    var list = document.createElement('LI');
-    frame.src    = url;
-    frame.width  = w;
-    frame.height = h;
-    frame.setAttribute("frameBorder", 0);
-    list.appendChild(frame);
-    document.getElementById("video").appendChild(list);
-  }
   
   componentDidMount () {
-    {this.state.videos.map((video) =>
-     {this.genFrame(200, 90, video)}
-    )}
+    $('iframe').on('load', function () {
+      $("iframe").contents().find('#app').hide()
+    });
+  }
+
+  componentDidUpdate () {
+   console.log('this.props.currentStreamers', this.props.currentStreamers);
 
   }
 
   render() {
     return (
-      <div className='hey'>
+      <div>
         <div className='row'>
-          <div className="col-md-6"> Current Video 
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/Dd7FixvoKBw" frameBorder="0" allowFullScreen></iframe>            <div id="articles"> Trending Articles
-              {this.state.articles.map((article) => 
-              <li> {article} </li>
-              )}  
-            </div>
+          <div className="col-md-8"> <h2>Current Video</h2> 
+            <iframe id="currentVideo" width="711" height="400" src="" frameBorder="0" allowFullScreen></iframe>            
+              <div id="articles"> <h2>Trending Articles</h2>
+                {this.state.articles.map((article) => 
+                  <li> {article} </li>
+                )}  
+              </div>
           </div>
-          <div className="col-md-6"> Trending Videos
+          
+          <div className="col-md-4"> <h2 id='broadcast'>Currently Broadcasting</h2>
             <ul id='video'>
+              {this.props.currentStreamers.map((video) => 
+                  <li className="video" onClick={this.updateCurrentVideo}> 
+                <div className="videoWrapper">
+                    <iframe width="142" height="80" src={"http://localhost:3000/" + video} frameBorder="0" allowFullScreen></iframe>        
+                </div>
+                  {video + " is reporting on " + this.props.user.stream.title}
+                  </li>
+              )}
             </ul>
           </div>
         </div>
