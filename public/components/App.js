@@ -21,8 +21,8 @@ class App extends React.Component {
     return (
       <div>
 
-        <nav className="navbar navbar-inverse">
-            <div className="container-fluid">
+        <nav className="navbar navbar-full navbar-inverse bg-primary">
+            <div className="hey">
               <div className="navbar-header">
                 <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
                   <span className="sr-only">Toggle navigation</span>
@@ -62,18 +62,14 @@ class App extends React.Component {
                   </ToggleDisplay>
                   <ToggleDisplay show={!!this.props.user.username}>
                     <li> <a href='' onClick={this.signout.bind(this)}> Log Out </a> </li>
-                  </ToggleDisplay>
+                  </ToggleDisplay>        
+                  </ul>
                 </ul>
               </div>
             </div>
           </nav>
-
         <br></br>
-
-
         {this.props.children}
-
-        <pre> currentUser: { this.props.user.username || 'none'} </pre>
       </div>
     );
   }
