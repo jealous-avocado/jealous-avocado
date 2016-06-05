@@ -28,6 +28,8 @@ class StreamPageComp extends React.Component {
       );
 
       console.log(componentContext.props.user, 'PROPS');
+      componentContext.props.dispatch(actions.updateCurrentStreamer(componentContext.props.user.username));
+      window.localStorage.setItem('state', JSON.stringify(componentContext.props));
 
     };
 

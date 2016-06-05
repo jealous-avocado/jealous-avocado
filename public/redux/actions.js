@@ -79,6 +79,12 @@ let actions = {
     return {
       type: LOGOUT_CURRENT_USER
     }
+  },
+  updateCurrentStreamer: (streamer) => {
+    return {
+      type: UPDATE_CURRENT_STREAMER,
+      addStreamer: streamer
+    }
   }
 };
 
