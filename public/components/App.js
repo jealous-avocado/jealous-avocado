@@ -11,8 +11,6 @@ class App extends React.Component {
   }
 
   signout() {
-    window.location.replace('/'); //currently not working
-
     let username = this.props.user.username;
     this.props.dispatch(actions.logoutUser());
     delete window.localStorage.state;
