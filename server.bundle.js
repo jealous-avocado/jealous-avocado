@@ -137,7 +137,7 @@
 	  res.redirect('/');
 	});
 	
-	app.get('/currentStreamer', function (req, res) {
+	app.get('/currentStreamers', function (req, res) {
 	  var streamerList = [];
 	
 	  User.query({ where: { isStreaming: true } }).fetchAll().then(function (streamers) {
@@ -149,7 +149,7 @@
 	  });
 	});
 	
-	app.post('/currentStreamer', function (req, res) {
+	app.post('/currentStreamers', function (req, res) {
 	  var username = req.body.username;
 	  var isStreaming = JSON.parse(req.body.isStreaming); //cast bool to int
 	  console.log('currentStreamer POST', username, isStreaming);
