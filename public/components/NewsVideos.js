@@ -23,9 +23,6 @@ class NewsVideos extends React.Component {
   render() {
     return (
       <div>
-        <div> Map over videos gotten from DB and show them here </div>
-        <br></br>
-
         <div className="col-md-4"> <h2 id='broadcast'>Currently Broadcasting</h2>
           <ul id='video'>
             {

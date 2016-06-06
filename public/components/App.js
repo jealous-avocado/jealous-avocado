@@ -2,6 +2,8 @@ import {Link} from 'react-router';
 import { connect } from 'react-redux';
 import ToggleDisplay from 'react-toggle-display';
 import actions from '../redux/actions';
+import Signin from './Signin';
+import Signup from './Signup';
 
 class App extends React.Component {
   constructor() {
@@ -23,6 +25,7 @@ class App extends React.Component {
   }
 
   render() {
+    var LOGIN_FORM;
 
     return (
       <div>
@@ -43,18 +46,6 @@ class App extends React.Component {
                 <ul className="nav navbar-nav">
                   <li><Link to="/">Home</Link> </li>
                   <li><Link to="/news">News</Link> </li>
-                  <li className="dropdown">
-                    <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span className="caret"></span></a>
-                    <ul className="dropdown-menu" role="menu">
-                      <li><a href="#">Action</a></li>
-                      <li><a href="#">Another action</a></li>
-                      <li><a href="#">Something else here</a></li>
-                      <li className="divider"></li>
-                      <li><a href="#">Separated link</a></li>
-                      <li className="divider"></li>
-                      <li><a href="#">One more separated link</a></li>
-                    </ul>
-                  </li>
                 </ul>
                 <form className="navbar-form navbar-left" role="search">
                   <div className="form-group">
@@ -63,16 +54,22 @@ class App extends React.Component {
                   <button onClick={this.searchForArticles.bind(this)} type="submit" className="btn btn-default">Submit</button>
                 </form>
                 <ul className="nav navbar-nav navbar-right">
-                  <ToggleDisplay show={!this.props.user.username}>
-                    <li> <Link to="/signin"> Sign in </Link> </li>
-                    <li> <Link to="/signup"> Sign up </Link> </li>
-                  </ToggleDisplay>
-                  <ToggleDisplay show={!!this.props.user.username}>
-                    <li>
-                      <a href={`/${this.props.user.username}`}>My Page</a>
-                    </li>
-                    <li> <a href='' onClick={this.signout.bind(this)}> Log Out [{this.props.user.username}]</a> </li>
-                  </ToggleDisplay>
+                  <li className="dropdown">
+                    <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Profile <span className="caret"></span></a>
+                    <ul className="dropdown-menu" role="menu">
+                      <ToggleDisplay show={!this.props.user.username}>
+                        <li> <Link to='/signin'> Sign in </Link> </li>
+                        <li> <Link to='/signup'> Sign up </Link> </li>
+                      </ToggleDisplay>
+                      <ToggleDisplay show={!!this.props.user.username}>
+                        <li>
+                          <a href={`/${this.props.user.username}`}>My Page</a>
+                        </li>
+                        <li> <a href='' onClick={this.signout.bind(this)}> Log Out [{this.props.user.username}]</a> </li>
+                      </ToggleDisplay>
+                    </ul>
+                  </li>
+
                 </ul>
               </div>
             </div>
