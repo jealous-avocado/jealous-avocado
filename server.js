@@ -24,6 +24,14 @@ var sessionStore = new knexSessionStore({
   tablename: 'sessions'
 });
 
+//reset streaming status of all users on server restart.
+User.fetchAll()
+.then(function(users) {
+  users.forEach(function(user){
+    user.set({isStreaming: false}).save();
+  })
+});
+
 app.use(bodyParser.urlencoded({     
  extended: true
 }));
