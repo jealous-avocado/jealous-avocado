@@ -14,13 +14,10 @@ class NewsArticles extends React.Component {
 
   componentWillMount() {
   //query database for topic and pull out the articles for that topic
-
     var componentContext = this;
     this.queryDB()
       .done(r => {
         componentContext.props.dispatch(actions.updateNewsArticles(r));
-
-        console.log('done', r);
       })
       .fail(e => console.log('E: ', e));
   }
