@@ -29386,7 +29386,7 @@
 	        // componentContext.props.dispatch(actions.saveBroadcastConnection(connection));
 	
 	        componentContext.props.dispatch(_actions2.default.updateCurrentStreamer(componentContext.props.user.username));
-	        $.post('/currentStreamer', { username: componentContext.props.user.username, isStreaming: true });
+	        $.post('/currentStreamers', { username: componentContext.props.user.username, isStreaming: true });
 	        window.localStorage.setItem('state', JSON.stringify(componentContext.props));
 	
 	        $('#startStream').hide();
@@ -29591,9 +29591,12 @@
 	    value: function refreshBroadcast() {
 	      var _this2 = this;
 	
+	      var componentContext = this;
+	      componentContext.props.currentStreamers = [];
 	      $.get('/currentStreamers').done(function (r) {
-	        console.log('results is', r);
-	        _this2.props.dispatch(_actions2.default.updateCurrentStreamer(r));
+	        r.forEach(function (value) {
+	          componentContext.props.dispatch(_actions2.default.updateCurrentStreamer(value));
+	        });
 	        window.localStorage.setItem('state', JSON.stringify(_this2.props));
 	      }).fail(function (e) {
 	        return console.log('Error in get request: ', e);

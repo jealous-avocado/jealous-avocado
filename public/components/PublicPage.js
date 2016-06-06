@@ -14,10 +14,13 @@ class PublicPage extends React.Component {
   }
 
   refreshBroadcast() {
+    var componentContext = this;
+    componentContext.props.currentStreamers = [];
     $.get('/currentStreamers')
     .done(r => {
-      console.log('results is', r)
-      this.props.dispatch(actions.updateCurrentStreamer(r));
+      r.forEach(function (value) {
+      componentContext.props.dispatch(actions.updateCurrentStreamer(value));
+      })
       window.localStorage.setItem('state', JSON.stringify(this.props));
       })
     .fail(e => console.log('Error in get request: ', e));

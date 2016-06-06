@@ -307,7 +307,7 @@
 	    host: '127.0.0.1',
 	    user: 'root',
 	    database: 'rep',
-	    password: 'kk'
+	    password: '1234'
 	  }
 	});
 	
