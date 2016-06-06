@@ -91,6 +91,38 @@ class StreamPageComp extends React.Component {
             </div>
           </div>
 
+
+        <div id="userPage"> User Page </div>
+
+        <ToggleDisplay show={this.matchUsertoURL.bind(this)()}>
+
+          <ToggleDisplay show={!this.props.user.stream.title}>
+            <form onSubmit={this.saveStreamTitle.bind(this)}>
+              <input id='streamTitleInput' placeholder='Title the stream'/>
+            </form>
+          </ToggleDisplay>
+          
+          <form onSubmit={this.saveHashTags.bind(this)}>
+            <input id='hashTagInput' placeholder='Enter a topic tag'/>
+          </form>
+          
+          <button id='startStream'> Start Stream </button>
+          <button id='stopStream' style={{'display': 'none'}}> Stop Stream </button>
+
+        </ToggleDisplay>
+
+        <br></br>
+
+        <div id='streamTitle'>Stream title: {this.props.user.stream.title}</div>
+
+        <div id="streamContainer"></div>
+        <div>
+        Hashtags: &nbsp;
+          {
+            this.props.user.stream.hashtags.map(tag => {
+              return <HashTagComp key={tag.id} removeTag={this.removeTag} tag={tag}/>
+            })
+          }
         </div>
 
         <div id='userDashCol' className='col-md-4'>

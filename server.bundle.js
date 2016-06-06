@@ -137,7 +137,7 @@
 	  res.redirect('/');
 	});
 	
-	app.get('/currentStreamer', function (req, res) {
+	app.get('/currentStreamers', function (req, res) {
 	  var streamerList = [];
 	
 	  User.query({ where: { isStreaming: true } }).fetchAll().then(function (streamers) {
@@ -149,7 +149,7 @@
 	  });
 	});
 	
-	app.post('/currentStreamer', function (req, res) {
+	app.post('/currentStreamers', function (req, res) {
 	  var username = req.body.username;
 	  var isStreaming = JSON.parse(req.body.isStreaming); //cast bool to int
 	  console.log('currentStreamer POST', username, isStreaming);
@@ -492,13 +492,13 @@
 	'use strict';
 	
 	module.exports = {
-	  KEY: 'YOUR_ALCHEMY_API_KEY',
+	  API_KEY: 'YOUR_ALCHEMY_API_KEY',
 	  getNewsURL: function getNewsURL(topic) {
-	    return 'https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=50&apikey=' + module.exports.KEY + '&return=enriched.url.url,enriched.url.text&q.enriched.url.concepts.concept.text=' + topic;
+	    return 'https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=50\n    &apikey=' + undefined[API_KEY] + '&return=enriched.url.url&q.enriched.url.concepts.concept.text=' + topic;
 	  },
 	
 	  getTextURL: function getTextURL(link) {
-	    return 'http://gateway-a.watsonplatform.net/calls/url/URLGetText?apikey=' + module.exports.KEY + '&outputMode=json&url=' + link;
+	    return 'http://gateway-a.watsonplatform.net/calls/url/URLGetText\n    ?apikey=' + undefined[API_KEY] + '\n    &outputMode=json\n    &url=' + link;
 	  }
 	};
 
