@@ -25337,7 +25337,6 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var LOGIN_FORM;
 	
 	      return React.createElement(
 	        'div',

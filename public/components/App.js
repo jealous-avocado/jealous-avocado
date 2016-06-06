@@ -25,7 +25,6 @@ class App extends React.Component {
   }
 
   render() {
-    var LOGIN_FORM;
 
     return (
       <div>
