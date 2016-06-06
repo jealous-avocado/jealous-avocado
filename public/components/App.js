@@ -65,7 +65,7 @@ class App extends React.Component {
                         </li>
                         <li> <a href='' onClick={this.signout.bind(this)}> Log Out [{this.props.user.username}]</a> </li>
                         <li>
-                          <Link to='/teek/profile'>Settings</Link>
+                          <Link to={`/${this.props.user.username}/profile`}>Settings</Link>
                         </li>
                       </ToggleDisplay>
                     </ul>
