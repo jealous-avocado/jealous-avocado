@@ -1,27 +1,24 @@
+
+import { connect } from 'react-redux';
+import actions from '../redux/actions';
+import NewsVideoEntry from './NewsVideoEntry';
+
 class NewsVideos extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      videos: []
-    }
   }
 
-  queryDB() {
-    const url = '/getVideos?topic=' + this.props.topic;
-    return $.get(url);
+  updateCurrentVideo(event) {
+    var src = $(event.currentTarget).find('iframe').attr('src');
+    $('#currentVideo').attr('src', src);
   }
 
-  componentWillMount() {
-    this.queryDB()
-      .done(r => {
-        /*
-        thissetState({
-          videos: r
-        });
-        */
-      })
-      .fail(e => console.log('E: ', e));
+  componentDidMount () {
+    $('iframe').on('load', function () {
+      $("iframe").contents().find('#app').hide()
+    });
   }
+
 
   render() {
     return (
@@ -29,13 +26,14 @@ class NewsVideos extends React.Component {
         <div> Map over videos gotten from DB and show them here </div>
         <br></br>
 
-        <div> 
-        Temporary News Videos Area 
-        {
-          this.state.videos.map(video => {
-            <NewsVideoEntry key = {video.title} video = {video} />
-          })
-        }
+        <div className="col-md-4"> <h2 id='broadcast'>Currently Broadcasting</h2>
+          <ul id='video'>
+            {
+              this.props.currentStreamers.map((video, idx) => {
+                <NewsVideoEntry key = {idx} idx={idx} updateCurrentVideo={this.updateCurrentVideo} video = {video} user={this.props.user} />
+              })
+            }
+          </ul>
         </div>
       </div>
     )
@@ -43,4 +41,8 @@ class NewsVideos extends React.Component {
   
 };
 
-export default NewsVideos;
+function mapStatetoProps(state) {
+  return state;
+}
+
+export default connect(mapStatetoProps)(NewsVideos);

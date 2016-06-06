@@ -90,21 +90,21 @@ app.post('/signin', function (req, res) {
 
 app.get('/signout', function (req, res) {
  //destory session 
- res.redirect('/');
+ res.redirect('/'); 
 });
 
 app.get('/getArticles', (req, res) => {
   const MAX_TIME = 86400000; //Longest time to keep articles in db.  (One day = 86400000ms)
   var allURLS = [];
-
   //only do an alchemyAPI request if necessary -- if there are cached articles, then show those first
   var refreshArticles = function(topicId) {
+
     Article.fetchAll({topicId: topicId}).then(function(articles){
       articles.forEach(function(article){
         article.destroy();
       });
     });
-    console.log('querying alchemyAPI for articles', req.query.topic);
+    console.log('querying alchemyAPI for articles in ', req.query.topic);
     request.get(alchemyAPI.getNewsURL(req.query.topic))
     .then(d => {
       d = JSON.parse(d);

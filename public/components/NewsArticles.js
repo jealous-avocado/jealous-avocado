@@ -1,25 +1,26 @@
+import actions from '../redux/actions';
+import NewsArticleEntry from './NewsArticleEntry';
+import { connect } from 'react-redux';
+
 class NewsArticles extends React.Component {
   constructor(props) {
     super(props);
   }
 
   queryDB() {
-    const url = '/getArticles?topic=' + this.props.topic;
+    const url = '/getArticles?topic=' + (this.props.topic || 'WORLD NEWS');
     return $.get(url);
   }
 
-  componentDidUpdate() {
+  componentWillMount() {
   //query database for topic and pull out the articles for that topic
 
+    var componentContext = this;
     this.queryDB()
       .done(r => {
-        //populate the component div with the articles returned
-        /*
-        this.setState({
-          articles: r
-        });
-        */
-        console.log('done');
+        componentContext.props.dispatch(actions.updateNewsArticles(r));
+
+        console.log('done', r);
       })
       .fail(e => console.log('E: ', e));
   }
@@ -27,19 +28,16 @@ class NewsArticles extends React.Component {
   render() {
    return (
       <div> 
-        <div> Map over all data received from query and render the articles </div>
-        <br></br>
-
         <div> 
-        Articles Here
+     
           {
-            this.props.articles.map( article => {
-              <NewsArticleEntry key={article.title} article = {article} />
+            this.props.articles.map( (article, idx) => {
+              return <NewsArticleEntry key={idx} idx={idx} article={article}/>
             })
           }
+
         </div>
         
-        <pre>{}</pre>
       </div>
 
     )
@@ -47,4 +45,8 @@ class NewsArticles extends React.Component {
 
 };
 
-export default NewsArticles;
+function mapStatetoProps(state) {
+  return state;
+}
+
+export default connect(mapStatetoProps)(NewsArticles);

@@ -58,7 +58,7 @@
 	
 	var _routes2 = _interopRequireDefault(_routes);
 	
-	var _store = __webpack_require__(254);
+	var _store = __webpack_require__(252);
 	
 	var _store2 = _interopRequireDefault(_store);
 	
@@ -25229,27 +25229,27 @@
 	
 	var _App2 = _interopRequireDefault(_App);
 	
-	var _Signin = __webpack_require__(246);
+	var _Signin = __webpack_require__(244);
 	
 	var _Signin2 = _interopRequireDefault(_Signin);
 	
-	var _Signup = __webpack_require__(248);
+	var _Signup = __webpack_require__(246);
 	
 	var _Signup2 = _interopRequireDefault(_Signup);
 	
-	var _TopicPage = __webpack_require__(249);
+	var _TopicPage = __webpack_require__(247);
 	
 	var _TopicPage2 = _interopRequireDefault(_TopicPage);
 	
-	var _StreamPageComp = __webpack_require__(252);
+	var _StreamPageComp = __webpack_require__(250);
 	
 	var _StreamPageComp2 = _interopRequireDefault(_StreamPageComp);
 	
-	var _NewsArticles = __webpack_require__(250);
+	var _NewsArticles = __webpack_require__(248);
 	
 	var _NewsArticles2 = _interopRequireDefault(_NewsArticles);
 	
-	var _PublicPage = __webpack_require__(253);
+	var _PublicPage = __webpack_require__(251);
 	
 	var _PublicPage2 = _interopRequireDefault(_PublicPage);
 	
@@ -25285,11 +25285,11 @@
 	
 	var _reactRedux = __webpack_require__(222);
 	
-	var _reactToggleDisplay = __webpack_require__(244);
+	var _reactToggleDisplay = __webpack_require__(242);
 	
 	var _reactToggleDisplay2 = _interopRequireDefault(_reactToggleDisplay);
 	
-	var _actions = __webpack_require__(245);
+	var _actions = __webpack_require__(243);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
@@ -25494,7 +25494,9 @@
 	                    React.createElement(
 	                      'a',
 	                      { href: '', onClick: this.signout.bind(this) },
-	                      ' Log Out '
+	                      ' Log Out [',
+	                      this.props.user.username,
+	                      ']'
 	                    ),
 	                    ' '
 	                  )
@@ -25504,14 +25506,7 @@
 	          )
 	        ),
 	        React.createElement('br', null),
-	        this.props.children,
-	        React.createElement(
-	          'pre',
-	          null,
-	          ' currentUser: ',
-	          this.props.user.username || 'none',
-	          ' '
-	        )
+	        this.props.children
 	      );
 	    }
 	  }]);
@@ -25709,11 +25704,11 @@
 	
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 	
-	var _hoistNonReactStatics = __webpack_require__(242);
+	var _hoistNonReactStatics = __webpack_require__(199);
 	
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 	
-	var _invariant = __webpack_require__(243);
+	var _invariant = __webpack_require__(166);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -26965,112 +26960,6 @@
 
 /***/ },
 /* 242 */
-/***/ function(module, exports) {
-
-	/**
-	 * Copyright 2015, Yahoo! Inc.
-	 * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
-	 */
-	'use strict';
-	
-	var REACT_STATICS = {
-	    childContextTypes: true,
-	    contextTypes: true,
-	    defaultProps: true,
-	    displayName: true,
-	    getDefaultProps: true,
-	    mixins: true,
-	    propTypes: true,
-	    type: true
-	};
-	
-	var KNOWN_STATICS = {
-	    name: true,
-	    length: true,
-	    prototype: true,
-	    caller: true,
-	    arguments: true,
-	    arity: true
-	};
-	
-	module.exports = function hoistNonReactStatics(targetComponent, sourceComponent) {
-	    if (typeof sourceComponent !== 'string') { // don't hoist over string (html) components
-	        var keys = Object.getOwnPropertyNames(sourceComponent);
-	        for (var i=0; i<keys.length; ++i) {
-	            if (!REACT_STATICS[keys[i]] && !KNOWN_STATICS[keys[i]]) {
-	                try {
-	                    targetComponent[keys[i]] = sourceComponent[keys[i]];
-	                } catch (error) {
-	
-	                }
-	            }
-	        }
-	    }
-	
-	    return targetComponent;
-	};
-
-
-/***/ },
-/* 243 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright 2013-2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 */
-	
-	'use strict';
-	
-	/**
-	 * Use invariant() to assert state which your program assumes to be true.
-	 *
-	 * Provide sprintf-style format (only %s is supported) and arguments
-	 * to provide information about what broke and what you were
-	 * expecting.
-	 *
-	 * The invariant message will be stripped in production, but the invariant
-	 * will remain to ensure logic does not differ in production.
-	 */
-	
-	var invariant = function(condition, format, a, b, c, d, e, f) {
-	  if (process.env.NODE_ENV !== 'production') {
-	    if (format === undefined) {
-	      throw new Error('invariant requires an error message argument');
-	    }
-	  }
-	
-	  if (!condition) {
-	    var error;
-	    if (format === undefined) {
-	      error = new Error(
-	        'Minified exception occurred; use the non-minified dev environment ' +
-	        'for the full error message and additional helpful warnings.'
-	      );
-	    } else {
-	      var args = [a, b, c, d, e, f];
-	      var argIndex = 0;
-	      error = new Error(
-	        format.replace(/%s/g, function() { return args[argIndex++]; })
-	      );
-	      error.name = 'Invariant Violation';
-	    }
-	
-	    error.framesToPop = 1; // we don't care about invariant's own frame
-	    throw error;
-	  }
-	};
-	
-	module.exports = invariant;
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
-
-/***/ },
-/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
@@ -27137,7 +27026,7 @@
 
 
 /***/ },
-/* 245 */
+/* 243 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -27237,7 +27126,7 @@
 	exports.default = actions;
 
 /***/ },
-/* 246 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27250,7 +27139,7 @@
 	
 	var _reactRedux = __webpack_require__(222);
 	
-	var _actions = __webpack_require__(245);
+	var _actions = __webpack_require__(243);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
@@ -27262,7 +27151,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var _ = __webpack_require__(247);
+	var _ = __webpack_require__(245);
 	
 	var Signin = function (_React$Component) {
 	  _inherits(Signin, _React$Component);
@@ -27304,8 +27193,10 @@
 	
 	        console.log('props signin: ', _this2.props);
 	        $('#signinForm').hide();
+	      }).fail(function (e) {
+	        $('#errorInfo').remove();
+	        $('#signinForm').append('<div id="errorInfo"><i>PLEASE ENTER ALL CORRECT INFO</i></div>');
 	      });
-	      // .fail(e => console.log(e, 'error'));
 	      // on fail --> present user with failed auth message
 	    }
 	  }, {
@@ -27340,7 +27231,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(Signin);
 
 /***/ },
-/* 247 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.8.3
@@ -28894,7 +28785,7 @@
 
 
 /***/ },
-/* 248 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28907,7 +28798,7 @@
 	
 	var _reactRedux = __webpack_require__(222);
 	
-	var _actions = __webpack_require__(245);
+	var _actions = __webpack_require__(243);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
@@ -28919,7 +28810,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var _ = __webpack_require__(247);
+	var _ = __webpack_require__(245);
 	
 	var Signup = function (_React$Component) {
 	  _inherits(Signup, _React$Component);
@@ -28997,7 +28888,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(Signup);
 
 /***/ },
-/* 249 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29008,17 +28899,17 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _NewsArticles = __webpack_require__(250);
+	var _NewsArticles = __webpack_require__(248);
 	
 	var _NewsArticles2 = _interopRequireDefault(_NewsArticles);
 	
-	var _NewsVideos = __webpack_require__(251);
+	var _NewsVideos = __webpack_require__(249);
 	
 	var _NewsVideos2 = _interopRequireDefault(_NewsVideos);
 	
 	var _reactRedux = __webpack_require__(222);
 	
-	var _actions = __webpack_require__(245);
+	var _actions = __webpack_require__(243);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
@@ -29069,7 +28960,7 @@
 	        React.createElement(
 	          'div',
 	          { className: 'col-md-7' },
-	          React.createElement(_NewsArticles2.default, { topic: this.props.newsTopic, articles: this.props.articles, dispatch: this.props.dispatch })
+	          React.createElement(_NewsArticles2.default, { topic: this.props.params.topic })
 	        ),
 	        React.createElement(
 	          'div',
@@ -29092,8 +28983,8 @@
 	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(TopicPage);
 
 /***/ },
-/* 250 */
-/***/ function(module, exports) {
+/* 248 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -29102,6 +28993,18 @@
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _actions = __webpack_require__(243);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
+	var _NewsArticleEntry = __webpack_require__(255);
+	
+	var _NewsArticleEntry2 = _interopRequireDefault(_NewsArticleEntry);
+	
+	var _reactRedux = __webpack_require__(222);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -29121,22 +29024,19 @@
 	  _createClass(NewsArticles, [{
 	    key: 'queryDB',
 	    value: function queryDB() {
-	      var url = '/getArticles?topic=' + this.props.topic;
+	      var url = '/getArticles?topic=' + (this.props.topic || 'WORLD NEWS');
 	      return $.get(url);
 	    }
 	  }, {
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate() {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
 	      //query database for topic and pull out the articles for that topic
 	
+	      var componentContext = this;
 	      this.queryDB().done(function (r) {
-	        //populate the component div with the articles returned
-	        /*
-	        this.setState({
-	          articles: r
-	        });
-	        */
-	        console.log('done');
+	        componentContext.props.dispatch(_actions2.default.updateNewsArticles(r));
+	
+	        console.log('done', r);
 	      }).fail(function (e) {
 	        return console.log('E: ', e);
 	      });
@@ -29150,18 +29050,10 @@
 	        React.createElement(
 	          'div',
 	          null,
-	          ' Map over all data received from query and render the articles '
-	        ),
-	        React.createElement('br', null),
-	        React.createElement(
-	          'div',
-	          null,
-	          'Articles Here',
-	          this.props.articles.map(function (article) {
-	            React.createElement(NewsArticleEntry, { key: article.title, article: article });
+	          this.props.articles.map(function (article, idx) {
+	            return React.createElement(_NewsArticleEntry2.default, { key: idx, idx: idx, article: article });
 	          })
-	        ),
-	        React.createElement('pre', null)
+	        )
 	      );
 	    }
 	  }]);
@@ -29171,11 +29063,15 @@
 	
 	;
 	
-	exports.default = NewsArticles;
+	function mapStatetoProps(state) {
+	  return state;
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(NewsArticles);
 
 /***/ },
-/* 251 */
-/***/ function(module, exports) {
+/* 249 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -29184,6 +29080,18 @@
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _reactRedux = __webpack_require__(222);
+	
+	var _actions = __webpack_require__(243);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
+	var _NewsVideoEntry = __webpack_require__(256);
+	
+	var _NewsVideoEntry2 = _interopRequireDefault(_NewsVideoEntry);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -29197,36 +29105,27 @@
 	  function NewsVideos(props) {
 	    _classCallCheck(this, NewsVideos);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NewsVideos).call(this, props));
-	
-	    _this.state = {
-	      videos: []
-	    };
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(NewsVideos).call(this, props));
 	  }
 	
 	  _createClass(NewsVideos, [{
-	    key: 'queryDB',
-	    value: function queryDB() {
-	      var url = '/getVideos?topic=' + this.props.topic;
-	      return $.get(url);
+	    key: 'updateCurrentVideo',
+	    value: function updateCurrentVideo(event) {
+	      var src = $(event.currentTarget).find('iframe').attr('src');
+	      $('#currentVideo').attr('src', src);
 	    }
 	  }, {
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      this.queryDB().done(function (r) {
-	        /*
-	        thissetState({
-	          videos: r
-	        });
-	        */
-	      }).fail(function (e) {
-	        return console.log('E: ', e);
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      $('iframe').on('load', function () {
+	        $("iframe").contents().find('#app').hide();
 	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+	
 	      return React.createElement(
 	        'div',
 	        null,
@@ -29238,11 +29137,20 @@
 	        React.createElement('br', null),
 	        React.createElement(
 	          'div',
-	          null,
-	          'Temporary News Videos Area',
-	          this.state.videos.map(function (video) {
-	            React.createElement(NewsVideoEntry, { key: video.title, video: video });
-	          })
+	          { className: 'col-md-4' },
+	          ' ',
+	          React.createElement(
+	            'h2',
+	            { id: 'broadcast' },
+	            'Currently Broadcasting'
+	          ),
+	          React.createElement(
+	            'ul',
+	            { id: 'video' },
+	            this.props.currentStreamers.map(function (video, idx) {
+	              React.createElement(_NewsVideoEntry2.default, { key: idx, idx: idx, updateCurrentVideo: _this2.updateCurrentVideo, video: video, user: _this2.props.user });
+	            })
+	          )
 	        )
 	      );
 	    }
@@ -29253,10 +29161,14 @@
 	
 	;
 	
-	exports.default = NewsVideos;
+	function mapStatetoProps(state) {
+	  return state;
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(NewsVideos);
 
 /***/ },
-/* 252 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29267,13 +29179,13 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _reactToggleDisplay = __webpack_require__(244);
+	var _reactToggleDisplay = __webpack_require__(242);
 	
 	var _reactToggleDisplay2 = _interopRequireDefault(_reactToggleDisplay);
 	
 	var _reactRedux = __webpack_require__(222);
 	
-	var _actions = __webpack_require__(245);
+	var _actions = __webpack_require__(243);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
@@ -29393,7 +29305,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(StreamPageComp);
 
 /***/ },
-/* 253 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29406,7 +29318,7 @@
 	
 	var _reactRedux = __webpack_require__(222);
 	
-	var _actions = __webpack_require__(245);
+	var _actions = __webpack_require__(243);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
@@ -29434,22 +29346,12 @@
 	      $('#currentVideo').attr('src', src);
 	    }
 	  }, {
-	    key: 'updateArticle',
-	    value: function updateArticle(article) {
-	      this.setState({ articles: articles });
-	    }
-	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      console.log(this.props.currentStreamers);
 	      $('iframe').on('load', function () {
 	        $("iframe").contents().find('#app').hide();
 	      });
-	    }
-	  }, {
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate() {
-	      console.log('this.props.currentStreamers', this.props.currentStreamers);
 	    }
 	  }, {
 	    key: 'render',
@@ -29524,7 +29426,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(PublicPage);
 
 /***/ },
-/* 254 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29536,11 +29438,11 @@
 	
 	var _redux = __webpack_require__(229);
 	
-	var _reducers = __webpack_require__(255);
+	var _reducers = __webpack_require__(253);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
-	var _reduxLogger = __webpack_require__(256);
+	var _reduxLogger = __webpack_require__(254);
 	
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 	
@@ -29566,7 +29468,7 @@
 	}
 
 /***/ },
-/* 255 */
+/* 253 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -29650,7 +29552,7 @@
 	exports.default = reducer;
 
 /***/ },
-/* 256 */
+/* 254 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -29881,6 +29783,71 @@
 	}
 	
 	module.exports = createLogger;
+
+/***/ },
+/* 255 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var NewsArticleEntry = function NewsArticleEntry(_ref) {
+	  var article = _ref.article;
+	  var idx = _ref.idx;
+	
+	  return React.createElement(
+	    "div",
+	    null,
+	    React.createElement(
+	      "div",
+	      null,
+	      " ",
+	      idx + 1,
+	      ". ",
+	      React.createElement(
+	        "a",
+	        { href: article },
+	        article
+	      ),
+	      " "
+	    )
+	  );
+	};
+	
+	exports.default = NewsArticleEntry;
+
+/***/ },
+/* 256 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var NewsVideoEntry = function NewsVideoEntry(props) {
+	  return React.createElement(
+	    "li",
+	    { className: "video", onClick: props.updateCurrentVideo },
+	    React.createElement(
+	      "div",
+	      null,
+	      " INDEX: ",
+	      props.idx,
+	      " "
+	    ),
+	    React.createElement(
+	      "div",
+	      { className: "videoWrapper" },
+	      React.createElement("iframe", { width: "142", height: "80", src: "http://localhost:3000/" + video, frameBorder: "0", allowFullScreen: true })
+	    ),
+	    video + " is reporting on " + props.user.stream.title
+	  );
+	};
+	
+	exports.default = NewsVideoEntry;
 
 /***/ }
 /******/ ]);

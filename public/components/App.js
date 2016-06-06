@@ -62,7 +62,7 @@ class App extends React.Component {
                     <li> <Link to="/signup"> Sign up </Link> </li>
                   </ToggleDisplay>
                   <ToggleDisplay show={!!this.props.user.username}>
-                    <li> <a href='' onClick={this.signout.bind(this)}> Log Out </a> </li>
+                    <li> <a href='' onClick={this.signout.bind(this)}> Log Out [{this.props.user.username}]</a> </li>
                   </ToggleDisplay>
                 </ul>
               </div>
@@ -71,10 +71,8 @@ class App extends React.Component {
 
         <br></br>
 
-
         {this.props.children}
 
-        <pre> currentUser: { this.props.user.username || 'none'} </pre>
       </div>
     );
   }

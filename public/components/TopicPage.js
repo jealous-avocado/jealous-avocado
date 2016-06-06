@@ -25,7 +25,7 @@ class TopicPage extends React.Component {
         <div> The Latest in {this.props.newsTopic} </div> <br></br>
         
         <div className='col-md-7'>
-          <NewsArticles topic={this.props.newsTopic} articles={this.props.articles} dispatch={this.props.dispatch}/>
+          <NewsArticles topic={this.props.params.topic}/>
         </div>
         <div className='col-md-5'>
           <NewsVideos topic={this.props.newsTopic}/>

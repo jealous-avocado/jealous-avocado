@@ -115,21 +115,21 @@
 	
 	  new User({ name: username }).fetch().then(function (user) {
 	    if (!user) {
-	      // var newUser = new User({
-	      //   name: username,
-	      //   password: password
-	      // });
-	      // newUser.save();
 	      res.status(404);
 	      res.end();
 	    } else {
 	      // console.log(user);
-	      res.status(201);
-	      res.end();
+	      user.checkPassword(password, function (isMatch) {
+	        if (isMatch) {
+	          res.status(201);
+	          res.end();
+	        } else {
+	          res.status(404);
+	          res.end();
+	        }
+	      });
 	    }
 	  });
-	  res.status(201);
-	  res.end();
 	});
 	
 	app.get('/signout', function (req, res) {
@@ -140,15 +140,15 @@
 	app.get('/getArticles', function (req, res) {
 	  var MAX_TIME = 86400000; //Longest time to keep articles in db.  (One day = 86400000ms)
 	  var allURLS = [];
-	
 	  //only do an alchemyAPI request if necessary -- if there are cached articles, then show those first
 	  var refreshArticles = function refreshArticles(topicId) {
+	
 	    Article.fetchAll({ topicId: topicId }).then(function (articles) {
 	      articles.forEach(function (article) {
 	        article.destroy();
 	      });
 	    });
-	    console.log('querying alchemyAPI for articles', req.query.topic);
+	    console.log('querying alchemyAPI for articles in ', req.query.topic);
 	    request.get(alchemyAPI.getNewsURL(req.query.topic)).then(function (d) {
 	      d = JSON.parse(d);
 	      d.result.docs.forEach(function (doc) {
@@ -278,7 +278,8 @@
 	  connection: {
 	    host: '127.0.0.1',
 	    user: 'root',
-	    database: 'rep'
+	    database: 'rep',
+	    password: 'kk'
 	  }
 	});
 	
@@ -413,9 +414,10 @@
 	  videos: function videos() {
 	    return this.hasMany(Video);
 	  },
-	  checkPassword: function checkPassword() {},
-	  hashPassword: function hashPassword(nonHashedPW) {
-	    bcrypt.hash(nonHashedPW, null, null, function (err, hash) {});
+	  checkPassword: function checkPassword(checkPW, callback) {
+	    bcrypt.compare(checkPW, this.get('password'), function (err, isMatch) {
+	      callback(isMatch);
+	    });
 	  }
 	});
 	
@@ -478,13 +480,13 @@
 	'use strict';
 	
 	module.exports = {
-	  API_KEY: '7899c81a8b05382d7102fd6a6c320f28954b8986',
+	  KEY: '5271f6ac77beb97a142fe534297b65aaebd9ed5a',
 	  getNewsURL: function getNewsURL(topic) {
-	    return 'https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=20&apikey=' + module.exports.API_KEY + '&return=enriched.url.url&q.enriched.url.concepts.concept.text=' + topic;
+	    return 'https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=50&apikey=' + module.exports.KEY + '&return=enriched.url.url&q.enriched.url.concepts.concept.text=' + topic;
 	  },
 	
 	  getTextURL: function getTextURL(link) {
-	    return 'http://gateway-a.watsonplatform.net/calls/url/URLGetText?apikey=' + module.exports.API_KEY + '&outputMode=json&url=' + link;
+	    return 'http://gateway-a.watsonplatform.net/calls/url/URLGetText?apikey=' + module.exports.KEY + '&outputMode=json&url=' + link;
 	  }
 	};
 

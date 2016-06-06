@@ -37,8 +37,11 @@ class Signin extends React.Component {
       console.log('props signin: ', this.props);
       $('#signinForm').hide();
       
+    })
+    .fail(e => {
+      $('#errorInfo').remove();
+      $('#signinForm').append('<div id="errorInfo"><i>PLEASE ENTER ALL CORRECT INFO</i></div>');
     });
-    // .fail(e => console.log(e, 'error'));
     // on fail --> present user with failed auth message
 
   }
