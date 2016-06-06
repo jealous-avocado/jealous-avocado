@@ -486,7 +486,11 @@
 	  },
 	
 	  getTextURL: function getTextURL(link) {
-	    return 'http://gateway-a.watsonplatform.net/calls/url/URLGetText?apikey=' + module.exports.KEY + '&outputMode=json&url=' + link;
+	    // return
+	
+	    /* --- FOR FULL URL TEXT USE BELOW ----
+	     return `http://gateway-a.watsonplatform.net/calls/url/URLGetText?apikey=${module.exports.KEY}&outputMode=json&url=${link}`;
+	    */
 	  }
 	};
 
