@@ -11,7 +11,7 @@ var knex = require('knex') ({
     host: '127.0.0.1',
     user: 'root',
     database: 'rep', 
-    password: '1234'
+    password: 'kk'
   }
 });
 
