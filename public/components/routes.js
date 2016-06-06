@@ -7,6 +7,7 @@ import TopicPage from './TopicPage';
 import StreamPageComp from './StreamPageComp';
 import NewsArticles from './NewsArticles';
 import PublicPage from './PublicPage';
+import Profile from './Profile';
 
 module.exports = (
   <Route path='/' component={App}>
@@ -16,7 +17,7 @@ module.exports = (
     <Route path='/news' component={TopicPage}> 
       <Route path='/news/:topic' component={NewsArticles}/>
     </Route>
-    <Route path='/:username/profile' component={PublicPage}/>
+    <Route path='/:username/profile' component={Profile}/>
     <Route path='/:username' component={StreamPageComp}/>
   </Route>
 )
