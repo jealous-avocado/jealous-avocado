@@ -58,7 +58,7 @@
 	
 	var _routes2 = _interopRequireDefault(_routes);
 	
-	var _store = __webpack_require__(256);
+	var _store = __webpack_require__(255);
 	
 	var _store2 = _interopRequireDefault(_store);
 	
@@ -25241,7 +25241,7 @@
 	
 	var _TopicPage2 = _interopRequireDefault(_TopicPage);
 	
-	var _StreamPageComp = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./StreamPageComp\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _StreamPageComp = __webpack_require__(253);
 	
 	var _StreamPageComp2 = _interopRequireDefault(_StreamPageComp);
 	
@@ -25249,7 +25249,7 @@
 	
 	var _NewsArticles2 = _interopRequireDefault(_NewsArticles);
 	
-	var _PublicPage = __webpack_require__(255);
+	var _PublicPage = __webpack_require__(254);
 	
 	var _PublicPage2 = _interopRequireDefault(_PublicPage);
 	
@@ -29272,10 +29272,6 @@
 	exports.default = NewsVideoEntry;
 
 /***/ },
-<<<<<<< HEAD
-/* 253 */,
-/* 254 */,
-=======
 /* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -29293,7 +29289,7 @@
 	
 	var _reactRedux = __webpack_require__(222);
 	
-	var _HashTagComp = __webpack_require__(254);
+	var _HashTagComp = __webpack_require__(258);
 	
 	var _HashTagComp2 = _interopRequireDefault(_HashTagComp);
 	
@@ -29430,6 +29426,55 @@
 	        ),
 	        React.createElement(
 	          'div',
+	          { id: 'userPage' },
+	          ' User Page '
+	        ),
+	        React.createElement(
+	          _reactToggleDisplay2.default,
+	          { show: this.matchUsertoURL.bind(this)() },
+	          React.createElement(
+	            _reactToggleDisplay2.default,
+	            { show: !this.props.user.stream.title },
+	            React.createElement(
+	              'form',
+	              { onSubmit: this.saveStreamTitle.bind(this) },
+	              React.createElement('input', { id: 'streamTitleInput', placeholder: 'Title the stream' })
+	            )
+	          ),
+	          React.createElement(
+	            'form',
+	            { onSubmit: this.saveHashTags.bind(this) },
+	            React.createElement('input', { id: 'hashTagInput', placeholder: 'Enter a topic tag' })
+	          ),
+	          React.createElement(
+	            'button',
+	            { id: 'startStream' },
+	            ' Start Stream '
+	          ),
+	          React.createElement(
+	            'button',
+	            { id: 'stopStream', style: { 'display': 'none' } },
+	            ' Stop Stream '
+	          )
+	        ),
+	        React.createElement('br', null),
+	        React.createElement(
+	          'div',
+	          { id: 'streamTitle' },
+	          'Stream title: ',
+	          this.props.user.stream.title
+	        ),
+	        React.createElement('div', { id: 'streamContainer' }),
+	        React.createElement(
+	          'div',
+	          null,
+	          'Hashtags:  ',
+	          this.props.user.stream.hashtags.map(function (tag) {
+	            return React.createElement(_HashTagComp2.default, { key: tag.id, removeTag: _this2.removeTag, tag: tag });
+	          })
+	        ),
+	        React.createElement(
+	          'div',
 	          { id: 'userDashCol', className: 'col-md-4' },
 	          React.createElement(
 	            'div',
@@ -29496,37 +29541,6 @@
 
 /***/ },
 /* 254 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var HashTagComp = function HashTagComp(_ref) {
-	  var tag = _ref.tag;
-	  var removeTag = _ref.removeTag;
-	
-	  return React.createElement(
-	    'span',
-	    { id: 'hashtag', onClick: removeTag, tag: tag.hashtag },
-	    React.createElement(
-	      'i',
-	      null,
-	      ' #',
-	      tag.hashtag,
-	      '   '
-	    ),
-	    ' |'
-	  );
-	};
-	
-	exports.default = HashTagComp;
-
-/***/ },
->>>>>>> e5d85629a152d9a4ae50cb0d2de9d729e2f39a7b
-/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29667,7 +29681,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(PublicPage);
 
 /***/ },
-/* 256 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29679,11 +29693,11 @@
 	
 	var _redux = __webpack_require__(229);
 	
-	var _reducers = __webpack_require__(257);
+	var _reducers = __webpack_require__(256);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
-	var _reduxLogger = __webpack_require__(258);
+	var _reduxLogger = __webpack_require__(257);
 	
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 	
@@ -29710,7 +29724,7 @@
 	}
 
 /***/ },
-/* 257 */
+/* 256 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -29798,7 +29812,7 @@
 	exports.default = reducer;
 
 /***/ },
-/* 258 */
+/* 257 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -30029,6 +30043,36 @@
 	}
 	
 	module.exports = createLogger;
+
+/***/ },
+/* 258 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var HashTagComp = function HashTagComp(_ref) {
+	  var tag = _ref.tag;
+	  var removeTag = _ref.removeTag;
+	
+	  return React.createElement(
+	    'span',
+	    { id: 'hashtag', onClick: removeTag, tag: tag.hashtag },
+	    React.createElement(
+	      'i',
+	      null,
+	      ' #',
+	      tag.hashtag,
+	      '   '
+	    ),
+	    ' |'
+	  );
+	};
+	
+	exports.default = HashTagComp;
 
 /***/ }
 /******/ ]);

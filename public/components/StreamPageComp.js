@@ -95,7 +95,7 @@ class StreamPageComp extends React.Component {
               </ToggleDisplay>
             </div>
           </div>
-
+        </div>
 
         <div id="userPage"> User Page </div>
 
