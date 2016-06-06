@@ -29129,17 +29129,13 @@
 	'use strict';
 	
 	module.exports = {
-	  KEY: '5271f6ac77beb97a142fe534297b65aaebd9ed5a',
+	  API_KEY: '7899c81a8b05382d7102fd6a6c320f28954b8986',
 	  getNewsURL: function getNewsURL(topic) {
-	    return 'https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=50&apikey=' + module.exports.KEY + '&return=enriched.url.url&q.enriched.url.concepts.concept.text=' + topic;
+	    return 'https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=20&apikey=' + module.exports.API_KEY + '&return=enriched.url.url&q.enriched.url.concepts.concept.text=' + topic;
 	  },
 	
 	  getTextURL: function getTextURL(link) {
-	    // return
-	
-	    /* --- FOR FULL URL TEXT USE BELOW ----
-	     return `http://gateway-a.watsonplatform.net/calls/url/URLGetText?apikey=${module.exports.KEY}&outputMode=json&url=${link}`;
-	    */
+	    return 'http://gateway-a.watsonplatform.net/calls/url/URLGetText?apikey=' + module.exports.API_KEY + '&outputMode=json&url=' + link;
 	  }
 	};
 

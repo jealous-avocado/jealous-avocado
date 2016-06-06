@@ -7,8 +7,7 @@
     "build": "npm run build:client && npm run build:server",
     "build:client": "webpack --watch",
     "build:server": "webpack --config webpack.server.config.js --watch",
-    "db": "mysql.server start",
-    "db:drop": "mysql -u root -e 'drop database rep;' rep"
+    "db": "mysql.server start"
   },
   "dependencies": {
     "babel-loader": "^6.2.4",
