@@ -72,6 +72,15 @@ let reducer = function(state, action) {
       return Object.assign({}, state, {
         currentStreamers: []
       });
+    case "REMOVE_CURRENT_STREAMER":
+      let TEMP = state.currentStreamers.filter(streamer => {
+        return streamer !== action.username;
+      });
+
+      return Object.assign({}, state, {
+        currentStreamers: TEMP
+      });
+      
     default:
       return state;
   }

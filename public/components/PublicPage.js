@@ -19,10 +19,10 @@ class PublicPage extends React.Component {
     $.get('/currentStreamers')
     .done(r => {
       r.forEach(function (value) {
-      componentContext.props.dispatch(actions.updateCurrentStreamer(value));
-      })
+        componentContext.props.dispatch(actions.updateCurrentStreamer(value));
+      });
       window.localStorage.setItem('state', JSON.stringify(this.props));
-      })
+    })
     .fail(e => console.log('Error in get request: ', e));
   }
   

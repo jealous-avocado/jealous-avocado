@@ -27083,6 +27083,7 @@
 	var UPDATE_CURRENT_STREAMER = 'UPDATE_CURRENT_STREAMER';
 	var SAVE_BROADCAST_CONNECTION = 'SAVE_BROADCAST_CONNECTION';
 	var RESET_CURRENT_STREAMER = 'RESET_CURRENT_STREAMER';
+	var REMOVE_CURRENT_STREAMER = 'REMOVE_CURRENT_STREAMER';
 	
 	var actions = {
 	  signinUser: function signinUser(username) {
@@ -27154,6 +27155,13 @@
 	  resetCurrentStreamer: function resetCurrentStreamer() {
 	    return {
 	      type: RESET_CURRENT_STREAMER
+	    };
+	  },
+	
+	  removeCurrentStreamer: function removeCurrentStreamer(username) {
+	    return {
+	      type: REMOVE_CURRENT_STREAMER,
+	      username: username
 	    };
 	  }
 	};
@@ -29327,8 +29335,12 @@
 	      };
 	
 	      document.querySelector('#stopStream').onclick = function () {
-	        $.post('/currentStreamers', { username: componentContext.props.user.username, isStreaming: false });
 	        connection.close();
+	
+	        $.post('/currentStreamers', { username: componentContext.props.user.username, isStreaming: false });
+	
+	        componentContext.props.dispatch(_actions2.default.removeCurrentStreamer(componentContext.props.user.username));
+	
 	        $('#stopStream').hide();
 	        $('#startStream').show();
 	        $('#streamTitleInput').val('').show();
@@ -29770,6 +29782,15 @@
 	      return Object.assign({}, state, {
 	        currentStreamers: []
 	      });
+	    case "REMOVE_CURRENT_STREAMER":
+	      var TEMP = state.currentStreamers.filter(function (streamer) {
+	        return streamer !== action.username;
+	      });
+	
+	      return Object.assign({}, state, {
+	        currentStreamers: TEMP
+	      });
+	
 	    default:
 	      return state;
 	  }
