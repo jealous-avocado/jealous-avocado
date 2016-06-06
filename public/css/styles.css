@@ -46,3 +46,35 @@ li {
 #broadcast {
   padding-left: 10px;
 }
+
+#userDashCol {
+  border: solid #ffff80;
+  background-color: #ffff80;
+  height: 100vh;
+  margin-top: -47px;
+}
+#dashboardText {
+  text-align: center;
+  font-weight: bold;
+  font-style: italic;
+  text-decoration: underline;
+ }
+
+ #userDashCol div {
+  margin-bottom: 10px;
+ }
+
+ #streamContainer {
+  width: 711px;
+  height: 400px;
+  background-color: black;
+ }
+
+ #streamOptionsContainer {
+  text-align: right;
+  margin-right: 10%;
+ }
+
+ #streamTitle {
+  text-align: left;
+ }
