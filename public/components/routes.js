@@ -16,6 +16,7 @@ module.exports = (
     <Route path='/news' component={TopicPage}> 
       <Route path='/news/:topic' component={NewsArticles}/>
     </Route>
-    <Route path='/:username' component={StreamPageComp} />
+    <Route path='/:username/profile' component={PublicPage}/>
+    <Route path='/:username' component={StreamPageComp}/>
   </Route>
 )
