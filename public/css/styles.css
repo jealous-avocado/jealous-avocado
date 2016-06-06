@@ -76,9 +76,8 @@ li {
  }
 
  #streamTitle {
+  font-weight: bold;
   text-align: left;
-<<<<<<< ab44fce38bf1dd78d5b296f749dae908954e81d4
-=======
  }
 
  #streamTitle:hover {
@@ -87,5 +86,4 @@ li {
 
  #articleContainer {
   border: solid;
->>>>>>> show snippets for articles
  }

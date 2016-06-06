@@ -133,7 +133,8 @@ class StreamPageComp extends React.Component {
         <div id='userDashCol' className='col-md-4'>
           <div id='dashboardText'> Dashboard </div>
 
-            <div id='streamTitle' onClick={this.editStreamTitle.bind(this)}>Stream title: {this.props.user.stream.title}</div>
+            <div> Stream Title: &nbsp; <span id='streamTitle' onClick={this.editStreamTitle.bind(this)}>{this.props.user.stream.title}</span>
+            </div>
             <ToggleDisplay show={!this.props.user.stream.title}>
               <div>
                 <form id='streamTitleForm' onSubmit={this.saveStreamTitle.bind(this)}>
@@ -142,13 +143,16 @@ class StreamPageComp extends React.Component {
               </div>
             </ToggleDisplay>
             
-            <div>
+            <div> 
             Hashtags: &nbsp;
-              {
-                this.props.user.stream.hashtags.map(tag => {
-                  return <HashTagComp key={tag.id} removeTag={this.removeTag} tag={tag}/>
-                })
-              }
+              <div>
+              
+                {
+                  this.props.user.stream.hashtags.map(tag => {
+                    return <HashTagComp key={tag.id} removeTag={this.removeTag} tag={tag}/>
+                  })
+                }
+              </div>
             </div>
             <div>
               <form onSubmit={this.saveHashTags.bind(this)}>

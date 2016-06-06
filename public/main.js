@@ -29272,8 +29272,260 @@
 	exports.default = NewsVideoEntry;
 
 /***/ },
+<<<<<<< HEAD
 /* 253 */,
 /* 254 */,
+=======
+/* 253 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _reactToggleDisplay = __webpack_require__(242);
+	
+	var _reactToggleDisplay2 = _interopRequireDefault(_reactToggleDisplay);
+	
+	var _reactRedux = __webpack_require__(222);
+	
+	var _HashTagComp = __webpack_require__(254);
+	
+	var _HashTagComp2 = _interopRequireDefault(_HashTagComp);
+	
+	var _actions = __webpack_require__(243);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var StreamPageComp = function (_React$Component) {
+	  _inherits(StreamPageComp, _React$Component);
+	
+	  function StreamPageComp(props) {
+	    _classCallCheck(this, StreamPageComp);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(StreamPageComp).call(this, props));
+	  }
+	
+	  _createClass(StreamPageComp, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	
+	      var connection = new RTCMultiConnection().connect();
+	
+	      connection.body = document.getElementById('streamContainer');
+	
+	      var componentContext = this;
+	
+	      document.querySelector('#startStream').onclick = function () {
+	        connection.open();
+	        connection.direction = 'one-way';
+	
+	        // componentContext.props.dispatch(actions.saveBroadcastConnection(connection));
+	
+	        componentContext.props.dispatch(_actions2.default.updateCurrentStreamer(componentContext.props.user.username));
+	        $.post('/currentStreamer', { username: componentContext.props.user.username, isStreaming: true });
+	        window.localStorage.setItem('state', JSON.stringify(componentContext.props));
+	
+	        $('#startStream').hide();
+	        $('#stopStream').show();
+	      };
+	
+	      document.querySelector('#stopStream').onclick = function () {
+	        connection.close();
+	        $('#stopStream').hide();
+	        $('#startStream').show();
+	        $('#streamTitleInput').val('').show();
+	      };
+	    }
+	  }, {
+	    key: 'matchUsertoURL',
+	    value: function matchUsertoURL() {
+	      return this.props.user.username === this.props.params.username;
+	    }
+	  }, {
+	    key: 'saveStreamTitle',
+	    value: function saveStreamTitle(e) {
+	      e.preventDefault();
+	
+	      var streamTitleVal = $(streamTitleInput).val();
+	
+	      this.props.dispatch(_actions2.default.updateBroadcasterStreamTopic(streamTitleVal));
+	    }
+	  }, {
+	    key: 'saveHashTags',
+	    value: function saveHashTags(e) {
+	      e.preventDefault();
+	
+	      var hashTagVal = $(hashTagInput).val();
+	      $(hashTagInput).val('');
+	
+	      this.props.dispatch(_actions2.default.updateBroadcasterStreamHashtags(hashTagVal));
+	    }
+	  }, {
+	    key: 'removeTag',
+	    value: function removeTag(e) {
+	      $(e.currentTarget).remove();
+	    }
+	  }, {
+	    key: 'editStreamTitle',
+	    value: function editStreamTitle() {
+	      this.props.dispatch(_actions2.default.updateBroadcasterStreamTopic(''));
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      $(streamTitleInput).focus();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      return React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          'div',
+	          { id: 'userStreamCol', className: 'col-md-8' },
+	          React.createElement(
+	            'div',
+	            null,
+	            React.createElement(
+	              'div',
+	              { id: 'streamTitle', onClick: this.editStreamTitle.bind(this) },
+	              this.props.user.stream.title
+	            ),
+	            React.createElement('div', { id: 'streamContainer' }),
+	            React.createElement(
+	              'div',
+	              { id: 'streamOptionsContainer' },
+	              React.createElement(
+	                _reactToggleDisplay2.default,
+	                { show: this.matchUsertoURL.bind(this)() },
+	                React.createElement(
+	                  'button',
+	                  { id: 'startStream', className: 'btn btn-default' },
+	                  ' Start Stream '
+	                ),
+	                React.createElement(
+	                  'button',
+	                  { id: 'stopStream', className: 'btn btn-default', style: { 'display': 'none' } },
+	                  ' Stop Stream '
+	                )
+	              )
+	            )
+	          )
+	        ),
+	        React.createElement(
+	          'div',
+	          { id: 'userDashCol', className: 'col-md-4' },
+	          React.createElement(
+	            'div',
+	            { id: 'dashboardText' },
+	            ' Dashboard '
+	          ),
+	          React.createElement(
+	            'div',
+	            null,
+	            ' Stream Title:   ',
+	            React.createElement(
+	              'span',
+	              { id: 'streamTitle', onClick: this.editStreamTitle.bind(this) },
+	              this.props.user.stream.title
+	            )
+	          ),
+	          React.createElement(
+	            _reactToggleDisplay2.default,
+	            { show: !this.props.user.stream.title },
+	            React.createElement(
+	              'div',
+	              null,
+	              React.createElement(
+	                'form',
+	                { id: 'streamTitleForm', onSubmit: this.saveStreamTitle.bind(this) },
+	                React.createElement('input', { className: 'form-control', id: 'streamTitleInput', placeholder: 'Title the stream' })
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'div',
+	            null,
+	            'Hashtags:  ',
+	            React.createElement(
+	              'div',
+	              null,
+	              this.props.user.stream.hashtags.map(function (tag) {
+	                return React.createElement(_HashTagComp2.default, { key: tag.id, removeTag: _this2.removeTag, tag: tag });
+	              })
+	            )
+	          ),
+	          React.createElement(
+	            'div',
+	            null,
+	            React.createElement(
+	              'form',
+	              { onSubmit: this.saveHashTags.bind(this) },
+	              React.createElement('input', { className: 'form-control', id: 'hashTagInput', placeholder: 'Enter a topic tag' })
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return StreamPageComp;
+	}(React.Component);
+	
+	function mapStatetoProps(state) {
+	  return state;
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(StreamPageComp);
+
+/***/ },
+/* 254 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var HashTagComp = function HashTagComp(_ref) {
+	  var tag = _ref.tag;
+	  var removeTag = _ref.removeTag;
+	
+	  return React.createElement(
+	    'span',
+	    { id: 'hashtag', onClick: removeTag, tag: tag.hashtag },
+	    React.createElement(
+	      'i',
+	      null,
+	      ' #',
+	      tag.hashtag,
+	      '   '
+	    ),
+	    ' |'
+	  );
+	};
+	
+	exports.default = HashTagComp;
+
+/***/ },
+>>>>>>> e5d85629a152d9a4ae50cb0d2de9d729e2f39a7b
 /* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
