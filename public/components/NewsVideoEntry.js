@@ -1,8 +1,15 @@
-window.NewsVideoEntry = (props) => {
+var NewsVideoEntry = (props) => {
   return (
-    <div>
-      <div> Video title: {video.title} </div>
-      <div> Video URL: {video.url} </div>
-    </div>
+    <li className="video" onClick={props.updateCurrentVideo}> 
+      <div> INDEX: {props.idx} </div>
+      <div className="videoWrapper">
+        <iframe width="142" height="80" src={"http://localhost:3000/" + video} frameBorder="0" allowFullScreen></iframe>        
+      </div>
+      
+      {video + " is reporting on " + props.user.stream.title}
+    </li>
   );
 };
+
+
+export default NewsVideoEntry;

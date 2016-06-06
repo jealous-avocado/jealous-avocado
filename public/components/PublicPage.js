@@ -11,20 +11,12 @@ class PublicPage extends React.Component {
     var src = $(event.currentTarget).find('iframe').attr('src');
     $('#currentVideo').attr('src', src);
   }
-  updateArticle(article) {
-    this.setState({articles: articles})
-  }
   
   componentDidMount () {
     console.log(this.props.currentStreamers);
     $('iframe').on('load', function () {
       $("iframe").contents().find('#app').hide()
     });
-  }
-
-  componentDidUpdate () {
-   console.log('this.props.currentStreamers', this.props.currentStreamers);
-
   }
 
   render() {

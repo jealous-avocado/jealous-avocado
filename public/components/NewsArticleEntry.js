@@ -1,8 +1,9 @@
-window.NewsArticleEntry = ({article}) => {
+var NewsArticleEntry = ({article, idx}) => {
   return (
     <div>
-      <div> Article title: {article.title} </div>
-      <div> Article URL: {article.url} </div>
+      <div> {idx+1}. <a href={article}>{article}</a> </div>
     </div>
   );
 };
+
+export default NewsArticleEntry;
