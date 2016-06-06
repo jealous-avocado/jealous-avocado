@@ -93,13 +93,42 @@ app.get('/signout', function (req, res) {
  res.redirect('/'); 
 });
 
+app.get('/currentStreamer', (req, res) => {
+  var streamerList = [];
+
+  User.query({where: {isStreaming: true}}).fetchAll()
+  .then(function(streamers) {
+    streamers.forEach(function(stream){
+      //console.log(article.get('url'), article.get('created_at'));
+      streamerList.push(stream.get('name'));
+    });
+    res.json(streamerList);
+  });
+});
+
+app.post('/currentStreamer', (req, res) => {
+  var username = req.body.username;
+  var isStreaming = JSON.parse(req.body.isStreaming); //cast bool to int
+  console.log('currentStreamer POST', username, isStreaming);
+  new User({name: username})
+    .fetch()
+    .then(function(user) {
+      if(user) {
+        user.set({isStreaming: isStreaming}).save();
+        res.end();
+      } else {
+        res.status(404);
+        res.end();
+      }
+    })
+});
+
 app.get('/getArticles', (req, res) => {
   const MAX_TIME = 86400000; //Longest time to keep articles in db.  (One day = 86400000ms)
   var allURLS = [];
   //only do an alchemyAPI request if necessary -- if there are cached articles, then show those first
   var refreshArticles = function(topicId) {
-
-    Article.fetchAll({topicId: topicId}).then(function(articles){
+    Article.query({where: {topicId: topicId}}).fetchAll().then(function(articles){
       articles.forEach(function(article){
         article.destroy();
       });
