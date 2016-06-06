@@ -492,13 +492,13 @@
 	'use strict';
 	
 	module.exports = {
-	  KEY: 'YOUR_ALCHEMY_API_KEY',
+	  API_KEY: 'YOUR_ALCHEMY_API_KEY',
 	  getNewsURL: function getNewsURL(topic) {
-	    return 'https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=50&apikey=' + module.exports.KEY + '&return=enriched.url.url,enriched.url.text&q.enriched.url.concepts.concept.text=' + topic;
+	    return 'https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=50\n    &apikey=' + undefined[API_KEY] + '&return=enriched.url.url&q.enriched.url.concepts.concept.text=' + topic;
 	  },
 	
 	  getTextURL: function getTextURL(link) {
-	    return 'http://gateway-a.watsonplatform.net/calls/url/URLGetText?apikey=' + module.exports.KEY + '&outputMode=json&url=' + link;
+	    return 'http://gateway-a.watsonplatform.net/calls/url/URLGetText\n    ?apikey=' + undefined[API_KEY] + '\n    &outputMode=json\n    &url=' + link;
 	  }
 	};
 

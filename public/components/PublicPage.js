@@ -26,7 +26,10 @@ class PublicPage extends React.Component {
   componentDidMount () {
     console.log(this.props.currentStreamers);
     $('iframe').on('load', function () {
-      $("iframe").contents().find('#app').hide()
+      $("iframe").contents().find('.navbar').hide();
+      $("iframe").contents().find('#streamTitle').hide();
+      $("iframe").contents().find('#userPage').hide();
+
     });
   }
 
