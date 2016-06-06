@@ -62,6 +62,7 @@ class App extends React.Component {
                     <li> <Link to="/signup"> Sign up </Link> </li>
                   </ToggleDisplay>
                   <ToggleDisplay show={!!this.props.user.username}>
+                    <li><a href={`/${this.props.user.username}`}>My Page</a></li>
                     <li> <a href='' onClick={this.signout.bind(this)}> Log Out [{this.props.user.username}]</a> </li>
                   </ToggleDisplay>
                 </ul>
