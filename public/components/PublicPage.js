@@ -16,6 +16,7 @@ class PublicPage extends React.Component {
   }
   
   componentDidMount () {
+    console.log(this.props.currentStreamers);
     $('iframe').on('load', function () {
       $("iframe").contents().find('#app').hide()
     });
@@ -33,9 +34,7 @@ class PublicPage extends React.Component {
           <div className="col-md-8"> <h2>Current Video</h2> 
             <iframe id="currentVideo" width="711" height="400" src="" frameBorder="0" allowFullScreen></iframe>            
               <div id="articles"> <h2>Trending Articles</h2>
-                {this.props.articles.map((article) => 
-                  <li> {article} </li>
-                )}  
+                 
               </div>
           </div>
           

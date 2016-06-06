@@ -27156,6 +27156,7 @@
 	var UPDATE_BROADCASTER_STREAM_HASHTAGS = 'UPDATE_BROADCASTER_STREAM_HASHTAGS';
 	var UPDATE_NEWS_PAGE_TOPIC = 'UPDATE_NEWS_PAGE_TOPIC';
 	var UPDATE_NEWS_ARTICLES = 'UPDATE_NEWS_ARTICLES';
+	var UPDATE_CURRENT_STREAMER = 'UPDATE_CURRENT_STREAMER';
 	
 	var actions = (_actions = {
 	  signinUser: function signinUser(username) {
@@ -29440,6 +29441,7 @@
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
+	      console.log(this.props.currentStreamers);
 	      $('iframe').on('load', function () {
 	        $("iframe").contents().find('#app').hide();
 	      });
@@ -29478,16 +29480,7 @@
 	                'h2',
 	                null,
 	                'Trending Articles'
-	              ),
-	              this.props.articles.map(function (article) {
-	                return React.createElement(
-	                  'li',
-	                  null,
-	                  ' ',
-	                  article,
-	                  ' '
-	                );
-	              })
+	              )
 	            )
 	          ),
 	          React.createElement(
