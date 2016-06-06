@@ -29431,9 +29431,13 @@
 	          ),
 	          React.createElement(
 	            'div',
-	            { id: 'streamTitle', onClick: this.editStreamTitle.bind(this) },
-	            'Stream title: ',
-	            this.props.user.stream.title
+	            null,
+	            ' Stream Title:   ',
+	            React.createElement(
+	              'span',
+	              { id: 'streamTitle', onClick: this.editStreamTitle.bind(this) },
+	              this.props.user.stream.title
+	            )
 	          ),
 	          React.createElement(
 	            _reactToggleDisplay2.default,
@@ -29452,9 +29456,13 @@
 	            'div',
 	            null,
 	            'Hashtags:  ',
-	            this.props.user.stream.hashtags.map(function (tag) {
-	              return React.createElement(_HashTagComp2.default, { key: tag.id, removeTag: _this2.removeTag, tag: tag });
-	            })
+	            React.createElement(
+	              'div',
+	              null,
+	              this.props.user.stream.hashtags.map(function (tag) {
+	                return React.createElement(_HashTagComp2.default, { key: tag.id, removeTag: _this2.removeTag, tag: tag });
+	              })
+	            )
 	          ),
 	          React.createElement(
 	            'div',
@@ -29488,6 +29496,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	
 	var HashTagComp = function HashTagComp(_ref) {
 	  var tag = _ref.tag;
 	  var removeTag = _ref.removeTag;

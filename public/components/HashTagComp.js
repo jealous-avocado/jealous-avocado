@@ -1,3 +1,4 @@
+
 var HashTagComp = ({tag, removeTag}) => {
   return (
     <span id='hashtag' onClick={removeTag} tag={tag.hashtag}>
@@ -7,3 +8,4 @@ var HashTagComp = ({tag, removeTag}) => {
 };
 
 export default HashTagComp;
+      

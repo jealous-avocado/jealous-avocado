@@ -76,5 +76,10 @@ li {
  }
 
  #streamTitle {
+  font-weight: bold;
   text-align: left;
+ }
+
+ #streamTitle:hover {
+  text-decoration: underline;
  }
