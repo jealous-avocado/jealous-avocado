@@ -50,10 +50,11 @@ class Signup extends React.Component {
   render() {
     return (
       <div>
+        Sign Up
         <form id="signinForm" onSubmit={this.postUser.bind(this)}>
           <input id='username' placeholder='username'/>
           <input id='password' placeholder='password' type='password' />
-          <input type='submit'></input>
+          <input type='submit' className="btn btn-default"/>
         </form> 
       </div>
     );

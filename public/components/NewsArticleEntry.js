@@ -8,8 +8,9 @@ var NewsArticleEntry = ({article, idx}) => {
 
   return (
     <div id='articleContainer'>
-      <div> {idx+1}. <a href={article.url}>{article.url}</a> </div>
+      <div> {idx+1}. {article.title}</div>
       <div><i>{article.snippet}</i></div>
+      <a href={article.url}>{article.url}</a> 
     </div>
   );
 };

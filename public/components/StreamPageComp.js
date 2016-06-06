@@ -96,7 +96,7 @@ class StreamPageComp extends React.Component {
             </div>
           </div>
         </div>
-        
+
         <div id='userDashCol' className='col-md-4'>
           <div id='dashboardText'> Dashboard </div>
 
