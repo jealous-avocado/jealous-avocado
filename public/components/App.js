@@ -1,4 +1,4 @@
-import {Link} from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import ToggleDisplay from 'react-toggle-display';
 import actions from '../redux/actions';
@@ -14,6 +14,7 @@ class App extends React.Component {
     let username = this.props.user.username;
     this.props.dispatch(actions.logoutUser());
     delete window.localStorage.state;
+    browserHistory.push('/');
   }
 
   searchForArticles(event) {
@@ -63,6 +64,9 @@ class App extends React.Component {
                           <a href={`/${this.props.user.username}`}>My Page</a>
                         </li>
                         <li> <a href='' onClick={this.signout.bind(this)}> Log Out [{this.props.user.username}]</a> </li>
+                        <li>
+                          <Link to='/teek/profile'>Settings</Link>
+                        </li>
                       </ToggleDisplay>
                     </ul>
                   </li>
