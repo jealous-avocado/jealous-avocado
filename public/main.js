@@ -28992,12 +28992,7 @@
 	      ' ',
 	      idx + 1,
 	      '. ',
-	      React.createElement(
-	        'a',
-	        { href: article.url },
-	        article.url
-	      ),
-	      ' '
+	      article.title
 	    ),
 	    React.createElement(
 	      'div',
@@ -29007,6 +29002,11 @@
 	        null,
 	        article.snippet
 	      )
+	    ),
+	    React.createElement(
+	      'a',
+	      { href: article.url },
+	      article.url
 	    )
 	  );
 	};
@@ -29022,7 +29022,7 @@
 	module.exports = {
 	  KEY: '5271f6ac77beb97a142fe534297b65aaebd9ed5a',
 	  getNewsURL: function getNewsURL(topic) {
-	    return 'https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=10&apikey=' + module.exports.KEY + '&return=enriched.url.url,enriched.url.text&q.enriched.url.concepts.concept.text=' + topic;
+	    return 'https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=10&apikey=' + module.exports.KEY + '&return=enriched.url.url,enriched.url.text,enriched.url.cleanedTitle&q.enriched.url.concepts.concept.text=' + topic;
 	  },
 	
 	  getTextURL: function getTextURL(link) {
