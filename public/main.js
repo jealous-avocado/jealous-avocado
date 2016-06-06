@@ -71,7 +71,6 @@
 	var store = (0, _store2.default)();
 	
 	if (state) {
-	  console.log(state.user.username, 'STATE index.js');
 	  var initialState = {
 	    user: {
 	      username: state.user.username,
@@ -29230,9 +29229,8 @@
 	        $('#streamTitleInput').val('').hide();
 	
 	        componentContext.props.dispatch(_actions2.default.updateBroadcasterStreamTopic(streamTitle));
-	
-	        console.log(componentContext.props.user, 'PROPS');
 	        componentContext.props.dispatch(_actions2.default.updateCurrentStreamer(componentContext.props.user.username));
+	        $.post('/currentStreamer', { username: componentContext.props.user.username, isStreaming: true });
 	        window.localStorage.setItem('state', JSON.stringify(componentContext.props));
 	      };
 	
@@ -29420,6 +29418,22 @@
 	      $('#currentVideo').attr('src', src);
 	    }
 	  }, {
+<<<<<<< HEAD
+=======
+	    key: 'refreshBroadcast',
+	    value: function refreshBroadcast() {
+	      var _this2 = this;
+	
+	      $.get('/currentStreamers').done(function (r) {
+	        console.log('results is', r);
+	        _this2.props.dispatch(_actions2.default.updateCurrentStreamer(r));
+	        window.localStorage.setItem('state', JSON.stringify(_this2.props));
+	      }).fail(function (e) {
+	        return console.log('Error in get request: ', e);
+	      });
+	    }
+	  }, {
+>>>>>>> Implement get and post request to currentStreamers endpoint
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      console.log(this.props.currentStreamers);
@@ -29430,7 +29444,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
+	      var _this3 = this;
 	
 	      return React.createElement(
 	        'div',
@@ -29469,18 +29483,23 @@
 	              'Currently Broadcasting'
 	            ),
 	            React.createElement(
+	              'button',
+	              { type: 'button', 'class': 'btn btn-success', onClick: this.refreshBroadcast.bind(this) },
+	              'Refresh Broadcast'
+	            ),
+	            React.createElement(
 	              'ul',
 	              { id: 'video' },
 	              this.props.currentStreamers.map(function (video) {
 	                return React.createElement(
 	                  'li',
-	                  { className: 'video', onClick: _this2.updateCurrentVideo },
+	                  { className: 'video', onClick: _this3.updateCurrentVideo },
 	                  React.createElement(
 	                    'div',
 	                    { className: 'videoWrapper' },
 	                    React.createElement('iframe', { width: '142', height: '80', src: "http://localhost:3000/" + video, frameBorder: '0', allowFullScreen: true })
 	                  ),
-	                  video + " is reporting on " + _this2.props.user.stream.title
+	                  video + " is reporting on " + _this3.props.user.stream.title
 	                );
 	              })
 	            )
