@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import actions from '../redux/actions';
 import ToggleDisplay from 'react-toggle-display';
+import { Router, browserHistory } from 'react-router';
 var _ = require('underscore');
 
 
@@ -35,7 +36,7 @@ class Signin extends React.Component {
       window.localStorage.setItem('state', JSON.stringify(this.props));
       $('#signinForm').hide();
 
-      
+      browserHistory.push(this.props.user.username);
     })
     .fail(e => {
       $('#errorInfo').remove();

@@ -35,8 +35,14 @@ class StreamPageComp extends React.Component {
     };
 
     document.querySelector('#stopStream').onclick = function() {
-      $.post('/currentStreamer',{username:componentContext.props.user.username,isStreaming: false});
       connection.close();
+
+      $.post('/currentStreamers',{username:componentContext.props.user.username,isStreaming: false});
+
+      componentContext.props.dispatch(
+        actions.removeCurrentStreamer(componentContext.props.user.username)
+      );
+      
       $('#stopStream').hide();
       $('#startStream').show();
       $('#streamTitleInput').val('').show();
