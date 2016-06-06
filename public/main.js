@@ -29129,13 +29129,17 @@
 	'use strict';
 	
 	module.exports = {
-	  API_KEY: '7899c81a8b05382d7102fd6a6c320f28954b8986',
+	  KEY: '5271f6ac77beb97a142fe534297b65aaebd9ed5a',
 	  getNewsURL: function getNewsURL(topic) {
-	    return 'https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=20&apikey=' + module.exports.API_KEY + '&return=enriched.url.url&q.enriched.url.concepts.concept.text=' + topic;
+	    return 'https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=50&apikey=' + module.exports.KEY + '&return=enriched.url.url,enriched.url.text&q.enriched.url.concepts.concept.text=' + topic;
 	  },
 	
 	  getTextURL: function getTextURL(link) {
-	    return 'http://gateway-a.watsonplatform.net/calls/url/URLGetText?apikey=' + module.exports.API_KEY + '&outputMode=json&url=' + link;
+	    // return
+	
+	    /* --- FOR FULL URL TEXT USE BELOW ----
+	     return `http://gateway-a.watsonplatform.net/calls/url/URLGetText?apikey=${module.exports.KEY}&outputMode=json&url=${link}`;
+	    */
 	  }
 	};
 
@@ -29368,6 +29372,16 @@
 	      $(e.currentTarget).remove();
 	    }
 	  }, {
+	    key: 'editStreamTitle',
+	    value: function editStreamTitle() {
+	      this.props.dispatch(_actions2.default.updateBroadcasterStreamTopic(''));
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      $(streamTitleInput).focus();
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
@@ -29377,52 +29391,80 @@
 	        null,
 	        React.createElement(
 	          'div',
-	          null,
-	          'User Page '
+	          { id: 'userStreamCol', className: 'col-md-8' },
+	          React.createElement(
+	            'div',
+	            null,
+	            React.createElement(
+	              'div',
+	              { id: 'streamTitle', onClick: this.editStreamTitle.bind(this) },
+	              this.props.user.stream.title
+	            ),
+	            React.createElement('div', { id: 'streamContainer' }),
+	            React.createElement(
+	              'div',
+	              { id: 'streamOptionsContainer' },
+	              React.createElement(
+	                _reactToggleDisplay2.default,
+	                { show: this.matchUsertoURL.bind(this)() },
+	                React.createElement(
+	                  'button',
+	                  { id: 'startStream', className: 'btn btn-default' },
+	                  ' Start Stream '
+	                ),
+	                React.createElement(
+	                  'button',
+	                  { id: 'stopStream', className: 'btn btn-default', style: { 'display': 'none' } },
+	                  ' Stop Stream '
+	                )
+	              )
+	            )
+	          )
 	        ),
 	        React.createElement(
-	          _reactToggleDisplay2.default,
-	          { show: this.matchUsertoURL.bind(this)() },
+	          'div',
+	          { id: 'userDashCol', className: 'col-md-4' },
+	          React.createElement(
+	            'div',
+	            { id: 'dashboardText' },
+	            ' Dashboard '
+	          ),
+	          React.createElement(
+	            'div',
+	            { id: 'streamTitle', onClick: this.editStreamTitle.bind(this) },
+	            'Stream title: ',
+	            this.props.user.stream.title
+	          ),
 	          React.createElement(
 	            _reactToggleDisplay2.default,
 	            { show: !this.props.user.stream.title },
 	            React.createElement(
-	              'form',
-	              { onSubmit: this.saveStreamTitle.bind(this) },
-	              React.createElement('input', { id: 'streamTitleInput', placeholder: 'Title the stream' })
+	              'div',
+	              null,
+	              React.createElement(
+	                'form',
+	                { id: 'streamTitleForm', onSubmit: this.saveStreamTitle.bind(this) },
+	                React.createElement('input', { className: 'form-control', id: 'streamTitleInput', placeholder: 'Title the stream' })
+	              )
 	            )
 	          ),
 	          React.createElement(
-	            'form',
-	            { onSubmit: this.saveHashTags.bind(this) },
-	            React.createElement('input', { id: 'hashTagInput', placeholder: 'Enter a topic tag' })
+	            'div',
+	            null,
+	            'Hashtags:  ',
+	            this.props.user.stream.hashtags.map(function (tag) {
+	              return React.createElement(_HashTagComp2.default, { key: tag.id, removeTag: _this2.removeTag, tag: tag });
+	            })
 	          ),
 	          React.createElement(
-	            'button',
-	            { id: 'startStream' },
-	            ' Start Stream '
-	          ),
-	          React.createElement(
-	            'button',
-	            { id: 'stopStream', style: { 'display': 'none' } },
-	            ' Stop Stream '
+	            'div',
+	            null,
+	            React.createElement(
+	              'form',
+	              { onSubmit: this.saveHashTags.bind(this) },
+	              React.createElement('input', { className: 'form-control', id: 'hashTagInput', placeholder: 'Enter a topic tag' })
+	            )
 	          )
-	        ),
-	        React.createElement('br', null),
-	        React.createElement(
-	          'div',
-	          { id: 'streamTitle' },
-	          'Stream title: ',
-	          this.props.user.stream.title
-	        ),
-	        React.createElement('div', { id: 'streamContainer' }),
-	        React.createElement(
-	          'div',
-	          null,
-	          'Hashtags:  ',
-	          this.props.user.stream.hashtags.map(function (tag) {
-	            return React.createElement(_HashTagComp2.default, { key: tag.id, removeTag: _this2.removeTag, tag: tag });
-	          })
 	        )
 	      );
 	    }
