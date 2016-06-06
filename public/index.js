@@ -21,7 +21,8 @@ if (state) {
     },
     newsTopic: state.newsTopic,
     articles: state.articles,
-    currentStreamers: state.currentStreamers
+    currentStreamers: state.currentStreamers, 
+    connection: state.connection
   };  
   
   store = configureStore(initialState);

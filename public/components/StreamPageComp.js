@@ -11,7 +11,9 @@ class StreamPageComp extends React.Component {
 
   componentDidMount() {
 
-    var connection = new RTCMultiConnection().connect();
+    var connection = new RTCMultiConnection().connect(); 
+    
+
     connection.body = document.getElementById('streamContainer');
 
     var componentContext = this;
@@ -19,13 +21,16 @@ class StreamPageComp extends React.Component {
     document.querySelector('#startStream').onclick = function() {
       connection.open();
       connection.direction = 'one-way';
-      $('#startStream').hide();
-      $('#stopStream').show();
+
+      // componentContext.props.dispatch(actions.saveBroadcastConnection(connection));
+      
 
       componentContext.props.dispatch(actions.updateCurrentStreamer(componentContext.props.user.username));
       $.post('/currentStreamer',{username:componentContext.props.user.username,isStreaming: true});
       window.localStorage.setItem('state', JSON.stringify(componentContext.props));
 
+      $('#startStream').hide();
+      $('#stopStream').show();
     };
 
     document.querySelector('#stopStream').onclick = function() {

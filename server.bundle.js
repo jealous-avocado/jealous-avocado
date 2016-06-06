@@ -180,6 +180,7 @@
 	      d.result.docs.forEach(function (doc) {
 	        var newArticle = new Article({
 	          url: doc.source.enriched.url.url,
+	          snippet: doc.source.enriched.url.text,
 	          topicId: topicId
 	        }).save();
 	      });
@@ -192,7 +193,7 @@
 	    Article.fetchAll({ topicId: topicId }).then(function (articles) {
 	      articles.forEach(function (article) {
 	        //console.log(article.get('url'), article.get('created_at'));
-	        allURLS.push(article.get('url'));
+	        allURLS.push({ url: article.get('url'), snippet: article.get('snippet') });
 	      });
 	      res.json(allURLS);
 	    });
@@ -359,6 +360,7 @@
 	      //article.string('title', 255);
 	      article.string('url', 1024).unique();
 	      article.integer('topicId');
+	      article.string('snippet', 3000);
 	      article.timestamps();
 	    }).then(function (table) {
 	      console.log('Created Table', table);
@@ -492,13 +494,17 @@
 	'use strict';
 	
 	module.exports = {
-	  API_KEY: 'YOUR_ALCHEMY_API_KEY',
+	  KEY: '5271f6ac77beb97a142fe534297b65aaebd9ed5a',
 	  getNewsURL: function getNewsURL(topic) {
-	    return 'https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=50\n    &apikey=' + undefined[API_KEY] + '&return=enriched.url.url&q.enriched.url.concepts.concept.text=' + topic;
+	    return 'https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=10&apikey=' + module.exports.KEY + '&return=enriched.url.url,enriched.url.text&q.enriched.url.concepts.concept.text=' + topic;
 	  },
 	
 	  getTextURL: function getTextURL(link) {
-	    return 'http://gateway-a.watsonplatform.net/calls/url/URLGetText\n    ?apikey=' + undefined[API_KEY] + '\n    &outputMode=json\n    &url=' + link;
+	    // return
+	
+	    /* --- FOR FULL URL TEXT USE BELOW ----
+	     return `http://gateway-a.watsonplatform.net/calls/url/URLGetText?apikey=${module.exports.KEY}&outputMode=json&url=${link}`;
+	    */
 	  }
 	};
 

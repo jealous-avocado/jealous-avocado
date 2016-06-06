@@ -58,7 +58,7 @@
 	
 	var _routes2 = _interopRequireDefault(_routes);
 	
-	var _store = __webpack_require__(258);
+	var _store = __webpack_require__(256);
 	
 	var _store2 = _interopRequireDefault(_store);
 	
@@ -81,7 +81,8 @@
 	    },
 	    newsTopic: state.newsTopic,
 	    articles: state.articles,
-	    currentStreamers: state.currentStreamers
+	    currentStreamers: state.currentStreamers,
+	    connection: state.connection
 	  };
 	
 	  store = (0, _store2.default)(initialState);
@@ -25228,15 +25229,15 @@
 	
 	var _App2 = _interopRequireDefault(_App);
 	
-	var _Signin = __webpack_require__(246);
+	var _Signin = __webpack_require__(244);
 	
 	var _Signin2 = _interopRequireDefault(_Signin);
 	
-	var _Signup = __webpack_require__(248);
+	var _Signup = __webpack_require__(246);
 	
 	var _Signup2 = _interopRequireDefault(_Signup);
 	
-	var _TopicPage = __webpack_require__(249);
+	var _TopicPage = __webpack_require__(247);
 	
 	var _TopicPage2 = _interopRequireDefault(_TopicPage);
 	
@@ -25244,11 +25245,11 @@
 	
 	var _StreamPageComp2 = _interopRequireDefault(_StreamPageComp);
 	
-	var _NewsArticles = __webpack_require__(250);
+	var _NewsArticles = __webpack_require__(248);
 	
 	var _NewsArticles2 = _interopRequireDefault(_NewsArticles);
 	
-	var _PublicPage = __webpack_require__(257);
+	var _PublicPage = __webpack_require__(255);
 	
 	var _PublicPage2 = _interopRequireDefault(_PublicPage);
 	
@@ -25284,11 +25285,11 @@
 	
 	var _reactRedux = __webpack_require__(222);
 	
-	var _reactToggleDisplay = __webpack_require__(244);
+	var _reactToggleDisplay = __webpack_require__(242);
 	
 	var _reactToggleDisplay2 = _interopRequireDefault(_reactToggleDisplay);
 	
-	var _actions = __webpack_require__(245);
+	var _actions = __webpack_require__(243);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
@@ -25354,8 +25355,8 @@
 	                React.createElement('span', { className: 'icon-bar' })
 	              ),
 	              React.createElement(
-	                'a',
-	                { className: 'navbar-brand', href: '#' },
+	                'div',
+	                { className: 'navbar-brand' },
 	                'GoRep'
 	              )
 	            ),
@@ -25370,8 +25371,8 @@
 	                  null,
 	                  React.createElement(
 	                    _reactRouter.Link,
-	                    { to: '/public' },
-	                    'Public'
+	                    { to: '/' },
+	                    'Home'
 	                  ),
 	                  ' '
 	                ),
@@ -25719,11 +25720,11 @@
 	
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 	
-	var _hoistNonReactStatics = __webpack_require__(242);
+	var _hoistNonReactStatics = __webpack_require__(199);
 	
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 	
-	var _invariant = __webpack_require__(243);
+	var _invariant = __webpack_require__(166);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -26975,112 +26976,6 @@
 
 /***/ },
 /* 242 */
-/***/ function(module, exports) {
-
-	/**
-	 * Copyright 2015, Yahoo! Inc.
-	 * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
-	 */
-	'use strict';
-	
-	var REACT_STATICS = {
-	    childContextTypes: true,
-	    contextTypes: true,
-	    defaultProps: true,
-	    displayName: true,
-	    getDefaultProps: true,
-	    mixins: true,
-	    propTypes: true,
-	    type: true
-	};
-	
-	var KNOWN_STATICS = {
-	    name: true,
-	    length: true,
-	    prototype: true,
-	    caller: true,
-	    arguments: true,
-	    arity: true
-	};
-	
-	module.exports = function hoistNonReactStatics(targetComponent, sourceComponent) {
-	    if (typeof sourceComponent !== 'string') { // don't hoist over string (html) components
-	        var keys = Object.getOwnPropertyNames(sourceComponent);
-	        for (var i=0; i<keys.length; ++i) {
-	            if (!REACT_STATICS[keys[i]] && !KNOWN_STATICS[keys[i]]) {
-	                try {
-	                    targetComponent[keys[i]] = sourceComponent[keys[i]];
-	                } catch (error) {
-	
-	                }
-	            }
-	        }
-	    }
-	
-	    return targetComponent;
-	};
-
-
-/***/ },
-/* 243 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright 2013-2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 */
-	
-	'use strict';
-	
-	/**
-	 * Use invariant() to assert state which your program assumes to be true.
-	 *
-	 * Provide sprintf-style format (only %s is supported) and arguments
-	 * to provide information about what broke and what you were
-	 * expecting.
-	 *
-	 * The invariant message will be stripped in production, but the invariant
-	 * will remain to ensure logic does not differ in production.
-	 */
-	
-	var invariant = function(condition, format, a, b, c, d, e, f) {
-	  if (process.env.NODE_ENV !== 'production') {
-	    if (format === undefined) {
-	      throw new Error('invariant requires an error message argument');
-	    }
-	  }
-	
-	  if (!condition) {
-	    var error;
-	    if (format === undefined) {
-	      error = new Error(
-	        'Minified exception occurred; use the non-minified dev environment ' +
-	        'for the full error message and additional helpful warnings.'
-	      );
-	    } else {
-	      var args = [a, b, c, d, e, f];
-	      var argIndex = 0;
-	      error = new Error(
-	        format.replace(/%s/g, function() { return args[argIndex++]; })
-	      );
-	      error.name = 'Invariant Violation';
-	    }
-	
-	    error.framesToPop = 1; // we don't care about invariant's own frame
-	    throw error;
-	  }
-	};
-	
-	module.exports = invariant;
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
-
-/***/ },
-/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
@@ -27147,7 +27042,7 @@
 
 
 /***/ },
-/* 245 */
+/* 243 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -27155,11 +27050,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	var _actions;
-	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-	
 	var UPDATE_CURRENT_USER = 'UPDATE_CURRENT_USER';
 	var LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
 	var UPDATE_BROADCASTER_STREAM_TOPIC = 'UPDATE_BROADCASTER_STREAM_TOPIC';
@@ -27167,8 +27057,9 @@
 	var UPDATE_NEWS_PAGE_TOPIC = 'UPDATE_NEWS_PAGE_TOPIC';
 	var UPDATE_NEWS_ARTICLES = 'UPDATE_NEWS_ARTICLES';
 	var UPDATE_CURRENT_STREAMER = 'UPDATE_CURRENT_STREAMER';
+	var SAVE_BROADCAST_CONNECTION = 'SAVE_BROADCAST_CONNECTION';
 	
-	var actions = (_actions = {
+	var actions = {
 	  signinUser: function signinUser(username) {
 	    return {
 	      type: UPDATE_CURRENT_USER,
@@ -27215,39 +27106,32 @@
 	        .then(result => dispatch(context.updateNewsArticles(result)));
 	    }
 	    */
-	  }
+	  },
 	
-	}, _defineProperty(_actions, 'updateNewsArticles', function updateNewsArticles(articles) {
-	  return {
-	    type: UPDATE_NEWS_ARTICLES,
-	    articles: articles
-	  };
-	}), _defineProperty(_actions, 'fetchNewsArticles', function fetchNewsArticles(query) {
-	  //async fetch to alchemy api or nyt api
-	  //return a function that returns a promised fetch request
-	  /*
-	  var context = this;
-	  return dispatch => {
-	    //dispatch another action that tells user that we are fetching ??
-	    return fetch(url+query)
-	      .then(result => dispatch(context.updateNewsArticles(result)));
+	  saveBroadcastConnection: function saveBroadcastConnection(connection) {
+	    return {
+	      type: SAVE_BROADCAST_CONNECTION,
+	      connection: connection
+	    };
+	  },
+	
+	  logoutUser: function logoutUser() {
+	    return {
+	      type: LOGOUT_CURRENT_USER
+	    };
+	  },
+	  updateCurrentStreamer: function updateCurrentStreamer(streamer) {
+	    return {
+	      type: UPDATE_CURRENT_STREAMER,
+	      addStreamer: streamer
+	    };
 	  }
-	  */
-	}), _defineProperty(_actions, 'logoutUser', function logoutUser() {
-	  return {
-	    type: LOGOUT_CURRENT_USER
-	  };
-	}), _defineProperty(_actions, 'updateCurrentStreamer', function updateCurrentStreamer(streamer) {
-	  return {
-	    type: UPDATE_CURRENT_STREAMER,
-	    addStreamer: streamer
-	  };
-	}), _actions);
+	};
 	
 	exports.default = actions;
 
 /***/ },
-/* 246 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27260,7 +27144,7 @@
 	
 	var _reactRedux = __webpack_require__(222);
 	
-	var _actions = __webpack_require__(245);
+	var _actions = __webpack_require__(243);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
@@ -27272,7 +27156,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var _ = __webpack_require__(247);
+	var _ = __webpack_require__(245);
 	
 	var Signin = function (_React$Component) {
 	  _inherits(Signin, _React$Component);
@@ -27352,7 +27236,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(Signin);
 
 /***/ },
-/* 247 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.8.3
@@ -28906,7 +28790,7 @@
 
 
 /***/ },
-/* 248 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28919,7 +28803,7 @@
 	
 	var _reactRedux = __webpack_require__(222);
 	
-	var _actions = __webpack_require__(245);
+	var _actions = __webpack_require__(243);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
@@ -28931,7 +28815,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var _ = __webpack_require__(247);
+	var _ = __webpack_require__(245);
 	
 	var Signup = function (_React$Component) {
 	  _inherits(Signup, _React$Component);
@@ -29009,7 +28893,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(Signup);
 
 /***/ },
-/* 249 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29020,17 +28904,17 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _NewsArticles = __webpack_require__(250);
+	var _NewsArticles = __webpack_require__(248);
 	
 	var _NewsArticles2 = _interopRequireDefault(_NewsArticles);
 	
-	var _NewsVideos = __webpack_require__(253);
+	var _NewsVideos = __webpack_require__(251);
 	
 	var _NewsVideos2 = _interopRequireDefault(_NewsVideos);
 	
 	var _reactRedux = __webpack_require__(222);
 	
-	var _actions = __webpack_require__(245);
+	var _actions = __webpack_require__(243);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
@@ -29104,7 +28988,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(TopicPage);
 
 /***/ },
-/* 250 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29115,11 +28999,11 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _actions = __webpack_require__(245);
+	var _actions = __webpack_require__(243);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
-	var _NewsArticleEntry = __webpack_require__(251);
+	var _NewsArticleEntry = __webpack_require__(249);
 	
 	var _NewsArticleEntry2 = _interopRequireDefault(_NewsArticleEntry);
 	
@@ -29188,7 +29072,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(NewsArticles);
 
 /***/ },
-/* 251 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29196,7 +29080,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var alchemy = __webpack_require__(252);
+	var alchemy = __webpack_require__(250);
 	
 	var NewsArticleEntry = function NewsArticleEntry(_ref) {
 	  var article = _ref.article;
@@ -29209,7 +29093,7 @@
 	
 	  return React.createElement(
 	    'div',
-	    null,
+	    { id: 'articleContainer' },
 	    React.createElement(
 	      'div',
 	      null,
@@ -29218,10 +29102,19 @@
 	      '. ',
 	      React.createElement(
 	        'a',
-	        { href: article },
-	        article
+	        { href: article.url },
+	        article.url
 	      ),
 	      ' '
+	    ),
+	    React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'i',
+	        null,
+	        article.snippet
+	      )
 	    )
 	  );
 	};
@@ -29229,24 +29122,28 @@
 	exports.default = NewsArticleEntry;
 
 /***/ },
-/* 252 */
+/* 250 */
 /***/ function(module, exports) {
 
 	'use strict';
 	
 	module.exports = {
-	  API_KEY: 'YOUR_ALCHEMY_API_KEY',
+	  KEY: '5271f6ac77beb97a142fe534297b65aaebd9ed5a',
 	  getNewsURL: function getNewsURL(topic) {
-	    return 'https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=50\n    &apikey=' + undefined[API_KEY] + '&return=enriched.url.url&q.enriched.url.concepts.concept.text=' + topic;
+	    return 'https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=10&apikey=' + module.exports.KEY + '&return=enriched.url.url,enriched.url.text&q.enriched.url.concepts.concept.text=' + topic;
 	  },
 	
 	  getTextURL: function getTextURL(link) {
-	    return 'http://gateway-a.watsonplatform.net/calls/url/URLGetText\n    ?apikey=' + undefined[API_KEY] + '\n    &outputMode=json\n    &url=' + link;
+	    // return
+	
+	    /* --- FOR FULL URL TEXT USE BELOW ----
+	     return `http://gateway-a.watsonplatform.net/calls/url/URLGetText?apikey=${module.exports.KEY}&outputMode=json&url=${link}`;
+	    */
 	  }
 	};
 
 /***/ },
-/* 253 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29259,11 +29156,11 @@
 	
 	var _reactRedux = __webpack_require__(222);
 	
-	var _actions = __webpack_require__(245);
+	var _actions = __webpack_require__(243);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
-	var _NewsVideoEntry = __webpack_require__(254);
+	var _NewsVideoEntry = __webpack_require__(252);
 	
 	var _NewsVideoEntry2 = _interopRequireDefault(_NewsVideoEntry);
 	
@@ -29344,7 +29241,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(NewsVideos);
 
 /***/ },
-/* 254 */
+/* 252 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -29375,9 +29272,9 @@
 	exports.default = NewsVideoEntry;
 
 /***/ },
-/* 255 */,
-/* 256 */,
-/* 257 */
+/* 253 */,
+/* 254 */,
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29390,7 +29287,7 @@
 	
 	var _reactRedux = __webpack_require__(222);
 	
-	var _actions = __webpack_require__(245);
+	var _actions = __webpack_require__(243);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
@@ -29518,7 +29415,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(PublicPage);
 
 /***/ },
-/* 258 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29530,11 +29427,11 @@
 	
 	var _redux = __webpack_require__(229);
 	
-	var _reducers = __webpack_require__(259);
+	var _reducers = __webpack_require__(257);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
-	var _reduxLogger = __webpack_require__(260);
+	var _reduxLogger = __webpack_require__(258);
 	
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 	
@@ -29553,14 +29450,15 @@
 	    },
 	    newsTopic: 'WORLD NEWS',
 	    articles: [],
-	    currentStreamers: []
+	    currentStreamers: [],
+	    connection: null
 	  } : arguments[0];
 	
 	  return finalcreateStore(_reducers2.default, initialState);
 	}
 
 /***/ },
-/* 259 */
+/* 257 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -29622,6 +29520,10 @@
 	        }
 	      });
 	
+	    case "SAVE_BROADCAST_CONNECTION":
+	      return Object.assign({}, state, {
+	        connection: action.connection
+	      });
 	    case "UPDATE_NEWS_PAGE_TOPIC":
 	      return Object.assign({}, state, {
 	        newsTopic: action.topic
@@ -29644,7 +29546,7 @@
 	exports.default = reducer;
 
 /***/ },
-/* 260 */
+/* 258 */
 /***/ function(module, exports) {
 
 	"use strict";

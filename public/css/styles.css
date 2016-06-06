@@ -77,4 +77,15 @@ li {
 
  #streamTitle {
   text-align: left;
+<<<<<<< ab44fce38bf1dd78d5b296f749dae908954e81d4
+=======
+ }
+
+ #streamTitle:hover {
+  text-decoration: underline;
+ }
+
+ #articleContainer {
+  border: solid;
+>>>>>>> show snippets for articles
  }

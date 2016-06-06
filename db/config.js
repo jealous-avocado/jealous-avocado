@@ -65,6 +65,7 @@ db.knex.schema.hasTable('articles').then(function(exists) {
       //article.string('title', 255);
       article.string('url', 1024).unique();
       article.integer('topicId');
+      article.string('snippet', 3000);
       article.timestamps();
     }).then(function(table) {
       console.log('Created Table', table);

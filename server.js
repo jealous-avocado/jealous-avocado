@@ -140,6 +140,7 @@ app.get('/getArticles', (req, res) => {
       d.result.docs.forEach(doc => {
         var newArticle = new Article({
           url: doc.source.enriched.url.url,
+          snippet: doc.source.enriched.url.text,
           topicId: topicId
         }).save();
       });
@@ -152,7 +153,7 @@ app.get('/getArticles', (req, res) => {
     Article.fetchAll({topicId: topicId}).then(function(articles){
       articles.forEach(function(article){
         //console.log(article.get('url'), article.get('created_at'));
-        allURLS.push(article.get('url'));
+        allURLS.push({url: article.get('url'), snippet: article.get('snippet')});
       });
       res.json(allURLS);
     });
