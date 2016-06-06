@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import actions from '../redux/actions';
+import ToggleDisplay from 'react-toggle-display';
 var _ = require('underscore');
+
 
 class Signin extends React.Component {
   constructor(props) {
@@ -30,12 +32,9 @@ class Signin extends React.Component {
     $.post('/signin', userObj)
     .done(() => {
       this.props.dispatch(actions.signinUser(username));
-
-
       window.localStorage.setItem('state', JSON.stringify(this.props));
-
-      console.log('props signin: ', this.props);
       $('#signinForm').hide();
+
       
     })
     .fail(e => {
@@ -58,7 +57,11 @@ class Signin extends React.Component {
           <input id='username' placeholder='username'/>
           <input id='password' placeholder='password' type='password' />
           <input type='submit' className="btn btn-default"/>
-        </form> 
+        </form>
+        <br></br>
+        <ToggleDisplay show={!!this.props.user.username}>
+          <a href={`/${this.props.user.username}`}>My Page</a> 
+        </ToggleDisplay>
       </div>
     );
   }
