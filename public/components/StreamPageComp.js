@@ -20,6 +20,7 @@ class StreamPageComp extends React.Component {
     
     document.querySelector('#startStream').onclick = function() {
       connection.open();
+      $(streamContainer).css('background-color', 'transparent');
       connection.direction = 'one-way';
 
       // componentContext.props.dispatch(actions.saveBroadcastConnection(connection));
@@ -36,6 +37,7 @@ class StreamPageComp extends React.Component {
 
     document.querySelector('#stopStream').onclick = function() {
       connection.close();
+      $(streamContainer).css('background-color', 'black');
 
       $.post('/currentStreamers',{username:componentContext.props.user.username,isStreaming: false});
 
