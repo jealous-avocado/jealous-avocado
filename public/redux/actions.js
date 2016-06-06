@@ -1,7 +1,8 @@
 const UPDATE_CURRENT_USER = 'UPDATE_CURRENT_USER';
 const LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
 const UPDATE_BROADCASTER_STREAM_TOPIC = 'UPDATE_BROADCASTER_STREAM_TOPIC';
-const UPDATE_BROADCASTER_STREAM_HASHTAGS = 'UPDATE_BROADCASTER_STREAM_HASHTAGS';
+const UPDATE_STREAM_HASHTAGS = 'UPDATE_STREAM_HASHTAGS';
+const REMOVE_STREAM_HASHTAGS = 'REMOVE_STREAM_HASHTAGS';
 const UPDATE_NEWS_PAGE_TOPIC = 'UPDATE_NEWS_PAGE_TOPIC';
 const UPDATE_NEWS_ARTICLES = 'UPDATE_NEWS_ARTICLES';
 const UPDATE_CURRENT_STREAMER = 'UPDATE_CURRENT_STREAMER';
@@ -29,12 +30,19 @@ let actions = {
     }
   },
 
-  updateBroadcasterStreamHashtags: (hashtag) => {
+  updateStreamHashtags: (hashtag) => {
     return {
-      type: UPDATE_BROADCASTER_STREAM_HASHTAGS, 
-      hashtag: hashtag,
+      type: UPDATE_STREAM_HASHTAGS, 
+      hashtag: hashtag
     }
   },
+
+  removeStreamHashtags: (hashtag) => {
+    return {
+      type: REMOVE_STREAM_HASHTAGS, 
+      hashtag: hashtag
+    }
+  }, 
 
   updateNewsArticles: (articles) => {
     return {

@@ -43,6 +43,7 @@ class StreamPageComp extends React.Component {
   saveStreamTitle(e) {
     e.preventDefault();
 
+    //please note that streamTitleInput will refer to id 'streamTitleInput' by nature of react. 
     let streamTitleVal = $(streamTitleInput).val();
 
     this.props.dispatch(
@@ -57,15 +58,23 @@ class StreamPageComp extends React.Component {
     $(hashTagInput).val('');
 
     this.props.dispatch(
-      actions.updateBroadcasterStreamHashtags(hashTagVal)
+      actions.updateStreamHashtags(hashTagVal)
     );
   }
 
   removeTag(e) {
+    //has bugs...FIX ME!
+
+    let hashText = $(e.currentTarget).find('.tagText')[0].innerText;
     $(e.currentTarget).remove();
+
+    this.props.dispatch(
+      actions.removeStreamHashtags(hashText)
+    );
   }
 
   render() {
+
     return (
       <div>
         <div>User Page </div>
@@ -79,7 +88,7 @@ class StreamPageComp extends React.Component {
           </ToggleDisplay>
           
           <form onSubmit={this.saveHashTags.bind(this)}>
-            <input id='hashTagInput' placeholder='Enter a topic tag'/>
+            <input id='hashTagInput' placeholder='Enter a hashtag'/>
           </form>
           
           <button id='startStream'> Start Stream </button>
@@ -96,7 +105,7 @@ class StreamPageComp extends React.Component {
         Hashtags: &nbsp;
           {
             this.props.user.stream.hashtags.map(tag => {
-              return <HashTagComp key={tag.id} removeTag={this.removeTag} tag={tag}/>
+              return <HashTagComp removeTag={this.removeTag.bind(this)} tag={tag}/>
             })
           }
         </div>

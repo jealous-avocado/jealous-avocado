@@ -37,7 +37,7 @@ let reducer = function(state, action) {
           }
         }
       });
-    case "UPDATE_BROADCASTER_STREAM_HASHTAGS":
+    case "UPDATE_STREAM_HASHTAGS":
       return Object.assign({}, state, {
         user: {
           username: state.user.username,
@@ -47,7 +47,23 @@ let reducer = function(state, action) {
               {
                 id: getHashtagID(state), 
                 hashtag: action.hashtag
-              }, ...state.user.stream.hashtags]
+              }, 
+              ...state.user.stream.hashtags
+            ]
+          }
+        }
+      });
+    case "REMOVE_STREAM_HASHTAGS":
+      let hashTemp = state.user.stream.hashtags.filter(tag => {
+        return tag.hashtag !== action.hashtag;
+      });
+
+      return Object.assign({}, state, {
+        user: {
+          username: state.user.username, 
+          stream: {
+            title: state.user.stream.title, 
+            hashtags: hashTemp
           }
         }
       });

@@ -27058,7 +27058,8 @@
 	var UPDATE_CURRENT_USER = 'UPDATE_CURRENT_USER';
 	var LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
 	var UPDATE_BROADCASTER_STREAM_TOPIC = 'UPDATE_BROADCASTER_STREAM_TOPIC';
-	var UPDATE_BROADCASTER_STREAM_HASHTAGS = 'UPDATE_BROADCASTER_STREAM_HASHTAGS';
+	var UPDATE_STREAM_HASHTAGS = 'UPDATE_STREAM_HASHTAGS';
+	var REMOVE_STREAM_HASHTAGS = 'REMOVE_STREAM_HASHTAGS';
 	var UPDATE_NEWS_PAGE_TOPIC = 'UPDATE_NEWS_PAGE_TOPIC';
 	var UPDATE_NEWS_ARTICLES = 'UPDATE_NEWS_ARTICLES';
 	var UPDATE_CURRENT_STREAMER = 'UPDATE_CURRENT_STREAMER';
@@ -27085,9 +27086,16 @@
 	    };
 	  },
 	
-	  updateBroadcasterStreamHashtags: function updateBroadcasterStreamHashtags(hashtag) {
+	  updateStreamHashtags: function updateStreamHashtags(hashtag) {
 	    return {
-	      type: UPDATE_BROADCASTER_STREAM_HASHTAGS,
+	      type: UPDATE_STREAM_HASHTAGS,
+	      hashtag: hashtag
+	    };
+	  },
+	
+	  removeStreamHashtags: function removeStreamHashtags(hashtag) {
+	    return {
+	      type: REMOVE_STREAM_HASHTAGS,
 	      hashtag: hashtag
 	    };
 	  },
@@ -29352,6 +29360,7 @@
 	    value: function saveStreamTitle(e) {
 	      e.preventDefault();
 	
+	      //please note that streamTitleInput will refer to id 'streamTitleInput' by nature of react.
 	      var streamTitleVal = $(streamTitleInput).val();
 	
 	      this.props.dispatch(_actions2.default.updateBroadcasterStreamTopic(streamTitleVal));
@@ -29364,12 +29373,17 @@
 	      var hashTagVal = $(hashTagInput).val();
 	      $(hashTagInput).val('');
 	
-	      this.props.dispatch(_actions2.default.updateBroadcasterStreamHashtags(hashTagVal));
+	      this.props.dispatch(_actions2.default.updateStreamHashtags(hashTagVal));
 	    }
 	  }, {
 	    key: 'removeTag',
 	    value: function removeTag(e) {
+	      //has bugs...FIX ME!
+	
+	      var hashText = $(e.currentTarget).find('.tagText')[0].innerText;
 	      $(e.currentTarget).remove();
+	
+	      this.props.dispatch(_actions2.default.removeStreamHashtags(hashText));
 	    }
 	  }, {
 	    key: 'render',
@@ -29399,7 +29413,7 @@
 	          React.createElement(
 	            'form',
 	            { onSubmit: this.saveHashTags.bind(this) },
-	            React.createElement('input', { id: 'hashTagInput', placeholder: 'Enter a topic tag' })
+	            React.createElement('input', { id: 'hashTagInput', placeholder: 'Enter a hashtag' })
 	          ),
 	          React.createElement(
 	            'button',
@@ -29425,7 +29439,7 @@
 	          null,
 	          'Hashtags:  ',
 	          this.props.user.stream.hashtags.map(function (tag) {
-	            return React.createElement(_HashTagComp2.default, { key: tag.id, removeTag: _this2.removeTag, tag: tag });
+	            return React.createElement(_HashTagComp2.default, { removeTag: _this2.removeTag.bind(_this2), tag: tag });
 	          })
 	        )
 	      );
@@ -29461,8 +29475,12 @@
 	      'i',
 	      null,
 	      ' #',
-	      tag.hashtag,
-	      '   '
+	      React.createElement(
+	        'span',
+	        { className: 'tagText' },
+	        tag.hashtag
+	      ),
+	      '   '
 	    ),
 	    ' |'
 	  );
@@ -29682,7 +29700,7 @@
 	          }
 	        }
 	      });
-	    case "UPDATE_BROADCASTER_STREAM_HASHTAGS":
+	    case "UPDATE_STREAM_HASHTAGS":
 	      return Object.assign({}, state, {
 	        user: {
 	          username: state.user.username,
@@ -29692,6 +29710,20 @@
 	              id: getHashtagID(state),
 	              hashtag: action.hashtag
 	            }].concat(_toConsumableArray(state.user.stream.hashtags))
+	          }
+	        }
+	      });
+	    case "REMOVE_STREAM_HASHTAGS":
+	      var hashTemp = state.user.stream.hashtags.filter(function (tag) {
+	        return tag.hashtag !== action.hashtag;
+	      });
+	
+	      return Object.assign({}, state, {
+	        user: {
+	          username: state.user.username,
+	          stream: {
+	            title: state.user.stream.title,
+	            hashtags: hashTemp
 	          }
 	        }
 	      });
