@@ -7,9 +7,20 @@ class PublicPage extends React.Component {
     super(props);
   
   }
+
   updateCurrentVideo(event) {
     var src = $(event.currentTarget).find('iframe').attr('src');
     $('#currentVideo').attr('src', src);
+  }
+
+  refreshBroadcast() {
+    $.get('/currentStreamers')
+    .done(r => {
+      console.log('results is', r)
+      this.props.dispatch(actions.updateCurrentStreamer(r));
+      window.localStorage.setItem('state', JSON.stringify(this.props));
+      })
+    .fail(e => console.log('Error in get request: ', e));
   }
   
   componentDidMount () {
@@ -31,6 +42,7 @@ class PublicPage extends React.Component {
           </div>
           
           <div className="col-md-4"> <h2 id='broadcast'>Currently Broadcasting</h2>
+          <button type="button" class="btn btn-success" onClick={this.refreshBroadcast.bind(this)}>Refresh Broadcast</button>
             <ul id='video'>
               {this.props.currentStreamers.map((video) => 
                   <li className="video" onClick={this.updateCurrentVideo}> 
