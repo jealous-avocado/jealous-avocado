@@ -9,11 +9,17 @@ class App extends React.Component {
   }
 
   signout() {
+    window.location.replace('/'); //currently not working
 
     let username = this.props.user.username;
     this.props.dispatch(actions.logoutUser());
     delete window.localStorage.state;
-    window.location.assign('/');
+  }
+
+  searchForArticles(event) {
+    /*
+    ideally this will search for current streams, articles, and user profiles based off of the input; but unfortunately we couldn't get to it. I hope you, the next developer, will carry on the legacy. - GoRep
+    */
   }
 
   render() {
@@ -54,7 +60,7 @@ class App extends React.Component {
                   <div className="form-group">
                     <input type="text" className="form-control" placeholder="Search"/>
                   </div>
-                  <button type="submit" className="btn btn-default">Submit</button>
+                  <button onClick={this.searchForArticles.bind(this)} type="submit" className="btn btn-default">Submit</button>
                 </form>
                 <ul className="nav navbar-nav navbar-right">
                   <ToggleDisplay show={!this.props.user.username}>
@@ -62,7 +68,9 @@ class App extends React.Component {
                     <li> <Link to="/signup"> Sign up </Link> </li>
                   </ToggleDisplay>
                   <ToggleDisplay show={!!this.props.user.username}>
-                    <li><a href={`/${this.props.user.username}`}>My Page</a></li>
+                    <li>
+                      <a href={`/${this.props.user.username}`}>My Page</a>
+                    </li>
                     <li> <a href='' onClick={this.signout.bind(this)}> Log Out [{this.props.user.username}]</a> </li>
                   </ToggleDisplay>
                 </ul>
@@ -79,6 +87,7 @@ class App extends React.Component {
   }
 
 }
+
 
 function mapStatetoProps(state) {
   return state;

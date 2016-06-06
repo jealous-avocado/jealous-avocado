@@ -56,7 +56,7 @@ class Signin extends React.Component {
         <form id="signinForm" onSubmit={this.postUser.bind(this)}>
           <input id='username' placeholder='username'/>
           <input id='password' placeholder='password' type='password' />
-          <input type='submit'></input>
+          <button type='submit'></button>
         </form> 
       </div>
     );

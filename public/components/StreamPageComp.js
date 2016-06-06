@@ -1,6 +1,6 @@
 import ToggleDisplay from 'react-toggle-display';
 import { connect } from 'react-redux';
-
+import HashTagComp from './HashTagComp';
 import actions from '../redux/actions';
 
 
@@ -12,6 +12,8 @@ class StreamPageComp extends React.Component {
   componentDidMount() {
 
     var connection = new RTCMultiConnection().connect();
+    connection.body = document.getElementById('streamContainer');
+
     var componentContext = this;
     
     document.querySelector('#startStream').onclick = function() {
@@ -20,14 +22,6 @@ class StreamPageComp extends React.Component {
       $('#startStream').hide();
       $('#stopStream').show();
 
-      let streamTitle = $('#streamTitleInput').val();
-      $('#streamTitleInput').val('').hide();
-
-      componentContext.props.dispatch( 
-        actions.updateBroadcasterStreamTopic(streamTitle)
-      );
-
-      console.log(componentContext.props.user, 'PROPS');
       componentContext.props.dispatch(actions.updateCurrentStreamer(componentContext.props.user.username));
       window.localStorage.setItem('state', JSON.stringify(componentContext.props));
 
@@ -37,16 +31,7 @@ class StreamPageComp extends React.Component {
       connection.close();
       $('#stopStream').hide();
       $('#startStream').show();
-
-    };
-
-    document.querySelector('#enterHashTags').onclick = function() {
-      
-      let hashTagInput = $('#hashTagInput').val();
-      $('#hashTagInput').val('');
-      componentContext.props.dispatch(
-        actions.updateBroadcasterStreamHashtags(hashTagInput)
-      );
+      $('#streamTitleInput').val('').show();
     };
 
   }
@@ -55,8 +40,29 @@ class StreamPageComp extends React.Component {
     return this.props.user.username === this.props.params.username;
   }
 
-  matchUsertoURL() {
-    return this.props.user.username === this.props.params.username;
+  saveStreamTitle(e) {
+    e.preventDefault();
+
+    let streamTitleVal = $(streamTitleInput).val();
+
+    this.props.dispatch(
+      actions.updateBroadcasterStreamTopic(streamTitleVal)
+    );
+  }
+
+  saveHashTags(e) {
+    e.preventDefault();
+
+    let hashTagVal = $(hashTagInput).val();
+    $(hashTagInput).val('');
+
+    this.props.dispatch(
+      actions.updateBroadcasterStreamHashtags(hashTagVal)
+    );
+  }
+
+  removeTag(e) {
+    $(e.currentTarget).remove();
   }
 
   render() {
@@ -66,20 +72,34 @@ class StreamPageComp extends React.Component {
 
         <ToggleDisplay show={this.matchUsertoURL.bind(this)()}>
 
-          <input id='streamTitleInput' placeholder='Title the stream'/>
+          <ToggleDisplay show={!this.props.user.stream.title}>
+            <form onSubmit={this.saveStreamTitle.bind(this)}>
+              <input id='streamTitleInput' placeholder='Title the stream'/>
+            </form>
+          </ToggleDisplay>
+          
+          <form onSubmit={this.saveHashTags.bind(this)}>
+            <input id='hashTagInput' placeholder='Enter a topic tag'/>
+          </form>
+          
           <button id='startStream'> Start Stream </button>
-          
-          <input id='hashTagInput' placeholder='Enter a topic tag'/>
-          <button id='enterHashTags'> Enter tags </button>
-          
           <button id='stopStream' style={{'display': 'none'}}> Stop Stream </button>
 
         </ToggleDisplay>
 
+        <br></br>
 
         <div id='streamTitle'>Stream title: {this.props.user.stream.title}</div>
 
-        <div id="videos-container"></div>
+        <div id="streamContainer"></div>
+        <div>
+        Hashtags: &nbsp;
+          {
+            this.props.user.stream.hashtags.map(tag => {
+              return <HashTagComp key={tag.id} removeTag={this.removeTag} tag={tag}/>
+            })
+          }
+        </div>
       </div>
     )
   }
