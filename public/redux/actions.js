@@ -5,6 +5,7 @@ const UPDATE_BROADCASTER_STREAM_HASHTAGS = 'UPDATE_BROADCASTER_STREAM_HASHTAGS';
 const UPDATE_NEWS_PAGE_TOPIC = 'UPDATE_NEWS_PAGE_TOPIC';
 const UPDATE_NEWS_ARTICLES = 'UPDATE_NEWS_ARTICLES';
 const UPDATE_CURRENT_STREAMER = 'UPDATE_CURRENT_STREAMER';
+const SAVE_BROADCAST_CONNECTION = 'SAVE_BROADCAST_CONNECTION';
 
 
 let actions = {
@@ -56,24 +57,11 @@ let actions = {
     */
   },
 
-  updateNewsArticles: (articles) => {
+  saveBroadcastConnection: (connection) => {
     return {
-      type: UPDATE_NEWS_ARTICLES,
-      articles: articles
+      type: SAVE_BROADCAST_CONNECTION, 
+      connection: connection
     }
-  },
-
-  fetchNewsArticles: (query) => {
-    //async fetch to alchemy api or nyt api
-    //return a function that returns a promised fetch request
-    /*
-    var context = this;
-    return dispatch => {
-      //dispatch another action that tells user that we are fetching ??
-      return fetch(url+query)
-        .then(result => dispatch(context.updateNewsArticles(result)));
-    }
-    */
   },
 
   logoutUser: () => {

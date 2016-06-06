@@ -11,7 +11,9 @@ class StreamPageComp extends React.Component {
 
   componentDidMount() {
 
-    var connection = new RTCMultiConnection().connect();
+    var connection = new RTCMultiConnection().connect(); 
+    
+
     connection.body = document.getElementById('streamContainer');
 
     var componentContext = this;
@@ -19,13 +21,16 @@ class StreamPageComp extends React.Component {
     document.querySelector('#startStream').onclick = function() {
       connection.open();
       connection.direction = 'one-way';
-      $('#startStream').hide();
-      $('#stopStream').show();
+
+      // componentContext.props.dispatch(actions.saveBroadcastConnection(connection));
+      
 
       componentContext.props.dispatch(actions.updateCurrentStreamer(componentContext.props.user.username));
       $.post('/currentStreamer',{username:componentContext.props.user.username,isStreaming: true});
       window.localStorage.setItem('state', JSON.stringify(componentContext.props));
 
+      $('#startStream').hide();
+      $('#stopStream').show();
     };
 
     document.querySelector('#stopStream').onclick = function() {
@@ -90,45 +95,13 @@ class StreamPageComp extends React.Component {
               </ToggleDisplay>
             </div>
           </div>
-
-
-        <div id="userPage"> User Page </div>
-
-        <ToggleDisplay show={this.matchUsertoURL.bind(this)()}>
-
-          <ToggleDisplay show={!this.props.user.stream.title}>
-            <form onSubmit={this.saveStreamTitle.bind(this)}>
-              <input id='streamTitleInput' placeholder='Title the stream'/>
-            </form>
-          </ToggleDisplay>
-          
-          <form onSubmit={this.saveHashTags.bind(this)}>
-            <input id='hashTagInput' placeholder='Enter a topic tag'/>
-          </form>
-          
-          <button id='startStream'> Start Stream </button>
-          <button id='stopStream' style={{'display': 'none'}}> Stop Stream </button>
-
-        </ToggleDisplay>
-
-        <br></br>
-
-        <div id='streamTitle'>Stream title: {this.props.user.stream.title}</div>
-
-        <div id="streamContainer"></div>
-        <div>
-        Hashtags: &nbsp;
-          {
-            this.props.user.stream.hashtags.map(tag => {
-              return <HashTagComp key={tag.id} removeTag={this.removeTag} tag={tag}/>
-            })
-          }
         </div>
-
+        
         <div id='userDashCol' className='col-md-4'>
           <div id='dashboardText'> Dashboard </div>
 
-            <div id='streamTitle' onClick={this.editStreamTitle.bind(this)}>Stream title: {this.props.user.stream.title}</div>
+            <div> Stream Title: &nbsp; <span id='streamTitle' onClick={this.editStreamTitle.bind(this)}>{this.props.user.stream.title}</span>
+            </div>
             <ToggleDisplay show={!this.props.user.stream.title}>
               <div>
                 <form id='streamTitleForm' onSubmit={this.saveStreamTitle.bind(this)}>
@@ -137,13 +110,16 @@ class StreamPageComp extends React.Component {
               </div>
             </ToggleDisplay>
             
-            <div>
+            <div> 
             Hashtags: &nbsp;
-              {
-                this.props.user.stream.hashtags.map(tag => {
-                  return <HashTagComp key={tag.id} removeTag={this.removeTag} tag={tag}/>
-                })
-              }
+              <div>
+              
+                {
+                  this.props.user.stream.hashtags.map(tag => {
+                    return <HashTagComp key={tag.id} removeTag={this.removeTag} tag={tag}/>
+                  })
+                }
+              </div>
             </div>
             <div>
               <form onSubmit={this.saveHashTags.bind(this)}>
