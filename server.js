@@ -24,6 +24,14 @@ var sessionStore = new knexSessionStore({
   tablename: 'sessions'
 });
 
+//reset streaming status of all users on server restart.
+User.fetchAll()
+.then(function(users) {
+  users.forEach(function(user){
+    user.set({isStreaming: false}).save();
+  })
+});
+
 app.use(bodyParser.urlencoded({     
  extended: true
 }));
@@ -115,6 +123,12 @@ app.post('/currentStreamers', (req, res) => {
     .then(function(user) {
       if(user) {
         user.set({isStreaming: isStreaming}).save();
+        // for now, limit stream length to 2 hours.
+        if(isStreaming) {
+          setTimeout(function(){
+            user.set({isStreaming: false}).save();
+          }, 1000*60*60*2, user);
+        }
         res.end();
       } else {
         res.status(404);
