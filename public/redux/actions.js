@@ -6,6 +6,7 @@ const UPDATE_NEWS_PAGE_TOPIC = 'UPDATE_NEWS_PAGE_TOPIC';
 const UPDATE_NEWS_ARTICLES = 'UPDATE_NEWS_ARTICLES';
 const UPDATE_CURRENT_STREAMER = 'UPDATE_CURRENT_STREAMER';
 const SAVE_BROADCAST_CONNECTION = 'SAVE_BROADCAST_CONNECTION';
+const RESET_CURRENT_STREAMER = 'RESET_CURRENT_STREAMER'
 
 
 let actions = {
@@ -73,6 +74,11 @@ let actions = {
     return {
       type: UPDATE_CURRENT_STREAMER,
       addStreamer: streamer
+    }
+  },
+  resetCurrentStreamer: () => {
+    return {
+      type: RESET_CURRENT_STREAMER
     }
   }
 };

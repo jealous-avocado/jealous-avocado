@@ -65,11 +65,13 @@ let reducer = function(state, action) {
         articles: action.articles
       });
     case "UPDATE_CURRENT_STREAMER":
-    console.log("state.currentStreamers is", state.currentStreamers)
-    return Object.assign({}, state, {
-      currentStreamers: [action.addStreamer,...state.currentStreamers]
-    });  
-
+      return Object.assign({}, state, {
+        currentStreamers: [action.addStreamer,...state.currentStreamers]
+      });
+    case "RESET_CURRENT_STREAMER":
+      return Object.assign({}, state, {
+        currentStreamers: []
+      });
     default:
       return state;
   }

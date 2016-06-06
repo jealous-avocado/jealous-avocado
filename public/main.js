@@ -27121,6 +27121,7 @@
 	var UPDATE_NEWS_ARTICLES = 'UPDATE_NEWS_ARTICLES';
 	var UPDATE_CURRENT_STREAMER = 'UPDATE_CURRENT_STREAMER';
 	var SAVE_BROADCAST_CONNECTION = 'SAVE_BROADCAST_CONNECTION';
+	var RESET_CURRENT_STREAMER = 'RESET_CURRENT_STREAMER';
 	
 	var actions = {
 	  signinUser: function signinUser(username) {
@@ -27187,6 +27188,11 @@
 	    return {
 	      type: UPDATE_CURRENT_STREAMER,
 	      addStreamer: streamer
+	    };
+	  },
+	  resetCurrentStreamer: function resetCurrentStreamer() {
+	    return {
+	      type: RESET_CURRENT_STREAMER
 	    };
 	  }
 	};
@@ -29592,7 +29598,7 @@
 	      var _this2 = this;
 	
 	      var componentContext = this;
-	      componentContext.props.currentStreamers = [];
+	      componentContext.props.dispatch(_actions2.default.resetCurrentStreamer());
 	      $.get('/currentStreamers').done(function (r) {
 	        r.forEach(function (value) {
 	          componentContext.props.dispatch(_actions2.default.updateCurrentStreamer(value));
@@ -29632,17 +29638,7 @@
 	              null,
 	              'Current Video'
 	            ),
-	            React.createElement('iframe', { id: 'currentVideo', width: '711', height: '400', src: '', frameBorder: '0', allowFullScreen: true }),
-	            React.createElement(
-	              'div',
-	              { id: 'articles' },
-	              ' ',
-	              React.createElement(
-	                'h2',
-	                null,
-	                'Trending Articles'
-	              )
-	            )
+	            React.createElement('iframe', { id: 'currentVideo', width: '711', height: '400', src: '', frameBorder: '0', allowFullScreen: true })
 	          ),
 	          React.createElement(
 	            'div',
@@ -29808,11 +29804,13 @@
 	        articles: action.articles
 	      });
 	    case "UPDATE_CURRENT_STREAMER":
-	      console.log("state.currentStreamers is", state.currentStreamers);
 	      return Object.assign({}, state, {
 	        currentStreamers: [action.addStreamer].concat(_toConsumableArray(state.currentStreamers))
 	      });
-	
+	    case "RESET_CURRENT_STREAMER":
+	      return Object.assign({}, state, {
+	        currentStreamers: []
+	      });
 	    default:
 	      return state;
 	  }

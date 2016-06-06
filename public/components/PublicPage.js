@@ -15,7 +15,7 @@ class PublicPage extends React.Component {
 
   refreshBroadcast() {
     var componentContext = this;
-    componentContext.props.currentStreamers = [];
+    componentContext.props.dispatch(actions.resetCurrentStreamer());
     $.get('/currentStreamers')
     .done(r => {
       r.forEach(function (value) {
@@ -42,11 +42,7 @@ class PublicPage extends React.Component {
         <div className='row'>
           <div className="col-md-8"> <h2>Current Video</h2> 
             <iframe id="currentVideo" width="711" height="400" src="" frameBorder="0" allowFullScreen></iframe>            
-              <div id="articles"> <h2>Trending Articles</h2>
-                 
-              </div>
           </div>
-          
           <div className="col-md-4"> <h2 id='broadcast'>Currently Broadcasting</h2>
           <button type="button" class="btn btn-success" onClick={this.refreshBroadcast.bind(this)}>Refresh Broadcast</button>
             <ul id='video'>
@@ -63,7 +59,6 @@ class PublicPage extends React.Component {
         </div>
       </div>
     );
-
   }
 }
 
