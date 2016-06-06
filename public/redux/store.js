@@ -17,7 +17,8 @@ export default function configureStore(
       }
     }, 
     newsTopic: 'WORLD NEWS',
-    articles: []
+    articles: [],
+    currentStreamers: []
   }
 ) {
   return finalcreateStore(reducer, initialState);

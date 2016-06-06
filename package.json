@@ -11,10 +11,12 @@
   },
   "dependencies": {
     "babel-loader": "^6.2.4",
+    "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.4.0",
     "body-parser": "^1.15.1",
     "bookshelf": "^0.9.5",
     "bootstrap": "^4.0.0-alpha.2",
+    "connect-session-knex": "^1.0.23",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "history": "^1.17.0",

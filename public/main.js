@@ -58,7 +58,7 @@
 	
 	var _routes2 = _interopRequireDefault(_routes);
 	
-	var _store = __webpack_require__(251);
+	var _store = __webpack_require__(254);
 	
 	var _store2 = _interopRequireDefault(_store);
 	
@@ -81,7 +81,8 @@
 	      }
 	    },
 	    newsTopic: state.newsTopic,
-	    articles: state.articles
+	    articles: state.articles,
+	    currentStreamers: state.currentStreamers
 	  };
 	
 	  store = (0, _store2.default)(initialState);
@@ -25228,27 +25229,27 @@
 	
 	var _App2 = _interopRequireDefault(_App);
 	
-	var _Signin = __webpack_require__(244);
+	var _Signin = __webpack_require__(246);
 	
 	var _Signin2 = _interopRequireDefault(_Signin);
 	
-	var _Signup = __webpack_require__(254);
+	var _Signup = __webpack_require__(248);
 	
 	var _Signup2 = _interopRequireDefault(_Signup);
 	
-	var _TopicPage = __webpack_require__(246);
+	var _TopicPage = __webpack_require__(249);
 	
 	var _TopicPage2 = _interopRequireDefault(_TopicPage);
 	
-	var _StreamPageComp = __webpack_require__(249);
+	var _StreamPageComp = __webpack_require__(252);
 	
 	var _StreamPageComp2 = _interopRequireDefault(_StreamPageComp);
 	
-	var _NewsArticles = __webpack_require__(247);
+	var _NewsArticles = __webpack_require__(250);
 	
 	var _NewsArticles2 = _interopRequireDefault(_NewsArticles);
 	
-	var _PublicPage = __webpack_require__(250);
+	var _PublicPage = __webpack_require__(253);
 	
 	var _PublicPage2 = _interopRequireDefault(_PublicPage);
 	
@@ -25284,11 +25285,11 @@
 	
 	var _reactRedux = __webpack_require__(222);
 	
-	var _reactToggleDisplay = __webpack_require__(242);
+	var _reactToggleDisplay = __webpack_require__(244);
 	
 	var _reactToggleDisplay2 = _interopRequireDefault(_reactToggleDisplay);
 	
-	var _actions = __webpack_require__(243);
+	var _actions = __webpack_require__(245);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
@@ -25708,11 +25709,11 @@
 	
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 	
-	var _hoistNonReactStatics = __webpack_require__(199);
+	var _hoistNonReactStatics = __webpack_require__(242);
 	
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 	
-	var _invariant = __webpack_require__(166);
+	var _invariant = __webpack_require__(243);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -26964,6 +26965,112 @@
 
 /***/ },
 /* 242 */
+/***/ function(module, exports) {
+
+	/**
+	 * Copyright 2015, Yahoo! Inc.
+	 * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+	 */
+	'use strict';
+	
+	var REACT_STATICS = {
+	    childContextTypes: true,
+	    contextTypes: true,
+	    defaultProps: true,
+	    displayName: true,
+	    getDefaultProps: true,
+	    mixins: true,
+	    propTypes: true,
+	    type: true
+	};
+	
+	var KNOWN_STATICS = {
+	    name: true,
+	    length: true,
+	    prototype: true,
+	    caller: true,
+	    arguments: true,
+	    arity: true
+	};
+	
+	module.exports = function hoistNonReactStatics(targetComponent, sourceComponent) {
+	    if (typeof sourceComponent !== 'string') { // don't hoist over string (html) components
+	        var keys = Object.getOwnPropertyNames(sourceComponent);
+	        for (var i=0; i<keys.length; ++i) {
+	            if (!REACT_STATICS[keys[i]] && !KNOWN_STATICS[keys[i]]) {
+	                try {
+	                    targetComponent[keys[i]] = sourceComponent[keys[i]];
+	                } catch (error) {
+	
+	                }
+	            }
+	        }
+	    }
+	
+	    return targetComponent;
+	};
+
+
+/***/ },
+/* 243 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 */
+	
+	'use strict';
+	
+	/**
+	 * Use invariant() to assert state which your program assumes to be true.
+	 *
+	 * Provide sprintf-style format (only %s is supported) and arguments
+	 * to provide information about what broke and what you were
+	 * expecting.
+	 *
+	 * The invariant message will be stripped in production, but the invariant
+	 * will remain to ensure logic does not differ in production.
+	 */
+	
+	var invariant = function(condition, format, a, b, c, d, e, f) {
+	  if (process.env.NODE_ENV !== 'production') {
+	    if (format === undefined) {
+	      throw new Error('invariant requires an error message argument');
+	    }
+	  }
+	
+	  if (!condition) {
+	    var error;
+	    if (format === undefined) {
+	      error = new Error(
+	        'Minified exception occurred; use the non-minified dev environment ' +
+	        'for the full error message and additional helpful warnings.'
+	      );
+	    } else {
+	      var args = [a, b, c, d, e, f];
+	      var argIndex = 0;
+	      error = new Error(
+	        format.replace(/%s/g, function() { return args[argIndex++]; })
+	      );
+	      error.name = 'Invariant Violation';
+	    }
+	
+	    error.framesToPop = 1; // we don't care about invariant's own frame
+	    throw error;
+	  }
+	};
+	
+	module.exports = invariant;
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ },
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
@@ -27030,7 +27137,7 @@
 
 
 /***/ },
-/* 243 */
+/* 245 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -27049,6 +27156,7 @@
 	var UPDATE_BROADCASTER_STREAM_HASHTAGS = 'UPDATE_BROADCASTER_STREAM_HASHTAGS';
 	var UPDATE_NEWS_PAGE_TOPIC = 'UPDATE_NEWS_PAGE_TOPIC';
 	var UPDATE_NEWS_ARTICLES = 'UPDATE_NEWS_ARTICLES';
+	var UPDATE_CURRENT_STREAMER = 'UPDATE_CURRENT_STREAMER';
 	
 	var actions = (_actions = {
 	  signinUser: function signinUser(username) {
@@ -27119,12 +27227,17 @@
 	  return {
 	    type: LOGOUT_CURRENT_USER
 	  };
+	}), _defineProperty(_actions, 'updateCurrentStreamer', function updateCurrentStreamer(streamer) {
+	  return {
+	    type: UPDATE_CURRENT_STREAMER,
+	    addStreamer: streamer
+	  };
 	}), _actions);
 	
 	exports.default = actions;
 
 /***/ },
-/* 244 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27137,7 +27250,7 @@
 	
 	var _reactRedux = __webpack_require__(222);
 	
-	var _actions = __webpack_require__(243);
+	var _actions = __webpack_require__(245);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
@@ -27149,7 +27262,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var _ = __webpack_require__(245);
+	var _ = __webpack_require__(247);
 	
 	var Signin = function (_React$Component) {
 	  _inherits(Signin, _React$Component);
@@ -27227,7 +27340,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(Signin);
 
 /***/ },
-/* 245 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.8.3
@@ -28781,7 +28894,7 @@
 
 
 /***/ },
-/* 246 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28792,17 +28905,120 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _NewsArticles = __webpack_require__(247);
+	var _reactRedux = __webpack_require__(222);
+	
+	var _actions = __webpack_require__(245);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var _ = __webpack_require__(247);
+	
+	var Signup = function (_React$Component) {
+	  _inherits(Signup, _React$Component);
+	
+	  function Signup(props) {
+	    _classCallCheck(this, Signup);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Signup).call(this, props));
+	  }
+	
+	  _createClass(Signup, [{
+	    key: 'escape',
+	    value: function escape(userInfo) {
+	      var escaped = {};
+	
+	      for (var key in userInfo) {
+	        var value = userInfo[key];
+	        escaped[key] = typeof value === 'string' ? _.escape(value) : value;
+	      }
+	
+	      return escaped;
+	    }
+	  }, {
+	    key: 'postUser',
+	    value: function postUser(e) {
+	      var _this2 = this;
+	
+	      e.preventDefault();
+	
+	      var username = $('#username').val();
+	      var password = $('#password').val();
+	
+	      var userObj = this.escape.call(this, { username: username, password: password });
+	
+	      $.post('/signup', userObj).done(function () {
+	        _this2.props.dispatch(_actions2.default.signinUser(username));
+	
+	        window.localStorage.setItem('state', JSON.stringify(_this2.props));
+	
+	        console.log('props signup: ', _this2.props);
+	        $('#signinForm').hide();
+	      });
+	      // .fail(e => console.log(e, 'error'));
+	      // on fail --> present user with failed auth message
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      $('#signinForm #username').focus();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          'form',
+	          { id: 'signinForm', onSubmit: this.postUser.bind(this) },
+	          React.createElement('input', { id: 'username', placeholder: 'username' }),
+	          React.createElement('input', { id: 'password', placeholder: 'password', type: 'password' }),
+	          React.createElement('input', { type: 'submit' })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Signup;
+	}(React.Component);
+	
+	function mapStatetoProps(state) {
+	  return state;
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(Signup);
+
+/***/ },
+/* 249 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _NewsArticles = __webpack_require__(250);
 	
 	var _NewsArticles2 = _interopRequireDefault(_NewsArticles);
 	
-	var _NewsVideos = __webpack_require__(248);
+	var _NewsVideos = __webpack_require__(251);
 	
 	var _NewsVideos2 = _interopRequireDefault(_NewsVideos);
 	
 	var _reactRedux = __webpack_require__(222);
 	
-	var _actions = __webpack_require__(243);
+	var _actions = __webpack_require__(245);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
@@ -28876,7 +29092,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(TopicPage);
 
 /***/ },
-/* 247 */
+/* 250 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28958,7 +29174,7 @@
 	exports.default = NewsArticles;
 
 /***/ },
-/* 248 */
+/* 251 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29040,7 +29256,7 @@
 	exports.default = NewsVideos;
 
 /***/ },
-/* 249 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29051,13 +29267,13 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _reactToggleDisplay = __webpack_require__(242);
+	var _reactToggleDisplay = __webpack_require__(244);
 	
 	var _reactToggleDisplay2 = _interopRequireDefault(_reactToggleDisplay);
 	
 	var _reactRedux = __webpack_require__(222);
 	
-	var _actions = __webpack_require__(243);
+	var _actions = __webpack_require__(245);
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
@@ -29097,6 +29313,8 @@
 	        componentContext.props.dispatch(_actions2.default.updateBroadcasterStreamTopic(streamTitle));
 	
 	        console.log(componentContext.props.user, 'PROPS');
+	        componentContext.props.dispatch(_actions2.default.updateCurrentStreamer(componentContext.props.user.username));
+	        window.localStorage.setItem('state', JSON.stringify(componentContext.props));
 	      };
 	
 	      document.querySelector('#stopStream').onclick = function () {
@@ -29175,8 +29393,8 @@
 	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(StreamPageComp);
 
 /***/ },
-/* 250 */
-/***/ function(module, exports) {
+/* 253 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -29185,6 +29403,14 @@
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _reactRedux = __webpack_require__(222);
+	
+	var _actions = __webpack_require__(245);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -29195,23 +29421,17 @@
 	var PublicPage = function (_React$Component) {
 	  _inherits(PublicPage, _React$Component);
 	
-	  function PublicPage() {
+	  function PublicPage(props) {
 	    _classCallCheck(this, PublicPage);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PublicPage).call(this));
-	
-	    _this.state = {
-	      videos: ['video1', 'video2', 'video3', 'video4', 'video5', 'video6'],
-	      articles: ['article1', 'article2', 'article3', 'article4', 'article5'],
-	      currentVideo: null
-	    };
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(PublicPage).call(this, props));
 	  }
 	
 	  _createClass(PublicPage, [{
-	    key: 'updateVideo',
-	    value: function updateVideo(video) {
-	      this.setState({ currentVideo: video });
+	    key: 'updateCurrentVideo',
+	    value: function updateCurrentVideo(event) {
+	      var src = $(event.currentTarget).find('iframe').attr('src');
+	      $('#currentVideo').attr('src', src);
 	    }
 	  }, {
 	    key: 'updateArticle',
@@ -29219,48 +29439,75 @@
 	      this.setState({ articles: articles });
 	    }
 	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      console.log(this.props.currentStreamers);
+	      $('iframe').on('load', function () {
+	        $("iframe").contents().find('#app').hide();
+	      });
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      console.log('this.props.currentStreamers', this.props.currentStreamers);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+	
 	      return React.createElement(
 	        'div',
-	        { className: 'container-fluid' },
+	        null,
 	        React.createElement(
 	          'div',
 	          { className: 'row' },
 	          React.createElement(
 	            'div',
-	            { className: 'col-md-6' },
-	            ' Current Video',
-	            React.createElement('iframe', { width: '560', height: '315', src: 'https://www.youtube.com/embed/Dd7FixvoKBw', frameborder: '0', allowfullscreen: true }),
-	            '            ',
+	            { className: 'col-md-8' },
+	            ' ',
+	            React.createElement(
+	              'h2',
+	              null,
+	              'Current Video'
+	            ),
+	            React.createElement('iframe', { id: 'currentVideo', width: '711', height: '400', src: '', frameBorder: '0', allowFullScreen: true }),
 	            React.createElement(
 	              'div',
 	              { id: 'articles' },
-	              ' Trending Articles',
-	              this.state.articles.map(function (article) {
-	                return React.createElement(
-	                  'li',
-	                  null,
-	                  ' ',
-	                  article,
-	                  ' '
-	                );
-	              })
+	              ' ',
+	              React.createElement(
+	                'h2',
+	                null,
+	                'Trending Articles'
+	              )
 	            )
 	          ),
 	          React.createElement(
 	            'div',
-	            { className: 'col-md-6' },
-	            ' Trending Videos',
-	            this.state.videos.map(function (video) {
-	              return React.createElement(
-	                'li',
-	                null,
-	                ' ',
-	                video,
-	                ' '
-	              );
-	            })
+	            { className: 'col-md-4' },
+	            ' ',
+	            React.createElement(
+	              'h2',
+	              { id: 'broadcast' },
+	              'Currently Broadcasting'
+	            ),
+	            React.createElement(
+	              'ul',
+	              { id: 'video' },
+	              this.props.currentStreamers.map(function (video) {
+	                return React.createElement(
+	                  'li',
+	                  { className: 'video', onClick: _this2.updateCurrentVideo },
+	                  React.createElement(
+	                    'div',
+	                    { className: 'videoWrapper' },
+	                    React.createElement('iframe', { width: '142', height: '80', src: "http://localhost:3000/" + video, frameBorder: '0', allowFullScreen: true })
+	                  ),
+	                  video + " is reporting on " + _this2.props.user.stream.title
+	                );
+	              })
+	            )
 	          )
 	        )
 	      );
@@ -29270,10 +29517,14 @@
 	  return PublicPage;
 	}(React.Component);
 	
-	exports.default = PublicPage;
+	function mapStatetoProps(state) {
+	  return state;
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(PublicPage);
 
 /***/ },
-/* 251 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29285,11 +29536,11 @@
 	
 	var _redux = __webpack_require__(229);
 	
-	var _reducers = __webpack_require__(252);
+	var _reducers = __webpack_require__(255);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
-	var _reduxLogger = __webpack_require__(253);
+	var _reduxLogger = __webpack_require__(256);
 	
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 	
@@ -29307,14 +29558,15 @@
 	      }
 	    },
 	    newsTopic: 'WORLD NEWS',
-	    articles: []
+	    articles: [],
+	    currentStreamers: []
 	  } : arguments[0];
 	
 	  return finalcreateStore(_reducers2.default, initialState);
 	}
 
 /***/ },
-/* 252 */
+/* 255 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -29384,6 +29636,11 @@
 	      return Object.assign({}, state, {
 	        articles: action.articles
 	      });
+	    case "UPDATE_CURRENT_STREAMER":
+	      console.log("state.currentStreamers is", state.currentStreamers);
+	      return Object.assign({}, state, {
+	        currentStreamers: [action.addStreamer].concat(_toConsumableArray(state.currentStreamers))
+	      });
 	
 	    default:
 	      return state;
@@ -29393,7 +29650,7 @@
 	exports.default = reducer;
 
 /***/ },
-/* 253 */
+/* 256 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -29624,109 +29881,6 @@
 	}
 	
 	module.exports = createLogger;
-
-/***/ },
-/* 254 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _reactRedux = __webpack_require__(222);
-	
-	var _actions = __webpack_require__(243);
-	
-	var _actions2 = _interopRequireDefault(_actions);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var _ = __webpack_require__(245);
-	
-	var Signup = function (_React$Component) {
-	  _inherits(Signup, _React$Component);
-	
-	  function Signup(props) {
-	    _classCallCheck(this, Signup);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Signup).call(this, props));
-	  }
-	
-	  _createClass(Signup, [{
-	    key: 'escape',
-	    value: function escape(userInfo) {
-	      var escaped = {};
-	
-	      for (var key in userInfo) {
-	        var value = userInfo[key];
-	        escaped[key] = typeof value === 'string' ? _.escape(value) : value;
-	      }
-	
-	      return escaped;
-	    }
-	  }, {
-	    key: 'postUser',
-	    value: function postUser(e) {
-	      var _this2 = this;
-	
-	      e.preventDefault();
-	
-	      var username = $('#username').val();
-	      var password = $('#password').val();
-	
-	      var userObj = this.escape.call(this, { username: username, password: password });
-	
-	      $.post('/signup', userObj).done(function () {
-	        _this2.props.dispatch(_actions2.default.signinUser(username));
-	
-	        window.localStorage.setItem('state', JSON.stringify(_this2.props));
-	
-	        console.log('props signup: ', _this2.props);
-	        $('#signinForm').hide();
-	      });
-	      // .fail(e => console.log(e, 'error'));
-	      // on fail --> present user with failed auth message
-	    }
-	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      $('#signinForm #username').focus();
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'div',
-	        null,
-	        React.createElement(
-	          'form',
-	          { id: 'signinForm', onSubmit: this.postUser.bind(this) },
-	          React.createElement('input', { id: 'username', placeholder: 'username' }),
-	          React.createElement('input', { id: 'password', placeholder: 'password', type: 'password' }),
-	          React.createElement('input', { type: 'submit' })
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return Signup;
-	}(React.Component);
-	
-	function mapStatetoProps(state) {
-	  return state;
-	}
-	
-	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(Signup);
 
 /***/ }
 /******/ ]);

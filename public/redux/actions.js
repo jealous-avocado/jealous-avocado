@@ -4,6 +4,7 @@ const UPDATE_BROADCASTER_STREAM_TOPIC = 'UPDATE_BROADCASTER_STREAM_TOPIC';
 const UPDATE_BROADCASTER_STREAM_HASHTAGS = 'UPDATE_BROADCASTER_STREAM_HASHTAGS';
 const UPDATE_NEWS_PAGE_TOPIC = 'UPDATE_NEWS_PAGE_TOPIC';
 const UPDATE_NEWS_ARTICLES = 'UPDATE_NEWS_ARTICLES';
+const UPDATE_CURRENT_STREAMER = 'UPDATE_CURRENT_STREAMER';
 
 
 let actions = {
@@ -78,6 +79,12 @@ let actions = {
   logoutUser: () => {
     return {
       type: LOGOUT_CURRENT_USER
+    }
+  },
+  updateCurrentStreamer: (streamer) => {
+    return {
+      type: UPDATE_CURRENT_STREAMER,
+      addStreamer: streamer
     }
   }
 };
