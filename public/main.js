@@ -29426,55 +29426,6 @@
 	        ),
 	        React.createElement(
 	          'div',
-	          { id: 'userPage' },
-	          ' User Page '
-	        ),
-	        React.createElement(
-	          _reactToggleDisplay2.default,
-	          { show: this.matchUsertoURL.bind(this)() },
-	          React.createElement(
-	            _reactToggleDisplay2.default,
-	            { show: !this.props.user.stream.title },
-	            React.createElement(
-	              'form',
-	              { onSubmit: this.saveStreamTitle.bind(this) },
-	              React.createElement('input', { id: 'streamTitleInput', placeholder: 'Title the stream' })
-	            )
-	          ),
-	          React.createElement(
-	            'form',
-	            { onSubmit: this.saveHashTags.bind(this) },
-	            React.createElement('input', { id: 'hashTagInput', placeholder: 'Enter a topic tag' })
-	          ),
-	          React.createElement(
-	            'button',
-	            { id: 'startStream' },
-	            ' Start Stream '
-	          ),
-	          React.createElement(
-	            'button',
-	            { id: 'stopStream', style: { 'display': 'none' } },
-	            ' Stop Stream '
-	          )
-	        ),
-	        React.createElement('br', null),
-	        React.createElement(
-	          'div',
-	          { id: 'streamTitle' },
-	          'Stream title: ',
-	          this.props.user.stream.title
-	        ),
-	        React.createElement('div', { id: 'streamContainer' }),
-	        React.createElement(
-	          'div',
-	          null,
-	          'Hashtags:  ',
-	          this.props.user.stream.hashtags.map(function (tag) {
-	            return React.createElement(_HashTagComp2.default, { key: tag.id, removeTag: _this2.removeTag, tag: tag });
-	          })
-	        ),
-	        React.createElement(
-	          'div',
 	          { id: 'userDashCol', className: 'col-md-4' },
 	          React.createElement(
 	            'div',
