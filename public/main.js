@@ -58,7 +58,7 @@
 	
 	var _routes2 = _interopRequireDefault(_routes);
 	
-	var _store = __webpack_require__(257);
+	var _store = __webpack_require__(258);
 	
 	var _store2 = _interopRequireDefault(_store);
 	
@@ -25249,7 +25249,7 @@
 	
 	var _NewsArticles2 = _interopRequireDefault(_NewsArticles);
 	
-	var _PublicPage = __webpack_require__(256);
+	var _PublicPage = __webpack_require__(257);
 	
 	var _PublicPage2 = _interopRequireDefault(_PublicPage);
 	
@@ -29359,7 +29359,7 @@
 	
 	var _reactRedux = __webpack_require__(222);
 	
-	var _HashTagComp = __webpack_require__(260);
+	var _HashTagComp = __webpack_require__(256);
 	
 	var _HashTagComp2 = _interopRequireDefault(_HashTagComp);
 	
@@ -29406,6 +29406,7 @@
 	
 	        $('#startStream').hide();
 	        $('#stopStream').show();
+	        window.open('http://localhost:3000');
 	      };
 	
 	      document.querySelector('#stopStream').onclick = function () {
@@ -29562,6 +29563,36 @@
 
 /***/ },
 /* 256 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var HashTagComp = function HashTagComp(_ref) {
+	  var tag = _ref.tag;
+	  var removeTag = _ref.removeTag;
+	
+	  return React.createElement(
+	    'span',
+	    { id: 'hashtag', onClick: removeTag, tag: tag.hashtag },
+	    React.createElement(
+	      'i',
+	      null,
+	      ' #',
+	      tag.hashtag,
+	      '   '
+	    ),
+	    ' |'
+	  );
+	};
+	
+	exports.default = HashTagComp;
+
+/***/ },
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29696,7 +29727,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStatetoProps)(PublicPage);
 
 /***/ },
-/* 257 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29708,11 +29739,11 @@
 	
 	var _redux = __webpack_require__(229);
 	
-	var _reducers = __webpack_require__(258);
+	var _reducers = __webpack_require__(259);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
-	var _reduxLogger = __webpack_require__(259);
+	var _reduxLogger = __webpack_require__(260);
 	
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 	
@@ -29739,7 +29770,7 @@
 	}
 
 /***/ },
-/* 258 */
+/* 259 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -29829,7 +29860,7 @@
 	exports.default = reducer;
 
 /***/ },
-/* 259 */
+/* 260 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -30060,36 +30091,6 @@
 	}
 	
 	module.exports = createLogger;
-
-/***/ },
-/* 260 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var HashTagComp = function HashTagComp(_ref) {
-	  var tag = _ref.tag;
-	  var removeTag = _ref.removeTag;
-	
-	  return React.createElement(
-	    'span',
-	    { id: 'hashtag', onClick: removeTag, tag: tag.hashtag },
-	    React.createElement(
-	      'i',
-	      null,
-	      ' #',
-	      tag.hashtag,
-	      '   '
-	    ),
-	    ' |'
-	  );
-	};
-	
-	exports.default = HashTagComp;
 
 /***/ }
 /******/ ]);
