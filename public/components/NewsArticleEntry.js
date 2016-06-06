@@ -7,8 +7,9 @@ var NewsArticleEntry = ({article, idx}) => {
   //   .catch();
 
   return (
-    <div>
-      <div> {idx+1}. <a href={article}>{article}</a> </div>
+    <div id='articleContainer'>
+      <div> {idx+1}. <a href={article.url}>{article.url}</a> </div>
+      <div><i>{article.snippet}</i></div>
     </div>
   );
 };

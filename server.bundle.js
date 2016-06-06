@@ -180,6 +180,7 @@
 	      d.result.docs.forEach(function (doc) {
 	        var newArticle = new Article({
 	          url: doc.source.enriched.url.url,
+	          snippet: doc.source.enriched.url.text,
 	          topicId: topicId
 	        }).save();
 	      });
@@ -192,7 +193,7 @@
 	    Article.fetchAll({ topicId: topicId }).then(function (articles) {
 	      articles.forEach(function (article) {
 	        //console.log(article.get('url'), article.get('created_at'));
-	        allURLS.push(article.get('url'));
+	        allURLS.push({ url: article.get('url'), snippet: article.get('snippet') });
 	      });
 	      res.json(allURLS);
 	    });
@@ -359,6 +360,7 @@
 	      //article.string('title', 255);
 	      article.string('url', 1024).unique();
 	      article.integer('topicId');
+	      article.string('snippet', 3000);
 	      article.timestamps();
 	    }).then(function (table) {
 	      console.log('Created Table', table);
@@ -494,7 +496,7 @@
 	module.exports = {
 	  KEY: '5271f6ac77beb97a142fe534297b65aaebd9ed5a',
 	  getNewsURL: function getNewsURL(topic) {
-	    return 'https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=50&apikey=' + module.exports.KEY + '&return=enriched.url.url,enriched.url.text&q.enriched.url.concepts.concept.text=' + topic;
+	    return 'https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=10&apikey=' + module.exports.KEY + '&return=enriched.url.url,enriched.url.text&q.enriched.url.concepts.concept.text=' + topic;
 	  },
 	
 	  getTextURL: function getTextURL(link) {

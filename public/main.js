@@ -81,7 +81,8 @@
 	    },
 	    newsTopic: state.newsTopic,
 	    articles: state.articles,
-	    currentStreamers: state.currentStreamers
+	    currentStreamers: state.currentStreamers,
+	    connection: state.connection
 	  };
 	
 	  store = (0, _store2.default)(initialState);
@@ -25354,8 +25355,8 @@
 	                React.createElement('span', { className: 'icon-bar' })
 	              ),
 	              React.createElement(
-	                'a',
-	                { className: 'navbar-brand', href: '#' },
+	                'div',
+	                { className: 'navbar-brand' },
 	                'GoRep'
 	              )
 	            ),
@@ -25370,8 +25371,8 @@
 	                  null,
 	                  React.createElement(
 	                    _reactRouter.Link,
-	                    { to: '/public' },
-	                    'Public'
+	                    { to: '/' },
+	                    'Home'
 	                  ),
 	                  ' '
 	                ),
@@ -27049,11 +27050,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	var _actions;
-	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-	
 	var UPDATE_CURRENT_USER = 'UPDATE_CURRENT_USER';
 	var LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
 	var UPDATE_BROADCASTER_STREAM_TOPIC = 'UPDATE_BROADCASTER_STREAM_TOPIC';
@@ -27061,8 +27057,9 @@
 	var UPDATE_NEWS_PAGE_TOPIC = 'UPDATE_NEWS_PAGE_TOPIC';
 	var UPDATE_NEWS_ARTICLES = 'UPDATE_NEWS_ARTICLES';
 	var UPDATE_CURRENT_STREAMER = 'UPDATE_CURRENT_STREAMER';
+	var SAVE_BROADCAST_CONNECTION = 'SAVE_BROADCAST_CONNECTION';
 	
-	var actions = (_actions = {
+	var actions = {
 	  signinUser: function signinUser(username) {
 	    return {
 	      type: UPDATE_CURRENT_USER,
@@ -27109,34 +27106,27 @@
 	        .then(result => dispatch(context.updateNewsArticles(result)));
 	    }
 	    */
-	  }
+	  },
 	
-	}, _defineProperty(_actions, 'updateNewsArticles', function updateNewsArticles(articles) {
-	  return {
-	    type: UPDATE_NEWS_ARTICLES,
-	    articles: articles
-	  };
-	}), _defineProperty(_actions, 'fetchNewsArticles', function fetchNewsArticles(query) {
-	  //async fetch to alchemy api or nyt api
-	  //return a function that returns a promised fetch request
-	  /*
-	  var context = this;
-	  return dispatch => {
-	    //dispatch another action that tells user that we are fetching ??
-	    return fetch(url+query)
-	      .then(result => dispatch(context.updateNewsArticles(result)));
+	  saveBroadcastConnection: function saveBroadcastConnection(connection) {
+	    return {
+	      type: SAVE_BROADCAST_CONNECTION,
+	      connection: connection
+	    };
+	  },
+	
+	  logoutUser: function logoutUser() {
+	    return {
+	      type: LOGOUT_CURRENT_USER
+	    };
+	  },
+	  updateCurrentStreamer: function updateCurrentStreamer(streamer) {
+	    return {
+	      type: UPDATE_CURRENT_STREAMER,
+	      addStreamer: streamer
+	    };
 	  }
-	  */
-	}), _defineProperty(_actions, 'logoutUser', function logoutUser() {
-	  return {
-	    type: LOGOUT_CURRENT_USER
-	  };
-	}), _defineProperty(_actions, 'updateCurrentStreamer', function updateCurrentStreamer(streamer) {
-	  return {
-	    type: UPDATE_CURRENT_STREAMER,
-	    addStreamer: streamer
-	  };
-	}), _actions);
+	};
 	
 	exports.default = actions;
 
@@ -29103,7 +29093,7 @@
 	
 	  return React.createElement(
 	    'div',
-	    null,
+	    { id: 'articleContainer' },
 	    React.createElement(
 	      'div',
 	      null,
@@ -29112,10 +29102,19 @@
 	      '. ',
 	      React.createElement(
 	        'a',
-	        { href: article },
-	        article
+	        { href: article.url },
+	        article.url
 	      ),
 	      ' '
+	    ),
+	    React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'i',
+	        null,
+	        article.snippet
+	      )
 	    )
 	  );
 	};
@@ -29131,7 +29130,7 @@
 	module.exports = {
 	  KEY: '5271f6ac77beb97a142fe534297b65aaebd9ed5a',
 	  getNewsURL: function getNewsURL(topic) {
-	    return 'https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=50&apikey=' + module.exports.KEY + '&return=enriched.url.url,enriched.url.text&q.enriched.url.concepts.concept.text=' + topic;
+	    return 'https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=10&apikey=' + module.exports.KEY + '&return=enriched.url.url,enriched.url.text&q.enriched.url.concepts.concept.text=' + topic;
 	  },
 	
 	  getTextURL: function getTextURL(link) {
@@ -29320,6 +29319,7 @@
 	    value: function componentDidMount() {
 	
 	      var connection = new RTCMultiConnection().connect();
+	
 	      connection.body = document.getElementById('streamContainer');
 	
 	      var componentContext = this;
@@ -29327,12 +29327,15 @@
 	      document.querySelector('#startStream').onclick = function () {
 	        connection.open();
 	        connection.direction = 'one-way';
-	        $('#startStream').hide();
-	        $('#stopStream').show();
+	
+	        // componentContext.props.dispatch(actions.saveBroadcastConnection(connection));
 	
 	        componentContext.props.dispatch(_actions2.default.updateCurrentStreamer(componentContext.props.user.username));
 	        $.post('/currentStreamer', { username: componentContext.props.user.username, isStreaming: true });
 	        window.localStorage.setItem('state', JSON.stringify(componentContext.props));
+	
+	        $('#startStream').hide();
+	        $('#stopStream').show();
 	      };
 	
 	      document.querySelector('#stopStream').onclick = function () {
@@ -29692,7 +29695,8 @@
 	    },
 	    newsTopic: 'WORLD NEWS',
 	    articles: [],
-	    currentStreamers: []
+	    currentStreamers: [],
+	    connection: null
 	  } : arguments[0];
 	
 	  return finalcreateStore(_reducers2.default, initialState);
@@ -29761,6 +29765,10 @@
 	        }
 	      });
 	
+	    case "SAVE_BROADCAST_CONNECTION":
+	      return Object.assign({}, state, {
+	        connection: action.connection
+	      });
 	    case "UPDATE_NEWS_PAGE_TOPIC":
 	      return Object.assign({}, state, {
 	        newsTopic: action.topic

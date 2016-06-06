@@ -36,12 +36,12 @@ class App extends React.Component {
                   <span className="icon-bar"></span>
                   <span className="icon-bar"></span>
                 </button>
-                <a className="navbar-brand" href="#">GoRep</a>
+                <div className="navbar-brand">GoRep</div>
               </div>
 
               <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
                 <ul className="nav navbar-nav">
-                  <li><Link to="/public">Public</Link> </li>
+                  <li><Link to="/">Home</Link> </li>
                   <li><Link to="/news">News</Link> </li>
                   <li className="dropdown">
                     <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span className="caret"></span></a>

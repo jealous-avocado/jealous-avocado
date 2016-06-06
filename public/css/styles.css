@@ -83,3 +83,7 @@ li {
  #streamTitle:hover {
   text-decoration: underline;
  }
+
+ #articleContainer {
+  border: solid;
+ }

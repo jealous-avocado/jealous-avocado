@@ -52,6 +52,10 @@ let reducer = function(state, action) {
         }
       });
 
+    case "SAVE_BROADCAST_CONNECTION":
+      return Object.assign({}, state, {
+        connection: action.connection
+      });
     case "UPDATE_NEWS_PAGE_TOPIC":
       return Object.assign({}, state, {
         newsTopic: action.topic
