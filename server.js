@@ -163,6 +163,14 @@ app.get('/getArticles', (req, res) => {
     });
 });
 
+app.get('/currentStreamer', (req, res) => {
+
+});
+
+app.post('/currentStreamer', (req, res) => {
+
+});
+
 app.get('*', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
 });

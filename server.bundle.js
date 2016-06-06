@@ -204,6 +204,10 @@
 	  });
 	});
 	
+	app.get('/currentStreamer', function (req, res) {});
+	
+	app.post('/currentStreamer', function (req, res) {});
+	
 	app.get('*', function (req, res) {
 	  res.sendFile(__dirname + '/public/index.html');
 	});
@@ -291,6 +295,7 @@
 	      user.increments('id').primary();
 	      user.string('name', 100).unique();
 	      user.string('password', 100);
+	      user.boolean('isStreaming').defaultTo(false);
 	      user.timestamps();
 	    }).then(function (table) {
 	      console.log('Created Table', table);
@@ -319,21 +324,6 @@
 	      video.integer('userId');
 	      video.integer('topicId');
 	      video.timestamps();
-	    }).then(function (table) {
-	      console.log('Created Table', table);
-	    });
-	  }
-	});
-	
-	db.knex.schema.hasTable('streams').then(function (exists) {
-	  if (!exists) {
-	    db.knex.schema.createTable('streams', function (stream) {
-	      stream.increments('id').primary();
-	      stream.string('title', 255);
-	      stream.string('url', 255);
-	      stream.integer('userId');
-	      stream.integer('topicId');
-	      stream.timestamps();
 	    }).then(function (table) {
 	      console.log('Created Table', table);
 	    });
@@ -480,17 +470,13 @@
 	'use strict';
 	
 	module.exports = {
-	  KEY: '5271f6ac77beb97a142fe534297b65aaebd9ed5a',
+	  API_KEY: '7899c81a8b05382d7102fd6a6c320f28954b8986',
 	  getNewsURL: function getNewsURL(topic) {
-	    return 'https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=50&apikey=' + module.exports.KEY + '&return=enriched.url.url&q.enriched.url.concepts.concept.text=' + topic;
+	    return 'https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=20&apikey=' + module.exports.API_KEY + '&return=enriched.url.url&q.enriched.url.concepts.concept.text=' + topic;
 	  },
 	
 	  getTextURL: function getTextURL(link) {
-	    // return
-	
-	    /* --- FOR FULL URL TEXT USE BELOW ----
-	     return `http://gateway-a.watsonplatform.net/calls/url/URLGetText?apikey=${module.exports.KEY}&outputMode=json&url=${link}`;
-	    */
+	    return 'http://gateway-a.watsonplatform.net/calls/url/URLGetText?apikey=' + module.exports.API_KEY + '&outputMode=json&url=' + link;
 	  }
 	};
 

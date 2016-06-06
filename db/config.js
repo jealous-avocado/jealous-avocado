@@ -23,6 +23,7 @@ db.knex.schema.hasTable('users').then(function(exists) {
       user.increments('id').primary();
       user.string('name', 100).unique();
       user.string('password', 100);
+      user.boolean('isStreaming').defaultTo(false);
       user.timestamps();
     }).then(function(table) {
       console.log('Created Table', table);
@@ -51,21 +52,6 @@ db.knex.schema.hasTable('videos').then(function(exists) {
       video.integer('userId');
       video.integer('topicId');
       video.timestamps();
-    }).then(function(table) {
-      console.log('Created Table', table);
-    });
-  }
-});
-
-db.knex.schema.hasTable('streams').then(function(exists) {
-  if (!exists){
-    db.knex.schema.createTable('streams', function (stream) {
-      stream.increments('id').primary();
-      stream.string('title', 255);
-      stream.string('url', 255);
-      stream.integer('userId');
-      stream.integer('topicId');
-      stream.timestamps();
     }).then(function(table) {
       console.log('Created Table', table);
     });
