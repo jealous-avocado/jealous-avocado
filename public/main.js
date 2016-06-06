@@ -25404,11 +25404,7 @@
 	                  { className: 'form-group' },
 	                  React.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Search' })
 	                ),
-	                React.createElement(
-	                  'button',
-	                  { onClick: this.searchForArticles.bind(this), type: 'submit', className: 'btn btn-default' },
-	                  'Submit'
-	                )
+	                React.createElement('input', { onClick: this.searchForArticles.bind(this), type: 'submit', className: 'btn btn-default' })
 	              ),
 	              React.createElement(
 	                'ul',

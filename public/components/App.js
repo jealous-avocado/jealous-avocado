@@ -51,7 +51,7 @@ class App extends React.Component {
                   <div className="form-group">
                     <input type="text" className="form-control" placeholder="Search"/>
                   </div>
-                  <button onClick={this.searchForArticles.bind(this)} type="submit" className="btn btn-default">Submit</button>
+                  <input onClick={this.searchForArticles.bind(this)} type="submit" className="btn btn-default"/>
                 </form>
                 <ul className="nav navbar-nav navbar-right">
                   <li className="dropdown">
