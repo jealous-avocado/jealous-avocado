@@ -31,6 +31,7 @@ class StreamPageComp extends React.Component {
 
       $('#startStream').hide();
       $('#stopStream').show();
+      window.open('http://localhost:3000');
     };
 
     document.querySelector('#stopStream').onclick = function() {

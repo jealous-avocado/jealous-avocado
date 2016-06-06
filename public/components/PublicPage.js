@@ -32,6 +32,8 @@ class PublicPage extends React.Component {
       $("iframe").contents().find('.navbar').hide();
       $("iframe").contents().find('#streamTitle').hide();
       $("iframe").contents().find('#userPage').hide();
+      $("iframe").contents().find('#userDashCol').hide();
+
 
     });
   }
