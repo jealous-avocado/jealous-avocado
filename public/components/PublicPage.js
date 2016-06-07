@@ -9,7 +9,6 @@ class PublicPage extends React.Component {
   }
 
   componentWillMount() {
-    console.log('hello');
     $('body').css('background-image', 'none');
   }
 

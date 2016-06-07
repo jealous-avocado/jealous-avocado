@@ -24,11 +24,15 @@ body {
   ), 
   url(lisbon.jpg);
   background-size: cover;
-
 }
 
 li {
   list-style-type: none;
+}
+
+video {
+  width: 711px;
+  height: 400px;
 }
 
 .video {
