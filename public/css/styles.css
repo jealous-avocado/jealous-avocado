@@ -102,10 +102,6 @@ video {
  #landing {
   font-weight: bold;
   text-align: center;
-  vertical-align: text-bottom;
-  width: 30%;
-  height: 300px;
-  margin-left: 35%;
  }
 
  .jumbotron {

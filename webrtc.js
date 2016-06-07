@@ -1,4 +1,4 @@
-var WebRTC_Scalable_Broadcast(app) {
+var WebRTC_Scalable_Broadcast = function(app) {
   var io = require('socket.io')(app);
 
   io.set('transports', [
@@ -24,7 +24,7 @@ var WebRTC_Scalable_Broadcast(app) {
         listofBroadcasts[user.bcastID] = {
           broadcasters: {}, 
           allUsers: {}, 
-          typeOfStreams = user.typeOfStreams
+          typeOfStreams: user.typeOfStreams
         };
       }
 
@@ -83,3 +83,5 @@ var WebRTC_Scalable_Broadcast(app) {
   };
   
 };
+
+module.exports = WebRTC_Scalable_Broadcast;

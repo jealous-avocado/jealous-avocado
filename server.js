@@ -212,6 +212,8 @@ app.get('*', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
 });
 
-app.listen(PORT, function () {
+require('./webrtc.js')(server);
+
+server.listen(PORT, function () {
  console.log('Express listening on port ' + PORT + '!');
 });
