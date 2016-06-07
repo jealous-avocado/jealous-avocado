@@ -37,7 +37,7 @@ class App extends React.Component {
                   <span className="icon-bar"></span>
                   <span className="icon-bar"></span>
                 </button>
-                <div className="navbar-brand">GoRep</div>
+                <a href='/' className="navbar-brand">GoRep</a>
               </div>
 
               <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-2">

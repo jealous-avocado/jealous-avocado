@@ -8,6 +8,11 @@ class PublicPage extends React.Component {
   
   }
 
+  componentWillMount() {
+    console.log('hello');
+    $('body').css('background-image', 'none');
+  }
+
   updateCurrentVideo(event) {
     var src = $(event.currentTarget).find('iframe').attr('src');
     $('#currentVideo').attr('src', src);

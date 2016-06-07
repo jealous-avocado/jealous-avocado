@@ -17,6 +17,13 @@ body {
   text-align: left;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
   font-weight: 200;
+  background-image:
+  linear-gradient(
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.4)
+  ), 
+  url(lisbon.jpg);
+  background-size: cover;
 
 }
 
@@ -86,4 +93,8 @@ li {
 
  #articleContainer {
   border: solid;
+ }
+
+ #landing {
+  text-align: center;
  }
