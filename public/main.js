@@ -25378,115 +25378,119 @@
 	              )
 	            ),
 	            React.createElement(
-	              'div',
-	              { className: 'collapse navbar-collapse', id: 'bs-example-navbar-collapse-2' },
+	              _reactToggleDisplay2.default,
+	              { show: window.location.pathname !== '/' },
 	              React.createElement(
-	                'ul',
-	                { className: 'nav navbar-nav' },
+	                'div',
+	                { className: 'collapse navbar-collapse', id: 'bs-example-navbar-collapse-2' },
 	                React.createElement(
-	                  'li',
-	                  null,
+	                  'ul',
+	                  { className: 'nav navbar-nav' },
 	                  React.createElement(
-	                    _reactRouter.Link,
-	                    { to: '/' },
-	                    'Home'
-	                  ),
-	                  ' '
-	                ),
-	                React.createElement(
-	                  'li',
-	                  null,
-	                  React.createElement(
-	                    _reactRouter.Link,
-	                    { to: '/news' },
-	                    'News'
-	                  ),
-	                  ' '
-	                )
-	              ),
-	              React.createElement(
-	                'form',
-	                { className: 'navbar-form navbar-left', role: 'search' },
-	                React.createElement(
-	                  'div',
-	                  { className: 'form-group' },
-	                  React.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Search' })
-	                ),
-	                React.createElement('input', { onClick: this.searchForArticles.bind(this), type: 'submit', className: 'btn btn-default' })
-	              ),
-	              React.createElement(
-	                'ul',
-	                { className: 'nav navbar-nav navbar-right' },
-	                React.createElement(
-	                  'li',
-	                  { className: 'dropdown' },
-	                  React.createElement(
-	                    'a',
-	                    { href: '#', className: 'dropdown-toggle', 'data-toggle': 'dropdown', role: 'button', 'aria-expanded': 'false' },
-	                    ' Profile ',
-	                    React.createElement('span', { className: 'caret' })
-	                  ),
-	                  React.createElement(
-	                    'ul',
-	                    { className: 'dropdown-menu', role: 'menu' },
+	                    'li',
+	                    null,
 	                    React.createElement(
-	                      _reactToggleDisplay2.default,
-	                      { show: !this.props.user.username },
-	                      React.createElement(
-	                        'li',
-	                        null,
-	                        ' ',
-	                        React.createElement(
-	                          _reactRouter.Link,
-	                          { to: '/signin' },
-	                          ' Sign in '
-	                        ),
-	                        ' '
-	                      ),
-	                      React.createElement(
-	                        'li',
-	                        null,
-	                        ' ',
-	                        React.createElement(
-	                          _reactRouter.Link,
-	                          { to: '/signup' },
-	                          ' Sign up '
-	                        ),
-	                        ' '
-	                      )
+	                      _reactRouter.Link,
+	                      { to: '/' },
+	                      'Home'
+	                    ),
+	                    ' '
+	                  ),
+	                  React.createElement(
+	                    'li',
+	                    null,
+	                    React.createElement(
+	                      _reactRouter.Link,
+	                      { to: '/news' },
+	                      'News'
+	                    ),
+	                    ' '
+	                  )
+	                ),
+	                React.createElement(
+	                  'form',
+	                  { className: 'navbar-form navbar-left', role: 'search' },
+	                  React.createElement(
+	                    'div',
+	                    { className: 'form-group' },
+	                    React.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Search' })
+	                  ),
+	                  React.createElement('input', { onClick: this.searchForArticles.bind(this), type: 'submit', className: 'btn btn-default' })
+	                ),
+	                React.createElement(
+	                  'ul',
+	                  { className: 'nav navbar-nav navbar-right' },
+	                  React.createElement(
+	                    'li',
+	                    { className: 'dropdown' },
+	                    React.createElement(
+	                      'a',
+	                      { href: '#', className: 'dropdown-toggle', 'data-toggle': 'dropdown', role: 'button', 'aria-expanded': 'false' },
+	                      ' Profile ',
+	                      React.createElement('span', { className: 'caret' })
 	                    ),
 	                    React.createElement(
-	                      _reactToggleDisplay2.default,
-	                      { show: !!this.props.user.username },
+	                      'ul',
+	                      { className: 'dropdown-menu', role: 'menu' },
 	                      React.createElement(
-	                        'li',
-	                        null,
+	                        _reactToggleDisplay2.default,
+	                        { show: !this.props.user.username },
 	                        React.createElement(
-	                          'a',
-	                          { href: '/' + this.props.user.username },
-	                          'My Page'
+	                          'li',
+	                          null,
+	                          ' ',
+	                          React.createElement(
+	                            _reactRouter.Link,
+	                            { to: '/signin' },
+	                            ' Sign in '
+	                          ),
+	                          ' '
+	                        ),
+	                        React.createElement(
+	                          'li',
+	                          null,
+	                          ' ',
+	                          React.createElement(
+	                            _reactRouter.Link,
+	                            { to: '/signup' },
+	                            ' Sign up '
+	                          ),
+	                          ' '
 	                        )
 	                      ),
 	                      React.createElement(
-	                        'li',
-	                        null,
-	                        ' ',
+	                        _reactToggleDisplay2.default,
+	                        { show: !!this.props.user.username },
 	                        React.createElement(
-	                          'a',
-	                          { href: '', onClick: this.signout.bind(this) },
-	                          ' Log Out [',
-	                          this.props.user.username,
-	                          ']'
+	                          'li',
+	                          null,
+	                          React.createElement(
+	                            'a',
+	                            { href: '/' + this.props.user.username },
+	                            'My Page'
+	                          )
 	                        ),
-	                        ' '
-	                      ),
-	                      React.createElement(
-	                        'li',
-	                        null,
 	                        React.createElement(
-	                          _reactRouter.Link,
-	                          { to: '/' + this.props.user.username + '/profile' },
-	                          'Settings'
+	                          'li',
+	                          null,
+	                          ' ',
+	                          React.createElement(
+	                            'a',
+	                            { href: '', onClick: this.signout.bind(this) },
+	                            ' Log Out [',
+	                            this.props.user.username,
+	                            ']'
+	                          ),
+	                          ' '
+	                        ),
+	                        React.createElement(
+	                          'li',
+	                          null,
+	                          React.createElement(
+	                            _reactRouter.Link,
+	                            { to: '/' + this.props.user.username + '/profile' },
+	                            'Settings'
+	                          )
 	                        )
 	                      )
 	                    )
