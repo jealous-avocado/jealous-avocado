@@ -25391,7 +25391,7 @@
 	                    null,
 	                    React.createElement(
 	                      _reactRouter.Link,
-	                      { to: '/' },
+	                      { to: '/public' },
 	                      'Home'
 	                    ),
 	                    ' '
