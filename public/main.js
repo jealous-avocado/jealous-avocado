@@ -29802,12 +29802,13 @@
 	        'div',
 	        { id: 'landing' },
 	        React.createElement(
-	          'div',
-	          { id: 'landingContainer' },
+	          _reactRouter.Link,
+	          { to: '/public' },
+	          ' ',
 	          React.createElement(
-	            _reactRouter.Link,
-	            { to: '/public' },
-	            ' Enter '
+	            'h1',
+	            null,
+	            'ENTER'
 	          )
 	        )
 	      );
