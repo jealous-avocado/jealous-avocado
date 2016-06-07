@@ -100,6 +100,7 @@ video {
  }
 
  #landing {
+  font-weight: bold;
   text-align: center;
  }
 
@@ -108,3 +109,4 @@ video {
   text-align: right;
   color: #d9d9d9;
  }
+

@@ -9,9 +9,7 @@ class LandingPage extends React.Component {
   render() {
     return (
       <div id='landing'>
-        <div id='landingContainer'>
-          <Link to='/public'> Enter </Link>
-        </div>
+        <Link to='/public'> <h1>ENTER</h1></Link>
       </div>
     );
   }

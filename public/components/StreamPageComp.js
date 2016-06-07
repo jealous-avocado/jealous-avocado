@@ -15,7 +15,7 @@ class StreamPageComp extends React.Component {
 
   componentDidMount() {
 
-    var connection = new RTCMultiConnection().connect(); 
+    var connection = new RTCMultiConnection(this.props.user.username).connect(); 
     
 
     connection.body = document.getElementById('streamContainer');
@@ -24,6 +24,7 @@ class StreamPageComp extends React.Component {
     
     document.querySelector('#startStream').onclick = function() {
       connection.open();
+      console.log(connection, 'CONNECTION');
       $(streamContainer).css('background-color', 'transparent');
       connection.direction = 'one-way';
 

@@ -29345,7 +29345,7 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	
-	      var connection = new RTCMultiConnection().connect();
+	      var connection = new RTCMultiConnection(this.props.user.username).connect();
 	
 	      connection.body = document.getElementById('streamContainer');
 	
@@ -29353,6 +29353,7 @@
 	
 	      document.querySelector('#startStream').onclick = function () {
 	        connection.open();
+	        console.log(connection, 'CONNECTION');
 	        $(streamContainer).css('background-color', 'transparent');
 	        connection.direction = 'one-way';
 	
@@ -29573,6 +29574,10 @@
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
+	var _Preview = __webpack_require__(261);
+	
+	var _Preview2 = _interopRequireDefault(_Preview);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29580,6 +29585,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var socket;
 	
 	var PublicPage = function (_React$Component) {
 	  _inherits(PublicPage, _React$Component);
@@ -29594,6 +29601,7 @@
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
 	      $('body').css('background-image', 'none');
+	      socket = io.connect();
 	    }
 	  }, {
 	    key: 'updateCurrentVideo',
@@ -29611,6 +29619,21 @@
 	      $.get('/currentStreamers').done(function (r) {
 	        r.forEach(function (value) {
 	          componentContext.props.dispatch(_actions2.default.updateCurrentStreamer(value));
+	          $('#video').append('<div id="previewContainer"></div>');
+	          var connection = new RTCMultiConnection(value).connect();
+	          connection.body = document.getElementById('previewContainer');
+	
+	          connection.session = {
+	            video: true,
+	            screen: true,
+	            audio: true,
+	            oneway: true
+	          };
+	          socket.emit('join-broadcast', {
+	            broadcastid: value,
+	            userid: connection.userid,
+	            typeOfStreams: connection.session
+	          });
 	        });
 	        window.localStorage.setItem('state', JSON.stringify(_this2.props));
 	      }).fail(function (e) {
@@ -29618,21 +29641,8 @@
 	      });
 	    }
 	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      console.log(this.props.currentStreamers);
-	      $('iframe').on('load', function () {
-	        $("iframe").contents().find('.navbar').hide();
-	        $("iframe").contents().find('#streamTitle').hide();
-	        $("iframe").contents().find('#userPage').hide();
-	        $("iframe").contents().find('#userDashCol').hide();
-	      });
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this3 = this;
-	
 	      return React.createElement(
 	        'div',
 	        null,
@@ -29664,22 +29674,7 @@
 	              { type: 'button', 'class': 'btn btn-success', onClick: this.refreshBroadcast.bind(this) },
 	              'Refresh Broadcast'
 	            ),
-	            React.createElement(
-	              'ul',
-	              { id: 'video' },
-	              this.props.currentStreamers.map(function (video) {
-	                return React.createElement(
-	                  'li',
-	                  { className: 'video', onClick: _this3.updateCurrentVideo },
-	                  React.createElement(
-	                    'div',
-	                    { className: 'videoWrapper' },
-	                    React.createElement('iframe', { width: '142', height: '80', src: "http://localhost:3000/" + video, frameBorder: '0', allowFullScreen: true })
-	                  ),
-	                  video + " is reporting on " + _this3.props.user.stream.title
-	                );
-	              })
-	            )
+	            React.createElement('ul', { id: 'video' })
 	          )
 	        )
 	      );
@@ -29802,12 +29797,13 @@
 	        'div',
 	        { id: 'landing' },
 	        React.createElement(
-	          'div',
-	          { id: 'landingContainer' },
+	          _reactRouter.Link,
+	          { to: '/public' },
+	          ' ',
 	          React.createElement(
-	            _reactRouter.Link,
-	            { to: '/public' },
-	            ' Enter '
+	            'h1',
+	            null,
+	            'ENTER'
 	          )
 	        )
 	      );
@@ -30193,6 +30189,35 @@
 	}
 	
 	module.exports = createLogger;
+
+/***/ },
+/* 261 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var Preview = function Preview(props) {
+	  var connection = new RTCMultiConnection(props.broadcastID).connect();
+	  connection.body = $(previewContainer);
+	  console.log('connection', connection);
+	  connection.session = {
+	    video: true,
+	    screen: true,
+	    audio: true,
+	    oneway: true
+	  };
+	  props.socket.emit('join-broadcast', {
+	    broadcastid: props.broadcastID,
+	    userid: connection.userid,
+	    typeOfStreams: connection.session
+	  });
+	  return React.createElement('div', null);
+	};
+	
+	exports.default = Preview;
 
 /***/ }
 /******/ ]);

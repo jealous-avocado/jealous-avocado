@@ -1,6 +1,8 @@
 
 import { connect } from 'react-redux';
 import actions from '../redux/actions';
+import Preview from './Preview';
+var socket;
 
 class PublicPage extends React.Component {
   constructor(props) {
@@ -10,6 +12,7 @@ class PublicPage extends React.Component {
 
   componentWillMount() {
     $('body').css('background-image', 'none');
+    socket = io.connect();
   }
 
   updateCurrentVideo(event) {
@@ -24,22 +27,26 @@ class PublicPage extends React.Component {
     .done(r => {
       r.forEach(function (value) {
         componentContext.props.dispatch(actions.updateCurrentStreamer(value));
+        $('#video').append('<div id="previewContainer"></div>');
+        var connection = new RTCMultiConnection(value).connect();
+        connection.body = document.getElementById('previewContainer');
+        
+        connection.session = {
+              video: true,
+              screen: true,
+              audio: true,
+              oneway: true
+          };
+        socket.emit('join-broadcast', {
+              broadcastid: value,
+              userid: connection.userid,
+              typeOfStreams: connection.session
+          });
       });
       window.localStorage.setItem('state', JSON.stringify(this.props));
+
     })
     .fail(e => console.log('Error in get request: ', e));
-  }
-  
-  componentDidMount () {
-    console.log(this.props.currentStreamers);
-    $('iframe').on('load', function () {
-      $("iframe").contents().find('.navbar').hide();
-      $("iframe").contents().find('#streamTitle').hide();
-      $("iframe").contents().find('#userPage').hide();
-      $("iframe").contents().find('#userDashCol').hide();
-
-
-    });
   }
 
   render() {
@@ -52,15 +59,8 @@ class PublicPage extends React.Component {
           <div className="col-md-4"> <h2 id='broadcast'>Currently Broadcasting</h2>
           <button type="button" class="btn btn-success" onClick={this.refreshBroadcast.bind(this)}>Refresh Broadcast</button>
             <ul id='video'>
-              {this.props.currentStreamers.map((video) => 
-                  <li className="video" onClick={this.updateCurrentVideo}> 
-                <div className="videoWrapper">
-                    <iframe width="142" height="80" src={"http://localhost:3000/" + video} frameBorder="0" allowFullScreen></iframe>        
-                </div>
-                  {video + " is reporting on " + this.props.user.stream.title}
-                  </li>
-              )}
             </ul>
+
           </div>
         </div>
       </div>
