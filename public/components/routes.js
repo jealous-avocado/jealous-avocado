@@ -8,16 +8,18 @@ import StreamPageComp from './StreamPageComp';
 import NewsArticles from './NewsArticles';
 import PublicPage from './PublicPage';
 import Profile from './Profile';
+import LandingPage from './LandingPage';
 
 module.exports = (
   <Route path='/' component={App}>
-    <IndexRoute component={PublicPage} />
-    <Route path='/signin' component={Signin} />
-    <Route path='/signup' component={Signup} />
-    <Route path='/news' component={TopicPage}> 
-      <Route path='/news/:topic' component={NewsArticles}/>
-    </Route>
-    <Route path='/:username/profile' component={Profile}/>
-    <Route path='/:username' component={StreamPageComp}/>
+      <IndexRoute component={LandingPage} />
+      <Route path='/public' component={PublicPage} />
+      <Route path='/signin' component={Signin} />
+      <Route path='/signup' component={Signup} />
+      <Route path='/news' component={TopicPage}> 
+        <Route path='/news/:topic' component={NewsArticles}/>
+      </Route>
+      <Route path='/:username/profile' component={Profile}/>
+      <Route path='/:username' component={StreamPageComp}/>
   </Route>
 )
