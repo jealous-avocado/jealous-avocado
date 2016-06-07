@@ -6,7 +6,6 @@ class LandingPage extends React.Component {
     super();
   }
 
-
   render() {
     return (
       <div id='landing'>

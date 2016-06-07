@@ -29570,7 +29570,6 @@
 	  _createClass(PublicPage, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      console.log('hello');
 	      $('body').css('background-image', 'none');
 	    }
 	  }, {
