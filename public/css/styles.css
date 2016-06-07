@@ -19,8 +19,8 @@ body {
   font-weight: 200;
   background-image:
   linear-gradient(
-    rgba(0, 0, 0, 0.4),
-    rgba(0, 0, 0, 0.4)
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.1)
   ), 
   url(lisbon.jpg);
   background-size: cover;
@@ -101,4 +101,10 @@ video {
 
  #landing {
   text-align: center;
+ }
+
+ .jumbotron {
+  background-color: rgba(0,0,0,0.5);
+  text-align: right;
+  color: #d9d9d9;
  }

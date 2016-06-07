@@ -27208,6 +27208,11 @@
 	      $('#signinForm #username').focus();
 	    }
 	  }, {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      $('body').css('background-image', 'url(../css/signin.jpg)');
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return React.createElement(
@@ -28876,6 +28881,11 @@
 	      $('#signinForm #username').focus();
 	    }
 	  }, {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      $('body').css('background-image', 'none');
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return React.createElement(
@@ -28953,6 +28963,8 @@
 	  }, {
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
+	      $('body').css('background-image', 'none');
+	
 	      var topic = this.props.params.topic ? this.props.params.topic.toUpperCase() : 'World News';
 	
 	      this.props.dispatch(_actions2.default.updateTopic(topic));
@@ -29045,6 +29057,7 @@
 	  }, {
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
+	      $('body').css('background-image', 'none');
 	      //query database for topic and pull out the articles for that topic
 	      var componentContext = this;
 	      this.queryDB().done(function (r) {
@@ -29205,6 +29218,11 @@
 	      });
 	    }
 	  }, {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      $('body').css('background-image', 'none');
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
@@ -29319,6 +29337,11 @@
 	  }
 	
 	  _createClass(StreamPageComp, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      $('body').css('background-image', 'none');
+	    }
+	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	
@@ -29700,6 +29723,11 @@
 	  }
 	
 	  _createClass(Profile, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      $('body').css('background-image', 'url(../css/cat.jpg)');
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	
@@ -29708,16 +29736,25 @@
 	        { className: 'container-fluid' },
 	        React.createElement(
 	          'div',
-	          { className: 'row' },
+	          { className: 'jumbotron' },
 	          React.createElement(
-	            'div',
-	            { className: 'col-md-5' },
-	            ' User '
+	            'h1',
+	            null,
+	            'FEATURES TO COME'
 	          ),
 	          React.createElement(
-	            'div',
-	            { className: 'col-md-7' },
-	            ' Favorite Topics '
+	            'h3',
+	            null,
+	            'Please meet our company photographer while you wait'
+	          ),
+	          React.createElement(
+	            'i',
+	            null,
+	            React.createElement(
+	              'h5',
+	              null,
+	              ' She\'s been on vacation...it\'s been a catastrophe '
+	            )
 	          )
 	        )
 	      );

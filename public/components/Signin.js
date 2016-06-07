@@ -50,6 +50,10 @@ class Signin extends React.Component {
     $('#signinForm #username').focus();
   }
 
+  componentWillMount() {
+    $('body').css('background-image', 'url(../css/signin.jpg)');
+  }
+
   render() {
     return (
       <div>
