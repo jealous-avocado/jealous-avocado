@@ -43,7 +43,7 @@ class App extends React.Component {
               <ToggleDisplay show={window.location.pathname !== '/'}>
                 <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
                   <ul className="nav navbar-nav">
-                    <li><Link to="/">Home</Link> </li>
+                    <li><Link to="/public">Home</Link> </li>
                     <li><Link to="/news">News</Link> </li>
                   </ul>
                   <form className="navbar-form navbar-left" role="search">

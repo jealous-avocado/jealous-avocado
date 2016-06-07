@@ -9,6 +9,10 @@ class StreamPageComp extends React.Component {
     super(props);
   }
 
+  componentWillMount() {
+    $('body').css('background-image', 'none');
+  }
+
   componentDidMount() {
 
     var connection = new RTCMultiConnection().connect(); 

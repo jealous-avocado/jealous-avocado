@@ -47,6 +47,10 @@ class Signup extends React.Component {
     $('#signinForm #username').focus();
   }
 
+  componentWillMount() {
+    $('body').css('background-image', 'none');
+  }
+
   render() {
     return (
       <div>

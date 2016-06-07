@@ -13,6 +13,7 @@ class NewsArticles extends React.Component {
   }
 
   componentWillMount() {
+    $('body').css('background-image', 'none');
   //query database for topic and pull out the articles for that topic
     var componentContext = this;
     this.queryDB()

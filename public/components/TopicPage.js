@@ -13,6 +13,8 @@ class TopicPage extends React.Component {
   }
 
   componentWillMount() {
+    $('body').css('background-image', 'none');
+    
     const topic = this.props.params.topic ? this.props.params.topic.toUpperCase() : 'World News';
 
     this.props.dispatch(actions.updateTopic(topic));

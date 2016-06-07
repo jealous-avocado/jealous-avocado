@@ -19,6 +19,10 @@ class NewsVideos extends React.Component {
     });
   }
 
+  componentWillMount() {
+    $('body').css('background-image', 'none');
+  }
+
 
   render() {
     return (
